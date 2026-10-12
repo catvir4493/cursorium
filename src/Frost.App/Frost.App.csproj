@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- WPF owns startup and the PerMonitorV2 manifest; WinForms is only used for NotifyIcon. -->
+  <PropertyGroup><OutputType>WinExe</OutputType><UseWPF>true</UseWPF><UseWindowsForms>true</UseWindowsForms><ApplicationManifest>app.manifest</ApplicationManifest><AssemblyName>FrostWhiteComet</AssemblyName><Version>1.0.0</Version><ApplicationIcon>../../assets/frost.ico</ApplicationIcon><NoWarn>$(NoWarn);WFAC010</NoWarn></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../Frost.Core/Frost.Core.csproj"/><Content Include="../../assets/frost.ico"><Link>frost.ico</Link><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory><CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory><ExcludeFromSingleFile>true</ExcludeFromSingleFile></Content><Content Include="../../assets/cursors/**/*"><Link>Theme/%(RecursiveDir)%(Filename)%(Extension)</Link><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory><CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory><ExcludeFromSingleFile>true</ExcludeFromSingleFile></Content></ItemGroup>
+</Project>
