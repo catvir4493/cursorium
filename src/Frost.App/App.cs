@@ -13,16 +13,27 @@ public sealed class App:System.Windows.Application
     private MainWindow? panel;
     private Forms.NotifyIcon? tray;
     private Forms.ToolStripMenuItem? enabledItem;
+    private Forms.ToolStripMenuItem? pauseItem;
+    private StudioService studio=null!;
     private readonly ThemeService theme=new();
     private readonly CancellationTokenSource lifetime=new();
     public bool Exiting{get;private set;}
     internal MainWindow Panel=>panel!;
+    internal StudioService Studio=>studio;
     internal Forms.ContextMenuStrip TrayMenu=>tray!.ContextMenuStrip!;
     private static bool isolatedTest;
-    private static string InstanceId=>"FrostWhiteComet-"+WindowsIdentity.GetCurrent().User!.Value+(isolatedTest?"-verification":"");
+    private static bool stateProbe;
+    private static string InstanceId=>"FrostWhiteComet-"+WindowsIdentity.GetCurrent().User!.Value+(isolatedTest?"-verification":"")+(stateProbe?"-state-probe":"");
     [STAThread] public static int Main(string[] args)
     {
-        isolatedTest=args.Contains("--isolated-test")&&(args.Contains("--self-test")||args.Contains("--benchmark"));
+        isolatedTest=args.Contains("--isolated-test")&&(args.Contains("--self-test")||args.Contains("--benchmark")||args.Contains("--state-probe"));
+        stateProbe=args.Contains("--state-probe");
+        if((args.Contains("--self-test")||args.Contains("--benchmark")||args.Contains("--state-probe"))&&!isolatedTest)return 2;
+        if(isolatedTest)
+        {
+            int rootIndex=Array.IndexOf(args,"--test-data-root");
+            Storage.UseTestingRoot(rootIndex>=0&&rootIndex+1<args.Length?args[rootIndex+1]:Path.Combine(AppContext.BaseDirectory,"test-data",Guid.NewGuid().ToString("N")));
+        }
         if(args.Contains("--fullscreen-probe"))
         {
             var testApp=new System.Windows.Application();var w=new Window{Title="FROST Fullscreen Probe",WindowStyle=WindowStyle.None,Background=System.Windows.Media.Brushes.MidnightBlue,Topmost=true};
@@ -37,7 +48,13 @@ public sealed class App:System.Windows.Application
         }
         try
         {
-            if(args.Contains("--restore-theme")){var t=new ThemeService();if(t.HasBackup)t.Restore();return 0;}
+            if(args.Contains("--restore-theme")){StudioService.RestoreSavedState(new ThemeService());return 0;}
+            if(args.Contains("--state-probe"))
+            {
+                var state=new StudioService(AppContext.BaseDirectory,new ThemeService());int reportIndex=Array.IndexOf(args,"--report");
+                if(reportIndex<0||reportIndex+1>=args.Length)throw new ArgumentException("State probe needs --report.");
+                Storage.Write(args[reportIndex+1],new{state=state.State,profiles=state.Profiles.Profiles,themes=state.Catalog.Themes.Select(t=>t.Id).ToArray()});return 0;
+            }
             if(args.Contains("--shutdown"))return 0;
             var app=new App{ShutdownMode=ShutdownMode.OnExplicitShutdown};app.Startup+=(_,_)=>app.Start(args);return app.Run();
         }
@@ -47,9 +64,9 @@ public sealed class App:System.Windows.Application
     private void Start(string[] args)
     {
         DispatcherUnhandledException+=(_,e)=>{Storage.Log(e.Exception.ToString());e.Handled=true;MessageBox.Show("An error occurred. FROST will exit safely; the installed cursor theme remains.\n"+e.Exception.Message);ExitApp();};
-        settings=Settings.Load();engine=new(settings);
+        studio=new StudioService(AppContext.BaseDirectory,theme);settings=studio.LiveEffects;engine=new(settings);
         if(args.Contains("--benchmark")){_ = DesktopVerification.Benchmark(this,engine,args);return;}
-        panel=new(settings,engine,theme);MainWindow=panel;CreateTray();
+        panel=new(studio,engine,theme);MainWindow=panel;CreateTray();
         if(args.Contains("--self-test")){_ = DesktopVerification.Run(this,engine,args);return;}
         if(!args.Contains("--tray"))panel.Show();_ = Listen();
     }
@@ -61,7 +78,7 @@ public sealed class App:System.Windows.Application
             {
                 using var pipe=new NamedPipeServerStream(InstanceId,PipeDirection.In,1,PipeTransmissionMode.Byte,PipeOptions.Asynchronous|PipeOptions.CurrentUserOnly);
                 await pipe.WaitForConnectionAsync(lifetime.Token);using var reader=new StreamReader(pipe);var command=await reader.ReadLineAsync(lifetime.Token);
-                if(command=="shutdown")ExitApp();else if(command=="restore"){if(theme.HasBackup)theme.Restore();panel?.Refresh();}else ShowPanel();
+                if(command=="shutdown")ExitApp();else if(command=="restore"){studio.RestoreOriginal();panel?.RefreshRestoredCursor();}else ShowPanel();
             }
             catch(OperationCanceledException){break;}
             catch(Exception ex){Storage.Log("IPC: "+ex.Message);await Task.Delay(200);}
@@ -69,18 +86,21 @@ public sealed class App:System.Windows.Application
     }
     private void CreateTray()
     {
-        var menu=new Forms.ContextMenuStrip();menu.Items.Add("Open settings",null,(_,_)=>ShowPanel());
-        enabledItem=new Forms.ToolStripMenuItem("Enable trails"){Checked=settings.Enabled};enabledItem.Click+=(_,_)=>{settings.Enabled=!settings.Enabled;settings.Save();panel?.Refresh();RefreshTray();};menu.Items.Add(enabledItem);
-        var presets=new Forms.ToolStripMenuItem("Select preset");foreach(var name in new[]{"Minimal","Standard","Glow"})presets.DropDownItems.Add(name,null,(_,_)=>{settings.ApplyPreset(name);settings.Save();panel?.Refresh();});menu.Items.Add(presets);
+        var menu=new Forms.ContextMenuStrip();menu.Items.Add("Open CURSORIUM",null,(_,_)=>ShowPanel());
+        enabledItem=new Forms.ToolStripMenuItem("Enable desktop effects"){Checked=settings.Enabled};enabledItem.Click+=(_,_)=>
+        {
+            try{studio.SetEffectsEnabled(!settings.Enabled);panel?.RefreshAppliedToggle();RefreshTray();}catch(Exception ex){Storage.Log(ex.ToString());MessageBox.Show("Could not save effects state: "+ex.Message);}
+        };menu.Items.Add(enabledItem);
+        pauseItem=new Forms.ToolStripMenuItem("Pause effects");pauseItem.Click+=(_,_)=>{engine!.PausedByUser=!engine.PausedByUser;RefreshTray();};menu.Items.Add(pauseItem);
         menu.Items.Add("Restore original cursor theme",null,(_,_)=>{ShowPanel();panel?.RestoreWithConfirmation();});menu.Items.Add(new Forms.ToolStripSeparator());menu.Items.Add("Quit",null,(_,_)=>ExitApp());
         using var iconStream=File.OpenRead(Path.Combine(AppContext.BaseDirectory,"frost.ico"));
-        tray=new Forms.NotifyIcon{Icon=new System.Drawing.Icon(iconStream),Text="FROST / WHITE COMET",ContextMenuStrip=menu,Visible=true};tray.DoubleClick+=(_,_)=>ShowPanel();
+        tray=new Forms.NotifyIcon{Icon=new System.Drawing.Icon(iconStream),Text="CURSORIUM — Cursor & Motion Studio",ContextMenuStrip=menu,Visible=true};tray.DoubleClick+=(_,_)=>ShowPanel();
     }
-    public void RefreshTray(){if(enabledItem!=null)enabledItem.Checked=settings.Enabled;}
+    public void RefreshTray(){if(enabledItem!=null)enabledItem.Checked=settings.Enabled;if(pauseItem!=null)pauseItem.Checked=engine?.PausedByUser==true;}
     private void ShowPanel(){panel?.Refresh();panel?.Show();if(panel!=null){panel.WindowState=WindowState.Normal;panel.Activate();}}
     public void ExitApp(int exitCode=0)
     {
-        if(Exiting)return;Exiting=true;lifetime.Cancel();try{settings?.Save();}catch(Exception ex){Storage.Log(ex.Message);}panel?.DisposeResources();engine?.Dispose();
+        if(Exiting)return;Exiting=true;lifetime.Cancel();panel?.DisposeResources();engine?.Dispose();
         if(tray!=null){tray.Visible=false;tray.Icon?.Dispose();tray.ContextMenuStrip?.Dispose();tray.Dispose();}panel?.Close();Shutdown(exitCode);
     }
 }

@@ -1,6 +1,6 @@
 $ErrorActionPreference='Stop'
 $frostRoot=Split-Path -Parent $PSScriptRoot
-$frostOutput=Join-Path $frostRoot 'artifacts\FrostWhiteComet-Source-1.0.0.zip'
+$frostOutput=Join-Path $frostRoot 'artifacts\CURSORIUM-Source-1.0.0.zip'
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 if (Test-Path -LiteralPath $frostOutput) { Remove-Item -LiteralPath $frostOutput -Force }

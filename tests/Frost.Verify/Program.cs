@@ -13,6 +13,11 @@ internal static class Program
     {
         try
         {
+            int studioIndex=Array.IndexOf(args,"--studio-tests");
+            if(studioIndex>=0)
+            {
+                CursoriumVerification.Run(Path.GetFullPath(args[studioIndex+1]),Path.GetFullPath(args[studioIndex+2]),args.Contains("--native-roundtrip"));return 0;
+            }
             string source=Path.GetFullPath(args.FirstOrDefault(a=>!a.StartsWith("--"))??"assets/cursors");
             foreach(var role in CursorRoles.All)
             {
@@ -32,7 +37,7 @@ internal static class Program
                 {
                     using var r=new BinaryReader(File.OpenRead(Path.Combine(source,role.FileName)));
                     Assert(new string(r.ReadChars(4))=="RIFF"&&r.ReadUInt32()==r.BaseStream.Length-8&&new string(r.ReadChars(4))=="ACON",role.Name+" RIFF");
-                    var h=Native.LoadCursorFromFile(Path.Combine(source,role.FileName));Assert(h!=IntPtr.Zero,role.Name+" animated native load");Native.DestroyCursor(h);
+                    var h=Native.LoadOwnedCursor(Path.Combine(source,role.FileName));Assert(h!=IntPtr.Zero,role.Name+" animated native load");Native.DestroyCursor(h);
                 }
             }
             if(args.Contains("--install-roundtrip"))

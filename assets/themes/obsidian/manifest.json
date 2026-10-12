@@ -1,0 +1,165 @@
+{
+  "theme": "Obsidian",
+  "sizes": [
+    32,
+    48,
+    64,
+    96
+  ],
+  "animation": {
+    "frames": 24,
+    "jiffies": 3
+  },
+  "roles": [
+    {
+      "Name": "Normal",
+      "RegistryName": "Arrow",
+      "SystemId": 32512,
+      "Label": "Normal",
+      "HotX": 4,
+      "HotY": 3,
+      "Animated": false,
+      "FileName": "Normal.cur"
+    },
+    {
+      "Name": "Help",
+      "RegistryName": "Help",
+      "SystemId": 32651,
+      "Label": "Help",
+      "HotX": 4,
+      "HotY": 3,
+      "Animated": false,
+      "FileName": "Help.cur"
+    },
+    {
+      "Name": "Working",
+      "RegistryName": "AppStarting",
+      "SystemId": 32650,
+      "Label": "Background",
+      "HotX": 4,
+      "HotY": 3,
+      "Animated": true,
+      "FileName": "Working.ani"
+    },
+    {
+      "Name": "Busy",
+      "RegistryName": "Wait",
+      "SystemId": 32514,
+      "Label": "Busy",
+      "HotX": 16,
+      "HotY": 16,
+      "Animated": true,
+      "FileName": "Busy.ani"
+    },
+    {
+      "Name": "Precision",
+      "RegistryName": "Crosshair",
+      "SystemId": 32515,
+      "Label": "Precision",
+      "HotX": 16,
+      "HotY": 16,
+      "Animated": false,
+      "FileName": "Precision.cur"
+    },
+    {
+      "Name": "Text",
+      "RegistryName": "IBeam",
+      "SystemId": 32513,
+      "Label": "Text",
+      "HotX": 16,
+      "HotY": 16,
+      "Animated": false,
+      "FileName": "Text.cur"
+    },
+    {
+      "Name": "Handwriting",
+      "RegistryName": "NWPen",
+      "SystemId": 32631,
+      "Label": "Handwriting",
+      "HotX": 5,
+      "HotY": 26,
+      "Animated": false,
+      "FileName": "Handwriting.cur"
+    },
+    {
+      "Name": "Unavailable",
+      "RegistryName": "No",
+      "SystemId": 32648,
+      "Label": "Unavailable",
+      "HotX": 16,
+      "HotY": 16,
+      "Animated": false,
+      "FileName": "Unavailable.cur"
+    },
+    {
+      "Name": "Vertical",
+      "RegistryName": "SizeNS",
+      "SystemId": 32645,
+      "Label": "Vertical resize",
+      "HotX": 16,
+      "HotY": 16,
+      "Animated": false,
+      "FileName": "Vertical.cur"
+    },
+    {
+      "Name": "Horizontal",
+      "RegistryName": "SizeWE",
+      "SystemId": 32644,
+      "Label": "Horizontal resize",
+      "HotX": 16,
+      "HotY": 16,
+      "Animated": false,
+      "FileName": "Horizontal.cur"
+    },
+    {
+      "Name": "DiagonalNWSE",
+      "RegistryName": "SizeNWSE",
+      "SystemId": 32642,
+      "Label": "Diagonal NW-SE",
+      "HotX": 16,
+      "HotY": 16,
+      "Animated": false,
+      "FileName": "DiagonalNWSE.cur"
+    },
+    {
+      "Name": "DiagonalNESW",
+      "RegistryName": "SizeNESW",
+      "SystemId": 32643,
+      "Label": "Diagonal NE-SW",
+      "HotX": 16,
+      "HotY": 16,
+      "Animated": false,
+      "FileName": "DiagonalNESW.cur"
+    },
+    {
+      "Name": "Move",
+      "RegistryName": "SizeAll",
+      "SystemId": 32646,
+      "Label": "Move",
+      "HotX": 16,
+      "HotY": 16,
+      "Animated": false,
+      "FileName": "Move.cur"
+    },
+    {
+      "Name": "Alternate",
+      "RegistryName": "UpArrow",
+      "SystemId": 32516,
+      "Label": "Alternate",
+      "HotX": 16,
+      "HotY": 3,
+      "Animated": false,
+      "FileName": "Alternate.cur"
+    },
+    {
+      "Name": "Link",
+      "RegistryName": "Hand",
+      "SystemId": 32649,
+      "Label": "Link",
+      "HotX": 12,
+      "HotY": 3,
+      "Animated": false,
+      "FileName": "Link.cur"
+    }
+  ]
+}

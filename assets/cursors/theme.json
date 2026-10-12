@@ -1,0 +1,25 @@
+{
+  "SchemaVersion": 1,
+  "Id": "frost",
+  "Name": "FROST / WHITE COMET",
+  "Author": "CURSORIUM",
+  "Description": "The original ice-white cursor suite, with animated busy roles.",
+  "Preview": "preview/Normal.png",
+  "Roles": {
+    "Normal": "Normal.cur",
+    "Help": "Help.cur",
+    "Working": "Working.ani",
+    "Busy": "Busy.ani",
+    "Precision": "Precision.cur",
+    "Text": "Text.cur",
+    "Handwriting": "Handwriting.cur",
+    "Unavailable": "Unavailable.cur",
+    "Vertical": "Vertical.cur",
+    "Horizontal": "Horizontal.cur",
+    "DiagonalNWSE": "DiagonalNWSE.cur",
+    "DiagonalNESW": "DiagonalNESW.cur",
+    "Move": "Move.cur",
+    "Alternate": "Alternate.cur",
+    "Link": "Link.cur"
+  }
+}

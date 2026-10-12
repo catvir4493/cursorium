@@ -1,0 +1,9 @@
+{
+  "SchemaVersion": 1,
+  "Trails": [
+    { "Id": "comet", "Name": "Comet", "Description": "Ice-blue filaments following your motion", "Length": 110, "Duration": 260, "Opacity": 0.4, "Particles": 10, "Color": "#91DEFF" },
+    { "Id": "minimal", "Name": "Minimal", "Description": "A quiet, short solid-color trace", "Length": 65, "Duration": 180, "Opacity": 0.22, "Particles": 0, "Color": "#DCEEFF" },
+    { "Id": "neon", "Name": "Neon", "Description": "Continuous light in your chosen color", "Length": 180, "Duration": 360, "Opacity": 0.55, "Particles": 0, "Color": "#B7A8FF" },
+    { "Id": "stardust", "Name": "Stardust", "Description": "Small drifting particles that fade away", "Length": 160, "Duration": 500, "Opacity": 0.5, "Particles": 24, "Color": "#91DEFF" }
+  ]
+}

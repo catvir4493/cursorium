@@ -10,11 +10,12 @@ public sealed class RawMouse:IDisposable
     [DllImport("user32.dll")]private static extern uint GetRawInputData(IntPtr input,uint command,IntPtr data,ref uint size,uint headerSize);
     private readonly HwndSource source;
     private readonly IntPtr buffer=Marshal.AllocHGlobal(256);
-    private readonly Action<bool> observe;
-    public RawMouse(IntPtr hwnd,Action<bool> observe)
+    private readonly Action<ClickButton> observe;
+    public RawMouse(IntPtr hwnd,Action<ClickButton> observe)
     {
         this.observe=observe;source=HwndSource.FromHwnd(hwnd);source.AddHook(Hook);
-        Native.Check(RegisterRawInputDevices(new[]{new Device{Page=1,Usage=2,Flags=0x100,Target=hwnd}},1,(uint)Marshal.SizeOf<Device>()),"Could not register raw mouse input");
+        try{Native.Check(RegisterRawInputDevices(new[]{new Device{Page=1,Usage=2,Flags=0x100,Target=hwnd}},1,(uint)Marshal.SizeOf<Device>()),"Could not register raw mouse input");}
+        catch{source.RemoveHook(Hook);Marshal.FreeHGlobal(buffer);throw;}
     }
     private IntPtr Hook(IntPtr hwnd,int msg,IntPtr w,IntPtr l,ref bool handled)
     {
@@ -25,7 +26,7 @@ public sealed class RawMouse:IDisposable
             if(read!=uint.MaxValue&&read>=header+24&&Marshal.ReadInt32(buffer)==0)
             {
                 ushort buttons=unchecked((ushort)Marshal.ReadInt16(buffer,(int)header+4));
-                observe((buttons&(1|4|16))!=0);
+                observe(ClickEffectManager.DecodeRawButtons(buttons));
             }
         }
         return IntPtr.Zero; // Let WPF/DefWindowProc clean up WM_INPUT; never consume legacy mouse messages.

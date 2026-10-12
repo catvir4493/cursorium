@@ -39,6 +39,8 @@ public static class Native
     [DllImport("user32.dll")] [return:MarshalAs(UnmanagedType.Bool)]public static extern bool SetPhysicalCursorPos(int x,int y);
     public static void Check(bool success,string operation){if(!success)throw new Win32Exception(Marshal.GetLastWin32Error(),operation);}
     public static void ReloadCursors()=>Check(SystemParametersInfo(0x57,0,IntPtr.Zero,2),"Windows could not reload the cursor scheme");
+    // LoadCursorFromFile returns a shared handle. LoadImage without LR_SHARED gives us an owned handle.
+    public static IntPtr LoadOwnedCursor(string path)=>LoadImage(IntPtr.Zero,path,2,0,0,0x10|0x40);
     public static List<MonitorInfo> Monitors()
     {
         var list=new List<MonitorInfo>(); MonitorCallback callback=(IntPtr h,IntPtr d,ref Rect r,IntPtr p)=>{var info=new MonitorInfo{Size=Marshal.SizeOf<MonitorInfo>(),Device=""};if(GetMonitorInfo(h,ref info))list.Add(info);return true;};

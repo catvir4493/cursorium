@@ -1,4 +1,55 @@
-# FROST / WHITE COMET: validation record
+# CURSORIUM / FROST: validation record
+
+## CURSORIUM v1.0 — October 13, 2026
+
+Fresh checks on Windows 11 build 26100, SDK 10.0.103, .NET 8 target;
+**one 2560×1440 display at 96 DPI**. The two-display results below are historical.
+
+- Release solution build and self-contained Windows x64 app/installer publish: zero warnings/errors.
+- Unchanged FROST native resources: 388 checks; new Obsidian resources: 388 checks.
+- Core/catalog/import/profile/native transaction suite: 66 checks, including actual theme switches,
+  partial failure after four role writes, applied-state persistence failure, exact rollback, durable
+  interrupted-journal recovery and restoration of the pre-test native configuration.
+- Published self-contained app desktop suite: 84 checks. Actual pointer movement, left/right
+  SendInput, keyboard focus/pass-through, fullscreen pause, draft/apply/cancel separation,
+  four distinct effect renderings, UI/tray/profile actions, import, independent click-only mode,
+  fresh-process configuration reload, repeated preview resource checks and overlay disposal passed.
+- 960×640, 960×600 and 850×520 DIP window layouts captured/inspected. These are layout checks,
+  **not** physical DPI-scaling verification.
+- Existing user's cursor backup and legacy/new configuration files passed before/after hash and
+  existence checks. Tests used separate data roots and restored their pre-test Windows cursor scheme.
+- New installer binary built. Its install/uninstall/upgrade round trip was **not run** on the existing
+  user installation; old installer evidence below does not establish new-version installer behavior.
+
+Published app short engine-only measurements (approximately four seconds each; 28 logical processors):
+
+| Scenario | WPF invalidations/s | Working set MiB | CPU, one core % | GDI before/after |
+|---|---:|---:|---:|---|
+| All effects disabled | 0.00 | 128.1 | 3.89 | 18 / 18 |
+| Enabled, stationary | 0.00 | 124.9 | 0.39 | 18 / 18 |
+| Comet, 60 target | 53.18 | 143.3 | 17.56 | 18 / 18 |
+| Minimal, 60 target | 53.17 | 132.9 | 3.90 | 18 / 18 |
+| Neon, 60 target | 53.46 | 134.5 | 3.90 | 18 / 18 |
+| Stardust, 60 target | 54.47 | 135.8 | 6.25 | 18 / 18 |
+| Comet, 120 target | 69.71 | 135.6 | 6.25 | 18 / 18 |
+| Power saving, 30 target | 29.97 | 136.2 | 3.12 | 18 / 18 |
+
+Disabled sampling was 4/s, with no rendering. Idle observed one distinct pointer position and no
+moving-model observations. First disabled/first active measurements can include deferred WPF/runtime
+initialization and are not long-session performance claims. Machine CPU equals one-core CPU / 28;
+memory excludes the full studio panel. Invalidations are **not measured GPU presentation FPS**.
+
+Raw local evidence: `artifacts/cursorium-verification/{core-report,desktop-report,restart-report,
+performance-report,user-data-protection}.json`, screenshots and effect render PNGs.
+Shareable sanitized evidence: `docs/verification/cursorium-2026-10-13.json`.
+Current architecture and limitations: [delivery](docs/CURSORIUM-DELIVERY.md),
+[architecture](docs/CURSORIUM-ARCHITECTURE.md).
+
+Windows 10, physical mixed DPI/multiple-monitor configurations, negative display coordinates,
+physical hotplug, sleep/resume, secure/protected desktops, exclusive fullscreen, genuine 120 Hz
+presentation and long-term resource/leak behavior remain unverified for this version.
+
+The following sections preserve original FROST history; their pass counts are not new CURSORIUM tests.
 
 Initial tests: **October 12, 2026, Europe/Budapest**, Windows 11 Pro build 26100, SDK 10.0.103, .NET 8 target. Implemented features are distinguished from hardware/long-session behavior that remains unverified.
 

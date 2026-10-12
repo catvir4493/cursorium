@@ -74,9 +74,24 @@ public static class CursorArtwork
             dc.DrawLine(Pen(color, r > 8 ? 3 : 2), new Point(c.X+r*Math.Cos(a),c.Y+r*Math.Sin(a)),new Point(c.X+r*Math.Cos(b),c.Y+r*Math.Sin(b)));
         }
     }
-    public static byte[] CreateCur(CursorRole role, int frame = 0)
+    private static BitmapSource DarkPalette(BitmapSource source)
     {
-        var images = Sizes.Select(s => Dib(Render(role,s,frame),s)).ToArray();
+        int size=source.PixelWidth;var pixels=new byte[size*size*4];source.CopyPixels(pixels,size*4,0);
+        for(int i=0;i<pixels.Length;i+=4)
+        {
+            int alpha=pixels[i+3];if(alpha==0)continue;
+            double light=(pixels[i]+pixels[i+1]+pixels[i+2])/(3d*alpha);
+            double fill=Math.Clamp((light-.18)/.65,0,1);
+            // Retain the authored geometry, alpha and hotspots with a distinct graphite/pale-edge palette.
+            pixels[i]=(byte)((215+(49-215)*fill)*alpha/255d);
+            pixels[i+1]=(byte)((202+(34-202)*fill)*alpha/255d);
+            pixels[i+2]=(byte)((190+(22-190)*fill)*alpha/255d);
+        }
+        var image=BitmapSource.Create(size,size,96,96,PixelFormats.Pbgra32,null,pixels,size*4);image.Freeze();return image;
+    }
+    public static byte[] CreateCur(CursorRole role, int frame = 0, bool dark = false)
+    {
+        var images = Sizes.Select(s => {var image=Render(role,s,frame);return Dib(dark?DarkPalette(image):image,s);}).ToArray();
         using var stream = new MemoryStream(); using var w = new BinaryWriter(stream);
         w.Write((ushort)0); w.Write((ushort)2); w.Write((ushort)Sizes.Length);
         int offset = 6 + 16 * Sizes.Length;
@@ -115,27 +130,28 @@ public static class CursorArtwork
     {
         using var ms=new MemoryStream();using var w=new BinaryWriter(ms);w.Write(Encoding.ASCII.GetBytes(id));w.Write(bytes.Length);w.Write(bytes);if((bytes.Length&1)!=0)w.Write((byte)0);return ms.ToArray();
     }
-    private static byte[] CreateAni(CursorRole role)
+    private static byte[] CreateAni(CursorRole role,bool dark=false)
     {
         using var header=new MemoryStream();using(var w=new BinaryWriter(header,Encoding.UTF8,true))
         { foreach(uint v in new uint[]{36,24,24,0,0,32,1,3,1}) w.Write(v); }
         using var frames=new MemoryStream();frames.Write(Encoding.ASCII.GetBytes("fram"));
-        for(int i=0;i<24;i++)frames.Write(Chunk("icon",CreateCur(role,i)));
+        for(int i=0;i<24;i++)frames.Write(Chunk("icon",CreateCur(role,i,dark)));
         using var body=new MemoryStream();body.Write(Encoding.ASCII.GetBytes("ACON"));body.Write(Chunk("anih",header.ToArray()));body.Write(Chunk("LIST",frames.ToArray()));
         return Chunk("RIFF",body.ToArray());
     }
-    public static void Generate(string output)
+    public static void Generate(string output,bool dark=false)
     {
         Directory.CreateDirectory(output);Directory.CreateDirectory(Path.Combine(output,"preview"));Directory.CreateDirectory(Path.Combine(output,"vectors"));
         foreach(var role in CursorRoles.All)
         {
-            File.WriteAllBytes(Path.Combine(output,role.Name+".cur"),CreateCur(role));
-            if(role.Animated)File.WriteAllBytes(Path.Combine(output,role.FileName),CreateAni(role));
-            var encoder=new PngBitmapEncoder();encoder.Frames.Add(BitmapFrame.Create(Render(role,96)));using(var f=File.Create(Path.Combine(output,"preview",role.Name+".png")))encoder.Save(f);
+            File.WriteAllBytes(Path.Combine(output,role.Name+".cur"),CreateCur(role,0,dark));
+            if(role.Animated)File.WriteAllBytes(Path.Combine(output,role.FileName),CreateAni(role,dark));
+            var image=Render(role,96);var encoder=new PngBitmapEncoder();encoder.Frames.Add(BitmapFrame.Create(dark?DarkPalette(image):image));using(var f=File.Create(Path.Combine(output,"preview",role.Name+".png")))encoder.Save(f);
             // Editable source geometry with SVG paths, never raster reference extraction.
-            string svg=Svg(role);File.WriteAllText(Path.Combine(output,"vectors",role.Name+".svg"),svg);
+            string svg=Svg(role);if(dark)svg=svg.Replace("#F7FAFF","#162231").Replace("#DCEEFF","#26394F").Replace("#243248","#BECAD7");File.WriteAllText(Path.Combine(output,"vectors",role.Name+".svg"),svg);
         }
-        File.WriteAllText(Path.Combine(output,"manifest.json"),JsonSerializer.Serialize(new { theme="FROST / WHITE COMET", sizes=Sizes, animation=new {frames=24,jiffies=3}, roles=CursorRoles.All },new JsonSerializerOptions{WriteIndented=true}));
+        File.WriteAllText(Path.Combine(output,"manifest.json"),JsonSerializer.Serialize(new { theme=dark?"Obsidian":"FROST / WHITE COMET", sizes=Sizes, animation=new {frames=24,jiffies=3}, roles=CursorRoles.All },new JsonSerializerOptions{WriteIndented=true}));
+        Storage.Write(Path.Combine(output,"theme.json"),new CursorTheme{Id=dark?"obsidian":"frost",Name=dark?"Obsidian":"FROST / WHITE COMET",Author="CURSORIUM",Description=dark?"Graphite pointers with pale edges. Pair with any motion effect.":"The original ice-white cursor suite, with animated busy roles.",Preview="preview/Normal.png",Roles=CursorRoles.All.ToDictionary(r=>r.Name,r=>r.FileName)});
     }
     private static string Svg(CursorRole role)
     {

@@ -3,7 +3,7 @@ $frostRoot = Split-Path -Parent $PSScriptRoot
 Set-Location -LiteralPath $frostRoot
 $frostTarget = Join-Path $env:LOCALAPPDATA 'Programs\FrostWhiteComet'
 $frostData = Join-Path $env:LOCALAPPDATA 'FrostWhiteComet'
-$frostShortcut = Join-Path ([Environment]::GetFolderPath('Programs')) 'FROST - WHITE COMET.lnk'
+$frostShortcut = Join-Path ([Environment]::GetFolderPath('Programs')) 'CURSORIUM.lnk'
 $frostReportDir = Join-Path $frostRoot 'artifacts\verification'
 if (Test-Path -LiteralPath $frostTarget) { throw 'Release verification requires no existing installation. Preserve your installation and test on another user account, or uninstall it deliberately first.' }
 if (Test-Path -LiteralPath (Join-Path $frostData 'original-theme.json')) { throw 'Release verification refuses an active theme backup. Restore your original theme first.' }
@@ -13,13 +13,13 @@ function Assert-Frost([bool]$Condition, [string]$Name) {
     $frostChecks.Add([pscustomobject]@{ name=$Name; passed=$Condition })
     if (-not $Condition) { throw $Name }
 }
-function Run-Frost([string]$Exe, [string[]]$Arguments, [int]$Timeout=30000) {
+function Run-Frost([string]$Exe, [string[]]$Arguments, [int]$Timeout=60000) {
     $frostProcess = Start-Process -FilePath $Exe -ArgumentList $Arguments -WindowStyle Hidden -PassThru
     if (-not $frostProcess.WaitForExit($Timeout)) { throw "Timed out: $Exe" }
     Assert-Frost ($frostProcess.ExitCode -eq 0) "Exit code: $([IO.Path]::GetFileName($Exe)) $Arguments"
 }
 try {
-    Run-Frost (Join-Path $frostRoot 'artifacts\FrostWhiteComet-Setup-1.0.0-Release.exe') @('--silent','--no-launch')
+    Run-Frost (Join-Path $frostRoot 'artifacts\CURSORIUM-Setup-1.0.0-Release.exe') @('--silent','--no-launch')
     Assert-Frost (Test-Path -LiteralPath (Join-Path $frostTarget 'FrostWhiteComet.exe')) 'Installed executable exists'
     Assert-Frost ((Get-ChildItem -LiteralPath (Join-Path $frostTarget 'Theme') -Filter '*.cur').Count -eq 15) 'All 15 external CUR resources installed'
     Assert-Frost ((Get-ChildItem -LiteralPath (Join-Path $frostTarget 'Theme') -Filter '*.ani').Count -eq 2) 'Both ANI resources installed'
@@ -29,10 +29,10 @@ try {
     Assert-Frost (-not (Test-Path -LiteralPath (Join-Path $frostData 'original-theme.json'))) 'Installer does not automatically change cursor theme'
     & dotnet run --project tests/Frost.Verify -c Release -- assets/cursors --install-roundtrip --engine-exe (Join-Path $frostTarget 'FrostWhiteComet.exe') 2>&1 | Tee-Object -FilePath (Join-Path $frostReportDir 'native-report.txt')
     Assert-Frost ($LASTEXITCODE -eq 0) 'Native cursor, install, restore, and theme-after-engine-exit verification'
-    Run-Frost (Join-Path $frostTarget 'FrostWhiteComet.exe') @('--self-test','--report',('"'+$frostReportDir+'"'))
+    Run-Frost (Join-Path $frostTarget 'FrostWhiteComet.exe') @('--self-test','--isolated-test','--report',('"'+$frostReportDir+'"'))
     $frostDesktop = Get-Content -LiteralPath (Join-Path $frostReportDir 'desktop-report.json') -Raw | ConvertFrom-Json
     Assert-Frost ($frostDesktop.passed -eq $true) 'Installed Release desktop verification passed'
-    Run-Frost (Join-Path $frostTarget 'FrostWhiteComet.exe') @('--benchmark','--report',('"'+$frostReportDir+'"'))
+    Run-Frost (Join-Path $frostTarget 'FrostWhiteComet.exe') @('--benchmark','--isolated-test','--report',('"'+$frostReportDir+'"'))
     Assert-Frost (Test-Path -LiteralPath (Join-Path $frostReportDir 'performance-report.json')) 'Installed Release benchmark recorded'
     & dotnet run --project tests/Frost.Verify -c Release -- assets/cursors --install-only 2>&1 | Tee-Object -FilePath (Join-Path $frostReportDir 'uninstall-theme-install.txt')
     Assert-Frost ($LASTEXITCODE -eq 0) 'Installed active native theme before uninstall'

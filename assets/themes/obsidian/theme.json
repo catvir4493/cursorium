@@ -1,0 +1,25 @@
+{
+  "SchemaVersion": 1,
+  "Id": "obsidian",
+  "Name": "Obsidian",
+  "Author": "CURSORIUM",
+  "Description": "Graphite pointers with pale edges. Pair with any motion effect.",
+  "Preview": "preview/Normal.png",
+  "Roles": {
+    "Normal": "Normal.cur",
+    "Help": "Help.cur",
+    "Working": "Working.ani",
+    "Busy": "Busy.ani",
+    "Precision": "Precision.cur",
+    "Text": "Text.cur",
+    "Handwriting": "Handwriting.cur",
+    "Unavailable": "Unavailable.cur",
+    "Vertical": "Vertical.cur",
+    "Horizontal": "Horizontal.cur",
+    "DiagonalNWSE": "DiagonalNWSE.cur",
+    "DiagonalNESW": "DiagonalNESW.cur",
+    "Move": "Move.cur",
+    "Alternate": "Alternate.cur",
+    "Link": "Link.cur"
+  }
+}

@@ -1,6 +1,7 @@
 namespace Frost.Core;
 public readonly record struct TrailPoint(double X,double Y,double Time,double Speed);
-public readonly record struct Halo(double X,double Y,double Time);
+[Flags] public enum ClickButton {None=0,Left=1,Right=2,Middle=4}
+public readonly record struct Halo(double X,double Y,double Time,ClickButton Button=ClickButton.Left);
 public sealed class TrailModel
 {
     private readonly List<TrailPoint> points=new(256);
@@ -40,10 +41,11 @@ public sealed class TrailModel
             length+=segment;
         }
     }
-    public void Click(double x,double y,double now){if(halos.Count>=8)halos.RemoveAt(0);halos.Add(new(x,y,now));}
+    public void Click(double x,double y,double now,ClickButton button=ClickButton.Left){if(halos.Count>=8)halos.RemoveAt(0);halos.Add(new(x,y,now,button));}
     public void Expire(double now,Settings settings)
     {
-        points.RemoveAll(p=>now-p.Time>settings.Duration);halos.RemoveAll(h=>now-h.Time>settings.HaloDuration||!settings.ClickHalo);
+        for(int i=points.Count-1;i>=0;i--)if(now-points[i].Time>settings.Duration||!settings.TrailEnabled)points.RemoveAt(i);
+        for(int i=halos.Count-1;i>=0;i--)if(now-halos[i].Time>settings.HaloDuration||!settings.ClickHalo||settings.ClickEffect=="off")halos.RemoveAt(i);
     }
     public void Clear(){points.Clear();halos.Clear();}
 }
