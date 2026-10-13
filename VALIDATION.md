@@ -7,7 +7,11 @@ visual/state/lifecycle assertions. Additional actual cached WPF restart and full
 interface checks: 99 passed. A production startup failure exposed card resource
 lookup before the control joined the host tree; rendering now waits for Loaded
 and immediately uses the valid cache before asynchronous refresh. The failed
-startup is not counted as passing installation evidence. Original FROST and Obsidian resource suites:
+startup is not counted as passing installation evidence. Another 99-check real
+WPF run uses a private clone of current user data. Dropdown keyboard tests retain
+their original assertions and real SendInput, with bounded condition waits rather
+than fixed 60/100 ms guesses; Escape explicitly closes an open menu before Cancel.
+The private clone and its screenshots are not published. Original FROST and Obsidian resource suites:
 388 checks each. No native transaction, security protocol or renderer rewrite.
 
 Same-size old/new captures cover Explore, Details, Cursors and Trails; actual

@@ -22,6 +22,7 @@ public static class InterfaceVerification
         int option=Array.IndexOf(args,"--report");var directory=Path.GetFullPath(option>=0?args[option+1]:"artifacts/interface-review");Directory.CreateDirectory(directory);
         var panel=app.Panel;var foreground=Native.GetForegroundWindow();Native.GetPhysicalCursorPos(out var pointer);bool passed=false;string? error=null;
         string nativeBefore=JsonSerializer.Serialize(new ThemeService().Snapshot().Cursors),appliedBefore=JsonSerializer.Serialize(app.Studio.State,Storage.Json);
+        async Task WaitForInput(Func<bool> condition){var timer=Stopwatch.StartNew();while(!condition()&&timer.ElapsedMilliseconds<1200)await Task.Delay(20);}
         try
         {
             panel.Topmost=true;panel.Show();((ListBox)panel.FindName("Navigation")).SelectedIndex=1;((TabControl)panel.FindName("ConfigTabs")).SelectedIndex=0;await Task.Delay(150);panel.WindowState=WindowState.Normal;panel.MinWidth=780;panel.MinHeight=480;panel.Width=1280;panel.Height=830;
@@ -41,7 +42,7 @@ public static class InterfaceVerification
             Check(length.Value>lengthBefore&&panel.Draft.Effects.Length==length.Value,"Custom slider retains actual keyboard value change and binding");
             var toggle=(CheckBox)panel.FindName("EnabledCheck");toggle.Focus();bool enabledBefore=toggle.IsChecked==true;DesktopVerification.PressKey(0x20);await Task.Delay(60);
             Check(toggle.IsChecked!=enabledBefore&&panel.Draft.Effects.Enabled==toggle.IsChecked,"Custom toggle retains actual Space keyboard interaction");DesktopVerification.PressKey(0x20);await Task.Delay(60);
-            var preset=(ComboBox)panel.FindName("TrailBox");preset.Focus();DesktopVerification.PressKey(0x73);await Task.Delay(100);Check(preset.IsDropDownOpen,"Custom combo opens via actual F4 keyboard input");DesktopVerification.PressKey(0x1B);await Task.Delay(60);Check(!preset.IsDropDownOpen&&panel.IsDirty,"Escape closes dropdown without cancelling the draft");
+            var preset=(ComboBox)panel.FindName("TrailBox");preset.Focus();DesktopVerification.PressKey(0x73);await WaitForInput(()=>preset.IsDropDownOpen);Check(preset.IsDropDownOpen,"Custom combo opens via actual F4 keyboard input");DesktopVerification.PressKey(0x1B);await WaitForInput(()=>!preset.IsDropDownOpen);Check(!preset.IsDropDownOpen&&panel.IsDirty,"Escape closes dropdown without cancelling the draft");
             FindButton(panel,"CancelButton").RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Button.ClickEvent));
             ((ComboBox)panel.FindName("ThemeBox")).SelectedItem=app.Studio.Catalog.Find("frost");
             ((ComboBox)panel.FindName("TrailBox")).SelectedItem=app.Studio.Effects.Trails.Single(t=>t.Id=="neon");

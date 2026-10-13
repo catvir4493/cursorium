@@ -112,7 +112,8 @@ public partial class MainWindow:Window
     private void SystemMotionChanged(object? sender,System.ComponentModel.PropertyChangedEventArgs e){if(e.PropertyName==nameof(SystemParameters.ClientAreaAnimation))Dispatcher.BeginInvoke(new Action(UpdateMotion));}
     private void HandleKeyboard(object sender,System.Windows.Input.KeyEventArgs e)
     {
-        if(new[]{ThemeBox,TrailBox,ClickBox,PreviewRole,ProfileBox,FpsBox,LibraryFilter}.Any(box=>box.IsDropDownOpen))return;
+        var dropdown=new[]{ThemeBox,TrailBox,ClickBox,PreviewRole,ProfileBox,FpsBox,LibraryFilter}.FirstOrDefault(box=>box.IsDropDownOpen);
+        if(dropdown!=null){if(e.Key==Key.Escape){dropdown.IsDropDownOpen=false;dropdown.Focus();e.Handled=true;}return;}
         if(Navigation.SelectedIndex==0){if(e.Key==Key.Escape&&Discover.Selected!=null){Discover.Back();e.Handled=true;}else if(e.Key==Key.F6){if(Navigation.IsKeyboardFocusWithin)Discover.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));else Navigation.Focus();e.Handled=true;}return;}
         if(e.Key==Key.Enter&&Keyboard.Modifiers==ModifierKeys.Control&&ViewState.CanApply){ApplyDraft();e.Handled=true;}
         else if(e.Key==Key.Escape&&ViewState.CanCancel){CancelChanges(this,new RoutedEventArgs());e.Handled=true;}
