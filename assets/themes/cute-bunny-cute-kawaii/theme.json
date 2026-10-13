@@ -1,0 +1,98 @@
+{
+  "SchemaVersion": 1,
+  "Id": "cute-bunny-cute-kawaii",
+  "Name": "Bunny Cute Kawaii",
+  "Author": "goat",
+  "Description": "Soft bunny sprites. Three missing roles explicitly inherit FROST.",
+  "Preview": "",
+  "Roles": {
+    "Normal": "Normal.ani",
+    "Help": "Help.ani",
+    "Working": "Working.ani",
+    "Busy": "Busy.ani",
+    "Precision": "Precision.cur",
+    "Text": "Text.ani",
+    "Handwriting": "Handwriting.cur",
+    "Unavailable": "Unavailable.ani",
+    "Vertical": "Vertical.cur",
+    "Horizontal": "Horizontal.cur",
+    "DiagonalNWSE": "DiagonalNWSE.cur",
+    "DiagonalNESW": "DiagonalNESW.cur",
+    "Move": "Move.cur",
+    "Alternate": "Alternate.ani",
+    "Link": "Link.cur"
+  },
+  "SourceUrl": "https://www.rw-designer.com/cursor-set/bunny-cute-kawaii",
+  "License": "Release to Public Domain (RealWorld); inherited FROST resources: project MIT license",
+  "Collection": "cute",
+  "IsAnimated": true,
+  "PublishedAt": "2019-12-03",
+  "PackageSha256": "64828ebf68e212801eaa0fa03a81c8e519ee63da8e201c7fb4423176436ffdc5",
+  "InheritedRoles": {
+    "DiagonalNWSE": "frost",
+    "DiagonalNESW": "frost",
+    "Link": "frost"
+  },
+  "SourceFiles": [
+    {
+      "OriginalName": "bunny cursor.ani",
+      "Path": "Normal.ani",
+      "Sha256": "109e2547f5e8f22ee3f0ab2057e2ccb0f89b24621b59931a813d88bd72988802"
+    },
+    {
+      "OriginalName": "help select.ani",
+      "Path": "Help.ani",
+      "Sha256": "9b0696124e2955d4bd5544481c51871aed94db765be61139798df529175b24e5"
+    },
+    {
+      "OriginalName": "handwriting.cur",
+      "Path": "Handwriting.cur",
+      "Sha256": "8c56ef0f67b92ce7f30ca9c871482dcd3103825a05c34e4a4357810fc467210e"
+    },
+    {
+      "OriginalName": "busy.ani",
+      "Path": "Busy.ani",
+      "Sha256": "e34407fcaf46182be37da58bb934677efb1201ae44b955448c0722f0df98c9db"
+    },
+    {
+      "OriginalName": "alt select.ani",
+      "Path": "Alternate.ani",
+      "Sha256": "3c1d7635df03964065f8dc050977318eb0b8ff67bfaae03e32ab93f73f7024a2"
+    },
+    {
+      "OriginalName": "precision select.cur",
+      "Path": "Precision.cur",
+      "Sha256": "118d3ae650e54d0553ac647f42f9ee26ddd4e2c12cc564368b0dc3593c065d40"
+    },
+    {
+      "OriginalName": "unavailble.ani",
+      "Path": "Unavailable.ani",
+      "Sha256": "2494212c905e7783834ece0142025afa133d7b6f2a47aea40a53744ec020ea5c"
+    },
+    {
+      "OriginalName": "working on background.ani",
+      "Path": "Working.ani",
+      "Sha256": "7d85a19ac64dcbecdd4e1c7458213ccc9c3aa1cc95151893485f7612093525cf"
+    },
+    {
+      "OriginalName": "text select.ani",
+      "Path": "Text.ani",
+      "Sha256": "3e30a5cef5e4b3196ae68d670172a963a8c53a435d9c0317926bfd3735236e62"
+    },
+    {
+      "OriginalName": "vertical resize.cur",
+      "Path": "Vertical.cur",
+      "Sha256": "e7cda8d9554e4cf64affd6b1d6c324ab82cb5ce2ee839c36acf48b5099e7ce02"
+    },
+    {
+      "OriginalName": "move.cur",
+      "Path": "Move.cur",
+      "Sha256": "edb5aea3a3c1fe36c105e350bbe156d00685a42a10c9224a6baee09a4ca2cc4c"
+    },
+    {
+      "OriginalName": "horizontal resize.cur",
+      "Path": "Horizontal.cur",
+      "Sha256": "baf8de6dfc5fde258bc02b1e379b420749c065908e17a83af6baaaf29f9e3364"
+    }
+  ]
+}

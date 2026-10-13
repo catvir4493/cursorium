@@ -151,7 +151,9 @@ public static class CursorArtwork
             string svg=Svg(role);if(dark)svg=svg.Replace("#F7FAFF","#162231").Replace("#DCEEFF","#26394F").Replace("#243248","#BECAD7");File.WriteAllText(Path.Combine(output,"vectors",role.Name+".svg"),svg);
         }
         File.WriteAllText(Path.Combine(output,"manifest.json"),JsonSerializer.Serialize(new { theme=dark?"Obsidian":"FROST / WHITE COMET", sizes=Sizes, animation=new {frames=24,jiffies=3}, roles=CursorRoles.All },new JsonSerializerOptions{WriteIndented=true}));
-        Storage.Write(Path.Combine(output,"theme.json"),new CursorTheme{Id=dark?"obsidian":"frost",Name=dark?"Obsidian":"FROST / WHITE COMET",Author="CURSORIUM",Description=dark?"Graphite pointers with pale edges. Pair with any motion effect.":"The original ice-white cursor suite, with animated busy roles.",Preview="preview/Normal.png",Roles=CursorRoles.All.ToDictionary(r=>r.Name,r=>r.FileName)});
+        var theme=new CursorTheme{Id=dark?"obsidian":"frost",Name=dark?"Obsidian":"FROST / WHITE COMET",Author="CURSORIUM",Description=dark?"Graphite pointers with pale edges. Pair with any motion effect.":"The original ice-white cursor suite, with animated busy roles.",Preview="preview/Normal.png",Roles=CursorRoles.All.ToDictionary(r=>r.Name,r=>r.FileName)};
+        // Keep the original manifests byte-stable when optional library metadata is added.
+        Storage.Write(Path.Combine(output,"theme.json"),new{theme.SchemaVersion,theme.Id,theme.Name,theme.Author,theme.Description,theme.Preview,theme.Roles});
     }
     private static string Svg(CursorRole role)
     {

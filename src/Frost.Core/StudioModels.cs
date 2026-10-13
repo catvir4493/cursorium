@@ -12,10 +12,30 @@ public sealed class CursorTheme
     public string Description {get;set;}="";
     public string Preview {get;set;}="";
     public Dictionary<string,string> Roles {get;set;}=new();
+    public string SourceUrl {get;set;}="";
+    public string License {get;set;}="";
+    public string Collection {get;set;}="";
+    public bool IsAnimated {get;set;}
+    public DateTimeOffset? ImportedAt {get;set;}
+    public string PublishedAt {get;set;}="";
+    public string PackageSha256 {get;set;}="";
+    public Dictionary<string,string> InheritedRoles {get;set;}=new();
+    public List<ThemeSourceFile> SourceFiles {get;set;}=new();
+    [JsonIgnore] public int NativeRoleCount=>IsSystem?0:Roles.Count-InheritedRoles.Count;
+    [JsonIgnore] public int AnimatedRoleCount=>Roles.Values.Count(p=>p.EndsWith(".ani",StringComparison.OrdinalIgnoreCase));
+    [JsonIgnore] public string LibraryCollection=>Collection.Length>0?Collection:Id.StartsWith("import-")?"imported":"built-in";
+    [JsonIgnore] public string RoleSummary=>IsSystem?"Windows original":$"{NativeRoleCount}/15 native · {InheritedRoles.Count} inherited";
     [JsonIgnore] public string DirectoryPath {get;set;}="";
     [JsonIgnore] public bool IsSystem=>Id=="system";
     public string Resource(string role)=>ThemeCatalog.SafeResource(DirectoryPath,Roles[role]);
     public override string ToString()=>Name;
+}
+
+public sealed class ThemeSourceFile
+{
+    public string OriginalName {get;set;}="";
+    public string Path {get;set;}="";
+    public string Sha256 {get;set;}="";
 }
 
 public sealed class TrailPreset

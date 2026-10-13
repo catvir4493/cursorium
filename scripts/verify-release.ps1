@@ -1,6 +1,58 @@
+param([switch]$IsolatedUpgrade,[ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.2.0')
 $ErrorActionPreference = 'Stop'
 $frostRoot = Split-Path -Parent $PSScriptRoot
 Set-Location -LiteralPath $frostRoot
+if($IsolatedUpgrade){
+    $taskSandbox=Join-Path ([IO.Path]::GetTempPath()) ('CursoriumUpgradeTest-'+[guid]::NewGuid().ToString('N'))
+    $taskProgram=Join-Path $taskSandbox 'Program'
+    $taskData=Join-Path $taskSandbox 'Data'
+    $taskOutput=Join-Path $frostRoot 'artifacts/cute-v1.2/upgrade-isolated'
+    New-Item -ItemType Directory -Force -Path $taskSandbox,$taskOutput | Out-Null
+    $taskRealTarget=Join-Path $env:LOCALAPPDATA 'Programs/FrostWhiteComet'
+    if(-not (Test-Path -LiteralPath (Join-Path $taskRealTarget 'frost-install.marker'))){throw 'A marked v1.1 installation is required for this upgrade test.'}
+    Copy-Item -LiteralPath $taskRealTarget -Destination $taskProgram -Recurse
+    Copy-Item -LiteralPath (Join-Path $env:LOCALAPPDATA 'FrostWhiteComet') -Destination $taskData -Recurse
+    # All private copies stay in the sandbox. They are never release/source assets.
+    function Get-UpgradeHashes([string]$Root){
+        $result=@{}
+        foreach($item in Get-ChildItem -LiteralPath $Root -File -Recurse){
+            $relative=$item.FullName.Substring($Root.Length+1)
+            if($relative -notin @('setup-result.json','frost.log','frost.log.old')){$result[$relative]=(Get-FileHash -LiteralPath $item.FullName).Hash}
+        }
+        return $result
+    }
+    $taskBefore=Get-UpgradeHashes $taskData
+    $taskKey=[Microsoft.Win32.Registry]::CurrentUser.OpenSubKey('Control Panel\Cursors')
+    try{$taskNativeBefore=@($taskKey.GetValueNames()|Sort-Object|ForEach-Object{@{name=$_;kind=$taskKey.GetValueKind($_).ToString();value=$taskKey.GetValue($_,$null,[Microsoft.Win32.RegistryValueOptions]::DoNotExpandEnvironmentNames)}})|ConvertTo-Json -Depth 8 -Compress}finally{$taskKey.Dispose()}
+    function Run-UpgradeProcess([string]$Exe,[string]$Arguments){
+        $start=[Diagnostics.ProcessStartInfo]::new($Exe);$start.UseShellExecute=$false;$start.CreateNoWindow=$true;$start.Arguments=$Arguments
+        $process=[Diagnostics.Process]::Start($start)
+        if(-not $process.WaitForExit(60000)-or $process.ExitCode -ne 0){throw 'Isolated upgrade process failed.'}
+    }
+    $taskKeyName='Software\Microsoft\Windows\CurrentVersion\Uninstall\FrostWhiteComet-'+[IO.Path]::GetFileName($taskSandbox)
+    try{
+        Run-UpgradeProcess (Join-Path $frostRoot "artifacts/CURSORIUM-Setup-$Version-Release.exe") ('--silent --no-launch --isolated-test --test-install-root "'+$taskSandbox+'"')
+        $taskAfter=Get-UpgradeHashes $taskData
+        if($taskAfter.Count -ne $taskBefore.Count){throw 'Isolated upgrade changed protected data count.'}
+        foreach($name in $taskBefore.Keys){if($taskAfter[$name] -ne $taskBefore[$name]){throw 'Isolated upgrade altered a protected resource.'}}
+        $taskPortable=Join-Path $frostRoot 'artifacts/cursorium-release/portable';$taskMatches=0
+        foreach($item in Get-ChildItem -LiteralPath $taskPortable -File -Recurse){
+            $relative=$item.FullName.Substring($taskPortable.Length+1);$installed=Join-Path $taskProgram $relative
+            if(-not (Test-Path -LiteralPath $installed)-or (Get-FileHash -LiteralPath $installed).Hash -ne (Get-FileHash -LiteralPath $item.FullName).Hash){throw 'Isolated installed payload mismatch.'};$taskMatches++
+        }
+        Run-UpgradeProcess (Join-Path $taskProgram 'FrostWhiteComet.exe') ('--state-probe --isolated-test --test-data-root "'+$taskData+'" --report "'+(Join-Path $taskSandbox 'state.json')+'"')
+        $state=Get-Content -LiteralPath (Join-Path $taskSandbox 'state.json') -Raw | ConvertFrom-Json
+        if(@($state.themes | Where-Object {$_ -like 'cute-*'}).Count -ne 5){throw 'Installed catalog lacks Cute Collection.'}
+        $taskRegistry=[Microsoft.Win32.Registry]::CurrentUser.OpenSubKey($taskKeyName)
+        try{if($taskRegistry.GetValue('DisplayVersion') -ne $Version){throw 'Isolated registration version mismatch.'}}finally{$taskRegistry.Dispose()}
+        $taskKey=[Microsoft.Win32.Registry]::CurrentUser.OpenSubKey('Control Panel\Cursors')
+        try{$taskNativeAfter=@($taskKey.GetValueNames()|Sort-Object|ForEach-Object{@{name=$_;kind=$taskKey.GetValueKind($_).ToString();value=$taskKey.GetValue($_,$null,[Microsoft.Win32.RegistryValueOptions]::DoNotExpandEnvironmentNames)}})|ConvertTo-Json -Depth 8 -Compress}finally{$taskKey.Dispose()}
+        if($taskNativeAfter -ne $taskNativeBefore){throw 'Isolated upgrade changed real native cursor state.'}
+        @{passed=$true;version=$Version;protectedFiles=$taskBefore.Count;payloadFiles=$taskMatches;cuteThemes=5;nativeUnchanged=$true;privateSandbox=$taskSandbox;notes='Actual existing installation/data copy upgraded in a bounded TEMP sandbox; own shortcut/registry namespace, no production IPC/startup writes. Uninstall not exercised.'}|ConvertTo-Json -Depth 5|Set-Content -LiteralPath (Join-Path $taskOutput 'upgrade-report.json') -Encoding utf8
+        Write-Host 'Isolated installed upgrade passed.'
+    }finally{[Microsoft.Win32.Registry]::CurrentUser.DeleteSubKeyTree($taskKeyName,$false)}
+    return
+}
 $frostTarget = Join-Path $env:LOCALAPPDATA 'Programs\FrostWhiteComet'
 $frostData = Join-Path $env:LOCALAPPDATA 'FrostWhiteComet'
 $frostShortcut = Join-Path ([Environment]::GetFolderPath('Programs')) 'CURSORIUM.lnk'

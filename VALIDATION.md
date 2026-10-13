@@ -1,3 +1,36 @@
+# CURSORIUM v1.2.0 validation update — 2026-10-13
+
+Release solution and self-contained x64 app/setup: 0 warnings, 0 errors.
+FROST and Obsidian: original 388 resource checks each; generated resources/manifests unchanged.
+Core/native roundtrip: 178 passed (all original 66 retained, 112 added).
+Desktop: 85 passed on the currently enumerated single 2560×1440 / 96-DPI display.
+The desktop test source is unchanged: the second monitor's four instances behind
+historical 89 are unavailable this run, not deleted or reported passed.
+Original UI: 98 passed. Collection UI: 28 passed. Five original ZIPs / 75 CUR+ANI
+pass production safe staging/native loading and original per-file SHA256 checks.
+All five protected user files remain unchanged by existence/SHA256 comparison.
+
+[Chinese delivery and limits](docs/CURSORIUM-v1.2-DELIVERY.md),
+[public validation reports](docs/validation/v1.2/),
+[actual WPF captures](docs/CURSORIUM-v1.2-SCREENSHOTS.md).
+
+Actual Windows 11 build 26100 / 100% DPI input, native Apply/rollback/restore,
+window management, compact layouts and animated resource lifecycle verified.
+Resolution and 125%/150% matrix are equivalent logical layouts; no physical DPI
+switch is claimed. Current dual-monitor, Windows 10, mixed DPI, protected desktop,
+exclusive fullscreen, long stress, fresh install and uninstall are not established.
+
+Existing v1.1 installation/data were copied into bounded TEMP isolation and upgraded
+before touching production. Actual production upgrade then backed up installation,
+data and native values; all 59 protected data/resources preserved, native registry
+types/values unchanged, payload file hashes matched, registered version 1.2.0.
+The absent desktop link was recreated from the correct Start-menu link; actual
+startup and reopening use the installed process. Private backups stay untracked.
+
+The records below remain historical evidence for their named versions.
+
+---
+
 # CURSORIUM / FROST: validation record
 
 ## CURSORIUM v1.1.0 — October 13, 2026

@@ -1,0 +1,109 @@
+{
+  "SchemaVersion": 1,
+  "Id": "cute-kawaii-cat-curs0rs",
+  "Name": "Kawaii Cat",
+  "Author": "MUFFET!! (archive: Sun_l1ght)",
+  "Description": "Animated little cats, with the author's original sequence and hotspots.",
+  "Preview": "",
+  "Roles": {
+    "Normal": "Normal.ani",
+    "Help": "Help.ani",
+    "Working": "Working.ani",
+    "Busy": "Busy.ani",
+    "Precision": "Precision.ani",
+    "Text": "Text.ani",
+    "Handwriting": "Handwriting.ani",
+    "Unavailable": "Unavailable.cur",
+    "Vertical": "Vertical.ani",
+    "Horizontal": "Horizontal.ani",
+    "DiagonalNWSE": "DiagonalNWSE.ani",
+    "DiagonalNESW": "DiagonalNESW.ani",
+    "Move": "Move.ani",
+    "Alternate": "Alternate.ani",
+    "Link": "Link.ani"
+  },
+  "SourceUrl": "https://www.rw-designer.com/cursor-set/kawaii-cat-curs0rs",
+  "License": "Release to Public Domain (RealWorld); inherited FROST resources: project MIT license",
+  "Collection": "cute",
+  "IsAnimated": true,
+  "PublishedAt": "2022-08-14",
+  "PackageSha256": "92febf3cfdaecf0eb2220c15e8b27a4e297d44e0a9237f71c15ca25a2fca6055",
+  "InheritedRoles": {},
+  "SourceFiles": [
+    {
+      "OriginalName": "diagonal resize /.ani",
+      "Path": "DiagonalNWSE.ani",
+      "Sha256": "675be35574f0a7738e8f785087a25c800654c78e6513c28c19eac576663d6704"
+    },
+    {
+      "OriginalName": "Diagonal resize -.ani",
+      "Path": "DiagonalNESW.ani",
+      "Sha256": "4a26b94b2c50f25a982fc58a0f04ebff7cbab01532e3bdd088cdf68d0123ebf4"
+    },
+    {
+      "OriginalName": "vertical resize.ani",
+      "Path": "Vertical.ani",
+      "Sha256": "31af4cb53e0f30ca39733f6437ef30cefab2e6daa15d6f727a7088a1714ae386"
+    },
+    {
+      "OriginalName": "horizontal resize.ani",
+      "Path": "Horizontal.ani",
+      "Sha256": "60e93e4eb46450ed40e3832d029de5f928d1a0ff27e50f3643239e1844239aa6"
+    },
+    {
+      "OriginalName": "move.ani",
+      "Path": "Move.ani",
+      "Sha256": "703863fb9ee85661e5d8a0ae22cc067f45e19af9938e7e6d42e694e5cb019ccc"
+    },
+    {
+      "OriginalName": "Normal select.ani",
+      "Path": "Normal.ani",
+      "Sha256": "cd855dd09e4fae329b6a685f3c40768fa1cbf0f4b5d17863cc01d24733ce436b"
+    },
+    {
+      "OriginalName": "Precision select.ani",
+      "Path": "Precision.ani",
+      "Sha256": "abeca4443a7c1b0096770adbd54f74d7b83016f2bb976fe182481557721e7312"
+    },
+    {
+      "OriginalName": "Working in Background.ani",
+      "Path": "Working.ani",
+      "Sha256": "0e46c1cc08e52ff090906fc4501ff793c4e275f15846df723575147237e47647"
+    },
+    {
+      "OriginalName": "Busy.ani",
+      "Path": "Busy.ani",
+      "Sha256": "86dab9523417287ae75c8f4080c385c46bb875cc83f191b2b86fcdcf2795d16c"
+    },
+    {
+      "OriginalName": "Unavailable.cur",
+      "Path": "Unavailable.cur",
+      "Sha256": "650789940de15e4ce13eef0378169d35750af3287c91396c276253d70348a6b6"
+    },
+    {
+      "OriginalName": "Text select.ani",
+      "Path": "Text.ani",
+      "Sha256": "a8cd4429b617c5582dd6f815ee2a53324c7dff3df331f6ea8f79d63d4c9fe695"
+    },
+    {
+      "OriginalName": "Handwriting.ani",
+      "Path": "Handwriting.ani",
+      "Sha256": "c53f919b6a5e38041e444c44a1ebc06c0bbce5b27ef08e23263b61db6c34a7ed"
+    },
+    {
+      "OriginalName": "Help select.ani",
+      "Path": "Help.ani",
+      "Sha256": "ec9bdd50c41215aaab142303670f23837d2cfa803575d0f265608b47e78f0cc1"
+    },
+    {
+      "OriginalName": "Alternate select.ani",
+      "Path": "Alternate.ani",
+      "Sha256": "1e8becd5f488069ced6b489f0f218c5b2e453fe09593d32487d6c4b577440478"
+    },
+    {
+      "OriginalName": "Link select.ani",
+      "Path": "Link.ani",
+      "Sha256": "09842c22320cef3597e3e3294006eff4f35f5f582059432c62907cd92d537d20"
+    }
+  ]
+}

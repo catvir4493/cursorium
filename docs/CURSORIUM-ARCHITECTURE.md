@@ -174,3 +174,35 @@ Mix Studio and Settings prioritize their content instead of showing an unrelated
 Primary API references: [WindowChrome](https://learn.microsoft.com/en-us/dotnet/api/system.windows.shell.windowchrome),
 [SystemParameters.ClientAreaAnimation](https://learn.microsoft.com/en-us/dotnet/api/system.windows.systemparameters.clientareaanimation),
 [DWM attributes](https://learn.microsoft.com/en-us/windows/win32/api/dwmapi/ne-dwmapi-dwmwindowattribute).
+
+## v1.2 theme library extension
+
+SchemaVersion remains 1. CursorTheme optionally records SourceUrl, License,
+Collection, IsAnimated, ImportedAt, PublishedAt, PackageSha256, SourceFiles
+(original name/path/SHA256) and InheritedRoles (role to fallback theme ID).
+ReadTheme still requires all 15 usable roles and validates source resources/hashes.
+NativeRoleCount excludes inherited roles; extra files are provenance, not standard
+roles. Built-in generation keeps the old manifest bytes using an explicit projection.
+
+CursorPack only stages bounded ZIP/folder cursor bytes. EOCD count is bounded before
+central-directory allocation; paths, links, expanded bytes and ratios are checked.
+CursorRoleRecognition suggests roles from the leaf filename, never enumeration or
+parent names. The WPF PackImportDialog reviews conflict/missing roles and fallback.
+ThemeCatalog.Import validates a GUID staging directory then moves it atomically
+into the same user Themes directory. No new theme service or package executable.
+
+ThemeLibraryPreferences stores filter and favorite IDs in library.json, separate
+from Draft, Applied, interface.json and Profile data. Cards project independent
+selected/applied/modified states. Metadata/source links come from the catalog.
+
+AniTimeline validates original seq/rate/jiffies. AnimatedCursorPreview decodes at
+most 256 48x48 frozen images once via Windows native resource decoding, disposing
+handles immediately. Its visible-only DispatcherTimer uses elapsed time and source
+jiffies; functional animation is independent of optional UiMotion. The local input
+cursor is still the original WPF Cursor, retaining native hotspots and animation.
+ThemeService, StudioService and all desktop render/input lifecycles remain intact.
+
+Installer isolation is opt-in under --isolated-test --test-install-root, restricted
+to non-linked TEMP CursoriumUpgradeTest-* roots. It uses separate install/data/link
+and registration names and never sends production IPC or changes the Run entry.
+Production installation paths, startup behavior and restoration stay compatible.

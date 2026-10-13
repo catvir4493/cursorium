@@ -1,0 +1,103 @@
+{
+  "SchemaVersion": 1,
+  "Id": "cute-pastel",
+  "Name": "Pastel",
+  "Author": "saraantie · shapes: quackyduck",
+  "Description": "Quiet pastel pointers. Three missing roles explicitly inherit FROST.",
+  "Preview": "",
+  "Roles": {
+    "Normal": "Normal.cur",
+    "Help": "Help.cur",
+    "Working": "Working.ani",
+    "Busy": "Busy.cur",
+    "Precision": "Precision.cur",
+    "Text": "Text.cur",
+    "Handwriting": "Handwriting.cur",
+    "Unavailable": "Unavailable.cur",
+    "Vertical": "Vertical.cur",
+    "Horizontal": "Horizontal.cur",
+    "DiagonalNWSE": "DiagonalNWSE.cur",
+    "DiagonalNESW": "DiagonalNESW.cur",
+    "Move": "Move.cur",
+    "Alternate": "Alternate.cur",
+    "Link": "Link.cur"
+  },
+  "SourceUrl": "https://www.rw-designer.com/cursor-set/pastel",
+  "License": "Release to Public Domain (RealWorld); inherited FROST resources: project MIT license",
+  "Collection": "cute",
+  "IsAnimated": false,
+  "PublishedAt": "2018-10-19",
+  "PackageSha256": "b002f0b58ebb627d054a94a152917f7659adc64d336e92378e6bb2c712acb1cb",
+  "InheritedRoles": {
+    "Working": "frost",
+    "Move": "frost",
+    "Alternate": "frost"
+  },
+  "SourceFiles": [
+    {
+      "OriginalName": "Pastel Busy 2.cur",
+      "Path": "Busy.cur",
+      "Sha256": "83d5e265aeea1db5f21f9c9d04dfa840d5fdc4401436fe6daf03daf163155b53"
+    },
+    {
+      "OriginalName": "Pastel Busy.cur",
+      "Path": "Extras/1.cur",
+      "Sha256": "ac6757a2b851130afe9ec2a31fccea79c89616fededf0a76ccb43dbcaa93a424"
+    },
+    {
+      "OriginalName": "Pastel Diagonal Resize 1.cur",
+      "Path": "DiagonalNWSE.cur",
+      "Sha256": "4b987a8c946aa0bb46a5dbcc91d801a5fb9dbe85b9a08f2a192e5c80345e13e9"
+    },
+    {
+      "OriginalName": "Pastel Diagonal Resize 2.cur",
+      "Path": "DiagonalNESW.cur",
+      "Sha256": "e93d0829cb406404b7db9b8d2324d2be9b939e2675facdaa0c2873101b8a40c0"
+    },
+    {
+      "OriginalName": "Pastel Handwriting.cur",
+      "Path": "Handwriting.cur",
+      "Sha256": "002ef145aa7154c66c38983e57ca32e9e939e7cf0691a1602f9bef9eb6f80eac"
+    },
+    {
+      "OriginalName": "Pastel Help.cur",
+      "Path": "Help.cur",
+      "Sha256": "8075449f2e84953b74b2a2da1d691c72425a16ed8b08898d0f0e8e78b2910d50"
+    },
+    {
+      "OriginalName": "Pastel Horizontal Resize .cur",
+      "Path": "Horizontal.cur",
+      "Sha256": "63cd8e687a92f288a23aa61ad76a56b6754b71cf40cba7adea0bdc589e0770cf"
+    },
+    {
+      "OriginalName": "Pastel Link.cur",
+      "Path": "Link.cur",
+      "Sha256": "bf24590de14ee361c3377b39c66e67e8c735b05265cbd9fdf03910d5873cf760"
+    },
+    {
+      "OriginalName": "Pastel Normal.cur",
+      "Path": "Normal.cur",
+      "Sha256": "07c9b75ab78fff0fe6f2fff700cbddbf3c4c7e89fba6caf09140fa75426b0c00"
+    },
+    {
+      "OriginalName": "Pastel Precision.cur",
+      "Path": "Precision.cur",
+      "Sha256": "ee497e0d05c3973afc60b8385965b1c0240b51b672f03a6fd31f60b7bdb3efef"
+    },
+    {
+      "OriginalName": "Pastel Select.cur",
+      "Path": "Text.cur",
+      "Sha256": "e95fcc5ef4283547b91c800585598c1b1d556381ac51e431b01c397c3b3c9705"
+    },
+    {
+      "OriginalName": "Pastel Unavailable.cur",
+      "Path": "Unavailable.cur",
+      "Sha256": "8a6ec72b5fb61382ace348b22f60f80c24ebc464aa67da00d72f8f826128cace"
+    },
+    {
+      "OriginalName": "Pastel Vertical Resize.cur",
+      "Path": "Vertical.cur",
+      "Sha256": "82ecc28e65b930fe13b9edda71a3042544012dabf0a1f0165ad42f0de91f52ef"
+    }
+  ]
+}

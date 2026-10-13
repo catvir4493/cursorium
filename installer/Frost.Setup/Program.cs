@@ -12,15 +12,26 @@ using Forms=System.Windows.Forms;
 
 internal static class Program
 {
-    private static readonly string Target=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"Programs","FrostWhiteComet");
-    private static readonly string Shortcut=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Programs),"CURSORIUM.lnk");
-    private static readonly string LegacyShortcut=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Programs),"FROST - WHITE COMET.lnk");
-    private const string UninstallKey=@"Software\Microsoft\Windows\CurrentVersion\Uninstall\FrostWhiteComet";
+    private static string Target=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"Programs","FrostWhiteComet");
+    private static string Shortcut=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Programs),"CURSORIUM.lnk");
+    private static string LegacyShortcut=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Programs),"FROST - WHITE COMET.lnk");
+    private static string UninstallKey=@"Software\Microsoft\Windows\CurrentVersion\Uninstall\FrostWhiteComet";
     private static readonly string ProductVersion=Assembly.GetExecutingAssembly().GetName().Version?.ToString(3)??"1.1.0";
     private static bool silent;
+    private static bool isolated;
     [STAThread]static int Main(string[] args)
     {
         silent=args.Contains("--silent");bool remove=args.Contains("--uninstall")||string.Equals(Path.GetFileName(Environment.ProcessPath),"Uninstall.exe",StringComparison.OrdinalIgnoreCase);
+        if(args.Contains("--isolated-test"))
+        {
+            int option=Array.IndexOf(args,"--test-install-root");if(option<0||option+1>=args.Length)return 2;
+            string root=Path.GetFullPath(args[option+1]),temp=Path.GetFullPath(Path.GetTempPath()).TrimEnd(Path.DirectorySeparatorChar)+Path.DirectorySeparatorChar;
+            if(!root.StartsWith(temp,StringComparison.OrdinalIgnoreCase)||!Path.GetFileName(root).StartsWith("CursoriumUpgradeTest-",StringComparison.Ordinal)||!Directory.Exists(root))return 2;
+            for(var current=root;current.Length>=temp.TrimEnd(Path.DirectorySeparatorChar).Length;current=Path.GetDirectoryName(current)!)
+            {if((File.GetAttributes(current)&FileAttributes.ReparsePoint)!=0)return 2;if(current.Equals(temp.TrimEnd(Path.DirectorySeparatorChar),StringComparison.OrdinalIgnoreCase))break;}
+            isolated=true;Target=Path.Combine(root,"Program");Shortcut=Path.Combine(root,"CURSORIUM.lnk");LegacyShortcut=Path.Combine(root,"FROST.lnk");UninstallKey+="-"+Path.GetFileName(root);Storage.UseTestingRoot(Path.Combine(root,"Data"));
+        }
+        else if(args.Contains("--test-install-root"))return 2;
         using var gate=new Mutex(true,@"Local\FrostWhiteComet.Setup",out bool first);
         if(!first){if(!silent)Forms.MessageBox.Show("Another installer is already running.");return 2;}
         try
@@ -35,6 +46,8 @@ internal static class Program
     }
     private static void StopApp()
     {
+        // An isolated upgrade must never send IPC to the real user's running instance.
+        if(isolated)return;
         var exe=Path.Combine(Target,"FrostWhiteComet.exe");if(!File.Exists(exe))return;
         using(var request=Process.Start(new ProcessStartInfo(exe,"--shutdown"){UseShellExecute=false,CreateNoWindow=true}))
         {if(request==null||!request.WaitForExit(6000)||request.ExitCode!=0)throw new IOException("Could not request the running application to quit.");}
@@ -71,11 +84,11 @@ internal static class Program
                 Directory.Move(staging,Target);File.Copy(Environment.ProcessPath!,Path.Combine(Target,"Uninstall.exe"),true);
                 CreateShortcut();if(previous&&File.Exists(LegacyShortcut))File.Delete(LegacyShortcut);using var key=Registry.CurrentUser.CreateSubKey(UninstallKey);
                 key.SetValue("DisplayName","CURSORIUM — Cursor & Motion Studio");key.SetValue("DisplayVersion",ProductVersion);key.SetValue("Publisher","CURSORIUM Project");key.SetValue("InstallLocation",Target);key.SetValue("DisplayIcon",Path.Combine(Target,"FrostWhiteComet.exe"));key.SetValue("UninstallString",$"\"{Path.Combine(Target,"Uninstall.exe")}\" --uninstall");key.SetValue("QuietUninstallString",$"\"{Path.Combine(Target,"Uninstall.exe")}\" --uninstall --silent");key.SetValue("NoModify",1);key.SetValue("NoRepair",1);
-                if(StartupRegistration.Enabled)StartupRegistration.Set(true,Path.Combine(Target,"FrostWhiteComet.exe"));
+                if(!isolated&&StartupRegistration.Enabled)StartupRegistration.Set(true,Path.Combine(Target,"FrostWhiteComet.exe"));
                 if(previous)DeleteOwned(old);
             }
             catch{if(Directory.Exists(Target)&&File.Exists(Path.Combine(Target,"frost-install.marker")))DeleteOwned(Target);if(previous&&Directory.Exists(old))Directory.Move(old,Target);throw;}
-            if(launch)Process.Start(new ProcessStartInfo(Path.Combine(Target,"FrostWhiteComet.exe")){UseShellExecute=true});
+            if(launch&&!isolated)Process.Start(new ProcessStartInfo(Path.Combine(Target,"FrostWhiteComet.exe")){UseShellExecute=true});
         }
         finally{if(Directory.Exists(staging)){string full=Path.GetFullPath(staging);if(full.StartsWith(Path.GetFullPath(Path.GetTempPath()),StringComparison.OrdinalIgnoreCase)&&Path.GetFileName(full).StartsWith("FrostSetup-"))Directory.Delete(full,true);}}
     }
@@ -96,7 +109,7 @@ internal static class Program
         if(!Directory.Exists(Target))return;
         if(!File.Exists(Path.Combine(Target,"frost-install.marker")))throw new IOException("The installation marker is missing. This directory will not be uninstalled.");
         StopApp();StudioService.RestoreSavedState(new ThemeService()); // abort uninstall if native or state restoration fails
-        StartupRegistration.Set(false,Path.Combine(Target,"FrostWhiteComet.exe"));if(File.Exists(Shortcut))File.Delete(Shortcut);if(File.Exists(LegacyShortcut))File.Delete(LegacyShortcut);Registry.CurrentUser.DeleteSubKeyTree(UninstallKey,false);
+        if(!isolated)StartupRegistration.Set(false,Path.Combine(Target,"FrostWhiteComet.exe"));if(File.Exists(Shortcut))File.Delete(Shortcut);if(File.Exists(LegacyShortcut))File.Delete(LegacyShortcut);Registry.CurrentUser.DeleteSubKeyTree(UninstallKey,false);
         string current=Path.GetFullPath(Environment.ProcessPath!);
         if(current.StartsWith(Target+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase))
         {

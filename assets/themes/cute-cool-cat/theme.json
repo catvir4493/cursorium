@@ -1,0 +1,129 @@
+{
+  "SchemaVersion": 1,
+  "Id": "cute-cool-cat",
+  "Name": "Cool Cat",
+  "Author": "Bobcat",
+  "Description": "Sunglasses, cats and original animation. Includes four bonus resources.",
+  "Preview": "",
+  "Roles": {
+    "Normal": "Normal.ani",
+    "Help": "Help.ani",
+    "Working": "Working.ani",
+    "Busy": "Busy.ani",
+    "Precision": "Precision.ani",
+    "Text": "Text.ani",
+    "Handwriting": "Handwriting.ani",
+    "Unavailable": "Unavailable.ani",
+    "Vertical": "Vertical.ani",
+    "Horizontal": "Horizontal.ani",
+    "DiagonalNWSE": "DiagonalNWSE.ani",
+    "DiagonalNESW": "DiagonalNESW.ani",
+    "Move": "Move.ani",
+    "Alternate": "Alternate.ani",
+    "Link": "Link.ani"
+  },
+  "SourceUrl": "https://www.rw-designer.com/cursor-set/cool-cat",
+  "License": "Release to Public Domain (RealWorld); inherited FROST resources: project MIT license",
+  "Collection": "cute",
+  "IsAnimated": true,
+  "PublishedAt": "2020-11-30",
+  "PackageSha256": "bfc999d1b574e6ae4c079d2868df699aebb9f763e271facb0ae6f18ecadfc8a7",
+  "InheritedRoles": {},
+  "SourceFiles": [
+    {
+      "OriginalName": "Cool Cat classic.ani",
+      "Path": "Normal.ani",
+      "Sha256": "5447c8f623d1d82cb91b1923bf0ce976df39d34af39fba6628ea88fddc9f581a"
+    },
+    {
+      "OriginalName": "Cool Cat help select.ani",
+      "Path": "Help.ani",
+      "Sha256": "91afcd9203182e6a148a208b98ad419de9b61fd9af275255a1ee19330dfd6ba3"
+    },
+    {
+      "OriginalName": "Cool Cat working in background.ani",
+      "Path": "Working.ani",
+      "Sha256": "9e05e71ae716f5abd6dece1891d75333f18ac162773a2c647e052217fc523bb9"
+    },
+    {
+      "OriginalName": "Cool Cat busy.ani",
+      "Path": "Busy.ani",
+      "Sha256": "ae658731c5aab8dc4f9b30c3a9f810336593d3e6e87f2dc1f7b17e27c8998d55"
+    },
+    {
+      "OriginalName": "Cool Cat precision select.ani",
+      "Path": "Precision.ani",
+      "Sha256": "926d8838e619f288e93e6c33e85c184a0a122114b723e699fcb2a97c90014f2b"
+    },
+    {
+      "OriginalName": "Cool Cat text select.ani",
+      "Path": "Text.ani",
+      "Sha256": "bedf486a75aa4743613e06533c494f2d01cdac1b2a1d6637f319fba212cef744"
+    },
+    {
+      "OriginalName": "Cool Cat handwriting.ani",
+      "Path": "Handwriting.ani",
+      "Sha256": "624d0cef5f3867da9e828109ce58c8c4f72eb91b3e9db45fcdbe368e9bd44651"
+    },
+    {
+      "OriginalName": "Cool Cat unavailiable.ani",
+      "Path": "Unavailable.ani",
+      "Sha256": "5d62ddc9499553fb317542e84157491fb99eabfc696413dd447c07ddf5103c2a"
+    },
+    {
+      "OriginalName": "Cool Cat vertical resize.ani",
+      "Path": "Vertical.ani",
+      "Sha256": "87f346a9696d33a5bc0e6f0fd85734c77bf3adf2c2ee99b0620e1a244caa2a06"
+    },
+    {
+      "OriginalName": "Cool Cat horizontal resize.ani",
+      "Path": "Horizontal.ani",
+      "Sha256": "94bdb5fcb8c53815da0c8738a041bd0d0ccb4ebc778e092b078fc1d7503a72a9"
+    },
+    {
+      "OriginalName": "Cool Cat diagonal resize 1.ani",
+      "Path": "DiagonalNWSE.ani",
+      "Sha256": "b20734e29c1801e30a7e962f5ad8c08ae0dc5e42df5311d42ee5fdc964ebabd5"
+    },
+    {
+      "OriginalName": "Cool cat diagonal resize 2.ani",
+      "Path": "DiagonalNESW.ani",
+      "Sha256": "feeadac03a1735c6f2d6815b7f2cf7210cc7ff6041540f4f1701ffe37f2651ca"
+    },
+    {
+      "OriginalName": "Cool Cat link select.ani",
+      "Path": "Link.ani",
+      "Sha256": "6cd094edddf5d361b6669e65ca7531204ef880281ca15f2265df3d7ff7007d24"
+    },
+    {
+      "OriginalName": "Cool Cat i'm on fire.ani",
+      "Path": "Extras/13.ani",
+      "Sha256": "12471061062191960472e285efed62317a9fa0b8a26f073f485e3d6b3a705476"
+    },
+    {
+      "OriginalName": "Cool Cat i'm a superstar.ani",
+      "Path": "Extras/14.ani",
+      "Sha256": "398ec5fb1217ca83df9db4e1665cc6d19eff8d273a47cec954cb296a6be07f31"
+    },
+    {
+      "OriginalName": "Cool Cat alternate select.ani",
+      "Path": "Alternate.ani",
+      "Sha256": "3235a7b02c339bf829c84cea63a72a3af2455b84df0617fb840a0d042747d069"
+    },
+    {
+      "OriginalName": "Cool Cat move.ani",
+      "Path": "Move.ani",
+      "Sha256": "6a0eedd1a3bc586a8378d941b6f9eef739a2290598c5584573523caca2ce1c19"
+    },
+    {
+      "OriginalName": "Cool Cat person select.ani",
+      "Path": "Extras/17.ani",
+      "Sha256": "21331e117d122d9acd2f2e9032716cd62c313488aa5c04299cede525e9f24376"
+    },
+    {
+      "OriginalName": "Cool Cat location select.ani",
+      "Path": "Extras/18.ani",
+      "Sha256": "8a23f58fc2bf9156016061d65d998f681f7e70b3cfe7a613f568e0d0b1876fa8"
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using System.Security.Cryptography;
 
 namespace Frost.Core;
 
@@ -31,8 +32,16 @@ public sealed class ThemeCatalog
     {
         var theme=JsonSerializer.Deserialize<CursorTheme>(File.ReadAllText(path),Storage.Json)??throw new InvalidDataException("Empty theme manifest.");
         theme.DirectoryPath=Path.GetDirectoryName(Path.GetFullPath(path))!;
+        theme.Author??="";theme.Description??="";theme.Preview??="";theme.SourceUrl??="";theme.License??="";theme.Collection??="";theme.PublishedAt??="";
         if(theme.SchemaVersion!=1||!Regex.IsMatch(theme.Id,"^[a-z0-9][a-z0-9-]{0,79}$")||theme.Id=="system"||string.IsNullOrWhiteSpace(theme.Name)||theme.Name.Length>100||theme.Roles==null||theme.Roles.Count!=CursorRoles.All.Length)throw new InvalidDataException("Invalid theme metadata or schema.");
         foreach(var role in CursorRoles.All){if(!theme.Roles.ContainsKey(role.Name))throw new InvalidDataException("Missing role: "+role.Name);CursorResource.Validate(theme.Resource(role.Name));}
+        if(theme.InheritedRoles==null||theme.SourceFiles==null||theme.SourceFiles.Count>CursorPack.MaxFiles||theme.SourceFiles.Any(f=>f==null)||theme.InheritedRoles.Keys.Any(r=>!theme.Roles.ContainsKey(r)))throw new InvalidDataException("Invalid role provenance.");
+        foreach(var file in theme.SourceFiles)
+        {
+            var resource=SafeResource(theme.DirectoryPath,file.Path);CursorResource.Validate(resource);
+            if(!string.Equals(Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(resource))),file.Sha256,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("Source cursor checksum mismatch: "+file.OriginalName);
+        }
+        theme.IsAnimated=theme.AnimatedRoleCount>0;
         if(theme.Preview.Length>0)SafeResource(theme.DirectoryPath,theme.Preview);
         return theme;
     }
@@ -46,25 +55,42 @@ public sealed class ThemeCatalog
         {if((File.GetAttributes(current)&FileAttributes.ReparsePoint)!=0)throw new InvalidDataException("Linked theme resources are not supported.");if(string.Equals(current,folder.TrimEnd(Path.DirectorySeparatorChar),StringComparison.OrdinalIgnoreCase))break;}
         return path;
     }
-    public CursorTheme Import(string name,CursorTheme baseTheme,IReadOnlyDictionary<string,string> replacements)
+    public CursorTheme Import(string name,CursorTheme baseTheme,IReadOnlyDictionary<string,string> replacements,IReadOnlyList<PackCursor>? sourceFiles=null)
     {
         name=name.Trim();if(name.Length is <1 or >100||baseTheme.IsSystem||replacements.Count==0)throw new ArgumentException("Choose a base theme, a name, and at least one cursor file.");
         foreach(var item in replacements){if(!CursorRoles.All.Any(r=>r.Name==item.Key))throw new ArgumentException("Unknown cursor role.");CursorResource.Validate(item.Value);}
-        var id="import-"+Guid.NewGuid().ToString("N");var directory=Path.Combine(Storage.Root,"Themes",id);Directory.CreateDirectory(directory);
+        var id="import-"+Guid.NewGuid().ToString("N");var destination=Path.Combine(Storage.Root,"Themes",id);var directory=Path.Combine(Storage.Root,"ImportStaging",id);Directory.CreateDirectory(directory);
         try
         {
-            var theme=new CursorTheme{Id=id,Name=name,Author="Local import",Description="Imported cursor resources; other roles inherit "+baseTheme.Name,DirectoryPath=directory};
+            var theme=new CursorTheme{Id=id,Name=name,Author="Local import",Description="Imported cursor resources; other roles inherit "+baseTheme.Name,Collection="imported",ImportedAt=DateTimeOffset.Now,DirectoryPath=directory};
             foreach(var role in CursorRoles.All)
             {
                 var source=replacements.TryGetValue(role.Name,out var path)?path:baseTheme.Resource(role.Name);CursorResource.Validate(source);
                 var file=role.Name+Path.GetExtension(source).ToLowerInvariant();File.Copy(source,Path.Combine(directory,file));theme.Roles.Add(role.Name,file);
+                if(replacements.ContainsKey(role.Name)&&sourceFiles==null)theme.SourceFiles.Add(new(){OriginalName=Path.GetFileName(source),Path=file,Sha256=Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(source)))});
+                else if(!replacements.ContainsKey(role.Name))theme.InheritedRoles.Add(role.Name,baseTheme.Id);
             }
-            Storage.Write(Path.Combine(directory,"theme.json"),theme);Reload();return Find(id);
+            // Pack provenance includes unused/bonus cursors, without treating them as standard roles.
+            if(sourceFiles!=null)
+            {
+                if(sourceFiles.Count>CursorPack.MaxFiles)throw new InvalidDataException("Too many source resources.");
+                theme.InheritedRoles.Clear();foreach(var role in CursorRoles.All.Where(r=>!replacements.ContainsKey(r.Name)))theme.InheritedRoles.Add(role.Name,baseTheme.Id);
+                int extra=0;
+                foreach(var source in sourceFiles)
+                {
+                    CursorResource.Validate(source.Path);var mapping=replacements.FirstOrDefault(r=>r.Value==source.Path);
+                    var file=mapping.Key!=null?theme.Roles[mapping.Key]:"Extras/"+(extra++)+Path.GetExtension(source.Path).ToLowerInvariant();
+                    if(mapping.Key==null){Directory.CreateDirectory(Path.Combine(directory,"Extras"));File.Copy(source.Path,Path.Combine(directory,file));}
+                    theme.SourceFiles.Add(new(){OriginalName=source.OriginalName,Path=file,Sha256=Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(source.Path)))});
+                }
+            }
+            Storage.Write(Path.Combine(directory,"theme.json"),theme);ReadTheme(Path.Combine(directory,"theme.json"));
+            Directory.CreateDirectory(Path.GetDirectoryName(destination)!);Directory.Move(directory,destination);Reload();return Find(id);
         }
         catch
         {
             // This directory has a freshly generated ID and only files written by this operation.
-            Directory.Delete(directory,true);throw;
+            if(Directory.Exists(directory))Directory.Delete(directory,true);throw;
         }
     }
 }
@@ -98,6 +124,7 @@ public static class CursorResource
     }
     private static void ValidateAni(ReadOnlySpan<byte> bytes)
     {
+        AniTimeline.Read(bytes);
         if(bytes.Length<12||!bytes[..4].SequenceEqual("RIFF"u8)||BitConverter.ToUInt32(bytes[4..])!=bytes.Length-8||!bytes.Slice(8,4).SequenceEqual("ACON"u8))throw new InvalidDataException("Invalid ANI RIFF header.");
         int frames=0,declared=0;bool header=false;
         for(int i=12;i<bytes.Length;)

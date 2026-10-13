@@ -13,6 +13,8 @@ internal static class Program
     {
         try
         {
+            int packIndex=Array.IndexOf(args,"--pack-audit");
+            if(packIndex>=0){CuteAcquisitionVerification.Run(Path.GetFullPath(args[packIndex+1]),Path.GetFullPath(args[packIndex+2]));return 0;}
             int studioIndex=Array.IndexOf(args,"--studio-tests");
             if(studioIndex>=0)
             {

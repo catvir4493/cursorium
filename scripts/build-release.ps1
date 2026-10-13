@@ -1,4 +1,4 @@
-param([switch]$SkipVerification,[ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.1.0')
+param([switch]$SkipVerification,[ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.2.0')
 $ErrorActionPreference = 'Stop'
 $frostRoot = Split-Path -Parent $PSScriptRoot
 Set-Location -LiteralPath $frostRoot
@@ -13,6 +13,15 @@ if (-not $SkipVerification) {
 New-Item -ItemType Directory -Path 'artifacts' -Force | Out-Null
 Invoke-Dotnet @('publish','src/Frost.App','-c','Release','-r','win-x64','--self-contained','true','-p:PublishSingleFile=false',"-p:Version=$Version",'-o','artifacts/cursorium-release/portable')
 if ((Get-ChildItem -LiteralPath 'artifacts/cursorium-release/portable/Theme' -Filter '*.cur').Count -ne 15 -or (Get-ChildItem -LiteralPath 'artifacts/cursorium-release/portable/Themes/obsidian' -Filter '*.cur').Count -ne 15 -or -not (Test-Path -LiteralPath 'artifacts/cursorium-release/portable/Catalog/effects.json')) { throw 'Published CURSORIUM theme/effect resources are incomplete.' }
+$cursoriumCute=@(Get-ChildItem -LiteralPath 'artifacts/cursorium-release/portable/Themes' -Directory | Where-Object {$_.Name -like 'cute-*'})
+if($cursoriumCute.Count -ne 5){throw 'Published Cute Collection requires five real themes.'}
+foreach($cursoriumTheme in $cursoriumCute){
+    $cursoriumManifest=Get-Content -LiteralPath (Join-Path $cursoriumTheme.FullName 'theme.json') -Raw|ConvertFrom-Json
+    if($cursoriumManifest.Collection -ne 'cute'-or $cursoriumManifest.License -notmatch 'Public Domain'-or @($cursoriumManifest.Roles.PSObject.Properties).Count -ne 15){throw 'Invalid redistributable Cute manifest.'}
+    foreach($cursoriumSource in $cursoriumManifest.SourceFiles){
+        if((Get-FileHash -LiteralPath (Join-Path $cursoriumTheme.FullName $cursoriumSource.Path)).Hash -ne $cursoriumSource.Sha256){throw 'Published Cute source checksum mismatch.'}
+    }
+}
 Copy-Item -LiteralPath 'README.md','LICENSE','VALIDATION.md' -Destination 'artifacts/cursorium-release/portable'
 Copy-Item -LiteralPath 'docs' -Destination 'artifacts/cursorium-release/portable' -Recurse -Force
 Compress-Archive -Path 'artifacts/cursorium-release/portable/*' -DestinationPath "artifacts/CURSORIUM-$Version-win-x64.zip" -Force

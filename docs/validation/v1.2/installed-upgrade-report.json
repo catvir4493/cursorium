@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "version": "1.2.0",
+  "passed": true,
+  "installerExitCode": 0,
+  "installedFilesMatchedBySha256": 704,
+  "protectedDataAndResourceFiles": 59,
+  "allProtectedDataAndResourcesUnchanged": true,
+  "nativeCursorValuesAndTypesPreserved": true,
+  "previousInstallationAndDataBackedUp": true,
+  "uninstallRegistrationVersion": "1.2.0",
+  "startMenuLaunchTitle": "CURSORIUM — Cursor & Motion Studio",
+  "desktopReopensSameProcess": true,
+  "notes": "Existing marked installation upgrade and actual shortcut launch. Does not establish fresh install, uninstall or failure-rollback roundtrip.",
+  "desktopShortcutRecreatedBecauseAbsent": true
+}

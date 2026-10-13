@@ -19,7 +19,8 @@ internal static class CursoriumVerification
         try
         {
             var studio=new StudioService(appDirectory,theme);var catalog=studio.Catalog;
-            Check(catalog.Themes.Count==3&&catalog.Warnings.Count==0,"Catalog loads original system, FROST and Obsidian");
+            foreach(var warning in catalog.Warnings)Console.WriteLine("Catalog: "+warning);
+            Check(new[]{"system","frost","obsidian"}.All(id=>catalog.Themes.Count(t=>t.Id==id)==1)&&catalog.Warnings.Count==0,"Catalog loads original system, FROST and Obsidian");
             Check(studio.Effects.Trails.Select(t=>t.Id).SequenceEqual(new[]{"comet","minimal","neon","stardust"}),"Four independent presets come from JSON");
             var frost=catalog.Find("frost");var dark=catalog.Find("obsidian");
             foreach(var t in new[]{frost,dark})foreach(var role in CursorRoles.All){CursorResource.Validate(t.Resource(role.Name));Check(true,t.Id+" native CUR/ANI validated: "+role.Name);}
@@ -66,6 +67,7 @@ internal static class CursoriumVerification
                 theme.Recover();Check(SnapshotValues(snapshot)==SnapshotValues(theme.Snapshot())&&stateText==File.ReadAllText(StudioService.StatePath),"Restart journal recovery restores both registry and applied JSON");
                 studio.RestoreOriginal();Check(!theme.HasBackup&&SnapshotValues(baseline)==SnapshotValues(theme.Snapshot("CURSORIUM / frost","CURSORIUM / obsidian")),"Restore returns exact pre-test Windows configuration and scheme entries");
             }
+            CuteCollectionVerification.Run(studio,theme,native,Check,Reject);
             success=true;
         }
         catch(Exception ex){error=ex.ToString();throw;}

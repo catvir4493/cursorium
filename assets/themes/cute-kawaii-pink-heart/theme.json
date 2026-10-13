@@ -1,0 +1,114 @@
+{
+  "SchemaVersion": 1,
+  "Id": "cute-kawaii-pink-heart",
+  "Name": "Kawaii Pink Heart",
+  "Author": "bobalover (archive: yurilover)",
+  "Description": "Pink hearts with playful animated busy, link and resizing roles.",
+  "Preview": "",
+  "Roles": {
+    "Normal": "Normal.cur",
+    "Help": "Help.ani",
+    "Working": "Working.ani",
+    "Busy": "Busy.ani",
+    "Precision": "Precision.cur",
+    "Text": "Text.cur",
+    "Handwriting": "Handwriting.cur",
+    "Unavailable": "Unavailable.ani",
+    "Vertical": "Vertical.ani",
+    "Horizontal": "Horizontal.ani",
+    "DiagonalNWSE": "DiagonalNWSE.ani",
+    "DiagonalNESW": "DiagonalNESW.ani",
+    "Move": "Move.ani",
+    "Alternate": "Alternate.cur",
+    "Link": "Link.ani"
+  },
+  "SourceUrl": "https://www.rw-designer.com/cursor-set/kawaii-pink-heart",
+  "License": "Release to Public Domain (RealWorld); inherited FROST resources: project MIT license",
+  "Collection": "cute",
+  "IsAnimated": true,
+  "PublishedAt": "2026-07-25",
+  "PackageSha256": "6ecca8bc3c7ef461efab20dd12c847a4a9308a4ef39c4ab880c25665bbf3f34c",
+  "InheritedRoles": {},
+  "SourceFiles": [
+    {
+      "OriginalName": "pinkheart alt.cur",
+      "Path": "Alternate.cur",
+      "Sha256": "4bcd31180913830ced7bb1e15fecae4956e7c1ce23b4d86ef8e99e359f01916c"
+    },
+    {
+      "OriginalName": "pinkheart busy.ani",
+      "Path": "Busy.ani",
+      "Sha256": "9214b1e19198ea974b367bd70fddab7f4d220d33c8265d0d64bc8aa23555a075"
+    },
+    {
+      "OriginalName": "pinkheart handwriting.cur",
+      "Path": "Handwriting.cur",
+      "Sha256": "aaf49f91d3fb1c1451022fe3d314ffbd2a29223f1af6b3916d452356177bc634"
+    },
+    {
+      "OriginalName": "pinkheart help.ani",
+      "Path": "Help.ani",
+      "Sha256": "4a0e1123ad81136b528cc8283ae74ef9303f1b2d8e0f08d7f0eddba4666e75a3"
+    },
+    {
+      "OriginalName": "pinkheart horizontal.ani",
+      "Path": "Horizontal.ani",
+      "Sha256": "6228b6d2d3e064f6105b88559c3c78db13b1598386ebc95ad8575f08225713ec"
+    },
+    {
+      "OriginalName": "pinkheart link.ani",
+      "Path": "Link.ani",
+      "Sha256": "3a59eac5bc1826db73e4f163aa686d3aa1efdf43134978f0382bf5a65767d976"
+    },
+    {
+      "OriginalName": "pinkheart normal.cur",
+      "Path": "Normal.cur",
+      "Sha256": "5092282dfc2a35332ada607a42ca28a4b0d4a240126757d681c539288ef3a270"
+    },
+    {
+      "OriginalName": "pinkheart precision.cur",
+      "Path": "Precision.cur",
+      "Sha256": "9b3d9a42ad6800b5bb8146421c944107001232501cf0cb0808f663a0a2fadf2b"
+    },
+    {
+      "OriginalName": "pinkheart text.cur",
+      "Path": "Text.cur",
+      "Sha256": "e9d15fcf5ef517678d4414035da34d061f1b631d684854591139bd38895104be"
+    },
+    {
+      "OriginalName": "pinkheart unavailable.ani",
+      "Path": "Unavailable.ani",
+      "Sha256": "5451cf44e563ab0154da9fad34ac48b2f45de752a769d608b740ecb37e7864a3"
+    },
+    {
+      "OriginalName": "pinkheart vertical.ani",
+      "Path": "Vertical.ani",
+      "Sha256": "5e8fd8e31b9cd385a05ba9f01c13ff058e392d75cfd5b0c7d747cc07a9d56d86"
+    },
+    {
+      "OriginalName": "pinkheart working.ani",
+      "Path": "Working.ani",
+      "Sha256": "8b84f4041257d9057fc13dbbb8db7e8169165111ee6a50145ac5ca7ca829ceec"
+    },
+    {
+      "OriginalName": "pinkheart diagonal 1.ani",
+      "Path": "DiagonalNWSE.ani",
+      "Sha256": "def57598dbc3ae64ee77a59c4541ffddaa93a41a7550a5c477fabc374b9f0259"
+    },
+    {
+      "OriginalName": "pinkheart diagonal 2.ani",
+      "Path": "DiagonalNESW.ani",
+      "Sha256": "cbe2bf05445c5fdc3dcba4932e0afb76fa9fa1acb4b7b7741b689becb40ff59e"
+    },
+    {
+      "OriginalName": "pinkheart move.ani",
+      "Path": "Move.ani",
+      "Sha256": "140573d4fd0eade396d3d107f34bdc3c248d577cc4ffaebff75e447b843c75f9"
+    },
+    {
+      "OriginalName": "pinkheart location.cur",
+      "Path": "Extras/15.cur",
+      "Sha256": "5092282dfc2a35332ada607a42ca28a4b0d4a240126757d681c539288ef3a270"
+    }
+  ]
+}

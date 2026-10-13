@@ -29,6 +29,7 @@ Invoke-CursoriumTest @('--self-test','--isolated-test','--test-data-root',('"'+$
 $cursoriumDesktop=Get-Content -LiteralPath (Join-Path $cursoriumReport 'desktop-report.json') -Raw | ConvertFrom-Json
 if($cursoriumDesktop.passed -ne $true){throw 'Desktop report contains a failure.'}
 Invoke-CursoriumTest @('--ui-review','--isolated-test','--test-data-root',('"'+(Join-Path $cursoriumReport ('ui-data-'+[guid]::NewGuid().ToString('N')))+'"'),'--report',('"'+(Join-Path $cursoriumReport 'interface')+'"'))
+Invoke-CursoriumTest @('--collection-review','--isolated-test','--test-data-root',('"'+(Join-Path $cursoriumReport ('collection-data-'+[guid]::NewGuid().ToString('N')))+'"'),'--report',('"'+(Join-Path $cursoriumReport 'collection')+'"'))
 if(-not $SkipBenchmark){Invoke-CursoriumTest @('--benchmark','--isolated-test','--test-data-root',('"'+(Join-Path $cursoriumReport ('benchmark-data-'+[guid]::NewGuid().ToString('N')))+'"'),'--report',('"'+$cursoriumReport+'"'))}
 $cursoriumProtectionChecks=@()
 foreach($cursoriumName in $cursoriumProtected){
