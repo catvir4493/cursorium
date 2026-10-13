@@ -36,13 +36,31 @@ internal static class Program
         if(!first){if(!silent)Forms.MessageBox.Show("Another installer is already running.");return 2;}
         try
         {
+            if(!isolated)Target=ResolveRegisteredTarget(Target);
+            if(args.Contains("--inspect-installation"))
+            {
+                Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(new{target=Target,version=ProductVersion,isolated},Storage.Json));return 0;
+            }
             if(!silent&&Forms.MessageBox.Show(remove?"Quit the trail engine, restore the backed-up cursor scheme, and uninstall CURSORIUM. Settings and archived backups will be retained.\n\nContinue?":$"Install CURSORIUM — Cursor & Motion Studio for the current user.\n\nLocation: {Target}\n\nNo administrator rights are required. The cursor theme and sign-in startup are not enabled automatically.",remove?"Uninstall CURSORIUM":"Install CURSORIUM",Forms.MessageBoxButtons.YesNo,Forms.MessageBoxIcon.Question)!=Forms.DialogResult.Yes)return 0;
             if(remove)Uninstall();else Install(!args.Contains("--no-launch"));
             Storage.Write(Path.Combine(Storage.Root,"setup-result.json"),new{action=remove?"uninstall":"install",success=true,at=DateTimeOffset.Now,target=Target});
             if(!silent)Forms.MessageBox.Show(remove?"The original cursor backup has been handled, and the Start menu and startup entries have been removed. Close this message to finish file cleanup. Settings and archived backups are retained.":"Installation complete. Open the control panel to install the native cursor theme.","CURSORIUM — Cursor & Motion Studio");return 0;
         }
-        catch(Exception ex){Storage.Log("Setup: "+ex);Storage.Write(Path.Combine(Storage.Root,"setup-result.json"),new{action=remove?"uninstall":"install",success=false,error=ex.Message});if(!silent)Forms.MessageBox.Show("Operation failed: "+ex.Message+"\nLog: "+Path.Combine(Storage.Root,"frost.log"));return 1;}
+        catch(Exception ex){if(args.Contains("--inspect-installation")){Console.Error.WriteLine(ex.Message);return 1;}Storage.Log("Setup: "+ex);Storage.Write(Path.Combine(Storage.Root,"setup-result.json"),new{action=remove?"uninstall":"install",success=false,error=ex.Message});if(!silent)Forms.MessageBox.Show("Operation failed: "+ex.Message+"\nLog: "+Path.Combine(Storage.Root,"frost.log"));return 1;}
         finally{gate.ReleaseMutex();}
+    }
+    private static string ResolveRegisteredTarget(string defaultTarget)
+    {
+        using var key=Registry.CurrentUser.OpenSubKey(UninstallKey);
+        if(key?.GetValue("InstallLocation") is not string location||string.IsNullOrWhiteSpace(location))return defaultTarget;
+        if(!Path.IsPathFullyQualified(location))throw new IOException("The registered installation path must be absolute.");
+        var full=Path.GetFullPath(location).TrimEnd(Path.DirectorySeparatorChar);
+        if(string.Equals(full,Path.GetPathRoot(full)?.TrimEnd(Path.DirectorySeparatorChar),StringComparison.OrdinalIgnoreCase)||string.Equals(full,Path.GetFullPath(Storage.Root).TrimEnd(Path.DirectorySeparatorChar),StringComparison.OrdinalIgnoreCase)||!Directory.Exists(full))throw new IOException("The registered CURSORIUM installation is unavailable or unsafe. Reconnect its drive before retrying.");
+        for(var current=full;!string.IsNullOrEmpty(current);current=Path.GetDirectoryName(current))
+            if((File.GetAttributes(current)&FileAttributes.ReparsePoint)!=0)throw new IOException("Linked installation directories are unsupported.");
+        var marker=Path.Combine(full,"frost-install.marker");var executable=Path.Combine(full,"FrostWhiteComet.exe");
+        if(!File.Exists(marker)||new FileInfo(marker).Length>4096||!File.ReadAllText(marker).StartsWith("CURSORIUM",StringComparison.Ordinal)||!File.Exists(executable)||!((System.Diagnostics.FileVersionInfo.GetVersionInfo(executable).ProductName??"").StartsWith("CURSORIUM",StringComparison.Ordinal)))throw new IOException("The registered directory is not a marked CURSORIUM installation.");
+        return full;
     }
     private static void StopApp()
     {

@@ -9,7 +9,9 @@ if($IsolatedUpgrade){
     $taskOutput=Join-Path $frostRoot 'artifacts/cute-v1.2/upgrade-isolated'
     New-Item -ItemType Directory -Force -Path $taskSandbox,$taskOutput | Out-Null
     $taskRealTarget=Join-Path $env:LOCALAPPDATA 'Programs/FrostWhiteComet'
-    if(-not (Test-Path -LiteralPath (Join-Path $taskRealTarget 'frost-install.marker'))){throw 'A marked v1.1 installation is required for this upgrade test.'}
+    $taskRegistration=Get-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\FrostWhiteComet' -ErrorAction SilentlyContinue
+    if($taskRegistration.InstallLocation){$taskRealTarget=$taskRegistration.InstallLocation}
+    if(-not (Test-Path -LiteralPath (Join-Path $taskRealTarget 'frost-install.marker'))){throw 'A marked existing installation is required for this upgrade test.'}
     Copy-Item -LiteralPath $taskRealTarget -Destination $taskProgram -Recurse
     Copy-Item -LiteralPath (Join-Path $env:LOCALAPPDATA 'FrostWhiteComet') -Destination $taskData -Recurse
     # All private copies stay in the sandbox. They are never release/source assets.
@@ -54,6 +56,8 @@ if($IsolatedUpgrade){
     return
 }
 $frostTarget = Join-Path $env:LOCALAPPDATA 'Programs\FrostWhiteComet'
+$frostRegistration=Get-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\FrostWhiteComet' -ErrorAction SilentlyContinue
+if($frostRegistration.InstallLocation){$frostTarget=$frostRegistration.InstallLocation}
 $frostData = Join-Path $env:LOCALAPPDATA 'FrostWhiteComet'
 $frostShortcut = Join-Path ([Environment]::GetFolderPath('Programs')) 'CURSORIUM.lnk'
 $frostReportDir = Join-Path $frostRoot 'artifacts\verification'
