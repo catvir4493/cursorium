@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-13",
+  "timezone": "Europe/Budapest",
+  "scope": "Upgrade of the existing marked FROST installation to CURSORIUM",
+  "passed": true,
+  "installerExitCode": 0,
+  "installedFilesMatchedBySha256": 577,
+  "cursorRegistryValuesPreservedDuringUpgrade": 20,
+  "cursorRegistryTypesPreservedDuringUpgrade": true,
+  "originalCursorBackupHashPreservedDuringUpgrade": true,
+  "oldInstallationAndDataBackupCreated": true,
+  "startMenuLaunchTitle": "CURSORIUM — Cursor & Motion Studio",
+  "desktopShortcutReopensSameNewInstance": true,
+  "uninstallRegistrationName": "CURSORIUM — Cursor & Motion Studio",
+  "observedWindowDpi": 96,
+  "notes": "Preservation checks cover the upgrade operation before subsequent user UI actions. Fresh install, uninstall and rollback round trips are unverified."
+}

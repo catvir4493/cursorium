@@ -51,6 +51,26 @@ presentation and long-term resource/leak behavior remain unverified for this ver
 
 The following sections preserve original FROST history; their pass counts are not new CURSORIUM tests.
 
+### Subsequent installed-version upgrade and launch verification
+
+On October 13, after the user reported the original FROST interface reopening, the
+existing marked installation was backed up and upgraded using the built CURSORIUM
+installer (`--silent --no-launch`, exit 0). All **577 published files** matched the
+installed copies by SHA256. A new CURSORIUM Start menu entry and desktop shortcut were
+verified against the installed executable. Launching the Start menu entry produced the
+CURSORIUM window; reopening from the desktop retained the same new process. Windows'
+uninstall registration displays CURSORIUM. Native window DPI was 96.
+
+The upgrade-operation comparison preserved all 20 current cursor values/types and the
+original cursor backup hash. Full old installation and user-data rollback copies remain
+local under `artifacts/installed-upgrade-rollback-*`. Subsequent user Apply/Restore
+actions are outside that comparison. Fresh install, uninstall and rollback round trips
+remain unverified. This supersedes the earlier lack of an actual **upgrade** test only.
+
+Raw evidence: `artifacts/cursorium-verification/installed-upgrade-report.json` and
+`installed-cursorium.png`. Sanitized evidence:
+`docs/verification/cursorium-installed-upgrade-2026-10-13.json`.
+
 Initial tests: **October 12, 2026, Europe/Budapest**, Windows 11 Pro build 26100, SDK 10.0.103, .NET 8 target. Implemented features are distinguished from hardware/long-session behavior that remains unverified.
 
 ## Initial native version
