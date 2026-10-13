@@ -44,5 +44,16 @@ public sealed class PackImportDialog:Window
             DialogResult=true;
         };
         SourceInitialized+=(_,_)=>WindowAppearance.Apply(this,true);
+        Loaded+=(_,_)=>
+        {
+            var handle=new System.Windows.Interop.WindowInteropHelper(this).Handle;
+            var monitor=new Native.MonitorInfo{Size=System.Runtime.InteropServices.Marshal.SizeOf<Native.MonitorInfo>(),Device=""};
+            if(!Native.GetMonitorInfo(Native.MonitorFromWindow(handle,2),ref monitor))return;
+            var dpi=System.Windows.Media.VisualTreeHelper.GetDpi(this);
+            double width=monitor.Work.Width/dpi.DpiScaleX-24,height=monitor.Work.Height/dpi.DpiScaleY-24;
+            MinWidth=Math.Min(MinWidth,width);MinHeight=Math.Min(MinHeight,height);Width=Math.Min(Width,width);Height=Math.Min(Height,height);
+            Left=Math.Clamp(Left,monitor.Work.Left/dpi.DpiScaleX,monitor.Work.Right/dpi.DpiScaleX-Width);
+            Top=Math.Clamp(Top,monitor.Work.Top/dpi.DpiScaleY,monitor.Work.Bottom/dpi.DpiScaleY-Height);
+        };
     }
 }
