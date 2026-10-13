@@ -1,9 +1,11 @@
-param([switch]$IsolatedUpgrade,[ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.3.0')
+param([switch]$IsolatedUpgrade,[switch]$CrossVolume,[ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.3.0')
 $ErrorActionPreference = 'Stop'
 $frostRoot = Split-Path -Parent $PSScriptRoot
 Set-Location -LiteralPath $frostRoot
 if($IsolatedUpgrade){
-    $taskSandbox=Join-Path ([IO.Path]::GetTempPath()) ('CursoriumUpgradeTest-'+[guid]::NewGuid().ToString('N'))
+    $taskBase=if($CrossVolume){Join-Path $frostRoot ('artifacts/CursoriumUpgradeTemp-'+[guid]::NewGuid().ToString('N'))}else{[IO.Path]::GetTempPath()}
+    if($CrossVolume){New-Item -ItemType Directory -Path $taskBase | Out-Null;[IO.File]::WriteAllText((Join-Path $taskBase 'cursorium-test-base.marker'),'CURSORIUM isolated upgrade tests');if([IO.Path]::GetPathRoot($taskBase) -eq [IO.Path]::GetPathRoot([IO.Path]::GetTempPath())){throw 'Cross-volume verification needs the project and Windows TEMP on different volumes.'}}
+    $taskSandbox=Join-Path $taskBase ('CursoriumUpgradeTest-'+[guid]::NewGuid().ToString('N'))
     $taskProgram=Join-Path $taskSandbox 'Program'
     $taskData=Join-Path $taskSandbox 'Data'
     $taskOutput=Join-Path $frostRoot 'artifacts/cute-v1.2/upgrade-isolated'
@@ -33,7 +35,8 @@ if($IsolatedUpgrade){
     }
     $taskKeyName='Software\Microsoft\Windows\CurrentVersion\Uninstall\FrostWhiteComet-'+[IO.Path]::GetFileName($taskSandbox)
     try{
-        Run-UpgradeProcess (Join-Path $frostRoot "artifacts/CURSORIUM-Setup-$Version-Release.exe") ('--silent --no-launch --isolated-test --test-install-root "'+$taskSandbox+'"')
+        $taskBaseArgument=if($CrossVolume){' --test-install-base "'+$taskBase+'"'}else{''}
+        Run-UpgradeProcess (Join-Path $frostRoot "artifacts/CURSORIUM-Setup-$Version-Release.exe") ('--silent --no-launch --isolated-test --test-install-root "'+$taskSandbox+'"'+$taskBaseArgument)
         $taskAfter=Get-UpgradeHashes $taskData
         if($taskAfter.Count -ne $taskBefore.Count){throw 'Isolated upgrade changed protected data count.'}
         foreach($name in $taskBefore.Keys){if($taskAfter[$name] -ne $taskBefore[$name]){throw 'Isolated upgrade altered a protected resource.'}}
@@ -50,7 +53,7 @@ if($IsolatedUpgrade){
         $taskKey=[Microsoft.Win32.Registry]::CurrentUser.OpenSubKey('Control Panel\Cursors')
         try{$taskNativeAfter=@($taskKey.GetValueNames()|Sort-Object|ForEach-Object{@{name=$_;kind=$taskKey.GetValueKind($_).ToString();value=$taskKey.GetValue($_,$null,[Microsoft.Win32.RegistryValueOptions]::DoNotExpandEnvironmentNames)}})|ConvertTo-Json -Depth 8 -Compress}finally{$taskKey.Dispose()}
         if($taskNativeAfter -ne $taskNativeBefore){throw 'Isolated upgrade changed real native cursor state.'}
-        @{passed=$true;version=$Version;protectedFiles=$taskBefore.Count;payloadFiles=$taskMatches;cuteThemes=5;nativeUnchanged=$true;privateSandbox=$taskSandbox;notes='Actual existing installation/data copy upgraded in a bounded TEMP sandbox; own shortcut/registry namespace, no production IPC/startup writes. Uninstall not exercised.'}|ConvertTo-Json -Depth 5|Set-Content -LiteralPath (Join-Path $taskOutput 'upgrade-report.json') -Encoding utf8
+        @{passed=$true;version=$Version;protectedFiles=$taskBefore.Count;payloadFiles=$taskMatches;cuteThemes=5;nativeUnchanged=$true;crossVolume=[bool]$CrossVolume;privateSandbox=$taskSandbox;notes='Actual existing installation/data copy upgraded in a bounded marked sandbox; own shortcut/registry namespace, no production IPC/startup writes. Cross-volume flag uses D: while Windows TEMP stays C:. Uninstall not exercised.'}|ConvertTo-Json -Depth 5|Set-Content -LiteralPath (Join-Path $taskOutput 'upgrade-report.json') -Encoding utf8
         Write-Host 'Isolated installed upgrade passed.'
     }finally{[Microsoft.Win32.Registry]::CurrentUser.DeleteSubKeyTree($taskKeyName,$false)}
     return

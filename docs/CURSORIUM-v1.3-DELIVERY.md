@@ -78,7 +78,7 @@ Cursor 安装使用 `Themes/<id>/<package-sha>/` 不可变内容和根部原子 
 
 本轮实际枚举单屏 Windows 11、2560×1440、96 DPI。实际运行正常窗口、小窗口与最大化；1920×1080、1366×768、125%/150% 使用等效逻辑工作区检查，不能当作物理 DPI 或显示器切换。当前没有双屏，未声称重新实测双屏。Windows 10、混合 DPI、长期压力、受保护桌面、独占游戏和完整安装/卸载/失败回滚矩阵仍待实测。
 
-安装升级继续使用已有 build-release / verify-release / publish-github 流程。目标沿用注册安装路径 `D:\CURSORIUM`，用户数据仍为 `%LOCALAPPDATA%\FrostWhiteComet`。升级的最终实测数据、包校验和远程发布记录以 Release 及本机 artifacts 的最终验证资料为准；没有将任何安装备份或用户配置混入公开证据。
+安装升级继续使用已有 build-release / verify-release / publish-github 流程。真实 D 盘升级首轮发现 C 盘 TEMP 跨卷目录移动失败，安装器已回滚到 v1.2.1。现已改为目标目录同卷、带归属标记的暂存目录；补充在 D 盘隔离副本、C 盘 Windows TEMP 的升级验证，61 个用户数据文件、750 个安装文件及真实指针状态通过核对。见 upgrade-cross-volume-report.json。目标沿用注册安装路径 `D:\CURSORIUM`，用户数据仍为 `%LOCALAPPDATA%\FrostWhiteComet`。升级的最终实测数据、包校验和远程发布记录以 Release 及本机 artifacts 的最终验证资料为准；没有将任何安装备份或用户配置混入公开证据。
 
 ## 文件与以后增加资源
 

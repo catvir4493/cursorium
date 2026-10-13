@@ -17,6 +17,7 @@ and 30 Cute-switch native handle measurements are included as short measurements
 [Chinese delivery](docs/CURSORIUM-v1.3-DELIVERY.md),
 [actual screenshots](docs/CURSORIUM-v1.3-SCREENSHOTS.md),
 [passing reports](docs/validation/v1.3).
+Cross-volume isolated upgrade also passed with D: target and C: Windows TEMP: 61 protected files, 750 payload files, five Cute themes and unchanged native values. Installer staging now uses the target volume; the first failed production attempt restored the old version safely.
 Signed official catalog and real ZIP downloads are published separately in
 catvir4493/cursorium-library. RSA-PSS authenticity does not replace untrusted
 ZIP/native parsing. Key compromise, first-install replay and lack of transparency

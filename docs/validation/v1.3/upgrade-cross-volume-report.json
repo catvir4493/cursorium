@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "version": "1.3.0",
+  "crossVolume": true,
+  "protectedFiles": 61,
+  "payloadFiles": 750,
+  "cuteThemes": 5,
+  "nativeUnchanged": true,
+  "notes": "Existing installation and data copy upgraded on D: while Windows TEMP remained C:. Bounded test base, isolated shortcuts/registration, no production IPC. Installer stage and target shared the target volume."
+}

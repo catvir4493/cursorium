@@ -26,12 +26,19 @@ internal static class Program
         {
             int option=Array.IndexOf(args,"--test-install-root");if(option<0||option+1>=args.Length)return 2;
             string root=Path.GetFullPath(args[option+1]),temp=Path.GetFullPath(Path.GetTempPath()).TrimEnd(Path.DirectorySeparatorChar)+Path.DirectorySeparatorChar;
+            int baseOption=Array.IndexOf(args,"--test-install-base");
+            if(baseOption>=0)
+            {
+                if(baseOption+1>=args.Length)return 2;var testBase=Path.GetFullPath(args[baseOption+1]);var marker=Path.Combine(testBase,"cursorium-test-base.marker");
+                if(!System.Text.RegularExpressions.Regex.IsMatch(Path.GetFileName(testBase),"^CursoriumUpgradeTemp-[a-f0-9]{32}$")||!Directory.Exists(testBase)||!File.Exists(marker)||new FileInfo(marker).Length>128||File.ReadAllText(marker)!="CURSORIUM isolated upgrade tests")return 2;
+                DownloadManager.GuardRoot(testBase);temp=testBase.TrimEnd(Path.DirectorySeparatorChar)+Path.DirectorySeparatorChar;
+            }
             if(!root.StartsWith(temp,StringComparison.OrdinalIgnoreCase)||!Path.GetFileName(root).StartsWith("CursoriumUpgradeTest-",StringComparison.Ordinal)||!Directory.Exists(root))return 2;
             for(var current=root;current.Length>=temp.TrimEnd(Path.DirectorySeparatorChar).Length;current=Path.GetDirectoryName(current)!)
             {if((File.GetAttributes(current)&FileAttributes.ReparsePoint)!=0)return 2;if(current.Equals(temp.TrimEnd(Path.DirectorySeparatorChar),StringComparison.OrdinalIgnoreCase))break;}
             isolated=true;Target=Path.Combine(root,"Program");Shortcut=Path.Combine(root,"CURSORIUM.lnk");LegacyShortcut=Path.Combine(root,"FROST.lnk");UninstallKey+="-"+Path.GetFileName(root);Storage.UseTestingRoot(Path.Combine(root,"Data"));
         }
-        else if(args.Contains("--test-install-root"))return 2;
+        else if(args.Contains("--test-install-root")||args.Contains("--test-install-base"))return 2;
         using var gate=new Mutex(true,@"Local\FrostWhiteComet.Setup",out bool first);
         if(!first){if(!silent)Forms.MessageBox.Show("Another installer is already running.");return 2;}
         try
@@ -79,7 +86,11 @@ internal static class Program
     private static void Install(bool launch)
     {
         using var payload=Assembly.GetExecutingAssembly().GetManifestResourceStream("Frost.Payload.zip")??throw new IOException("The installer payload is missing. Build it with scripts/build-release.ps1.");
-        string staging=Path.Combine(Path.GetTempPath(),"FrostSetup-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(staging);
+        // Stage beside the registered installation: the final directory rename must
+        // stay on the same volume even when Windows TEMP is on C: and target is D:.
+        string parent=Path.GetDirectoryName(Path.GetFullPath(Target))!;DownloadManager.GuardRoot(parent);Directory.CreateDirectory(parent);
+        string staging=Path.Combine(parent,".cursorium-setup-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(staging);
+        File.WriteAllText(Path.Combine(staging,"cursorium-setup-owner.marker"),Path.GetFileName(staging));
         string old=Target+".previous";
         try
         {
@@ -99,7 +110,7 @@ internal static class Program
             StopApp();Directory.CreateDirectory(Path.GetDirectoryName(Target)!);bool previous=Directory.Exists(Target);if(previous)Directory.Move(Target,old);
             try
             {
-                Directory.Move(staging,Target);File.Copy(Environment.ProcessPath!,Path.Combine(Target,"Uninstall.exe"),true);
+                Directory.Move(staging,Target);File.Delete(Path.Combine(Target,"cursorium-setup-owner.marker"));File.Copy(Environment.ProcessPath!,Path.Combine(Target,"Uninstall.exe"),true);
                 CreateShortcut();if(previous&&File.Exists(LegacyShortcut))File.Delete(LegacyShortcut);using var key=Registry.CurrentUser.CreateSubKey(UninstallKey);
                 key.SetValue("DisplayName","CURSORIUM — Cursor & Motion Studio");key.SetValue("DisplayVersion",ProductVersion);key.SetValue("Publisher","CURSORIUM Project");key.SetValue("InstallLocation",Target);key.SetValue("DisplayIcon",Path.Combine(Target,"FrostWhiteComet.exe"));key.SetValue("UninstallString",$"\"{Path.Combine(Target,"Uninstall.exe")}\" --uninstall");key.SetValue("QuietUninstallString",$"\"{Path.Combine(Target,"Uninstall.exe")}\" --uninstall --silent");key.SetValue("NoModify",1);key.SetValue("NoRepair",1);
                 if(!isolated&&StartupRegistration.Enabled)StartupRegistration.Set(true,Path.Combine(Target,"FrostWhiteComet.exe"));
@@ -108,7 +119,15 @@ internal static class Program
             catch{if(Directory.Exists(Target)&&File.Exists(Path.Combine(Target,"frost-install.marker")))DeleteOwned(Target);if(previous&&Directory.Exists(old))Directory.Move(old,Target);throw;}
             if(launch&&!isolated)Process.Start(new ProcessStartInfo(Path.Combine(Target,"FrostWhiteComet.exe")){UseShellExecute=true});
         }
-        finally{if(Directory.Exists(staging)){string full=Path.GetFullPath(staging);if(full.StartsWith(Path.GetFullPath(Path.GetTempPath()),StringComparison.OrdinalIgnoreCase)&&Path.GetFileName(full).StartsWith("FrostSetup-"))Directory.Delete(full,true);}}
+        finally
+        {
+            if(Directory.Exists(staging))
+            {
+                string full=Path.GetFullPath(staging),marker=Path.Combine(full,"cursorium-setup-owner.marker");
+                if(!string.Equals(Path.GetDirectoryName(full),parent,StringComparison.OrdinalIgnoreCase)||!Path.GetFileName(full).StartsWith(".cursorium-setup-",StringComparison.Ordinal)||!File.Exists(marker)||File.ReadAllText(marker)!=Path.GetFileName(full))throw new IOException("Unowned installer staging cleanup refused.");
+                DownloadManager.GuardRoot(full);Directory.Delete(full,true);
+            }
+        }
     }
     private static void CreateShortcut()
     {
