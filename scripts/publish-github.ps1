@@ -23,7 +23,9 @@ Write-Host "Source uploaded and verified: https://github.com/$cursoriumRepositor
 if(-not $Release){return}
 
 if(-not $NotesPath){$NotesPath="docs/releases/$Version.md"}
-$cursoriumNotes=Get-Content -LiteralPath $NotesPath -Raw -Encoding UTF8
+# File-provider note properties on Get-Content strings are serialized as an object
+# by Windows PowerShell 5.1. The GitHub body must be a plain JSON string.
+$cursoriumNotes=[IO.File]::ReadAllText((Resolve-Path -LiteralPath $NotesPath).Path,[Text.Encoding]::UTF8)
 $cursoriumNames=@("CURSORIUM-Setup-$Version-Release.exe","CURSORIUM-$Version-win-x64.zip","CURSORIUM-Themes-$Version.zip","CURSORIUM-Source-$Version.zip",'CURSORIUM-SHA256SUMS.txt')
 $cursoriumAssets=@($cursoriumNames | ForEach-Object {Get-Item -LiteralPath (Join-Path $cursoriumRoot "artifacts/$_")})
 $cursoriumChecksumLines=Get-Content -LiteralPath 'artifacts/CURSORIUM-SHA256SUMS.txt'
