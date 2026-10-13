@@ -1,3 +1,7 @@
+# CURSORIUM 工程交付
+
+当前版本：**v1.1.0**。界面升级的变更、文件清单、构建/测试与局限见 [v1.1 交付](CURSORIUM-v1.1-DELIVERY.md)，真实窗口截图见 [同尺寸对照与子页面](CURSORIUM-v1.1-SCREENSHOTS.md)。以下保留 v1.0 历史记录。
+
 # CURSORIUM v1.0 工程交付
 
 日期：2026-10-13（Europe/Budapest）。优先顺序按功能、扩展性、稳定性/性能、视觉细化实施。

@@ -16,6 +16,7 @@ internal static class Program
     private static readonly string Shortcut=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Programs),"CURSORIUM.lnk");
     private static readonly string LegacyShortcut=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Programs),"FROST - WHITE COMET.lnk");
     private const string UninstallKey=@"Software\Microsoft\Windows\CurrentVersion\Uninstall\FrostWhiteComet";
+    private static readonly string ProductVersion=Assembly.GetExecutingAssembly().GetName().Version?.ToString(3)??"1.1.0";
     private static bool silent;
     [STAThread]static int Main(string[] args)
     {
@@ -60,7 +61,7 @@ internal static class Program
                 }
             }
             if(!File.Exists(Path.Combine(staging,"FrostWhiteComet.exe")))throw new IOException("The installer payload is missing the main executable.");
-            File.WriteAllText(Path.Combine(staging,"frost-install.marker"),"CURSORIUM — Cursor & Motion Studio 1.0.0");
+            File.WriteAllText(Path.Combine(staging,"frost-install.marker"),$"CURSORIUM — Cursor & Motion Studio {ProductVersion}");
             if(Directory.Exists(Target)&&!File.Exists(Path.Combine(Target,"frost-install.marker")))throw new IOException("The target directory is not a CURSORIUM installation. Installation has been stopped.");
             if(!Directory.Exists(Target)&&File.Exists(Shortcut))throw new IOException("A Start menu shortcut with this name already exists. Preserve or rename it before retrying.");
             if(Directory.Exists(old))throw new IOException("An unfinished upgrade backup exists: "+old);
@@ -69,7 +70,7 @@ internal static class Program
             {
                 Directory.Move(staging,Target);File.Copy(Environment.ProcessPath!,Path.Combine(Target,"Uninstall.exe"),true);
                 CreateShortcut();if(previous&&File.Exists(LegacyShortcut))File.Delete(LegacyShortcut);using var key=Registry.CurrentUser.CreateSubKey(UninstallKey);
-                key.SetValue("DisplayName","CURSORIUM — Cursor & Motion Studio");key.SetValue("DisplayVersion","1.0.0");key.SetValue("Publisher","CURSORIUM Project");key.SetValue("InstallLocation",Target);key.SetValue("DisplayIcon",Path.Combine(Target,"FrostWhiteComet.exe"));key.SetValue("UninstallString",$"\"{Path.Combine(Target,"Uninstall.exe")}\" --uninstall");key.SetValue("QuietUninstallString",$"\"{Path.Combine(Target,"Uninstall.exe")}\" --uninstall --silent");key.SetValue("NoModify",1);key.SetValue("NoRepair",1);
+                key.SetValue("DisplayName","CURSORIUM — Cursor & Motion Studio");key.SetValue("DisplayVersion",ProductVersion);key.SetValue("Publisher","CURSORIUM Project");key.SetValue("InstallLocation",Target);key.SetValue("DisplayIcon",Path.Combine(Target,"FrostWhiteComet.exe"));key.SetValue("UninstallString",$"\"{Path.Combine(Target,"Uninstall.exe")}\" --uninstall");key.SetValue("QuietUninstallString",$"\"{Path.Combine(Target,"Uninstall.exe")}\" --uninstall --silent");key.SetValue("NoModify",1);key.SetValue("NoRepair",1);
                 if(StartupRegistration.Enabled)StartupRegistration.Set(true,Path.Combine(Target,"FrostWhiteComet.exe"));
                 if(previous)DeleteOwned(old);
             }

@@ -2,17 +2,19 @@
 
 Windows 鼠标主题与桌面特效管理工具，沿用原 FROST 项目的 **C# / .NET 8 / WPF / Win32**。本地运行，无账户、商店、注入或主题脚本。
 
-![CURSORIUM studio](docs/images/cursorium-studio.png)
+![CURSORIUM studio](docs/images/v1.1/explore.png)
 
 源码：[catvir4493/cursorium](https://github.com/catvir4493/cursorium)。安装器与便携版：[GitHub Releases](https://github.com/catvir4493/cursorium/releases)。原 FROST 项目与历史继续保留在 [frost-white-comet](https://github.com/catvir4493/frost-white-comet)。
+
+v1.1 的 UI、状态与窗口框架升级、同尺寸前后对照和页面截图见 [交付记录](docs/CURSORIUM-v1.1-DELIVERY.md) 与 [截图对照](docs/CURSORIUM-v1.1-SCREENSHOTS.md)。
 
 ## 功能
 
 - 完整保留 FROST / WHITE COMET 的 15 个指针角色、四种分辨率 CUR 和两个动画 ANI。第二套内置主题为 Obsidian。
 - Comet、Minimal、Neon、Stardust 共用采样、时间驱动模型和渲染循环。
 - 点击效果独立选择 Off / Soft Halo / Ring；左键单环、右键双环。
-- 指针、拖尾与点击效果可自由组合；参数和颜色修改先更新应用内预览，**Apply to Desktop** 才应用到系统。
-- **Cancel changes** 恢复已应用配置；Profile 支持 Create / Save / Rename / Delete。选择 Profile 先预览，再 Apply。
+- 指针、拖尾与点击效果可自由组合；参数和颜色修改先更新应用内预览，**Apply Changes** 才应用到系统。
+- **Cancel Changes** 恢复已应用配置；Profile 支持 Create / Save / Rename / Delete。选择 Profile 先预览，再 Apply。
 - 安全导入 `.cur` / `.ani`；验证文件结构、大小、热点和 Windows 加载结果。导入副本保存在本地，无脚本执行。
 - 系统指针切换保存原始备份；逐次事务日志支持部分失败回滚及下次启动恢复。
 - 托盘支持启用/关闭、暂停/恢复、打开界面、恢复指针和退出；开机启动可选。
@@ -23,18 +25,18 @@ Windows 鼠标主题与桌面特效管理工具，沿用原 FROST 项目的 **C#
 
 关闭窗口会保留托盘进程；Quit 会释放特效引擎，Windows 指针主题继续保留。Restore original cursors 恢复安装第一套主题前保存的配置，包括原注册表类型和原本不存在的值。已有 FROST 的备份继续有效。
 
-安装器 `CURSORIUM-Setup-1.0.0-Release.exe` 按当前用户安装，无需管理员权限。安装本身不改变系统指针或默认开启登录启动。卸载先退出引擎并恢复备份；恢复失败时停止卸载。设置、导入主题、指针稳定副本与历史备份保留。
+安装器 `CURSORIUM-Setup-1.1.0-Release.exe` 按当前用户安装，无需管理员权限。安装本身不改变系统指针或默认开启登录启动。卸载先退出引擎并恢复备份；恢复失败时停止卸载。设置、导入主题、指针稳定副本与历史备份保留。
 
 ## 使用
 
 1. Explore / Cursors 选择指针主题；Trails 选择运动预设。
-2. 在右侧调整长度、消散时间、强度、粒子数、颜色及点击效果。在中央移动、左右点击测试。
-3. 按 Apply to Desktop。之后 Windows 指针和桌面效果使用该组合。
+2. 右侧 Trail / Cursor / Click 分组调整组合；消散时间、粒子数等在 Advanced settings。中央 Live Preview 可移动和左右点击，角色下拉框可测试系统角色。
+3. 按 Apply Changes。之后 Windows 指针和桌面效果使用该组合。
 4. Mix Studio 输入名称并 Create，或选择已有 Profile 修改后 Save。Rename 修改名称；Delete 只删除保存的 Profile。
 
 导入一个文件时，先在 Cursors 的角色下拉框选择要替换的角色。导入多个文件时使用角色名称，如 `Normal.cur`、`Text.cur`、`Busy.ani`；未替换的角色继承当前主题。导入后选中新主题，按 Apply 即可应用。选择 Original system 会保留/恢复原指针配置。
 
-拖尾开关与点击效果独立；Enable all desktop effects 是总开关。托盘 Pause 是临时暂停，托盘 Enable 的状态会持久保存。开机启动注册立即生效；其他设置由 Apply 生效。
+拖尾开关与点击效果独立；Desktop effects 是总开关。托盘 Pause 是临时暂停，托盘 Enable 的状态会持久保存。开机启动注册立即生效；界面动画和系统标题栏偏好也立即保存；特效参数由 Apply 生效。Apply 和 Cancel 在没有草稿变化时禁用。
 
 ## 数据和扩展
 
@@ -43,6 +45,7 @@ Windows 鼠标主题与桌面特效管理工具，沿用原 FROST 项目的 **C#
   settings.json                 旧版配置，首次读取时迁移，不覆盖
   studio.json                   schemaVersion 1，最后成功应用的配置
   profiles.json                 schemaVersion 1，独立的已保存 Profile
+  interface.json                schemaVersion 1，界面动画与系统标题栏偏好
   original-theme.json           最初的 Windows 指针配置备份
   theme-transaction.json        未完成事务的恢复日志
   Backups/                      恢复后归档
@@ -69,7 +72,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-release.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-cursorium.ps1
 ```
 
-完成验证并提交后，`scripts/publish-github.ps1` 推送并核对远程 main；正式版本增加 `-Release -Version 1.0.0 -NotesPath docs/releases/1.0.0.md` 会上传并校验下载文件，再发布 GitHub Release。凭据由 Git Credential Manager 在内存中读取。项目持续发布约定保存在 `AGENTS.md`：之后每次迭代完成验证后自动提交和上传。
+完成验证并提交后，`scripts/publish-github.ps1` 推送并核对远程 main；正式版本增加 `-Release -Version 1.1.0 -NotesPath docs/releases/1.1.0.md` 会上传并校验下载文件，再发布 GitHub Release。凭据由 Git Credential Manager 在内存中读取。项目持续发布约定保存在 `AGENTS.md`：之后每次迭代完成验证后自动提交和上传。
 
 `build-release.ps1` 生成自包含 Windows x64 便携 ZIP、安装器、主题 ZIP、源码 ZIP 和 SHA256 校验文件。`verify-cursorium.ps1` 使用独立数据目录；原生切换测试暂时改变系统指针，在结束时恢复测试前配置；桌面测试会短暂移动鼠标并使用 SendInput。现有用户设置与备份通过前后哈希检查保护。
 

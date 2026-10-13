@@ -1,4 +1,4 @@
-param([switch]$SkipVerification,[ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.0.0')
+param([switch]$SkipVerification,[ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.1.0')
 $ErrorActionPreference = 'Stop'
 $frostRoot = Split-Path -Parent $PSScriptRoot
 Set-Location -LiteralPath $frostRoot

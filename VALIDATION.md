@@ -1,5 +1,67 @@
 # CURSORIUM / FROST: validation record
 
+## CURSORIUM v1.1.0 — October 13, 2026
+
+Current-version evidence: Windows 11 build 26100; SDK 10.0.103; .NET 8/WPF/Win32;
+**two real displays (2560×1440 and 1920×1080), both 96 DPI**.
+
+- Release solution and self-contained app/installer build: zero warnings/errors.
+- FROST and Obsidian unchanged native resources: 388 checks each.
+- Core/import/profile/native transactions: 66 passed.
+- Original desktop suite on the two displays: 89 passed (88 original checks plus hidden-preview exclusion regression). Additional original count comes from
+  existing per-display checks; the original functional paths were retained.
+- Interface suite: 98 passed. Real slider arrow/Space toggle/F4 dropdown input after
+  actual foreground activation; Escape popup isolation; draft/invalid/apply/cancel state;
+  all 15 cursor preview roles; Saved Profile feedback; advanced views; persisted animation
+  switch and OS gate; native/system-caption fallback; caption/resize hit tests;
+  minimize/maximize/restore/close-to-tray/reopen; maximized controls inside work bounds;
+  9 equivalent logical work-area cases across 5 pages, compact 850×520 and long names.
+- Existing settings.json, studio.json, profiles.json, original-theme.json and interface.json
+  preserved by existence/SHA256 comparison. Isolated native tests restored exact prior scheme.
+- Same-size 1280×830 old/new and major pages captured from real WPF windows. Preview trails
+  use actual local mouse samples. [Screenshot comparison](docs/CURSORIUM-v1.1-SCREENSHOTS.md).
+- No changes to native services, desktop engine, overlay, painter, LivePreview or cursor assets.
+
+Eight approximately four-second engine-only scenarios on 28 logical processors:
+
+| Scenario | WPF invalidations/s | Working set MiB | CPU, one core % | GDI before/after |
+|---|---:|---:|---:|---|
+| Disabled | 0.0 | 151.4 | 9.36 | 33 / 33 |
+| Stationary | 0.0 | 149.9 | 3.50 | 33 / 33 |
+| Comet, 60 target | 53.7 | 167.4 | 13.65 | 33 / 33 |
+| Minimal, 60 target | 52.9 | 157.2 | 6.24 | 33 / 33 |
+| Neon, 60 target | 53.7 | 158.4 | 6.25 | 33 / 33 |
+| Stardust, 60 target | 55.2 | 159.0 | 5.86 | 33 / 33 |
+| Comet, 120 target | 68.9 | 160.6 | 8.58 | 33 / 33 |
+| Power saving, 30 target | 29.5 | 160.7 | 3.90 | 33 / 33 |
+
+Machine CPU is one-core CPU / 28. UI was hidden for benchmark. This includes runtime
+initialization and per-monitor layered surface overhead, not GPU presentation FPS or
+long-term leak/whole-studio memory evidence. USER remained 34–35; repeated native cursor
+preview resource counts stayed bounded in the desktop suite.
+
+The 1366×768/1920×1080/2560×1440 × 100/125/150 matrix adjusts available DIPs; monitor DPI
+stays 96. **Physical 125%/150%/mixed DPI is unverified.** Windows 10, negative monitor
+coordinates, physical hotplug, sleep/resume, secure/protected desktops, exclusive fullscreen,
+genuine high-refresh presentation and long sessions remain unverified. Fresh install,
+uninstall and upgrade-failure rollback were not run against the user's existing installation.
+
+Raw successful evidence: `artifacts/interface-v1.1/verified/` (core, desktop, performance,
+restart, data protection) and `artifacts/interface-v1.1/final-validated/interface/capture-report.json`.
+The final regression rerun is under `artifacts/interface-v1.1/final-validated/`.
+Sanitized evidence: [cursorium-v1.1-2026-10-13.json](docs/verification/cursorium-v1.1-2026-10-13.json).
+First attempts with missing keyboard foreground and clipped maximized caption controls
+failed, were corrected and rerun; failed attempts remain local and are not counted as passes.
+[Delivery and limitations](docs/CURSORIUM-v1.1-DELIVERY.md).
+
+Existing marked installation was actually upgraded with v1.1.0 (exit 0). First upgrade
+matched 611 published files by SHA256 and preserved 58 existing data/resource files and
+native cursor values/types. Start menu launch showed the new installed window; desktop
+reopen retained its process. Registry version is 1.1.0. Full installation/data rollback
+archives stay local. Documentation of this result was added after that run; final packaging
+adds documentation, with no software changes. [Sanitized upgrade report](docs/verification/cursorium-v1.1-installed-upgrade-2026-10-13.json).
+
+
 ## CURSORIUM v1.0 — October 13, 2026
 
 Fresh checks on Windows 11 build 26100, SDK 10.0.103, .NET 8 target;

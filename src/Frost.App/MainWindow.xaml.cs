@@ -8,6 +8,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Microsoft.Win32;
 using Frost.Core;
+using Frost.App.Presentation;
 
 namespace Frost.App;
 
@@ -23,20 +24,29 @@ public partial class MainWindow:Window
     private readonly Dictionary<string,BitmapSource> thumbnails=new();
     private readonly DispatcherTimer statusTimer;
     private bool ready,disposed;
+    private UiPreferences preferences=new();
+    public StudioViewState ViewState {get;}=new();
     private string? profileId;
     public StudioConfiguration Draft {get;}
     public bool IsDirty=>profileId!=studio.State.ProfileId||(ColorInput!=null&&!Settings.ValidColor(ColorInput.Text))||JsonSerializer.Serialize(Draft,Storage.Json)!=JsonSerializer.Serialize(studio.State.Applied,Storage.Json);
     public MainWindow(StudioService studio,TrailEngine engine,ThemeService theme)
     {
-        this.studio=studio;this.engine=engine;this.theme=theme;Draft=studio.State.Applied.Clone();profileId=studio.State.ProfileId;InitializeComponent();
+        this.studio=studio;this.engine=engine;this.theme=theme;Draft=studio.State.Applied.Clone();profileId=studio.State.ProfileId;InitializeComponent();DataContext=ViewState;
+        try{preferences=UiPreferences.Load();}catch(Exception ex){Storage.Log(ex.ToString());Notify(ex.Message,true);}
+        AnimationsCheck.IsChecked=preferences.EnableAnimations;SystemTitleCheck.IsChecked=preferences.UseSystemTitleBar;UiMotion.SetAllowed(preferences.EnableAnimations);
         foreach(var role in CursorRoles.All)PreviewRole.Items.Add(role.Name);PreviewRole.SelectedIndex=0;
         BindCatalog();LoadControls();BindProfiles();Navigation.SelectedIndex=0;ready=true;
-        Preview.Update(Draft.Effects);UpdateDraftStatus();Feedback.Text=studio.LoadWarning??string.Join("; ",studio.Catalog.Warnings);
-        statusTimer=new DispatcherTimer{Interval=TimeSpan.FromMilliseconds(400)};statusTimer.Tick+=(_,_)=>{EngineStatus.Text=engine.Status;RestoreButton.IsEnabled=theme.HasBackup;};
+        Preview.Update(Draft.Effects);UpdateDraftStatus();if(string.IsNullOrEmpty(ViewState.Notification))Notify(studio.LoadWarning??string.Join("; ",studio.Catalog.Warnings));
+        statusTimer=new DispatcherTimer{Interval=TimeSpan.FromMilliseconds(400)};statusTimer.Tick+=(_,_)=>{EngineStatus.Text=engine.Status;NavRuntimeLabel.Text=engine.Status;RuntimeIndicator.Fill=(Brush)FindResource(studio.LiveEffects.Enabled&&!engine.PausedByUser?"SuccessBrush":"QuietBrush");RestoreButton.IsEnabled=theme.HasBackup;};
         IsVisibleChanged+=(_,_)=>{if(IsVisible)statusTimer.Start();else statusTimer.Stop();UpdatePreviewBounds();};
         Preview.LayoutUpdated+=PreviewLayoutUpdated;
+        Preview.MouseEnter+=(_,_)=>PreviewHint.Visibility=Visibility.Collapsed;
+        Preview.MouseLeave+=(_,_)=>PreviewHint.Visibility=Visibility.Visible;
         Closing+=(_,e)=>{if(!((App)System.Windows.Application.Current).Exiting){e.Cancel=true;Hide();}};
-        Loaded+=(_,_)=>FitWorkArea();SizeChanged+=(_,_)=>{NavColumn.Width=new GridLength(ActualWidth<1100?132:158);ParameterColumn.Width=new GridLength(ActualWidth<1100?264:300);};
+        SourceInitialized+=(_,_)=>ApplyWindowAppearance();
+        PreviewKeyDown+=HandleKeyboard;SystemParameters.StaticPropertyChanged+=SystemMotionChanged;
+        Loaded+=(_,_)=>{FitWorkArea();FitLayout();};SizeChanged+=(_,_)=>FitLayout();
+        StateChanged+=(_,_)=>{MaximizeGlyph.Data=(Geometry)FindResource(WindowState==WindowState.Maximized?"RestoreIcon":"MaximizeIcon");Dispatcher.BeginInvoke(new Action(UpdateChromeInset),DispatcherPriority.Loaded);};
         DpiChanged+=(_,_)=>Dispatcher.BeginInvoke(new Action(FitWorkArea));
     }
     private void FitWorkArea()
@@ -45,13 +55,58 @@ public partial class MainWindow:Window
         var info=new Native.MonitorInfo{Size=System.Runtime.InteropServices.Marshal.SizeOf<Native.MonitorInfo>(),Device=""};
         if(!Native.GetMonitorInfo(Native.MonitorFromWindow(handle,2),ref info))return;
         double width=info.Work.Width/dpi.DpiScaleX-24,height=info.Work.Height/dpi.DpiScaleY-24;
-        MinWidth=Math.Min(900,width);MinHeight=Math.Min(580,height);Width=Math.Min(Width,width);Height=Math.Min(Height,height);
+        MinWidth=Math.Min(780,width);MinHeight=Math.Min(480,height);Width=Math.Min(Width,width);Height=Math.Min(Height,height);
         Left=Math.Max(info.Work.Left/dpi.DpiScaleX,Math.Min(Left,info.Work.Right/dpi.DpiScaleX-Width));Top=Math.Max(info.Work.Top/dpi.DpiScaleY,Math.Min(Top,info.Work.Bottom/dpi.DpiScaleY-Height));
     }
+    private void FitLayout()
+    {
+        bool compact=ActualWidth<1000;
+        NavColumn.Width=new GridLength(compact?64:ActualWidth<1180?148:184);ParameterColumn.Width=new GridLength(ActualWidth<1000?280:320);
+        foreach(var label in new[]{NavExploreLabel,NavCursorLabel,NavTrailLabel,NavMixLabel,NavSettingsLabel,WorkspaceLabel,NavRuntimeLabel,NavVersionLabel})label.Visibility=compact?Visibility.Collapsed:Visibility.Visible;
+        TestArea.Height=Math.Clamp((ActualHeight-170)*.40,200,540);EngineStatus.Visibility=compact?Visibility.Visible:Visibility.Collapsed;
+        Dispatcher.BeginInvoke(new Action(UpdateChromeInset),DispatcherPriority.Loaded);
+    }
+    private void UpdateChromeInset()
+    {
+        if(disposed)return;
+        var chrome=System.Windows.Shell.WindowChrome.GetWindowChrome(this);
+        if(WindowState!=WindowState.Maximized||preferences.UseSystemTitleBar||!IsLoaded||!IsVisible){RootFrame.Padding=new Thickness();if(chrome!=null)chrome.CaptionHeight=48;return;}
+        var handle=new System.Windows.Interop.WindowInteropHelper(this).Handle;
+        var monitor=new Native.MonitorInfo{Size=System.Runtime.InteropServices.Marshal.SizeOf<Native.MonitorInfo>(),Device=""};
+        if(!Native.GetMonitorInfo(Native.MonitorFromWindow(handle,2),ref monitor))return;
+        var start=RootFrame.PointToScreen(new Point());var end=RootFrame.PointToScreen(new Point(RootFrame.ActualWidth,RootFrame.ActualHeight));var dpi=VisualTreeHelper.GetDpi(this);
+        RootFrame.Padding=new Thickness(Math.Max(0,(monitor.Work.Left-start.X)/dpi.DpiScaleX),Math.Max(0,(monitor.Work.Top-start.Y)/dpi.DpiScaleY),Math.Max(0,(end.X-monitor.Work.Right)/dpi.DpiScaleX),Math.Max(0,(end.Y-monitor.Work.Bottom)/dpi.DpiScaleY));
+        if(chrome!=null)chrome.CaptionHeight=48+RootFrame.Padding.Top;
+    }
+    private void MinimizeWindow(object sender,RoutedEventArgs e)=>SystemCommands.MinimizeWindow(this);
+    private void MaximizeWindow(object sender,RoutedEventArgs e){if(WindowState==WindowState.Maximized)SystemCommands.RestoreWindow(this);else SystemCommands.MaximizeWindow(this);}
+    private void CloseWindow(object sender,RoutedEventArgs e)=>Close();
+    private void ApplyWindowAppearance()
+    {
+        WindowAppearance.Apply(this,preferences.UseSystemTitleBar);CustomTitleBar.Visibility=preferences.UseSystemTitleBar?Visibility.Collapsed:Visibility.Visible;TitleRow.Height=new GridLength(preferences.UseSystemTitleBar?0:48);
+        Dispatcher.BeginInvoke(new Action(UpdateChromeInset),DispatcherPriority.Loaded);
+    }
+    private void AppearanceChanged(object sender,RoutedEventArgs e)
+    {
+        if(!ready)return;
+        var previous=(preferences.EnableAnimations,preferences.UseSystemTitleBar);
+        try{preferences.EnableAnimations=AnimationsCheck.IsChecked==true;preferences.UseSystemTitleBar=SystemTitleCheck.IsChecked==true;preferences.Save();ApplyWindowAppearance();UpdateMotion();Notify("Appearance saved.");}
+        catch(Exception ex){preferences.EnableAnimations=previous.Item1;preferences.UseSystemTitleBar=previous.Item2;ready=false;AnimationsCheck.IsChecked=previous.Item1;SystemTitleCheck.IsChecked=previous.Item2;ready=true;ApplyWindowAppearance();UpdateMotion();Notify("Could not save appearance: "+ex.Message,true);}
+    }
+    private void UpdateMotion(){UiMotion.SetAllowed(preferences.EnableAnimations);if(!UiMotion.Allowed){ContentScroll.BeginAnimation(OpacityProperty,null);ContentScroll.Opacity=1;}}
+    private void SystemMotionChanged(object? sender,System.ComponentModel.PropertyChangedEventArgs e){if(e.PropertyName==nameof(SystemParameters.ClientAreaAnimation))Dispatcher.BeginInvoke(new Action(UpdateMotion));}
+    private void HandleKeyboard(object sender,System.Windows.Input.KeyEventArgs e)
+    {
+        if(new[]{ThemeBox,TrailBox,ClickBox,PreviewRole,ProfileBox,FpsBox}.Any(box=>box.IsDropDownOpen))return;
+        if(e.Key==Key.Enter&&Keyboard.Modifiers==ModifierKeys.Control&&ViewState.CanApply){ApplyDraft();e.Handled=true;}
+        else if(e.Key==Key.Escape&&ViewState.CanCancel){CancelChanges(this,new RoutedEventArgs());e.Handled=true;}
+        else if(e.Key==Key.F6){if(Navigation.IsKeyboardFocusWithin){if(Preview.IsVisible)Preview.Focus();else ContentScroll.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));}else if(ContentScroll.IsKeyboardFocusWithin)ConfigTabs.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));else Navigation.Focus();e.Handled=true;}
+    }
+    private void Notify(string message,bool error=false){ViewState.Notification=message;ViewState.NotificationError=error;Feedback.Text=message;Feedback.Foreground=(Brush)FindResource(error?"ErrorBrush":"SuccessBrush");}
     private void PreviewLayoutUpdated(object? sender,EventArgs e)=>UpdatePreviewBounds();
     private void UpdatePreviewBounds()
     {
-        if(!IsVisible||!Preview.IsLoaded){engine.PreviewBounds=null;return;}
+        if(!IsVisible||!Preview.IsLoaded||!Preview.IsVisible){engine.PreviewBounds=null;return;}
         var top=Preview.PointToScreen(new Point(0,0));var bottom=Preview.PointToScreen(new Point(Preview.ActualWidth,Preview.ActualHeight));
         var viewport=ContentScroll.PointToScreen(new Point(0,0));var viewportEnd=ContentScroll.PointToScreen(new Point(ContentScroll.ActualWidth,ContentScroll.ActualHeight));
         engine.PreviewBounds=new Native.Rect{Left=(int)Math.Max(top.X,viewport.X),Top=(int)Math.Max(top.Y,viewport.Y),Right=(int)Math.Min(bottom.X,viewportEnd.X),Bottom=(int)Math.Min(bottom.Y,viewportEnd.Y)};
@@ -84,7 +139,7 @@ public partial class MainWindow:Window
     {
         bool wasReady=ready;ready=false;ProfileBox.ItemsSource=studio.Profiles.Profiles.ToArray();ProfileBox.SelectedItem=studio.Profiles.Profiles.FirstOrDefault(p=>p.Id==profileId);
         if(ProfileBox.SelectedItem is StudioProfile selected)ProfileName.Text=selected.Name;
-        SaveProfileButton.IsEnabled=RenameProfileButton.IsEnabled=DeleteProfileButton.IsEnabled=ProfileBox.SelectedItem!=null;ready=wasReady;
+        SaveProfileButton.IsEnabled=RenameProfileButton.IsEnabled=DeleteProfileButton.IsEnabled=ProfileBox.SelectedItem!=null;ready=wasReady;UpdateDraftStatus();
     }
     private void LoadControls()
     {
@@ -100,7 +155,7 @@ public partial class MainWindow:Window
     private void UpdateThemePreview()
     {
         if(ThemeBox.SelectedItem is not CursorTheme selected){ThemeTitle.Text="Unavailable cursor theme";ThemeDescription.Text=Draft.CursorThemeId;return;}
-        ThemeTitle.Text=selected.Name;ThemeDescription.Text=selected.Description;HeroImage.Source=Thumbnail(selected);
+        UpdatePageHeader();HeroImage.Source=Thumbnail(selected);
         Preview.Cursor=null;RoleGrid.Children.Clear();Mouse.UpdateCursor();foreach(var cursor in ownedCursors)cursor.Dispose();ownedCursors.Clear();cursors.Clear();
         foreach(var role in CursorRoles.All)
         {
@@ -110,7 +165,11 @@ public partial class MainWindow:Window
         }
         SetPreviewCursor();
     }
-    private void SetPreviewCursor(){Preview.Cursor=cursors.Count>PreviewRole.SelectedIndex&&PreviewRole.SelectedIndex>=0?cursors[PreviewRole.SelectedIndex]:null;}
+    private void SetPreviewCursor()
+    {
+        int role=PreviewRole.SelectedIndex;Preview.Cursor=cursors.Count>role&&role>=0?cursors[role]:null;
+        if(ThemeBox.SelectedItem is CursorTheme selected&&role>=0)HeroImage.Source=Thumbnail(selected,CursorRoles.All[role].Name);
+    }
     private static Cursor SystemCursor(string role)=>role switch{"Text"=>Cursors.IBeam,"Precision"=>Cursors.Cross,"Busy"=>Cursors.Wait,"Working"=>Cursors.AppStarting,"Help"=>Cursors.Help,"Unavailable"=>Cursors.No,"Vertical"=>Cursors.SizeNS,"Horizontal"=>Cursors.SizeWE,"DiagonalNWSE"=>Cursors.SizeNWSE,"DiagonalNESW"=>Cursors.SizeNESW,"Move"=>Cursors.SizeAll,"Link"=>Cursors.Hand,"Alternate"=>Cursors.UpArrow,_=>Cursors.Arrow};
     private void PreviewRoleChanged(object s,SelectionChangedEventArgs e){if(Preview!=null)SetPreviewCursor();}
     private void Changed(){if(!ready)return;Preview.Update(Draft.Effects);UpdateDraftStatus();}
@@ -122,9 +181,22 @@ public partial class MainWindow:Window
     }
     private void UpdateDraftStatus()
     {
-        if(DraftStatus==null)return;DraftStatus.Text=IsDirty?"Preview has changes · Apply to activate":"Matches your applied combination";CancelButton.IsEnabled=IsDirty;
-        ApplyButton.IsEnabled=Settings.ValidColor(ColorInput.Text)&&ThemeBox.SelectedItem!=null;
-        CombinationLabel.Text=$"{Draft.Effects.TrailEffect} motion · {(Draft.Effects.ClickHalo?Draft.Effects.ClickEffect:"off")} clicks · {Draft.Effects.Color}";
+        if(DraftStatus==null)return;bool dirty=IsDirty,valid=Settings.ValidColor(ColorInput.Text);
+        ViewState.CanApply=dirty&&valid&&ThemeBox.SelectedItem!=null&&!ViewState.IsBusy;ViewState.CanCancel=dirty&&!ViewState.IsBusy;ViewState.InvalidColor=!valid;
+        ViewState.StateLabel=dirty?"Draft":"Applied";ViewState.DraftMessage=!valid?"Enter a valid color to apply.":dirty?"Unapplied changes · preview only":"Matches your applied combination";
+        ViewState.ClickName=Draft.Effects.ClickHalo?Draft.Effects.ClickEffect:"off";ViewState.CursorName=(ThemeBox.SelectedItem as CursorTheme)?.Name??"Unavailable cursor";ViewState.TrailName=$"{(TrailBox.SelectedItem as TrailPreset)?.Name??Draft.Effects.TrailEffect} · {ViewState.ClickName} clicks";
+        var saved=studio.Profiles.Profiles.FirstOrDefault(p=>p.Id==profileId);ViewState.HasProfile=saved!=null;
+        ViewState.ProfileCaption=saved==null?"No saved profile selected":"Saved profile · "+saved.Name+(JsonSerializer.Serialize(saved.Configuration,Storage.Json)!=JsonSerializer.Serialize(Draft,Storage.Json)?" · modified":"");
+        ViewState.AppliedSummary=$"Applied: {studio.State.Applied.CursorThemeId} / {studio.State.Applied.Effects.TrailEffect}";
+        CombinationLabel.Text=$"{(Draft.Effects.TrailEnabled?Draft.Effects.TrailEffect:"no trail")} · {ViewState.ClickName} clicks · {Draft.Effects.Color}";
+        ColorValidation.Text=valid?"Hex color · #RRGGBB":"Enter six hex digits after #.";ColorValidation.Foreground=(Brush)FindResource(valid?"MutedBrush":"ErrorBrush");ColorInput.BorderBrush=(Brush)FindResource(valid?"BorderBrush":"ErrorBrush");
+        foreach(var swatch in new[]{IceColor,PurpleColor,AmberColor})swatch.BorderBrush=(Brush)FindResource(valid&&string.Equals(ColorInput.Text,(string)swatch.Tag,StringComparison.OrdinalIgnoreCase)?"AccentBrush":"BorderBrush");
+    }
+    private void UpdatePageHeader()
+    {
+        int page=Navigation.SelectedIndex;var selected=ThemeBox.SelectedItem as CursorTheme;
+        ThemeTitle.Text=page==3?"Mix Studio":page==4?"Settings":selected?.Name??"Cursor library";
+        ThemeDescription.Text=page==3?"Your reusable cursor, motion and click combinations.":page==4?"Desktop behavior, appearance and local data.":selected?.Description??"Choose a local theme to preview.";
     }
     public void Refresh(){RestoreButton.IsEnabled=theme.HasBackup;((App)System.Windows.Application.Current).RefreshTray();}
     public void RefreshAppliedToggle(){Draft.Effects.Enabled=studio.LiveEffects.Enabled;LoadControls();}
@@ -132,7 +204,9 @@ public partial class MainWindow:Window
     private void Navigate(object s,SelectionChangedEventArgs e)
     {
         if(CursorPage==null)return;int index=Navigation.SelectedIndex;CursorPage.Visibility=index==1?Visibility.Visible:Visibility.Collapsed;TrailPage.Visibility=index==2?Visibility.Visible:Visibility.Collapsed;MixPage.Visibility=index==3?Visibility.Visible:Visibility.Collapsed;SettingsPage.Visibility=index==4?Visibility.Visible:Visibility.Collapsed;
-        ThemeCards.Visibility=index is 0 or 1?Visibility.Visible:Visibility.Collapsed;PageLabel.Text=new[]{"EXPLORE / LOCAL LIBRARY","CURSORS / NATIVE WINDOWS ROLES","TRAILS / MOTION PRESETS","MIX STUDIO / SAVED COMBINATIONS","SETTINGS / DESKTOP BEHAVIOR"}[Math.Clamp(index,0,4)];
+        ThemeLibrary.Visibility=index is 0 or 1?Visibility.Visible:Visibility.Collapsed;PreviewContainer.Visibility=index<3?Visibility.Visible:Visibility.Collapsed;PageLabel.Text=new[]{"EXPLORE / LOCAL LIBRARY","CURSORS / NATIVE WINDOWS ROLES","TRAILS / MOTION PRESETS","MIX STUDIO / SAVED COMBINATIONS","SETTINGS / DESKTOP BEHAVIOR"}[Math.Clamp(index,0,4)];ContentScroll.ScrollToTop();UiMotion.Reveal(ContentScroll);
+        UpdatePageHeader();
+        UpdatePreviewBounds();
     }
     private void ThemeChanged(object s,SelectionChangedEventArgs e){if(!ready||ThemeBox.SelectedItem is not CursorTheme selected)return;Draft.CursorThemeId=selected.Id;bool was=ready;ready=false;ThemeCards.SelectedItem=ThemeCards.Items.Cast<ThemeCardView>().FirstOrDefault(t=>t.Theme.Id==selected.Id);ready=was;UpdateThemePreview();Changed();}
     private void ThemeCardChanged(object s,SelectionChangedEventArgs e){if(ready&&ThemeCards.SelectedItem is ThemeCardView card)ThemeBox.SelectedItem=card.Theme;}
@@ -150,26 +224,28 @@ public partial class MainWindow:Window
     private void ApplyCombination(object s,RoutedEventArgs e)=>ApplyDraft();
     public bool ApplyDraft()
     {
+        ViewState.IsBusy=true;UpdateDraftStatus();
         try
         {
-            if(!Settings.ValidColor(ColorInput.Text))throw new ArgumentException("Enter a #RRGGBB color.");studio.Apply(Draft,profileId);Feedback.Text="Applied to desktop. Original cursors remain recoverable.";Refresh();UpdateDraftStatus();return true;
+            if(!Settings.ValidColor(ColorInput.Text))throw new ArgumentException("Enter a #RRGGBB color.");if(IsDirty)studio.Apply(Draft,profileId);Notify("Applied to desktop. Original cursors remain recoverable.");Refresh();return true;
         }
-        catch(Exception ex){Feedback.Text="Apply failed: "+ex.Message;Storage.Log(ex.ToString());return false;}
+        catch(Exception ex){Notify("Apply failed: "+ex.Message,true);Storage.Log(ex.ToString());return false;}
+        finally{ViewState.IsBusy=false;UpdateDraftStatus();}
     }
-    private void CancelChanges(object s,RoutedEventArgs e){CopyDraft(studio.State.Applied);profileId=studio.State.ProfileId;BindProfiles();Feedback.Text="Preview reset to your applied combination.";}
+    private void CancelChanges(object s,RoutedEventArgs e){profileId=studio.State.ProfileId;CopyDraft(studio.State.Applied);BindProfiles();Notify("Preview reset to your applied combination.");}
     private void CopyDraft(StudioConfiguration value){Draft.CursorThemeId=value.CursorThemeId;Draft.Effects.CopyFrom(value.Effects);LoadControls();}
-    private void ProfileSelected(object s,SelectionChangedEventArgs e){if(!ready||ProfileBox.SelectedItem is not StudioProfile selected)return;profileId=selected.Id;ProfileName.Text=selected.Name;CopyDraft(selected.Configuration);BindProfiles();Feedback.Text="Profile loaded into preview. Press Apply to activate it.";}
+    private void ProfileSelected(object s,SelectionChangedEventArgs e){if(!ready||ProfileBox.SelectedItem is not StudioProfile selected)return;profileId=selected.Id;ProfileName.Text=selected.Name;CopyDraft(selected.Configuration);BindProfiles();Notify("Profile loaded into preview. Press Apply to activate it.");}
     private void CreateProfile(object s,RoutedEventArgs e)=>WriteProfile(null);
     private void SaveProfile(object s,RoutedEventArgs e)=>WriteProfile(profileId);
     private void WriteProfile(string? id)
     {
-        try{studio.Validate(Draft);if(!Settings.ValidColor(ColorInput.Text))throw new ArgumentException("Enter a valid color before saving.");var saved=studio.Profiles.Save(id,ProfileName.Text,Draft);profileId=saved.Id;BindProfiles();Feedback.Text="Profile saved locally.";}catch(Exception ex){Feedback.Text=ex.Message;}
+        try{studio.Validate(Draft);if(!Settings.ValidColor(ColorInput.Text))throw new ArgumentException("Enter a valid color before saving.");var saved=studio.Profiles.Save(id,ProfileName.Text,Draft);profileId=saved.Id;BindProfiles();Notify("Profile saved locally.");}catch(Exception ex){Notify(ex.Message,true);}
     }
-    private void RenameProfile(object s,RoutedEventArgs e){try{if(profileId==null)return;studio.Profiles.Rename(profileId,ProfileName.Text);BindProfiles();Feedback.Text="Profile renamed.";}catch(Exception ex){Feedback.Text=ex.Message;}}
+    private void RenameProfile(object s,RoutedEventArgs e){try{if(profileId==null)return;studio.Profiles.Rename(profileId,ProfileName.Text);BindProfiles();Notify("Profile renamed.");}catch(Exception ex){Notify(ex.Message,true);}}
     private void DeleteProfile(object s,RoutedEventArgs e)
     {
         if(profileId==null)return;if(MessageBox.Show(this,"Delete the selected saved profile? Your applied combination is kept.","Delete profile",MessageBoxButton.YesNo)!=MessageBoxResult.Yes)return;
-        try{studio.Profiles.Delete(profileId);profileId=null;BindProfiles();Feedback.Text="Profile deleted.";}catch(Exception ex){Feedback.Text=ex.Message;}
+        try{studio.Profiles.Delete(profileId);profileId=null;BindProfiles();Notify("Profile deleted.");}catch(Exception ex){Notify(ex.Message,true);}
     }
     private void ImportFiles(object s,RoutedEventArgs e)
     {
@@ -181,24 +257,24 @@ public partial class MainWindow:Window
             else foreach(var path in dialog.FileNames){var role=CursorRoles.All.SingleOrDefault(r=>r.Name.Equals(Path.GetFileNameWithoutExtension(path),StringComparison.OrdinalIgnoreCase))??throw new ArgumentException("Unrecognized role filename: "+Path.GetFileName(path));if(!files.TryAdd(role.Name,path))throw new ArgumentException("Choose one file per role: "+role.Name);}
             ImportResources(ImportName.Text,files);
         }
-        catch(Exception ex){Feedback.Text="Import failed: "+ex.Message;Storage.Log(ex.ToString());}
+        catch(Exception ex){Notify("Import failed: "+ex.Message,true);Storage.Log(ex.ToString());}
     }
     public void ImportResources(string name,IReadOnlyDictionary<string,string> resources)
     {
         var selected=studio.Catalog.Find(Draft.CursorThemeId);if(selected.IsSystem)selected=studio.Catalog.Find("frost");
-        var imported=studio.Catalog.Import(name,selected,resources);BindCatalog();Draft.CursorThemeId=imported.Id;LoadControls();Feedback.Text="Imported into your local library. Preview it and press Apply.";
+        var imported=studio.Catalog.Import(name,selected,resources);BindCatalog();Draft.CursorThemeId=imported.Id;LoadControls();Notify("Imported into your local library. Preview it and press Apply.");
     }
     private void RestoreTheme(object s,RoutedEventArgs e)=>RestoreWithConfirmation();
     public void RestoreWithConfirmation()
     {
         if(!theme.HasBackup)return;
         if(MessageBox.Show(this,"Restore the cursor configuration saved before the first installation? This replaces the current Windows cursor scheme.","Restore original cursors",MessageBoxButton.YesNo)!=MessageBoxResult.Yes)return;
-        try{studio.RestoreOriginal();RefreshRestoredCursor();Feedback.Text="Original Windows cursor configuration restored.";}catch(Exception ex){Feedback.Text="Restore failed: "+ex.Message;Storage.Log(ex.ToString());}
+        try{studio.RestoreOriginal();RefreshRestoredCursor();Notify("Original Windows cursor configuration restored.");}catch(Exception ex){Notify("Restore failed: "+ex.Message,true);Storage.Log(ex.ToString());}
     }
     private void StartupChanged(object s,RoutedEventArgs e)
     {
-        if(!ready)return;try{StartupRegistration.Set(StartupCheck.IsChecked==true,Environment.ProcessPath!);Feedback.Text="Sign-in startup updated.";}catch(Exception ex){Feedback.Text=ex.Message;ready=false;StartupCheck.IsChecked=StartupRegistration.Enabled;ready=true;}
+        if(!ready)return;try{StartupRegistration.Set(StartupCheck.IsChecked==true,Environment.ProcessPath!);Notify("Sign-in startup updated.");}catch(Exception ex){Notify(ex.Message,true);ready=false;StartupCheck.IsChecked=StartupRegistration.Enabled;ready=true;}
     }
-    private void OpenData(object s,RoutedEventArgs e){try{Directory.CreateDirectory(Storage.Root);Process.Start(new ProcessStartInfo("explorer.exe",Storage.Root){UseShellExecute=true});}catch(Exception ex){Feedback.Text=ex.Message;}}
-    public void DisposeResources(){if(disposed)return;disposed=true;statusTimer.Stop();Preview.LayoutUpdated-=PreviewLayoutUpdated;engine.PreviewBounds=null;Preview.Dispose();Preview.Cursor=null;RoleGrid.Children.Clear();Mouse.UpdateCursor();foreach(var cursor in ownedCursors)cursor.Dispose();ownedCursors.Clear();cursors.Clear();}
+    private void OpenData(object s,RoutedEventArgs e){try{Directory.CreateDirectory(Storage.Root);Process.Start(new ProcessStartInfo("explorer.exe",Storage.Root){UseShellExecute=true});}catch(Exception ex){Notify(ex.Message,true);}}
+    public void DisposeResources(){if(disposed)return;disposed=true;statusTimer.Stop();SystemParameters.StaticPropertyChanged-=SystemMotionChanged;Preview.LayoutUpdated-=PreviewLayoutUpdated;engine.PreviewBounds=null;Preview.Dispose();Preview.Cursor=null;RoleGrid.Children.Clear();Mouse.UpdateCursor();foreach(var cursor in ownedCursors)cursor.Dispose();ownedCursors.Clear();cursors.Clear();}
 }

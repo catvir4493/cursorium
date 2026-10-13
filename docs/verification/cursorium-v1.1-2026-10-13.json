@@ -1,0 +1,1256 @@
+{
+  "schemaVersion": 1,
+  "version": "1.1.0",
+  "date": "2026-10-13",
+  "timezone": "Europe/Budapest",
+  "environment": {
+    "os": "Windows 11 build 26100",
+    "sdk": "10.0.103",
+    "target": ".NET 8 WPF/Win32",
+    "monitors": [
+      {
+        "Device": "\\\\.\\DISPLAY1",
+        "bounds": {
+          "Width": 2560,
+          "Height": 1440,
+          "Left": 0,
+          "Top": 0,
+          "Right": 2560,
+          "Bottom": 1440
+        },
+        "dpi": 96
+      },
+      {
+        "Device": "\\\\.\\DISPLAY6",
+        "bounds": {
+          "Width": 1920,
+          "Height": 1080,
+          "Left": 339,
+          "Top": 1440,
+          "Right": 2259,
+          "Bottom": 2520
+        },
+        "dpi": 96
+      }
+    ]
+  },
+  "build": {
+    "configuration": "Release",
+    "warnings": 0,
+    "errors": 0,
+    "selfContainedWindowsX64": true
+  },
+  "nativeResources": {
+    "frostChecks": 388,
+    "obsidianChecks": 388,
+    "unchangedFromBaseline": true
+  },
+  "suites": {
+    "core": {
+      "passed": true,
+      "count": 66,
+      "checks": [
+        {
+          "name": "Catalog loads original system, FROST and Obsidian",
+          "passed": true
+        },
+        {
+          "name": "Four independent presets come from JSON",
+          "passed": true
+        },
+        {
+          "name": "frost native CUR/ANI validated: Normal",
+          "passed": true
+        },
+        {
+          "name": "frost native CUR/ANI validated: Help",
+          "passed": true
+        },
+        {
+          "name": "frost native CUR/ANI validated: Working",
+          "passed": true
+        },
+        {
+          "name": "frost native CUR/ANI validated: Busy",
+          "passed": true
+        },
+        {
+          "name": "frost native CUR/ANI validated: Precision",
+          "passed": true
+        },
+        {
+          "name": "frost native CUR/ANI validated: Text",
+          "passed": true
+        },
+        {
+          "name": "frost native CUR/ANI validated: Handwriting",
+          "passed": true
+        },
+        {
+          "name": "frost native CUR/ANI validated: Unavailable",
+          "passed": true
+        },
+        {
+          "name": "frost native CUR/ANI validated: Vertical",
+          "passed": true
+        },
+        {
+          "name": "frost native CUR/ANI validated: Horizontal",
+          "passed": true
+        },
+        {
+          "name": "frost native CUR/ANI validated: DiagonalNWSE",
+          "passed": true
+        },
+        {
+          "name": "frost native CUR/ANI validated: DiagonalNESW",
+          "passed": true
+        },
+        {
+          "name": "frost native CUR/ANI validated: Move",
+          "passed": true
+        },
+        {
+          "name": "frost native CUR/ANI validated: Alternate",
+          "passed": true
+        },
+        {
+          "name": "frost native CUR/ANI validated: Link",
+          "passed": true
+        },
+        {
+          "name": "obsidian native CUR/ANI validated: Normal",
+          "passed": true
+        },
+        {
+          "name": "obsidian native CUR/ANI validated: Help",
+          "passed": true
+        },
+        {
+          "name": "obsidian native CUR/ANI validated: Working",
+          "passed": true
+        },
+        {
+          "name": "obsidian native CUR/ANI validated: Busy",
+          "passed": true
+        },
+        {
+          "name": "obsidian native CUR/ANI validated: Precision",
+          "passed": true
+        },
+        {
+          "name": "obsidian native CUR/ANI validated: Text",
+          "passed": true
+        },
+        {
+          "name": "obsidian native CUR/ANI validated: Handwriting",
+          "passed": true
+        },
+        {
+          "name": "obsidian native CUR/ANI validated: Unavailable",
+          "passed": true
+        },
+        {
+          "name": "obsidian native CUR/ANI validated: Vertical",
+          "passed": true
+        },
+        {
+          "name": "obsidian native CUR/ANI validated: Horizontal",
+          "passed": true
+        },
+        {
+          "name": "obsidian native CUR/ANI validated: DiagonalNWSE",
+          "passed": true
+        },
+        {
+          "name": "obsidian native CUR/ANI validated: DiagonalNESW",
+          "passed": true
+        },
+        {
+          "name": "obsidian native CUR/ANI validated: Move",
+          "passed": true
+        },
+        {
+          "name": "obsidian native CUR/ANI validated: Alternate",
+          "passed": true
+        },
+        {
+          "name": "obsidian native CUR/ANI validated: Link",
+          "passed": true
+        },
+        {
+          "name": "Built-in native themes have different actual pixels",
+          "passed": true
+        },
+        {
+          "name": "Theme paths reject traversal",
+          "passed": true
+        },
+        {
+          "name": "Theme paths reject absolute resources",
+          "passed": true
+        },
+        {
+          "name": "Invalid CUR bytes rejected",
+          "passed": true
+        },
+        {
+          "name": "Executable extensions rejected even with valid cursor bytes",
+          "passed": true
+        },
+        {
+          "name": "Malformed ANI RIFF rejected",
+          "passed": true
+        },
+        {
+          "name": "Import stores CUR and ANI with correct role mapping",
+          "passed": true
+        },
+        {
+          "name": "Imported complete theme survives catalog reload",
+          "passed": true
+        },
+        {
+          "name": "Profile has an independent configuration snapshot",
+          "passed": true
+        },
+        {
+          "name": "Profile name and click parameters persist",
+          "passed": true
+        },
+        {
+          "name": "Saving an existing profile persists edits",
+          "passed": true
+        },
+        {
+          "name": "Profile deletion persists",
+          "passed": true
+        },
+        {
+          "name": "Raw Input distinguishes button-down identity and ignores releases",
+          "passed": true
+        },
+        {
+          "name": "Click effects work independently with trails disabled",
+          "passed": true
+        },
+        {
+          "name": "Off clears click effects",
+          "passed": true
+        },
+        {
+          "name": "Bounded history: comet",
+          "passed": true
+        },
+        {
+          "name": "Time-based expiry: comet",
+          "passed": true
+        },
+        {
+          "name": "Bounded history: minimal",
+          "passed": true
+        },
+        {
+          "name": "Time-based expiry: minimal",
+          "passed": true
+        },
+        {
+          "name": "Bounded history: neon",
+          "passed": true
+        },
+        {
+          "name": "Time-based expiry: neon",
+          "passed": true
+        },
+        {
+          "name": "Bounded history: stardust",
+          "passed": true
+        },
+        {
+          "name": "Time-based expiry: stardust",
+          "passed": true
+        },
+        {
+          "name": "Actual Windows switch to FROST",
+          "passed": true
+        },
+        {
+          "name": "First original configuration preserved",
+          "passed": true
+        },
+        {
+          "name": "Actual Windows switch to distinct Obsidian theme",
+          "passed": true
+        },
+        {
+          "name": "Injected partial native failure is reported",
+          "passed": true
+        },
+        {
+          "name": "Partial failure rolls back registry types, values and original backup",
+          "passed": true
+        },
+        {
+          "name": "Persistence failure after native apply is reported",
+          "passed": true
+        },
+        {
+          "name": "Persistence failure rolls back the active Windows theme",
+          "passed": true
+        },
+        {
+          "name": "Imported theme + Neon + Ring actually apply independently",
+          "passed": true
+        },
+        {
+          "name": "Last successful combination restored by new service instance",
+          "passed": true
+        },
+        {
+          "name": "Restart journal recovery restores both registry and applied JSON",
+          "passed": true
+        },
+        {
+          "name": "Restore returns exact pre-test Windows configuration and scheme entries",
+          "passed": true
+        }
+      ]
+    },
+    "desktop": {
+      "passed": true,
+      "count": 89,
+      "checks": [
+        {
+          "name": "Overlay native styles: \\\\.\\DISPLAY1",
+          "passed": true
+        },
+        {
+          "name": "Physical monitor bounds: \\\\.\\DISPLAY1",
+          "passed": true
+        },
+        {
+          "name": "Overlay native styles: \\\\.\\DISPLAY6",
+          "passed": true
+        },
+        {
+          "name": "Physical monitor bounds: \\\\.\\DISPLAY6",
+          "passed": true
+        },
+        {
+          "name": "Overlay positioning preserves foreground focus",
+          "passed": true
+        },
+        {
+          "name": "SendInput click delivered",
+          "passed": true
+        },
+        {
+          "name": "Actual button click passes through overlay",
+          "passed": true
+        },
+        {
+          "name": "Raw Input created click halo",
+          "passed": true
+        },
+        {
+          "name": "Click does not activate overlay",
+          "passed": true
+        },
+        {
+          "name": "Keyboard input submitted",
+          "passed": true
+        },
+        {
+          "name": "Keyboard focus and input preserved",
+          "passed": true
+        },
+        {
+          "name": "Physical trail recorded on \\\\.\\DISPLAY1",
+          "passed": true
+        },
+        {
+          "name": "Trail sample aligns with actual physical cursor on \\\\.\\DISPLAY1",
+          "passed": true
+        },
+        {
+          "name": "Physical trail recorded on \\\\.\\DISPLAY6",
+          "passed": true
+        },
+        {
+          "name": "Trail sample aligns with actual physical cursor on \\\\.\\DISPLAY6",
+          "passed": true
+        },
+        {
+          "name": "Stopped trail and halo naturally expire",
+          "passed": true
+        },
+        {
+          "name": "Display rebuild releases old native windows, cycle 0",
+          "passed": true
+        },
+        {
+          "name": "Display rebuild recreates current monitor overlays, cycle 0",
+          "passed": true
+        },
+        {
+          "name": "Display rebuild releases old native windows, cycle 1",
+          "passed": true
+        },
+        {
+          "name": "Display rebuild recreates current monitor overlays, cycle 1",
+          "passed": true
+        },
+        {
+          "name": "Display rebuild releases old native windows, cycle 2",
+          "passed": true
+        },
+        {
+          "name": "Display rebuild recreates current monitor overlays, cycle 2",
+          "passed": true
+        },
+        {
+          "name": "Disable clears trail",
+          "passed": true
+        },
+        {
+          "name": "External fullscreen test window has actual monitor bounds",
+          "passed": true
+        },
+        {
+          "name": "External fullscreen test window is foreground",
+          "passed": true
+        },
+        {
+          "name": "External borderless fullscreen auto-pause",
+          "passed": true
+        },
+        {
+          "name": "Length slider updates draft without changing desktop",
+          "passed": true
+        },
+        {
+          "name": "Independent cursor, trail and click selectors",
+          "passed": true
+        },
+        {
+          "name": "Changing cursor preserves selected trail",
+          "passed": true
+        },
+        {
+          "name": "Preview changes do not write applied state or native cursors",
+          "passed": true
+        },
+        {
+          "name": "Cancel resets preview to the applied configuration",
+          "passed": true
+        },
+        {
+          "name": "Color text updates local preview",
+          "passed": true
+        },
+        {
+          "name": "Invalid color disables Apply",
+          "passed": true
+        },
+        {
+          "name": "Real Apply activates FROST, purple Neon and Ring on Windows",
+          "passed": true
+        },
+        {
+          "name": "UI Apply switches to second native theme",
+          "passed": true
+        },
+        {
+          "name": "Hidden local preview releases desktop-effect exclusion",
+          "passed": true
+        },
+        {
+          "name": "Real Create profile button persists a combination",
+          "passed": true
+        },
+        {
+          "name": "Real Rename profile button persists name",
+          "passed": true
+        },
+        {
+          "name": "Real Save profile button persists draft edits",
+          "passed": true
+        },
+        {
+          "name": "Profile selection restores its saved combination to draft",
+          "passed": true
+        },
+        {
+          "name": "Saved profile can be applied",
+          "passed": true
+        },
+        {
+          "name": "CUR and ANI import through UI service can be applied",
+          "passed": true
+        },
+        {
+          "name": "Apply motion preset: comet",
+          "passed": true
+        },
+        {
+          "name": "Desktop engine receives selected effect: comet",
+          "passed": true
+        },
+        {
+          "name": "Effect renderer draws pixels: comet",
+          "passed": true
+        },
+        {
+          "name": "Real mouse movement reaches local preview: comet",
+          "passed": true
+        },
+        {
+          "name": "Desktop overlay stays clear over local draft preview: comet",
+          "passed": true
+        },
+        {
+          "name": "Real desktop motion sampled for effect: comet",
+          "passed": true
+        },
+        {
+          "name": "Apply motion preset: minimal",
+          "passed": true
+        },
+        {
+          "name": "Desktop engine receives selected effect: minimal",
+          "passed": true
+        },
+        {
+          "name": "Effect renderer draws pixels: minimal",
+          "passed": true
+        },
+        {
+          "name": "Real mouse movement reaches local preview: minimal",
+          "passed": true
+        },
+        {
+          "name": "Desktop overlay stays clear over local draft preview: minimal",
+          "passed": true
+        },
+        {
+          "name": "Real desktop motion sampled for effect: minimal",
+          "passed": true
+        },
+        {
+          "name": "Apply motion preset: neon",
+          "passed": true
+        },
+        {
+          "name": "Desktop engine receives selected effect: neon",
+          "passed": true
+        },
+        {
+          "name": "Effect renderer draws pixels: neon",
+          "passed": true
+        },
+        {
+          "name": "Real mouse movement reaches local preview: neon",
+          "passed": true
+        },
+        {
+          "name": "Desktop overlay stays clear over local draft preview: neon",
+          "passed": true
+        },
+        {
+          "name": "Real desktop motion sampled for effect: neon",
+          "passed": true
+        },
+        {
+          "name": "Apply motion preset: stardust",
+          "passed": true
+        },
+        {
+          "name": "Desktop engine receives selected effect: stardust",
+          "passed": true
+        },
+        {
+          "name": "Effect renderer draws pixels: stardust",
+          "passed": true
+        },
+        {
+          "name": "Real mouse movement reaches local preview: stardust",
+          "passed": true
+        },
+        {
+          "name": "Desktop overlay stays clear over local draft preview: stardust",
+          "passed": true
+        },
+        {
+          "name": "Real desktop motion sampled for effect: stardust",
+          "passed": true
+        },
+        {
+          "name": "Four preset renderings produce distinct pixel output",
+          "passed": true
+        },
+        {
+          "name": "Apply independent click-only configuration",
+          "passed": true
+        },
+        {
+          "name": "Left click renders while trails are disabled (Click effects only)",
+          "passed": true
+        },
+        {
+          "name": "Raw Input right click retains accurate identity",
+          "passed": true
+        },
+        {
+          "name": "Actual tray toggle disables all effects",
+          "passed": true
+        },
+        {
+          "name": "Actual tray toggle re-enables all effects",
+          "passed": true
+        },
+        {
+          "name": "Actual tray pause clears effects",
+          "passed": true
+        },
+        {
+          "name": "Actual tray resume works",
+          "passed": true
+        },
+        {
+          "name": "Actual sign-in switch writes app Run entry",
+          "passed": true
+        },
+        {
+          "name": "Actual sign-in switch removes app Run entry",
+          "passed": true
+        },
+        {
+          "name": "Close panel keeps tray process running",
+          "passed": true
+        },
+        {
+          "name": "Actual tray action shows studio",
+          "passed": true
+        },
+        {
+          "name": "Apply final preview combination",
+          "passed": true
+        },
+        {
+          "name": "Compact 960x640 DIP layout retains preview and Apply",
+          "passed": true
+        },
+        {
+          "name": "Restart state probe launched",
+          "passed": true
+        },
+        {
+          "name": "Fresh process starts with persisted configuration",
+          "passed": true
+        },
+        {
+          "name": "Fresh process restores applied combination and saved profile",
+          "passed": true
+        },
+        {
+          "name": "Repeated cursor preview switches keep native resource counts bounded",
+          "passed": true
+        },
+        {
+          "name": "Small-work-area layout: 960x600 DIPs",
+          "passed": true
+        },
+        {
+          "name": "Small-work-area layout: 850x520 DIPs",
+          "passed": true
+        },
+        {
+          "name": "Engine disposal releases all native overlay windows",
+          "passed": true
+        },
+        {
+          "name": "Stopping trail engine leaves the native cursor theme installed",
+          "passed": true
+        },
+        {
+          "name": "Desktop verification restores the exact pre-test Windows cursor configuration",
+          "passed": true
+        }
+      ]
+    },
+    "interface": {
+      "passed": true,
+      "count": 98,
+      "checks": [
+        {
+          "name": "Unchanged applied state disables Apply and Cancel",
+          "passed": true
+        },
+        {
+          "name": "Draft edit enables actions and exposes accurate state",
+          "passed": true
+        },
+        {
+          "name": "Invalid draft remains cancellable and cannot be applied",
+          "passed": true
+        },
+        {
+          "name": "Cancel restores applied configuration and button state",
+          "passed": true
+        },
+        {
+          "name": "Owned window receives foreground and slider keyboard focus after actual click",
+          "passed": true
+        },
+        {
+          "name": "Native keyboard arrow submitted to custom slider",
+          "passed": true
+        },
+        {
+          "name": "Custom slider retains actual keyboard value change and binding",
+          "passed": true
+        },
+        {
+          "name": "Custom toggle retains actual Space keyboard interaction",
+          "passed": true
+        },
+        {
+          "name": "Custom combo opens via actual F4 keyboard input",
+          "passed": true
+        },
+        {
+          "name": "Escape closes dropdown without cancelling the draft",
+          "passed": true
+        },
+        {
+          "name": "Saved Profile is identified separately from unapplied draft",
+          "passed": true
+        },
+        {
+          "name": "All 15 local preview roles retain cursor/thumbnail without changing configuration",
+          "passed": true
+        },
+        {
+          "name": "Real mouse movement renders the temporary combination in local preview",
+          "passed": true
+        },
+        {
+          "name": "Real mouse movement renders the temporary combination in local preview",
+          "passed": true
+        },
+        {
+          "name": "Real mouse movement renders the temporary combination in local preview",
+          "passed": true
+        },
+        {
+          "name": "Settings view uses a real scrollable control: 0",
+          "passed": true
+        },
+        {
+          "name": "Settings view uses a real scrollable control: 1",
+          "passed": true
+        },
+        {
+          "name": "Settings view uses a real scrollable control: 2",
+          "passed": true
+        },
+        {
+          "name": "Advanced settings exposes bound fade slider",
+          "passed": true
+        },
+        {
+          "name": "Collapsed advanced settings hides uncommon controls",
+          "passed": true
+        },
+        {
+          "name": "Disable animations persists outside effect profiles",
+          "passed": true
+        },
+        {
+          "name": "System animation preference gates optional UI motion",
+          "passed": true
+        },
+        {
+          "name": "Native title bar fallback is functional and persisted",
+          "passed": true
+        },
+        {
+          "name": "Custom caption uses native WindowChrome sizing and hit testing",
+          "passed": true
+        },
+        {
+          "name": "Caption native hit-test returns HTCAPTION for drag and double-click",
+          "passed": true
+        },
+        {
+          "name": "Left frame native hit-test returns HTLEFT for resizing",
+          "passed": true
+        },
+        {
+          "name": "Custom maximize button invokes native window management",
+          "passed": true
+        },
+        {
+          "name": "Maximized caption controls stay inside monitor work area",
+          "passed": true
+        },
+        {
+          "name": "Custom restore button restores normal window",
+          "passed": true
+        },
+        {
+          "name": "Custom minimize button works",
+          "passed": true
+        },
+        {
+          "name": "Custom close preserves tray residency",
+          "passed": true
+        },
+        {
+          "name": "Tray reopens custom chrome window",
+          "passed": true
+        },
+        {
+          "name": "Actions remain reachable at logical work area for 1366;768 / 1",
+          "passed": true
+        },
+        {
+          "name": "Preview and settings remain separate for 1366;768 / 1",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 0 at 1366;768 / 1",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 1 at 1366;768 / 1",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 2 at 1366;768 / 1",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 3 at 1366;768 / 1",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 4 at 1366;768 / 1",
+          "passed": true
+        },
+        {
+          "name": "Actions remain reachable at logical work area for 1366;768 / 1,25",
+          "passed": true
+        },
+        {
+          "name": "Preview and settings remain separate for 1366;768 / 1,25",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 0 at 1366;768 / 1,25",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 1 at 1366;768 / 1,25",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 2 at 1366;768 / 1,25",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 3 at 1366;768 / 1,25",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 4 at 1366;768 / 1,25",
+          "passed": true
+        },
+        {
+          "name": "Actions remain reachable at logical work area for 1366;768 / 1,5",
+          "passed": true
+        },
+        {
+          "name": "Preview and settings remain separate for 1366;768 / 1,5",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 0 at 1366;768 / 1,5",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 1 at 1366;768 / 1,5",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 2 at 1366;768 / 1,5",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 3 at 1366;768 / 1,5",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 4 at 1366;768 / 1,5",
+          "passed": true
+        },
+        {
+          "name": "Actions remain reachable at logical work area for 1920;1080 / 1",
+          "passed": true
+        },
+        {
+          "name": "Preview and settings remain separate for 1920;1080 / 1",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 0 at 1920;1080 / 1",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 1 at 1920;1080 / 1",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 2 at 1920;1080 / 1",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 3 at 1920;1080 / 1",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 4 at 1920;1080 / 1",
+          "passed": true
+        },
+        {
+          "name": "Actions remain reachable at logical work area for 1920;1080 / 1,25",
+          "passed": true
+        },
+        {
+          "name": "Preview and settings remain separate for 1920;1080 / 1,25",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 0 at 1920;1080 / 1,25",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 1 at 1920;1080 / 1,25",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 2 at 1920;1080 / 1,25",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 3 at 1920;1080 / 1,25",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 4 at 1920;1080 / 1,25",
+          "passed": true
+        },
+        {
+          "name": "Actions remain reachable at logical work area for 1920;1080 / 1,5",
+          "passed": true
+        },
+        {
+          "name": "Preview and settings remain separate for 1920;1080 / 1,5",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 0 at 1920;1080 / 1,5",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 1 at 1920;1080 / 1,5",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 2 at 1920;1080 / 1,5",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 3 at 1920;1080 / 1,5",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 4 at 1920;1080 / 1,5",
+          "passed": true
+        },
+        {
+          "name": "Actions remain reachable at logical work area for 2560;1440 / 1",
+          "passed": true
+        },
+        {
+          "name": "Preview and settings remain separate for 2560;1440 / 1",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 0 at 2560;1440 / 1",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 1 at 2560;1440 / 1",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 2 at 2560;1440 / 1",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 3 at 2560;1440 / 1",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 4 at 2560;1440 / 1",
+          "passed": true
+        },
+        {
+          "name": "Actions remain reachable at logical work area for 2560;1440 / 1,25",
+          "passed": true
+        },
+        {
+          "name": "Preview and settings remain separate for 2560;1440 / 1,25",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 0 at 2560;1440 / 1,25",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 1 at 2560;1440 / 1,25",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 2 at 2560;1440 / 1,25",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 3 at 2560;1440 / 1,25",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 4 at 2560;1440 / 1,25",
+          "passed": true
+        },
+        {
+          "name": "Actions remain reachable at logical work area for 2560;1440 / 1,5",
+          "passed": true
+        },
+        {
+          "name": "Preview and settings remain separate for 2560;1440 / 1,5",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 0 at 2560;1440 / 1,5",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 1 at 2560;1440 / 1,5",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 2 at 2560;1440 / 1,5",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 3 at 2560;1440 / 1,5",
+          "passed": true
+        },
+        {
+          "name": "Pinned actions reachable on page 4 at 2560;1440 / 1,5",
+          "passed": true
+        },
+        {
+          "name": "850x520 DIP window preserves reachable actions",
+          "passed": true
+        },
+        {
+          "name": "Long imported theme and saved profile names preserve pinned actions in compact layout",
+          "passed": true
+        },
+        {
+          "name": "UI review never applies draft or changes Windows cursor state",
+          "passed": true
+        }
+      ]
+    }
+  },
+  "userDataProtection": [
+    {
+      "unchanged": true,
+      "name": "original-theme.json"
+    },
+    {
+      "unchanged": true,
+      "name": "settings.json"
+    },
+    {
+      "unchanged": true,
+      "name": "studio.json"
+    },
+    {
+      "unchanged": true,
+      "name": "profiles.json"
+    },
+    {
+      "unchanged": true,
+      "name": "interface.json"
+    }
+  ],
+  "performance": {
+    "measurements": [
+      {
+        "mode": "disabled",
+        "seconds": 4.0061757,
+        "renderInvalidationsPerSecond": 0,
+        "samplesPerSecond": 3.9938335210435087,
+        "cpuOneCorePercent": 9.360547081292808,
+        "cpuMachinePercent": 0.33430524455856797,
+        "workingSet": 158797824,
+        "gdiBefore": 33,
+        "gdiAfter": 33,
+        "userBefore": 34,
+        "userAfter": 35,
+        "observedDistinctPositions": 1,
+        "movingObservations": 0
+      },
+      {
+        "mode": "idle",
+        "seconds": 4.0148155,
+        "renderInvalidationsPerSecond": 0,
+        "samplesPerSecond": 63.7638204033216,
+        "cpuOneCorePercent": 3.5026512672723045,
+        "cpuMachinePercent": 0.12509468188521583,
+        "workingSet": 157224960,
+        "gdiBefore": 33,
+        "gdiAfter": 33,
+        "userBefore": 34,
+        "userAfter": 34,
+        "observedDistinctPositions": 1,
+        "movingObservations": 0
+      },
+      {
+        "mode": "comet-60",
+        "seconds": 4.0052975,
+        "renderInvalidationsPerSecond": 53.67890899489988,
+        "samplesPerSecond": 64.1650198477137,
+        "cpuOneCorePercent": 13.653791917983824,
+        "cpuMachinePercent": 0.48763541346751826,
+        "workingSet": 175521792,
+        "gdiBefore": 33,
+        "gdiAfter": 33,
+        "userBefore": 34,
+        "userAfter": 35,
+        "observedDistinctPositions": 100,
+        "movingObservations": 473
+      },
+      {
+        "mode": "minimal-60",
+        "seconds": 4.0062173,
+        "renderInvalidationsPerSecond": 52.91774862037563,
+        "samplesPerSecond": 63.40145195315662,
+        "cpuOneCorePercent": 6.240300389090218,
+        "cpuMachinePercent": 0.22286787103893638,
+        "workingSet": 164794368,
+        "gdiBefore": 33,
+        "gdiAfter": 33,
+        "userBefore": 34,
+        "userAfter": 35,
+        "observedDistinctPositions": 100,
+        "movingObservations": 474
+      },
+      {
+        "mode": "neon-60",
+        "seconds": 4.0024755,
+        "renderInvalidationsPerSecond": 53.71675470051584,
+        "samplesPerSecond": 63.210878787118645,
+        "cpuOneCorePercent": 6.246134111445074,
+        "cpuMachinePercent": 0.22307621826589552,
+        "workingSet": 166072320,
+        "gdiBefore": 33,
+        "gdiAfter": 33,
+        "userBefore": 35,
+        "userAfter": 34,
+        "observedDistinctPositions": 100,
+        "movingObservations": 473
+      },
+      {
+        "mode": "stardust-60",
+        "seconds": 4.0019093,
+        "renderInvalidationsPerSecond": 55.22364037585759,
+        "samplesPerSecond": 63.71958345683689,
+        "cpuOneCorePercent": 5.856579361841625,
+        "cpuMachinePercent": 0.2091635486372009,
+        "workingSet": 166699008,
+        "gdiBefore": 33,
+        "gdiAfter": 33,
+        "userBefore": 35,
+        "userAfter": 35,
+        "observedDistinctPositions": 100,
+        "movingObservations": 476
+      },
+      {
+        "mode": "active-120",
+        "seconds": 4.0065659,
+        "renderInvalidationsPerSecond": 68.88692383669516,
+        "samplesPerSecond": 63.89511616681217,
+        "cpuOneCorePercent": 8.57966647747722,
+        "cpuMachinePercent": 0.3064166599099007,
+        "workingSet": 168349696,
+        "gdiBefore": 33,
+        "gdiAfter": 33,
+        "userBefore": 34,
+        "userAfter": 35,
+        "observedDistinctPositions": 100,
+        "movingObservations": 476
+      },
+      {
+        "mode": "power-30",
+        "seconds": 4.0023741,
+        "renderInvalidationsPerSecond": 29.48250139835754,
+        "samplesPerSecond": 39.72642038318156,
+        "cpuOneCorePercent": 3.9039328206742887,
+        "cpuMachinePercent": 0.13942616868335236,
+        "workingSet": 168472576,
+        "gdiBefore": 33,
+        "gdiAfter": 33,
+        "userBefore": 34,
+        "userAfter": 35,
+        "observedDistinctPositions": 100,
+        "movingObservations": 459
+      }
+    ],
+    "monitorCount": 2,
+    "logicalProcessors": 28,
+    "notes": "Render rates count WPF invalidations, not GPU presentation. These short engine-only measurements include WPF and the current per-monitor layered surfaces; deferred initialization can affect early samples."
+  },
+  "layoutMatrix": {
+    "screenSizes": [
+      "1366x768",
+      "1920x1080",
+      "2560x1440"
+    ],
+    "scales": [
+      1,
+      1.25,
+      1.5
+    ],
+    "method": "Equivalent logical work areas; does not change physical monitor DPI",
+    "pagesChecked": 5,
+    "smallWindowDips": "850x520"
+  },
+  "notVerified": [
+    "Windows 10",
+    "physical 125%/150% or mixed DPI",
+    "negative monitor coordinates",
+    "physical hotplug",
+    "sleep/resume",
+    "secure/protected desktop",
+    "exclusive fullscreen",
+    "true high refresh presentation",
+    "long term resource leaks",
+    "fresh install/uninstall/upgrade-failure rollback round trips"
+  ]
+}

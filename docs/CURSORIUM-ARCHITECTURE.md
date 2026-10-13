@@ -141,3 +141,36 @@ render subscriptions, display/power subscriptions, overlays, timers, tray/menu/i
 Native API behavior was checked against Microsoft's [DestroyCursor documentation](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-destroycursor),
 [LoadCursorFromFile documentation](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-loadcursorfromfilew) and
 [Raw Input registration documentation](https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-rawinputdevice).
+
+
+## v1.1 presentation foundation
+
+ResourceDictionary files under `Frost.App/Presentation` own design tokens, vector icons
+and interactive templates. `StudioViewState` projects button availability, Draft/Applied,
+current combination, Saved Profile identity and feedback. It neither persists application
+configurations nor controls the native renderer. Existing event handlers still call the
+same StudioService/ThemeService/ProfileManager boundaries.
+
+`UiPreferences` writes `interface.json` (schemaVersion 1) separately from profiles and
+applied state. Animation and system-caption choices take effect immediately. `UiMotion`
+only animates card Transform and page Opacity, checks Windows ClientAreaAnimation,
+and cancels unnecessary motion when disabled. It creates no background loop.
+
+`WindowAppearance` uses WPF WindowChrome native hit testing and SystemCommands. The
+normal window stays opaque; resize borders/caption integrate with Windows while closing
+still hides to the existing tray. An explicit SingleBorderWindow fallback requests dark
+DWM caption attributes; unsupported cosmetic attributes do not block window behavior.
+DPI work-area fitting remains in DIPs derived from physical monitor work bounds.
+
+Apply/Cancel share one projection: dirty configuration or changed Profile identity makes
+a draft; invalid hex input disables Apply while allowing Cancel. Saving a Profile does
+not apply it. Cancel restores both applied configuration and Profile ID before updating
+controls. An open dropdown owns Escape before the global draft-cancel shortcut.
+
+The central content scroll contains preview then catalog cards. Compact navigation keeps
+icons/tooltips/automation names; settings tabs scroll independently of pinned Apply/Cancel.
+Mix Studio and Settings prioritize their content instead of showing an unrelated preview.
+
+Primary API references: [WindowChrome](https://learn.microsoft.com/en-us/dotnet/api/system.windows.shell.windowchrome),
+[SystemParameters.ClientAreaAnimation](https://learn.microsoft.com/en-us/dotnet/api/system.windows.systemparameters.clientareaanimation),
+[DWM attributes](https://learn.microsoft.com/en-us/windows/win32/api/dwmapi/ne-dwmapi-dwmwindowattribute).

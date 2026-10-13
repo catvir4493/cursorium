@@ -26,9 +26,9 @@ public sealed class App:System.Windows.Application
     private static string InstanceId=>"FrostWhiteComet-"+WindowsIdentity.GetCurrent().User!.Value+(isolatedTest?"-verification":"")+(stateProbe?"-state-probe":"");
     [STAThread] public static int Main(string[] args)
     {
-        isolatedTest=args.Contains("--isolated-test")&&(args.Contains("--self-test")||args.Contains("--benchmark")||args.Contains("--state-probe"));
+        isolatedTest=args.Contains("--isolated-test")&&(args.Contains("--self-test")||args.Contains("--benchmark")||args.Contains("--state-probe")||args.Contains("--ui-review"));
         stateProbe=args.Contains("--state-probe");
-        if((args.Contains("--self-test")||args.Contains("--benchmark")||args.Contains("--state-probe"))&&!isolatedTest)return 2;
+        if((args.Contains("--self-test")||args.Contains("--benchmark")||args.Contains("--state-probe")||args.Contains("--ui-review"))&&!isolatedTest)return 2;
         if(isolatedTest)
         {
             int rootIndex=Array.IndexOf(args,"--test-data-root");
@@ -67,6 +67,7 @@ public sealed class App:System.Windows.Application
         studio=new StudioService(AppContext.BaseDirectory,theme);settings=studio.LiveEffects;engine=new(settings);
         if(args.Contains("--benchmark")){_ = DesktopVerification.Benchmark(this,engine,args);return;}
         panel=new(studio,engine,theme);MainWindow=panel;CreateTray();
+        if(args.Contains("--ui-review")){_ = InterfaceVerification.CapturePages(this,args);return;}
         if(args.Contains("--self-test")){_ = DesktopVerification.Run(this,engine,args);return;}
         if(!args.Contains("--tray"))panel.Show();_ = Listen();
     }

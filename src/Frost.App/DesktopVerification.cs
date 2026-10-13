@@ -20,12 +20,19 @@ public static class DesktopVerification
     [DllImport("user32.dll")]private static extern int GetGuiResources(IntPtr process,int flag);
     private static readonly List<object> results=new();
     private static void Check(bool value,string name){results.Add(new{name,passed=value});if(!value)throw new Exception(name);}
+    internal static bool PressKey(ushort key)=>SendInput(2,new[]{new Input{Type=1,Data=new Union{Key=new KeyInput{Key=key}}},new Input{Type=1,Data=new Union{Key=new KeyInput{Key=key,Flags=2}}}},Marshal.SizeOf<Input>())==2;
+    internal static bool ClickAt(Point point)
+    {
+        Native.SetPhysicalCursorPos((int)point.X,(int)point.Y);
+        return SendInput(2,new[]{new Input{Data=new Union{Mouse=new MouseInput{Flags=2}}},new Input{Data=new Union{Mouse=new MouseInput{Flags=4}}}},Marshal.SizeOf<Input>())==2;
+    }
     public static async Task Run(App app,TrailEngine engine,string[] args)
     {
         string output=Path.GetFullPath(GetOption(args,"--report")??"artifacts/verification");Directory.CreateDirectory(output);
         string? originalConfig=File.Exists(Settings.PathName)?File.ReadAllText(Settings.PathName):null;
         Native.GetPhysicalCursorPos(out var original);var originalForeground=Native.GetForegroundWindow();Window? probe=null;MainWindow? panel=null;bool success=false;string? error=null;
         var process=Process.GetCurrentProcess();var started=Stopwatch.StartNew();var cpuBefore=process.TotalProcessorTime;int gdiBefore=GetGuiResources(process.Handle,0),userBefore=GetGuiResources(process.Handle,1);long memBefore=process.WorkingSet64;
+        var observedMonitors=engine.Windows.Select(w=>new{w.Monitor.Device,bounds=w.Monitor.Monitor,dpi=Native.GetDpiForWindow(w.Handle)}).ToArray();
         try
         {
             var settings=engine.Windows[0].Painter.Settings;settings.Enabled=true;settings.PauseFullscreen=false;settings.PowerSaving=false;settings.ApplyPreset("Standard");settings.ClickHalo=true;
@@ -104,6 +111,7 @@ public static class DesktopVerification
             Check(app.Studio.LiveEffects.TrailEffect=="neon"&&app.Studio.LiveEffects.ClickEffect=="ring"&&new ThemeService().IsActive(app.Studio.Catalog.Find("frost")),"Real Apply activates FROST, purple Neon and Ring on Windows");
             themes.SelectedItem=app.Studio.Catalog.Find("obsidian");Check(panel.ApplyDraft()&&new ThemeService().IsActive(app.Studio.Catalog.Find("obsidian")),"UI Apply switches to second native theme");
             var navigation=(ListBox)panel.FindName("Navigation");navigation.SelectedIndex=3;
+            Check(engine.PreviewBounds==null,"Hidden local preview releases desktop-effect exclusion");
             ((TextBox)panel.FindName("ProfileName")).Text="Desktop verification mix";
             ((Button)panel.FindName("NewProfileButton")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
             Check(app.Studio.Profiles.Profiles.Count==1,"Real Create profile button persists a combination");
@@ -192,7 +200,7 @@ public static class DesktopVerification
         {
             var verificationTheme=new ThemeService();if(verificationTheme.HasBackup)verificationTheme.Restore();
             probe?.Close();panel?.Hide();Native.SetPhysicalCursorPos(original.X,original.Y);if(originalForeground!=IntPtr.Zero)SetForegroundWindow(originalForeground);
-            process.Refresh();var report=new{passed=success,error,checks=results,monitors=engine.Windows.Select(w=>new{w.Monitor.Device,bounds=w.Monitor.Monitor,dpi=Native.GetDpiForWindow(w.Handle)}).ToArray(),elapsedSeconds=started.Elapsed.TotalSeconds,cpuSeconds=(process.TotalProcessorTime-cpuBefore).TotalSeconds,workingSetBefore=memBefore,workingSetAfter=process.WorkingSet64,gdiBefore,gdiAfter=GetGuiResources(process.Handle,0),userBefore,userAfter=GetGuiResources(process.Handle,1),notes="Input tests used SendInput on this interactive desktop. FPS settings are targets, not measured throughput. Resource figures include UI creation and screenshots."};
+            process.Refresh();var report=new{passed=success,error,checks=results,monitors=observedMonitors,elapsedSeconds=started.Elapsed.TotalSeconds,cpuSeconds=(process.TotalProcessorTime-cpuBefore).TotalSeconds,workingSetBefore=memBefore,workingSetAfter=process.WorkingSet64,gdiBefore,gdiAfter=GetGuiResources(process.Handle,0),userBefore,userAfter=GetGuiResources(process.Handle,1),notes="Input tests used SendInput on this interactive desktop. FPS settings are targets, not measured throughput. Resource figures include UI creation and screenshots."};
             File.WriteAllText(Path.Combine(output,"desktop-report.json"),JsonSerializer.Serialize(report,new JsonSerializerOptions{WriteIndented=true,IncludeFields=true}));app.ExitApp(success?0:1);
             if(originalConfig!=null)File.WriteAllText(Settings.PathName,originalConfig);else if(File.Exists(Settings.PathName))File.Delete(Settings.PathName);
         }
