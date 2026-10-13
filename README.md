@@ -4,6 +4,8 @@ Windows 鼠标主题与桌面特效管理工具，沿用原 FROST 项目的 **C#
 
 ![CURSORIUM studio](docs/images/cursorium-studio.png)
 
+源码：[catvir4493/cursorium](https://github.com/catvir4493/cursorium)。安装器与便携版：[GitHub Releases](https://github.com/catvir4493/cursorium/releases)。原 FROST 项目与历史继续保留在 [frost-white-comet](https://github.com/catvir4493/frost-white-comet)。
+
 ## 功能
 
 - 完整保留 FROST / WHITE COMET 的 15 个指针角色、四种分辨率 CUR 和两个动画 ANI。第二套内置主题为 Obsidian。
@@ -66,6 +68,8 @@ dotnet run --project tests/Frost.Verify -c Release -- assets/themes/obsidian
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-release.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-cursorium.ps1
 ```
+
+完成验证并提交后，`scripts/publish-github.ps1` 推送并核对远程 main；正式版本增加 `-Release -Version 1.0.0 -NotesPath docs/releases/1.0.0.md` 会上传并校验下载文件，再发布 GitHub Release。凭据由 Git Credential Manager 在内存中读取。项目持续发布约定保存在 `AGENTS.md`：之后每次迭代完成验证后自动提交和上传。
 
 `build-release.ps1` 生成自包含 Windows x64 便携 ZIP、安装器、主题 ZIP、源码 ZIP 和 SHA256 校验文件。`verify-cursorium.ps1` 使用独立数据目录；原生切换测试暂时改变系统指针，在结束时恢复测试前配置；桌面测试会短暂移动鼠标并使用 SendInput。现有用户设置与备份通过前后哈希检查保护。
 
