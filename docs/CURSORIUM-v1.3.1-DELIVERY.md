@@ -50,11 +50,14 @@ Release solution 构建 0 错误、0 警告；自包含 Windows x64 应用及单
 | 核心及原生事务 | 180 |
 | 桌面、输入、覆盖层、托盘 | 85 |
 | 界面、键盘、窗口和逻辑布局 | 98 |
+| 带已验证缓存的实际 WPF 重启及完整界面检查 | 99 |
 | Cute 集合 | 28 |
 | 在线下载安全故障注入 | 51 |
 | 公开网络与实际 WPF | 80 |
 
 旧在线 51 项全部保留，新增 29 项：首屏主要操作、概览与技术层次、1×/2×/4× 观察不改变 Cursor 或 ANI 播放、真实角色缩略图、作用域反馈清理、15 个角色按钮逐一选择但不改 Draft、恢复入口展开、小窗口操作位置及快速导航资源边界。没有删除或跳过安全、输入、Apply / Cancel、Profile 和原生恢复断言。
+
+真实安装首轮启动暴露了已有签名缓存会在控件尚未接入窗口时触发设计资源查找的问题：安装及 72 个原数据文件核对通过，窗口启动未通过。现已将卡片创建延后到 Loaded，并先显示有效缓存再异步刷新；新增单独的实际 WPF 缓存重启检查（99 项），验证构造期间确有已验证缓存，加载后卡片能够解析共享资源。问题已修复，失败轮次不计为成功安装启动。
 
 线上验证实际获取 Pages 签名目录和 GitHub Release 包，再临时预览、下载、进入本地库、通过原事务应用 Windows、保存 Profile、阻止删除被引用资源、取消草稿和恢复原指针。测试使用隔离数据，在 finally 比较并恢复测试前 Windows 指针值；不会把测试备份混入用户最初备份。
 
@@ -78,7 +81,7 @@ C: TEMP / D: 目标的隔离安装升级已通过，公共摘要见同目录验�
 
 主要 UI：MainWindow.xaml / .xaml.cs，Presentation/DiscoverView.xaml / .xaml.cs，Controls.xaml，ThemeCardView.cs，AnimatedCursorPreview.cs。新增 ThemeCoverRenderer.cs。DesignTokens.xaml、Icons.xaml、StudioViewState.cs、LivePreview.cs 保持原有实现。
 
-工具/检查：App.cs 增加隔离封面导出入口，LibraryPublisher.cs 增加媒体独立导出，DiscoverVerification.cs 扩展 WPF 检查，generate-covers.ps1；既有发布脚本版本更新，verify-installed-upgrade.ps1 区分安装原文件保护与启动后的签名缓存刷新。App / Setup csproj 更新版本。没有第二套发布流水线。
+工具/检查：App.cs 增加隔离封面导出入口，LibraryPublisher.cs 增加媒体独立导出，DiscoverVerification.cs 扩展 WPF 检查，InterfaceVerification.cs 与 verify-cursorium.ps1 增加真实缓存重启检查，generate-covers.ps1；既有发布脚本版本更新，verify-installed-upgrade.ps1 区分安装原文件保护与启动后的签名缓存刷新。App / Setup csproj 更新版本。没有第二套发布流水线。
 
 ## 未解决及未验证范围
 

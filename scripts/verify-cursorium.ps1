@@ -30,7 +30,11 @@ $cursoriumTestingData=Join-Path $cursoriumReport ('desktop-data-'+[guid]::NewGui
 Invoke-CursoriumTest @('--self-test','--isolated-test','--test-data-root',('"'+$cursoriumTestingData+'"'),'--report',('"'+$cursoriumReport+'"'))
 $cursoriumDesktop=Get-Content -LiteralPath (Join-Path $cursoriumReport 'desktop-report.json') -Raw | ConvertFrom-Json
 if($cursoriumDesktop.passed -ne $true){throw 'Desktop report contains a failure.'}
-Invoke-CursoriumTest @('--ui-review','--isolated-test','--test-data-root',('"'+(Join-Path $cursoriumReport ('ui-data-'+[guid]::NewGuid().ToString('N')))+'"'),'--report',('"'+(Join-Path $cursoriumReport 'interface')+'"'))
+$cursoriumUiData=Join-Path $cursoriumReport ('ui-data-'+[guid]::NewGuid().ToString('N'))
+Invoke-CursoriumTest @('--ui-review','--isolated-test','--test-data-root',('"'+$cursoriumUiData+'"'),'--report',('"'+(Join-Path $cursoriumReport 'interface')+'"'))
+# Restart a real WPF process with the signed cache it just created. Native/service
+# restart alone does not exercise early visual-tree resource lookup.
+Invoke-CursoriumTest @('--ui-review','--require-cached-catalog','--isolated-test','--test-data-root',('"'+$cursoriumUiData+'"'),'--report',('"'+(Join-Path $cursoriumReport 'cached-interface')+'"'))
 Invoke-CursoriumTest @('--collection-review','--isolated-test','--test-data-root',('"'+(Join-Path $cursoriumReport ('collection-data-'+[guid]::NewGuid().ToString('N')))+'"'),'--report',('"'+(Join-Path $cursoriumReport 'collection')+'"'))
 if($Discover){Invoke-CursoriumTest @('--discover-review','--isolated-test','--test-data-root',('"'+(Join-Path $cursoriumReport ('discover-data-'+[guid]::NewGuid().ToString('N')))+'"'),'--report',('"'+(Join-Path $cursoriumReport 'discover')+'"'))}
 if(-not $SkipBenchmark){Invoke-CursoriumTest @('--benchmark','--isolated-test','--test-data-root',('"'+(Join-Path $cursoriumReport ('benchmark-data-'+[guid]::NewGuid().ToString('N')))+'"'),'--report',('"'+$cursoriumReport+'"'))}

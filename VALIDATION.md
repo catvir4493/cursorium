@@ -3,7 +3,11 @@
 Release build: zero errors/warnings. Current checks: core/native 180,
 desktop/input 85, interface 98, collection 28, online security 51 and actual
 public network/WPF 80, all passed. Original online 51 retained with 29 added
-visual/state/lifecycle assertions. Original FROST and Obsidian resource suites:
+visual/state/lifecycle assertions. Additional actual cached WPF restart and full
+interface checks: 99 passed. A production startup failure exposed card resource
+lookup before the control joined the host tree; rendering now waits for Loaded
+and immediately uses the valid cache before asynchronous refresh. The failed
+startup is not counted as passing installation evidence. Original FROST and Obsidian resource suites:
 388 checks each. No native transaction, security protocol or renderer rewrite.
 
 Same-size old/new captures cover Explore, Details, Cursors and Trails; actual

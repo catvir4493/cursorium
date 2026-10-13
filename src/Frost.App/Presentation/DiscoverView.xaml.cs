@@ -40,12 +40,13 @@ public partial class DiscoverView:UserControl,IDisposable
     public RemoteResource? Selected=>selected;
     public bool IsDownloading=>operation!=null;
     internal AnimatedCursorPreview AnimatedPreview=>animation;
+    internal bool StartedWithCachedCatalog {get;}
     public DiscoverView(ThemeCatalog themes)
     {
         this.themes=themes;InitializeComponent();animation=new(AnimatedImage);Catalog=new(http);Downloads=new(http,themes);
         Sort.SelectedIndex=0;foreach(var role in CursorRoles.All)Roles.Items.Add(role.Name);Roles.SelectedIndex=0;ObservationZoom.SelectedIndex=0;
-        DetailPreview.Update(new Settings{Enabled=false});ready=true;LoadCatalog();
-        Loaded+=async(_,_)=>{if(Catalog.Current==null)await RefreshCatalog();else _=RefreshCatalog();};
+        DetailPreview.Update(new Settings{Enabled=false});ready=true;LoadCatalog();StartedWithCachedCatalog=Catalog.Current!=null;
+        Loaded+=async(_,_)=>{Render();if(Catalog.Current==null)await RefreshCatalog();else _=RefreshCatalog();};
         IsVisibleChanged+=(_,_)=>{if(!IsVisible){ReleasePreview();mediaOperation?.Cancel();detailMedia?.Cancel();if(operation==null)Status.Text=Catalog.Status;}else{Render();if(selected!=null)LoadDetailCover(selected);}};
         DetailPreview.LayoutUpdated+=(_,_)=>UpdatePreviewBounds();DetailScroll.ScrollChanged+=(_,_)=>UpdatePreviewBounds();
     }
@@ -71,7 +72,9 @@ public partial class DiscoverView:UserControl,IDisposable
     private void FilterChanged(object sender,RoutedEventArgs e){if(!ready)return;page=0;Render();BrowseScroll.ScrollToTop();}
     public void Render()
     {
-        if(!ready||disposed)return;mediaOperation?.Cancel();mediaOperation?.Dispose();mediaOperation=CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token);
+        // Cached catalogs are available during construction, before the host's
+        // shared design resources can be resolved. Render after joining the tree.
+        if(!ready||disposed||!IsLoaded)return;mediaOperation?.Cancel();mediaOperation?.Dispose();mediaOperation=CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token);
         try
         {
             var filtered=Filtered();int pages=Math.Max(1,(filtered.Count+PageSize-1)/PageSize);page=Math.Min(page,pages-1);Cards.Children.Clear();

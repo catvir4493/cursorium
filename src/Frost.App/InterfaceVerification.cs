@@ -27,6 +27,7 @@ public static class InterfaceVerification
             panel.Topmost=true;panel.Show();((ListBox)panel.FindName("Navigation")).SelectedIndex=1;((TabControl)panel.FindName("ConfigTabs")).SelectedIndex=0;await Task.Delay(150);panel.WindowState=WindowState.Normal;panel.MinWidth=780;panel.MinHeight=480;panel.Width=1280;panel.Height=830;
             Native.SetWindowPos(new WindowInteropHelper(panel).Handle,IntPtr.Zero,40,40,1280,830,0x10);panel.Activate();SetForegroundWindow(new WindowInteropHelper(panel).Handle);
             panel.UpdateLayout();await Task.Delay(80);DesktopVerification.ClickAt(panel.PointToScreen(new Point(300,24)));await Task.Delay(80);
+            if(args.Contains("--require-cached-catalog"))Check(panel.Discover.StartedWithCachedCatalog&&((WrapPanel)panel.Discover.FindName("Cards")).Children.Count>0,"Actual WPF process restarts with the verified cached catalog and resolves shared card design resources");
             Check(!panel.IsDirty&&!FindButton(panel,"ApplyButton").IsEnabled&&!FindButton(panel,"CancelButton").IsEnabled,"Unchanged applied state disables Apply and Cancel");
             ((Slider)panel.FindName("LengthSlider")).Value=137;
             Check(panel.IsDirty&&FindButton(panel,"ApplyButton").IsEnabled&&FindButton(panel,"CancelButton").IsEnabled&&panel.ViewState.StateLabel=="Draft","Draft edit enables actions and exposes accurate state");
