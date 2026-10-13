@@ -206,3 +206,8 @@ Installer isolation is opt-in under --isolated-test --test-install-root, restric
 to non-linked TEMP CursoriumUpgradeTest-* roots. It uses separate install/data/link
 and registration names and never sends production IPC or changes the Run entry.
 Production installation paths, startup behavior and restoration stay compatible.
+
+In v1.2.1, CursorPack additionally scans each bounded central-directory header and
+compares actual entries with EOCD before constructing ZipArchive. This closes the
+understated-counter allocation gap; directory offsets, sizes and name lengths are
+validated in the same preflight. Forged-directory regression measures allocation.

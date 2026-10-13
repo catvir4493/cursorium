@@ -1,0 +1,68 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "slug": "kawaii-cat-curs0rs",
+      "packageSha256": "92FEBF3CFDAECF0EB2220C15E8B27A4E297D44E0A9237F71C15CA25A2FCA6055",
+      "validatedCursors": 15,
+      "recognizedRoles": 13,
+      "conflicts": [],
+      "unrecognized": [
+        "diagonal resize /.ani",
+        "Diagonal resize -.ani"
+      ],
+      "passed": true
+    },
+    {
+      "slug": "kawaii-pink-heart",
+      "packageSha256": "6ECCA8BC3C7EF461EFAB20DD12C847A4A9308A4EF39C4AB880C25665BBF3F34C",
+      "validatedCursors": 16,
+      "recognizedRoles": 15,
+      "conflicts": [],
+      "unrecognized": [
+        "pinkheart location.cur"
+      ],
+      "passed": true
+    },
+    {
+      "slug": "bunny-cute-kawaii",
+      "packageSha256": "64828EBF68E212801EAA0FA03A81C8E519EE63DA8E201C7FB4423176436FFDC5",
+      "validatedCursors": 12,
+      "recognizedRoles": 11,
+      "conflicts": [],
+      "unrecognized": [
+        "bunny cursor.ani"
+      ],
+      "passed": true
+    },
+    {
+      "slug": "pastel",
+      "packageSha256": "B002F0B58EBB627D054A94A152917F7659ADC64D336E92378E6BB2C712ACB1CB",
+      "validatedCursors": 13,
+      "recognizedRoles": 11,
+      "conflicts": [
+        "Busy"
+      ],
+      "unrecognized": [
+        "Pastel Select.cur"
+      ],
+      "passed": true
+    },
+    {
+      "slug": "cool-cat",
+      "packageSha256": "BFC999D1B574E6AE4C079D2868DF699AEBB9F763E271FACB0AE6F18ECADFC8A7",
+      "validatedCursors": 19,
+      "recognizedRoles": 14,
+      "conflicts": [],
+      "unrecognized": [
+        "Cool Cat classic.ani",
+        "Cool Cat i\u0027m on fire.ani",
+        "Cool Cat i\u0027m a superstar.ani",
+        "Cool Cat person select.ani",
+        "Cool Cat location select.ani"
+      ],
+      "passed": true
+    }
+  ],
+  "notes": "All five original author ZIPs opened through production bounded staging; every CUR/ANI passed binary and native validation and remained byte-for-byte identical. Name suggestions deliberately leave ambiguous/custom names for review; curated manifests use separately reviewed author CRS mapping."
+}

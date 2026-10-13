@@ -50,6 +50,21 @@ public sealed class CursorPack:IDisposable
             if(BitConverter.ToUInt32(tail,i)!=0x06054B50||i+22+BitConverter.ToUInt16(tail,i+20)!=tail.Length)continue;
             int entries=BitConverter.ToUInt16(tail,i+10);
             if(BitConverter.ToUInt16(tail,i+4)!=0||BitConverter.ToUInt16(tail,i+6)!=0||BitConverter.ToUInt16(tail,i+8)!=entries||entries>MaxEntries||BitConverter.ToUInt32(tail,i+12)==uint.MaxValue||BitConverter.ToUInt32(tail,i+16)==uint.MaxValue)throw new InvalidDataException("Multipart, ZIP64 or oversized directories are unsupported.");
+            long start=BitConverter.ToUInt32(tail,i+16),size=BitConverter.ToUInt32(tail,i+12),end=file.Length-tail.Length+i;
+            if(start+size!=end)throw new InvalidDataException("Invalid ZIP directory bounds.");
+            file.Position=start;var header=new byte[46];int actual=0;
+            // EOCD counters are untrusted. Scan the bounded directory before ZipArchive
+            // can create entry objects, including when a forged counter understates them.
+            while(file.Position<end)
+            {
+                if(++actual>entries||actual>MaxEntries||end-file.Position<46)throw new InvalidDataException("ZIP directory entry count exceeds the declared or supported limit.");
+                file.ReadExactly(header);
+                if(BitConverter.ToUInt32(header)!=0x02014B50||BitConverter.ToUInt16(header,34)!=0)throw new InvalidDataException("Invalid ZIP directory entry.");
+                int nameLength=BitConverter.ToUInt16(header,28),extraLength=BitConverter.ToUInt16(header,30),commentLength=BitConverter.ToUInt16(header,32);
+                if(nameLength>512||file.Position+nameLength+extraLength+commentLength>end)throw new InvalidDataException("Oversized or truncated ZIP directory entry.");
+                file.Position+=nameLength+extraLength+commentLength;
+            }
+            if(actual!=entries)throw new InvalidDataException("ZIP directory entry count mismatch.");
             return;
         }
         throw new InvalidDataException("Invalid ZIP directory header.");

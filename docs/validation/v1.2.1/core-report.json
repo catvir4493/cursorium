@@ -1,0 +1,727 @@
+{
+  "passed": true,
+  "error": null,
+  "nativeRoundtrip": true,
+  "checks": [
+    {
+      "name": "Catalog loads original system, FROST and Obsidian",
+      "passed": true
+    },
+    {
+      "name": "Four independent presets come from JSON",
+      "passed": true
+    },
+    {
+      "name": "frost native CUR/ANI validated: Normal",
+      "passed": true
+    },
+    {
+      "name": "frost native CUR/ANI validated: Help",
+      "passed": true
+    },
+    {
+      "name": "frost native CUR/ANI validated: Working",
+      "passed": true
+    },
+    {
+      "name": "frost native CUR/ANI validated: Busy",
+      "passed": true
+    },
+    {
+      "name": "frost native CUR/ANI validated: Precision",
+      "passed": true
+    },
+    {
+      "name": "frost native CUR/ANI validated: Text",
+      "passed": true
+    },
+    {
+      "name": "frost native CUR/ANI validated: Handwriting",
+      "passed": true
+    },
+    {
+      "name": "frost native CUR/ANI validated: Unavailable",
+      "passed": true
+    },
+    {
+      "name": "frost native CUR/ANI validated: Vertical",
+      "passed": true
+    },
+    {
+      "name": "frost native CUR/ANI validated: Horizontal",
+      "passed": true
+    },
+    {
+      "name": "frost native CUR/ANI validated: DiagonalNWSE",
+      "passed": true
+    },
+    {
+      "name": "frost native CUR/ANI validated: DiagonalNESW",
+      "passed": true
+    },
+    {
+      "name": "frost native CUR/ANI validated: Move",
+      "passed": true
+    },
+    {
+      "name": "frost native CUR/ANI validated: Alternate",
+      "passed": true
+    },
+    {
+      "name": "frost native CUR/ANI validated: Link",
+      "passed": true
+    },
+    {
+      "name": "obsidian native CUR/ANI validated: Normal",
+      "passed": true
+    },
+    {
+      "name": "obsidian native CUR/ANI validated: Help",
+      "passed": true
+    },
+    {
+      "name": "obsidian native CUR/ANI validated: Working",
+      "passed": true
+    },
+    {
+      "name": "obsidian native CUR/ANI validated: Busy",
+      "passed": true
+    },
+    {
+      "name": "obsidian native CUR/ANI validated: Precision",
+      "passed": true
+    },
+    {
+      "name": "obsidian native CUR/ANI validated: Text",
+      "passed": true
+    },
+    {
+      "name": "obsidian native CUR/ANI validated: Handwriting",
+      "passed": true
+    },
+    {
+      "name": "obsidian native CUR/ANI validated: Unavailable",
+      "passed": true
+    },
+    {
+      "name": "obsidian native CUR/ANI validated: Vertical",
+      "passed": true
+    },
+    {
+      "name": "obsidian native CUR/ANI validated: Horizontal",
+      "passed": true
+    },
+    {
+      "name": "obsidian native CUR/ANI validated: DiagonalNWSE",
+      "passed": true
+    },
+    {
+      "name": "obsidian native CUR/ANI validated: DiagonalNESW",
+      "passed": true
+    },
+    {
+      "name": "obsidian native CUR/ANI validated: Move",
+      "passed": true
+    },
+    {
+      "name": "obsidian native CUR/ANI validated: Alternate",
+      "passed": true
+    },
+    {
+      "name": "obsidian native CUR/ANI validated: Link",
+      "passed": true
+    },
+    {
+      "name": "Built-in native themes have different actual pixels",
+      "passed": true
+    },
+    {
+      "name": "Theme paths reject traversal",
+      "passed": true
+    },
+    {
+      "name": "Theme paths reject absolute resources",
+      "passed": true
+    },
+    {
+      "name": "Invalid CUR bytes rejected",
+      "passed": true
+    },
+    {
+      "name": "Executable extensions rejected even with valid cursor bytes",
+      "passed": true
+    },
+    {
+      "name": "Malformed ANI RIFF rejected",
+      "passed": true
+    },
+    {
+      "name": "Import stores CUR and ANI with correct role mapping",
+      "passed": true
+    },
+    {
+      "name": "Imported complete theme survives catalog reload",
+      "passed": true
+    },
+    {
+      "name": "Profile has an independent configuration snapshot",
+      "passed": true
+    },
+    {
+      "name": "Profile name and click parameters persist",
+      "passed": true
+    },
+    {
+      "name": "Saving an existing profile persists edits",
+      "passed": true
+    },
+    {
+      "name": "Profile deletion persists",
+      "passed": true
+    },
+    {
+      "name": "Raw Input distinguishes button-down identity and ignores releases",
+      "passed": true
+    },
+    {
+      "name": "Click effects work independently with trails disabled",
+      "passed": true
+    },
+    {
+      "name": "Off clears click effects",
+      "passed": true
+    },
+    {
+      "name": "Bounded history: comet",
+      "passed": true
+    },
+    {
+      "name": "Time-based expiry: comet",
+      "passed": true
+    },
+    {
+      "name": "Bounded history: minimal",
+      "passed": true
+    },
+    {
+      "name": "Time-based expiry: minimal",
+      "passed": true
+    },
+    {
+      "name": "Bounded history: neon",
+      "passed": true
+    },
+    {
+      "name": "Time-based expiry: neon",
+      "passed": true
+    },
+    {
+      "name": "Bounded history: stardust",
+      "passed": true
+    },
+    {
+      "name": "Time-based expiry: stardust",
+      "passed": true
+    },
+    {
+      "name": "Actual Windows switch to FROST",
+      "passed": true
+    },
+    {
+      "name": "First original configuration preserved",
+      "passed": true
+    },
+    {
+      "name": "Actual Windows switch to distinct Obsidian theme",
+      "passed": true
+    },
+    {
+      "name": "Injected partial native failure is reported",
+      "passed": true
+    },
+    {
+      "name": "Partial failure rolls back registry types, values and original backup",
+      "passed": true
+    },
+    {
+      "name": "Persistence failure after native apply is reported",
+      "passed": true
+    },
+    {
+      "name": "Persistence failure rolls back the active Windows theme",
+      "passed": true
+    },
+    {
+      "name": "Imported theme \u002B Neon \u002B Ring actually apply independently",
+      "passed": true
+    },
+    {
+      "name": "Last successful combination restored by new service instance",
+      "passed": true
+    },
+    {
+      "name": "Restart journal recovery restores both registry and applied JSON",
+      "passed": true
+    },
+    {
+      "name": "Restore returns exact pre-test Windows configuration and scheme entries",
+      "passed": true
+    },
+    {
+      "name": "Five actual Cute Collection manifests load without warnings",
+      "passed": true
+    },
+    {
+      "name": "Bunny Cute Kawaii: real source, license and complete roles",
+      "passed": true
+    },
+    {
+      "name": "Bunny Cute Kawaii: every source cursor SHA256 matches",
+      "passed": true
+    },
+    {
+      "name": "Bunny Cute Kawaii: original and inherited counts are accurate",
+      "passed": true
+    },
+    {
+      "name": "Bunny Cute Kawaii: explicit inherited bytes DiagonalNWSE",
+      "passed": true
+    },
+    {
+      "name": "Bunny Cute Kawaii: explicit inherited bytes DiagonalNESW",
+      "passed": true
+    },
+    {
+      "name": "Bunny Cute Kawaii: explicit inherited bytes Link",
+      "passed": true
+    },
+    {
+      "name": "Bunny Cute Kawaii: validated original ANI timeline bunny cursor.ani",
+      "passed": true
+    },
+    {
+      "name": "Bunny Cute Kawaii: validated original ANI timeline help select.ani",
+      "passed": true
+    },
+    {
+      "name": "Bunny Cute Kawaii: validated original ANI timeline busy.ani",
+      "passed": true
+    },
+    {
+      "name": "Bunny Cute Kawaii: validated original ANI timeline alt select.ani",
+      "passed": true
+    },
+    {
+      "name": "Bunny Cute Kawaii: validated original ANI timeline unavailble.ani",
+      "passed": true
+    },
+    {
+      "name": "Bunny Cute Kawaii: validated original ANI timeline working on background.ani",
+      "passed": true
+    },
+    {
+      "name": "Bunny Cute Kawaii: validated original ANI timeline text select.ani",
+      "passed": true
+    },
+    {
+      "name": "Cool Cat: real source, license and complete roles",
+      "passed": true
+    },
+    {
+      "name": "Cool Cat: every source cursor SHA256 matches",
+      "passed": true
+    },
+    {
+      "name": "Cool Cat: original and inherited counts are accurate",
+      "passed": true
+    },
+    {
+      "name": "Cool Cat: validated original ANI timeline Cool Cat classic.ani",
+      "passed": true
+    },
+    {
+      "name": "Cool Cat: validated original ANI timeline Cool Cat help select.ani",
+      "passed": true
+    },
+    {
+      "name": "Cool Cat: validated original ANI timeline Cool Cat working in background.ani",
+      "passed": true
+    },
+    {
+      "name": "Cool Cat: validated original ANI timeline Cool Cat busy.ani",
+      "passed": true
+    },
+    {
+      "name": "Cool Cat: validated original ANI timeline Cool Cat precision select.ani",
+      "passed": true
+    },
+    {
+      "name": "Cool Cat: validated original ANI timeline Cool Cat text select.ani",
+      "passed": true
+    },
+    {
+      "name": "Cool Cat: validated original ANI timeline Cool Cat handwriting.ani",
+      "passed": true
+    },
+    {
+      "name": "Cool Cat: validated original ANI timeline Cool Cat unavailiable.ani",
+      "passed": true
+    },
+    {
+      "name": "Cool Cat: validated original ANI timeline Cool Cat vertical resize.ani",
+      "passed": true
+    },
+    {
+      "name": "Cool Cat: validated original ANI timeline Cool Cat horizontal resize.ani",
+      "passed": true
+    },
+    {
+      "name": "Cool Cat: validated original ANI timeline Cool Cat diagonal resize 1.ani",
+      "passed": true
+    },
+    {
+      "name": "Cool Cat: validated original ANI timeline Cool cat diagonal resize 2.ani",
+      "passed": true
+    },
+    {
+      "name": "Cool Cat: validated original ANI timeline Cool Cat link select.ani",
+      "passed": true
+    },
+    {
+      "name": "Cool Cat: validated original ANI timeline Cool Cat i\u0027m on fire.ani",
+      "passed": true
+    },
+    {
+      "name": "Cool Cat: validated original ANI timeline Cool Cat i\u0027m a superstar.ani",
+      "passed": true
+    },
+    {
+      "name": "Cool Cat: validated original ANI timeline Cool Cat alternate select.ani",
+      "passed": true
+    },
+    {
+      "name": "Cool Cat: validated original ANI timeline Cool Cat move.ani",
+      "passed": true
+    },
+    {
+      "name": "Cool Cat: validated original ANI timeline Cool Cat person select.ani",
+      "passed": true
+    },
+    {
+      "name": "Cool Cat: validated original ANI timeline Cool Cat location select.ani",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Cat: real source, license and complete roles",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Cat: every source cursor SHA256 matches",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Cat: original and inherited counts are accurate",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Cat: validated original ANI timeline diagonal resize /.ani",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Cat: validated original ANI timeline Diagonal resize -.ani",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Cat: validated original ANI timeline vertical resize.ani",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Cat: validated original ANI timeline horizontal resize.ani",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Cat: validated original ANI timeline move.ani",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Cat: validated original ANI timeline Normal select.ani",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Cat: validated original ANI timeline Precision select.ani",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Cat: validated original ANI timeline Working in Background.ani",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Cat: validated original ANI timeline Busy.ani",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Cat: validated original ANI timeline Text select.ani",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Cat: validated original ANI timeline Handwriting.ani",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Cat: validated original ANI timeline Help select.ani",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Cat: validated original ANI timeline Alternate select.ani",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Cat: validated original ANI timeline Link select.ani",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Pink Heart: real source, license and complete roles",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Pink Heart: every source cursor SHA256 matches",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Pink Heart: original and inherited counts are accurate",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Pink Heart: validated original ANI timeline pinkheart busy.ani",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Pink Heart: validated original ANI timeline pinkheart help.ani",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Pink Heart: validated original ANI timeline pinkheart horizontal.ani",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Pink Heart: validated original ANI timeline pinkheart link.ani",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Pink Heart: validated original ANI timeline pinkheart unavailable.ani",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Pink Heart: validated original ANI timeline pinkheart vertical.ani",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Pink Heart: validated original ANI timeline pinkheart working.ani",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Pink Heart: validated original ANI timeline pinkheart diagonal 1.ani",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Pink Heart: validated original ANI timeline pinkheart diagonal 2.ani",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Pink Heart: validated original ANI timeline pinkheart move.ani",
+      "passed": true
+    },
+    {
+      "name": "Pastel: real source, license and complete roles",
+      "passed": true
+    },
+    {
+      "name": "Pastel: every source cursor SHA256 matches",
+      "passed": true
+    },
+    {
+      "name": "Pastel: original and inherited counts are accurate",
+      "passed": true
+    },
+    {
+      "name": "Pastel: explicit inherited bytes Working",
+      "passed": true
+    },
+    {
+      "name": "Pastel: explicit inherited bytes Move",
+      "passed": true
+    },
+    {
+      "name": "Pastel: explicit inherited bytes Alternate",
+      "passed": true
+    },
+    {
+      "name": "Order-independent role recognition: normal.cur",
+      "passed": true
+    },
+    {
+      "name": "Order-independent role recognition: busy.ani",
+      "passed": true
+    },
+    {
+      "name": "Order-independent role recognition: pinkheart link select.ani",
+      "passed": true
+    },
+    {
+      "name": "Order-independent role recognition: cool cat unavailiable.ani",
+      "passed": true
+    },
+    {
+      "name": "Order-independent role recognition: working in background.ani",
+      "passed": true
+    },
+    {
+      "name": "Order-independent role recognition: Pastel diagonal resize 1.cur",
+      "passed": true
+    },
+    {
+      "name": "Order-independent role recognition: Diagonal resize 2.ani",
+      "passed": true
+    },
+    {
+      "name": "Order-independent role recognition: bunny unavailble.ani",
+      "passed": true
+    },
+    {
+      "name": "Unknown or contradictory roles require manual review",
+      "passed": true
+    },
+    {
+      "name": "Parent folder names cannot silently assign cursor roles",
+      "passed": true
+    },
+    {
+      "name": "ANI out-of-range original frame index rejected",
+      "passed": true
+    },
+    {
+      "name": "ANI zero step timing rejected",
+      "passed": true
+    },
+    {
+      "name": "ZIP stages only validated cursor bytes; nested names recognized",
+      "passed": true
+    },
+    {
+      "name": "Repeat import creates independent IDs and preserves reviewed provenance",
+      "passed": true
+    },
+    {
+      "name": "Committed import paths are permanent and available",
+      "passed": true
+    },
+    {
+      "name": "Import leaves original source files unchanged",
+      "passed": true
+    },
+    {
+      "name": "Duplicate role names expose conflict rather than silently choosing",
+      "passed": true
+    },
+    {
+      "name": "ZIP rejects traversal/rooted path: ../normal.cur",
+      "passed": true
+    },
+    {
+      "name": "ZIP rejects traversal/rooted path: C:/normal.cur",
+      "passed": true
+    },
+    {
+      "name": "ZIP rejects traversal/rooted path: /normal.cur",
+      "passed": true
+    },
+    {
+      "name": "ZIP rejects traversal/rooted path: nested/../../normal.cur",
+      "passed": true
+    },
+    {
+      "name": "ZIP rejects traversal/rooted path: folder\\..\\normal.cur",
+      "passed": true
+    },
+    {
+      "name": "ZIP rejects Unix symbolic links",
+      "passed": true
+    },
+    {
+      "name": "ZIP rejects Windows reparse entries",
+      "passed": true
+    },
+    {
+      "name": "ZIP entry limit enforced",
+      "passed": true
+    },
+    {
+      "name": "ZIP rejects forged EOCD count with 4096 actual directory entries",
+      "passed": true
+    },
+    {
+      "name": "Forged ZIP directory rejected before unbounded entry-object allocation",
+      "passed": true
+    },
+    {
+      "name": "ZIP cursor count limit enforced",
+      "passed": true
+    },
+    {
+      "name": "ZIP per-file size limit enforced",
+      "passed": true
+    },
+    {
+      "name": "ZIP suspicious compression ratio rejected",
+      "passed": true
+    },
+    {
+      "name": "ZIP malformed cursor rejected",
+      "passed": true
+    },
+    {
+      "name": "Failed and successful imports clean all uncommitted staging resources",
+      "passed": true
+    },
+    {
+      "name": "Directory import stages validated CUR and ANI resources",
+      "passed": true
+    },
+    {
+      "name": "Library filter and favorites persist independently of applied state",
+      "passed": true
+    },
+    {
+      "name": "Cute themes persist in freely combined profiles",
+      "passed": true
+    },
+    {
+      "name": "Bunny Cute Kawaii: actual native Apply \u002B independent effects \u002B original backup preserved",
+      "passed": true
+    },
+    {
+      "name": "Cool Cat: actual native Apply \u002B independent effects \u002B original backup preserved",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Cat: actual native Apply \u002B independent effects \u002B original backup preserved",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Pink Heart: actual native Apply \u002B independent effects \u002B original backup preserved",
+      "passed": true
+    },
+    {
+      "name": "Pastel: actual native Apply \u002B independent effects \u002B original backup preserved",
+      "passed": true
+    },
+    {
+      "name": "Cute theme partial native failure reported",
+      "passed": true
+    },
+    {
+      "name": "Cute failed Apply rolls back exact native state",
+      "passed": true
+    }
+  ]
+}

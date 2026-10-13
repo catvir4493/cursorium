@@ -53,6 +53,21 @@ internal static class CuteCollectionVerification
         reject(()=>{using var pack=CursorPack.Open(Zip("symlink",z=>Entry(z,"normal.cur",source,unchecked((int)0xA1FF0000))));},"ZIP rejects Unix symbolic links");
         reject(()=>{using var pack=CursorPack.Open(Zip("reparse",z=>Entry(z,"normal.cur",source,0x400)));},"ZIP rejects Windows reparse entries");
         reject(()=>{using var pack=CursorPack.Open(Zip("too-many",z=>{for(int i=0;i<=CursorPack.MaxEntries;i++)Entry(z,i+".txt",new byte[22]);}));},"ZIP entry limit enforced");
+        var forged=Path.Combine(scratch,"forged-directory.zip");
+        using(var memory=new MemoryStream())
+        {
+            using(var writer=new BinaryWriter(memory,System.Text.Encoding.UTF8,true))
+            {
+                for(int i=0;i<4096;i++)
+                {
+                    byte[] name=System.Text.Encoding.ASCII.GetBytes("cursor-"+i+".cur");var header=new byte[46];BitConverter.GetBytes(0x02014B50u).CopyTo(header,0);BitConverter.GetBytes((ushort)20).CopyTo(header,4);BitConverter.GetBytes((ushort)20).CopyTo(header,6);BitConverter.GetBytes((ushort)name.Length).CopyTo(header,28);writer.Write(header);writer.Write(name);
+                }
+                uint size=(uint)memory.Length;var eocd=new byte[22];BitConverter.GetBytes(0x06054B50u).CopyTo(eocd,0);BitConverter.GetBytes((ushort)1).CopyTo(eocd,8);BitConverter.GetBytes((ushort)1).CopyTo(eocd,10);BitConverter.GetBytes(size).CopyTo(eocd,12);writer.Write(eocd);
+            }
+            File.WriteAllBytes(forged,memory.ToArray());
+        }
+        long allocated=GC.GetAllocatedBytesForCurrentThread();reject(()=>{using var pack=CursorPack.Open(forged);},"ZIP rejects forged EOCD count with 4096 actual directory entries");
+        check(GC.GetAllocatedBytesForCurrentThread()-allocated<512*1024,"Forged ZIP directory rejected before unbounded entry-object allocation");
         reject(()=>{using var pack=CursorPack.Open(Zip("too-many-cursors",z=>{for(int i=0;i<=CursorPack.MaxFiles;i++)Entry(z,i+".cur",source);}));},"ZIP cursor count limit enforced");
         reject(()=>{using var pack=CursorPack.Open(Zip("large",z=>Entry(z,"normal.cur",new byte[CursorResource.MaxBytes+1],level:CompressionLevel.NoCompression)));},"ZIP per-file size limit enforced");
         reject(()=>{using var pack=CursorPack.Open(Zip("ratio",z=>Entry(z,"normal.cur",new byte[1024*1024])));},"ZIP suspicious compression ratio rejected");

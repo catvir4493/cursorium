@@ -1,3 +1,14 @@
+# v1.2.1 ZIP directory safety patch
+
+Core/native checks: 180 passed, retaining all v1.2.0 checks and adding two
+forged-central-directory checks. A 4096-entry directory falsely declaring one
+entry is rejected before ZipArchive allocation; measured thread allocations stay
+below 512 KiB. All five original author ZIPs / 75 resources still pass.
+Release solution: zero warnings/errors. No UI, native transaction or renderer
+changes. Prior 85 desktop / 98 interface / 28 collection checks remain the
+unchanged-code baseline; the patch does not claim newly repeated physical tests.
+[Patch notes](docs/releases/1.2.1.md). v1.2.0 publication/history is preserved.
+
 # CURSORIUM v1.2.0 validation update — 2026-10-13
 
 Release solution and self-contained x64 app/setup: 0 warnings, 0 errors.
