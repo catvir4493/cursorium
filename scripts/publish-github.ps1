@@ -1,6 +1,6 @@
 param(
     [switch]$Release,
-    [ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.2.1',
+    [ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.3.0',
     [string]$NotesPath
 )
 $ErrorActionPreference='Stop'

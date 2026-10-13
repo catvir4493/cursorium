@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://catvir4493.github.io/cursorium-library/catalog/v1/schema.json",
+  "title": "CURSORIUM official resource catalog v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["SchemaVersion", "CatalogVersion", "Resources"],
+  "properties": {
+    "SchemaVersion": {"const": 1},
+    "CatalogVersion": {"$ref": "#/$defs/version"},
+    "Resources": {"type": "array", "maxItems": 2000, "items": {"$ref": "#/$defs/resource"}}
+  },
+  "$defs": {
+    "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+(?:\\.[0-9]+){0,2}$"},
+    "officialUrl": {"type": "string", "format": "uri", "pattern": "^https://(?:catvir4493\\.github\\.io/cursorium-library/catalog/v1/|github\\.com/catvir4493/cursorium-library/releases/download/)"},
+    "roles": {"type": "array", "maxItems": 15, "uniqueItems": true, "items": {"enum": ["Normal", "Help", "Working", "Busy", "Precision", "Text", "Handwriting", "Unavailable", "Vertical", "Horizontal", "DiagonalNWSE", "DiagonalNESW", "Move", "Alternate", "Link"]}},
+    "resource": {
+      "type": "object", "additionalProperties": false,
+      "required": ["Id", "Type", "Version", "Name", "Author", "Description", "Tags", "CoverUrl", "PreviewMedia", "PackageUrl", "PackageSize", "SHA256", "License", "SourceUrl", "SupportedRoles", "NativeRoles", "AnimatedCursorCount", "RequiredEngine", "MinimumClientVersion"],
+      "properties": {
+        "Id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,79}$", "not": {"const": "system"}},
+        "Type": {"enum": ["cursor", "trail"]},
+        "Version": {"$ref": "#/$defs/version"},
+        "Name": {"type": "string", "minLength": 1, "maxLength": 100},
+        "Author": {"type": "string", "maxLength": 150},
+        "Description": {"type": "string", "maxLength": 4000},
+        "Tags": {"type": "array", "maxItems": 16, "items": {"type": "string", "minLength": 1, "maxLength": 40}},
+        "CoverUrl": {"$ref": "#/$defs/officialUrl"},
+        "PreviewMedia": {"type": "array", "maxItems": 6, "items": {"$ref": "#/$defs/officialUrl"}},
+        "PackageUrl": {"$ref": "#/$defs/officialUrl"},
+        "PackageSize": {"type": "integer", "minimum": 1, "maximum": 67108864},
+        "SHA256": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"},
+        "License": {"type": "string", "minLength": 1, "maxLength": 1000},
+        "SourceUrl": {"type": "string", "format": "uri", "pattern": "^https://"},
+        "SupportedRoles": {"$ref": "#/$defs/roles"},
+        "NativeRoles": {"$ref": "#/$defs/roles"},
+        "AnimatedCursorCount": {"type": "integer", "minimum": 0, "maximum": 15},
+        "RequiredEngine": {"const": "cursorium-1"},
+        "MinimumClientVersion": {"$ref": "#/$defs/version"},
+        "LastUpdated": {"type": ["string", "null"]},
+        "PublishedAt": {"type": ["string", "null"]},
+        "AddedAt": {"type": ["string", "null"], "format": "date-time"},
+        "Featured": {"type": "boolean"}
+      },
+      "allOf": [
+        {"if": {"properties": {"Type": {"const": "cursor"}}}, "then": {"properties": {"SupportedRoles": {"minItems": 15}}}},
+        {"if": {"properties": {"Type": {"const": "trail"}}}, "then": {"properties": {"SupportedRoles": {"maxItems": 0}, "NativeRoles": {"maxItems": 0}, "AnimatedCursorCount": {"const": 0}}}}
+      ]
+    }
+  }
+}

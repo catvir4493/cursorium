@@ -24,7 +24,7 @@ internal static class CollectionVerification
         void Click(string name)=>Control<Button>(name).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
         try
         {
-            panel.Topmost=true;panel.Show();await Task.Delay(250);Native.SetWindowPos(new WindowInteropHelper(panel).Handle,IntPtr.Zero,50,50,1680,980,0x10);panel.Activate();SetForegroundWindow(new WindowInteropHelper(panel).Handle);DesktopVerification.ClickAt(panel.PointToScreen(new Point(300,24)));await Task.Delay(180);
+            panel.Topmost=true;panel.Show();Control<ListBox>("Navigation").SelectedIndex=1;await Task.Delay(250);Native.SetWindowPos(new WindowInteropHelper(panel).Handle,IntPtr.Zero,50,50,1680,980,0x10);panel.Activate();SetForegroundWindow(new WindowInteropHelper(panel).Handle);DesktopVerification.ClickAt(panel.PointToScreen(new Point(300,24)));await Task.Delay(180);
             Check(Native.GetForegroundWindow()==new WindowInteropHelper(panel).Handle,"Collection captures own actual foreground WPF window");
             var themeBox=Control<ComboBox>("ThemeBox");var filter=Control<ComboBox>("LibraryFilter");var cards=Control<ListBox>("ThemeCards");var scroll=Control<ScrollViewer>("ContentScroll");
             filter.SelectedIndex=2;await Task.Delay(100);Check(cards.Items.Count==5&&cards.Items.Cast<ThemeCardView>().All(c=>c.Theme.Collection=="cute"),"Cute filter presents exactly five real themes");
@@ -54,7 +54,7 @@ internal static class CollectionVerification
             Check(hashes>1,"ANI preview uses distinct actual source pixels, not a static first frame");
             var initial=Control<System.Windows.Controls.Image>("HeroImage").Source;bool moved=false;for(int i=0;i<25;i++){await Task.Delay(20);moved|=!ReferenceEquals(initial,Control<System.Windows.Controls.Image>("HeroImage").Source);}
             Check(moved,"Visible ANI thumbnail advances according to source timing");Control<CheckBox>("AnimationsCheck").IsChecked=false;Check(panel.AnimatedPreview.Running,"Disabling optional UI motion preserves functional cursor animation");
-            panel.Hide();await Task.Delay(40);Check(!panel.AnimatedPreview.Running,"Hidden window stops ANI preview rendering");panel.Show();Control<ListBox>("Navigation").SelectedIndex=1;await Task.Delay(50);scroll.ScrollToEnd();await Task.Delay(60);Check(scroll.VerticalOffset>Control<LivePreview>("Preview").ActualHeight&&!panel.AnimatedPreview.Running,"Preview outside scrolling viewport stops ANI rendering");Control<ListBox>("Navigation").SelectedIndex=0;scroll.ScrollToTop();await Task.Delay(50);
+            panel.Hide();await Task.Delay(40);Check(!panel.AnimatedPreview.Running,"Hidden window stops ANI preview rendering");panel.Show();Control<ListBox>("Navigation").SelectedIndex=1;await Task.Delay(50);scroll.ScrollToEnd();await Task.Delay(60);Check(scroll.VerticalOffset>Control<LivePreview>("Preview").ActualHeight&&!panel.AnimatedPreview.Running,"Preview outside scrolling viewport stops ANI rendering");Control<ListBox>("Navigation").SelectedIndex=1;scroll.ScrollToTop();await Task.Delay(50);
             gdiBefore=GetGuiResources(process.Handle,0);userBefore=GetGuiResources(process.Handle,1);
             for(int i=0;i<30;i++){themeBox.SelectedItem=studio.Catalog.Themes.Where(t=>t.Collection=="cute").ElementAt(i%5);await Task.Delay(12);}
             GC.Collect();GC.WaitForPendingFinalizers();await Task.Delay(80);gdiAfter=GetGuiResources(process.Handle,0);userAfter=GetGuiResources(process.Handle,1);

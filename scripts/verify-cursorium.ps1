@@ -1,4 +1,4 @@
-param([string]$ApplicationDirectory='artifacts/cursorium-release/portable',[switch]$SkipBenchmark,[string]$ReportDirectory='artifacts/cursorium-verification')
+param([string]$ApplicationDirectory='artifacts/cursorium-release/portable',[switch]$SkipBenchmark,[switch]$Discover,[string]$ReportDirectory='artifacts/cursorium-verification')
 $ErrorActionPreference='Stop'
 $cursoriumRoot=Split-Path -Parent $PSScriptRoot
 Set-Location -LiteralPath $cursoriumRoot
@@ -24,12 +24,15 @@ function Invoke-CursoriumTest([string[]]$Arguments){
 }
 & dotnet run --project tests/Frost.Verify -c Release -- --studio-tests $cursoriumApp $cursoriumReport --native-roundtrip 2>&1 | Tee-Object -FilePath (Join-Path $cursoriumReport 'core-console.txt')
 if($LASTEXITCODE -ne 0){throw 'Core/native transaction verification failed.'}
+& dotnet run --project tests/Frost.Verify -c Release -- --online-tests $cursoriumApp (Join-Path $cursoriumRoot 'tests/fixtures/online') (Join-Path $cursoriumReport 'online-security')
+if($LASTEXITCODE -ne 0){throw 'Online download security verification failed.'}
 $cursoriumTestingData=Join-Path $cursoriumReport ('desktop-data-'+[guid]::NewGuid().ToString('N'))
 Invoke-CursoriumTest @('--self-test','--isolated-test','--test-data-root',('"'+$cursoriumTestingData+'"'),'--report',('"'+$cursoriumReport+'"'))
 $cursoriumDesktop=Get-Content -LiteralPath (Join-Path $cursoriumReport 'desktop-report.json') -Raw | ConvertFrom-Json
 if($cursoriumDesktop.passed -ne $true){throw 'Desktop report contains a failure.'}
 Invoke-CursoriumTest @('--ui-review','--isolated-test','--test-data-root',('"'+(Join-Path $cursoriumReport ('ui-data-'+[guid]::NewGuid().ToString('N')))+'"'),'--report',('"'+(Join-Path $cursoriumReport 'interface')+'"'))
 Invoke-CursoriumTest @('--collection-review','--isolated-test','--test-data-root',('"'+(Join-Path $cursoriumReport ('collection-data-'+[guid]::NewGuid().ToString('N')))+'"'),'--report',('"'+(Join-Path $cursoriumReport 'collection')+'"'))
+if($Discover){Invoke-CursoriumTest @('--discover-review','--isolated-test','--test-data-root',('"'+(Join-Path $cursoriumReport ('discover-data-'+[guid]::NewGuid().ToString('N')))+'"'),'--report',('"'+(Join-Path $cursoriumReport 'discover')+'"'))}
 if(-not $SkipBenchmark){Invoke-CursoriumTest @('--benchmark','--isolated-test','--test-data-root',('"'+(Join-Path $cursoriumReport ('benchmark-data-'+[guid]::NewGuid().ToString('N')))+'"'),'--report',('"'+$cursoriumReport+'"'))}
 $cursoriumProtectionChecks=@()
 foreach($cursoriumName in $cursoriumProtected){

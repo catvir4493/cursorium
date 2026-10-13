@@ -24,8 +24,9 @@ public static class InterfaceVerification
         string nativeBefore=JsonSerializer.Serialize(new ThemeService().Snapshot().Cursors),appliedBefore=JsonSerializer.Serialize(app.Studio.State,Storage.Json);
         try
         {
-            panel.Topmost=true;panel.Show();await Task.Delay(150);panel.WindowState=WindowState.Normal;panel.MinWidth=780;panel.MinHeight=480;panel.Width=1280;panel.Height=830;
+            panel.Topmost=true;panel.Show();((ListBox)panel.FindName("Navigation")).SelectedIndex=1;((TabControl)panel.FindName("ConfigTabs")).SelectedIndex=0;await Task.Delay(150);panel.WindowState=WindowState.Normal;panel.MinWidth=780;panel.MinHeight=480;panel.Width=1280;panel.Height=830;
             Native.SetWindowPos(new WindowInteropHelper(panel).Handle,IntPtr.Zero,40,40,1280,830,0x10);panel.Activate();SetForegroundWindow(new WindowInteropHelper(panel).Handle);
+            panel.UpdateLayout();await Task.Delay(80);DesktopVerification.ClickAt(panel.PointToScreen(new Point(300,24)));await Task.Delay(80);
             Check(!panel.IsDirty&&!FindButton(panel,"ApplyButton").IsEnabled&&!FindButton(panel,"CancelButton").IsEnabled,"Unchanged applied state disables Apply and Cancel");
             ((Slider)panel.FindName("LengthSlider")).Value=137;
             Check(panel.IsDirty&&FindButton(panel,"ApplyButton").IsEnabled&&FindButton(panel,"CancelButton").IsEnabled&&panel.ViewState.StateLabel=="Draft","Draft edit enables actions and exposes accurate state");
@@ -54,10 +55,11 @@ public static class InterfaceVerification
             for(int page=0;page<5;page++)
             {
                 navigation.SelectedIndex=page;await Task.Delay(250);
-                if(page<3)await MoveInsidePreview(panel);
+                if(page is 1 or 2)await MoveInsidePreview(panel);
+                if(page==0)Check(panel.Discover.IsVisible&&!((LivePreview)panel.FindName("Preview")).IsVisible&&!((FrameworkElement)panel.FindName("ConfigurationPanel")).IsVisible,"Explore exposes discovery controls while local preview and Customize remain in the owned library");
                 CaptureWindow(panel,Path.Combine(directory,new[]{"explore","cursors","trails","mix-studio","settings"}[page]+".png"));
             }
-            navigation.SelectedIndex=0;
+            navigation.SelectedIndex=1;
             var tabs=(TabControl)panel.FindName("ConfigTabs");
             for(int tab=0;tab<3;tab++){tabs.SelectedIndex=tab;await Task.Delay(180);Check(tabs.SelectedContent is ScrollViewer,"Settings view uses a real scrollable control: "+tab);CaptureWindow(panel,Path.Combine(directory,new[]{"customize-trail","customize-cursor","customize-click"}[tab]+".png"));}
             tabs.SelectedIndex=0;var advanced=(Expander)panel.FindName("TrailAdvanced");advanced.IsExpanded=true;await Task.Delay(100);
@@ -82,16 +84,16 @@ public static class InterfaceVerification
             foreach(var screen in new[]{new Size(1366,768),new Size(1920,1080),new Size(2560,1440)})
             foreach(double scale in new[]{1.0,1.25,1.5})
             {
-                double width=(screen.Width-32)/scale,height=(screen.Height-64)/scale;panel.Left=0;panel.Top=0;panel.MinWidth=Math.Min(780,width);panel.MinHeight=Math.Min(480,height);panel.Width=width;panel.Height=height;navigation.SelectedIndex=0;await Task.Delay(100);
+                double width=(screen.Width-32)/scale,height=(screen.Height-64)/scale;panel.Left=0;panel.Top=0;panel.MinWidth=Math.Min(780,width);panel.MinHeight=Math.Min(480,height);panel.Width=width;panel.Height=height;navigation.SelectedIndex=1;await Task.Delay(100);
                 var apply=FindButton(panel,"ApplyButton");var cancel=FindButton(panel,"CancelButton");var preview=(LivePreview)panel.FindName("Preview");
                 Check(InWindow(panel,apply)&&InWindow(panel,cancel)&&preview.ActualWidth>150,"Actions remain reachable at logical work area for "+screen+" / "+scale);
                 Check(preview.TranslatePoint(new Point(preview.ActualWidth,0),panel).X<apply.TranslatePoint(new Point(),panel).X,"Preview and settings remain separate for "+screen+" / "+scale);
-                for(int page=0;page<5;page++){navigation.SelectedIndex=page;await Task.Delay(20);Check(InWindow(panel,apply)&&InWindow(panel,cancel),"Pinned actions reachable on page "+page+" at "+screen+" / "+scale);}
-                navigation.SelectedIndex=0;await Task.Delay(220);CaptureWindow(panel,Path.Combine(directory,$"layout-{screen.Width}x{screen.Height}-{scale*100:F0}-logical.png"));
+                for(int page=0;page<5;page++){navigation.SelectedIndex=page;await Task.Delay(20);Check(page==0?InWindow(panel,(Button)panel.Discover.FindName("RefreshButton"))&&!apply.IsVisible:InWindow(panel,apply)&&InWindow(panel,cancel),"Page-specific actions reachable on page "+page+" at "+screen+" / "+scale);}
+                navigation.SelectedIndex=1;await Task.Delay(220);CaptureWindow(panel,Path.Combine(directory,$"layout-{screen.Width}x{screen.Height}-{scale*100:F0}-logical.png"));
             }
             panel.Width=850;panel.Height=520;await Task.Delay(100);Check(InWindow(panel,FindButton(panel,"ApplyButton"))&&InWindow(panel,FindButton(panel,"CancelButton")),"850x520 DIP window preserves reachable actions");CaptureWindow(panel,Path.Combine(directory,"compact-850x520.png"));
             panel.ImportResources("An exceptionally long external cursor theme name for layout review",new Dictionary<string,string>{{"Normal",app.Studio.Catalog.Find("frost").Resource("Normal")}});
-            navigation.SelectedIndex=3;((TextBox)panel.FindName("ProfileName")).Text="A long reusable profile name for checking compact window layout";FindButton(panel,"RenameProfileButton").RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Button.ClickEvent));navigation.SelectedIndex=0;await Task.Delay(220);
+            navigation.SelectedIndex=3;((TextBox)panel.FindName("ProfileName")).Text="A long reusable profile name for checking compact window layout";FindButton(panel,"RenameProfileButton").RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Button.ClickEvent));navigation.SelectedIndex=1;await Task.Delay(220);
             Check(InWindow(panel,FindButton(panel,"ApplyButton"))&&InWindow(panel,FindButton(panel,"CancelButton")),"Long imported theme and saved profile names preserve pinned actions in compact layout");CaptureWindow(panel,Path.Combine(directory,"compact-long-names.png"));
             Check(JsonSerializer.Serialize(new ThemeService().Snapshot().Cursors)==nativeBefore&&JsonSerializer.Serialize(app.Studio.State,Storage.Json)==appliedBefore,"UI review never applies draft or changes Windows cursor state");
             passed=true;

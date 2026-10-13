@@ -68,5 +68,6 @@ public sealed class AnimatedCursorPreview:IDisposable
     }
     [DllImport("user32.dll",SetLastError=true)]private static extern IntPtr CreateIconFromResourceEx(byte[] bits,uint length,[MarshalAs(UnmanagedType.Bool)]bool icon,uint version,int width,int height,uint flags);
     [DllImport("user32.dll")]private static extern bool DestroyIcon(IntPtr icon);
-    public void Dispose(){timer.Stop();timer.Tick-=Tick;clock.Stop();frames=Array.Empty<BitmapSource>();timeline=null;resource=null;}
+    public void Clear(){timer.Stop();clock.Reset();frames=Array.Empty<BitmapSource>();timeline=null;resource=null;CurrentStep=0;image.Source=null;}
+    public void Dispose(){Clear();timer.Tick-=Tick;}
 }

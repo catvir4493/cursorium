@@ -211,3 +211,50 @@ In v1.2.1, CursorPack additionally scans each bounded central-directory header a
 compares actual entries with EOCD before constructing ZipArchive. This closes the
 understated-counter allocation gap; directory offsets, sizes and name lengths are
 validated in the same preflight. Forged-directory regression measures allocation.
+
+## v1.3 online discovery and local ownership
+
+Explore is a DiscoverView hosted inside the original WindowChrome shell, spanning
+the workspace columns. Cursors/Trails/Mix retain MainWindow's Draft projection,
+local preview, parameter controls and pinned Apply/Cancel. Detail selection never
+changes Draft; Open in Cursors/Trails explicitly selects an owned resource there.
+
+RemoteCatalogService reads only the official public HTTPS index. It verifies exact
+bytes using an embedded 3072-bit RSA-PSS public key, validates schema/metadata and
+atomically caches bytes plus signature. Concurrent refreshes share a task; 15-second
+catalog timeout falls back to the last verified cache. No GitHub token is shipped.
+Version and renderer compatibility are separate from resource display names.
+
+OfficialHttp streams bounded bytes asynchronously, checking every redirect against
+the Pages/repository/CDN boundary. DownloadManager coordinates package hash/size,
+CursorPack.OpenValidatedArchive and VerifiedResourcePack; it does not duplicate
+the forged-central-directory parser and never invokes ThemeService. CUR/ANI binary
+and native-load validation remains mandatory after signed-package verification.
+
+Cursor packages contain schema1 theme.json, cursor files and NOTICE.txt. Resource
+ID/version/name/author, role coverage and provenance must match signed catalog data.
+The immutable user Themes/<id>/<package-sha>/ tree is fully validated before atomic
+root manifest publication; the manifest is the installation record. Existing bundled
+IDs are owned without another download. MotionLibrary/<id>.json is the independent
+atomic record for data-only presets with four trusted renderer types and existing
+numeric bounds. Profiles retain numeric settings, so removing a motion preset does
+not remove saved behavior. Source downloads and Windows stable native copies have
+independent lifetimes; safe removal never deletes Theme/installed.
+
+Preview packages live in bounded process/start-time staging, not the owned library.
+The real WPF Cursor retains hotspots/ANI timing; AnimatedCursorPreview shares the
+existing seq/rate decoder for the visible hero. Leaving details clears frame
+references and destroys owned handles/cursor before deleting staging. Dead-session
+cleanup validates a bounded non-reparse tree and preserves active process sessions.
+
+Explore uses 24-resource pages and at most four asynchronous PNG loads, never a
+per-card ANI timer. Covers are generated from native cursors or production
+TrailPainter output; the disk media cache is bounded at 24 MiB and decode at 512px.
+library.json remains the shared favorite-ID source for online and local resources,
+including favorites temporarily absent from an offline catalog. Online state,
+owned resources, Draft and Applied are distinct projections of the same IDs.
+
+The independent cursorium-library repository publishes signed catalog v1 JSON,
+actual media, attribution and immutable Release ZIPs. Schema is documented in
+docs/catalog-v1.schema.json; adding reviewed compatible data needs a catalog update,
+not a desktop release. New executable renderers cannot be supplied by downloads.

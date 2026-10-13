@@ -22,6 +22,8 @@ public partial class MainWindow:Window
     private readonly Dictionary<string,BitmapSource> thumbnails=new();
     private readonly DispatcherTimer statusTimer;
     private readonly AnimatedCursorPreview animatedPreview;
+    public DiscoverView Discover {get;}
+    private IReadOnlyList<TrailPreset> AllTrails=>studio.Effects.Trails.Concat(Discover?.Downloads.LoadTrails()??Array.Empty<TrailPreset>()).ToArray();
     internal AnimatedCursorPreview AnimatedPreview=>animatedPreview;
     private bool ready,disposed;
     private UiPreferences preferences=new();
@@ -33,6 +35,12 @@ public partial class MainWindow:Window
     public MainWindow(StudioService studio,TrailEngine engine,ThemeService theme)
     {
         this.studio=studio;this.engine=engine;this.theme=theme;Draft=studio.State.Applied.Clone();profileId=studio.State.ProfileId;InitializeComponent();DataContext=ViewState;animatedPreview=new(HeroImage);
+        Discover=new(studio.Catalog);DiscoverHost.Content=Discover;
+        Discover.LibraryChanged+=()=>{studio.Catalog.Reload();BindCatalog();LoadControls();};
+        Discover.FavoritesChanged+=()=>{library=ThemeLibraryPreferences.Load();BindThemeCards();};
+        Discover.OpenOwned+=item=>{studio.Catalog.Reload();BindCatalog();if(item.Type=="cursor"){Navigation.SelectedIndex=1;ThemeBox.SelectedItem=studio.Catalog.Find(item.Id);}else{Navigation.SelectedIndex=2;TrailBox.SelectedItem=TrailBox.Items.Cast<TrailPreset>().First(p=>p.Id==item.Id);}};
+        Discover.PreviewBoundsChanged+=bounds=>{if(Navigation.SelectedIndex==0)engine.PreviewBounds=bounds is Rect r?new Native.Rect{Left=(int)r.Left,Top=(int)r.Top,Right=(int)r.Right,Bottom=(int)r.Bottom}:null;};
+        NavVersionLabel.Text="v1.3 · Discover & Install";
         try{preferences=UiPreferences.Load();}catch(Exception ex){Storage.Log(ex.ToString());Notify(ex.Message,true);}
         try{library=ThemeLibraryPreferences.Load();}catch(Exception ex){Storage.Log(ex.ToString());Notify(ex.Message,true);}
         LibraryFilter.SelectedItem=LibraryFilter.Items.Cast<ComboBoxItem>().FirstOrDefault(i=>(string)i.Tag==library.Filter)??LibraryFilter.Items[0];
@@ -93,7 +101,7 @@ public partial class MainWindow:Window
     {
         if(!ready)return;
         var previous=(preferences.EnableAnimations,preferences.UseSystemTitleBar);
-        try{preferences.EnableAnimations=AnimationsCheck.IsChecked==true;preferences.UseSystemTitleBar=SystemTitleCheck.IsChecked==true;preferences.Save();ApplyWindowAppearance();UpdateMotion();Notify("Appearance saved.");}
+        try{preferences.EnableAnimations=AnimationsCheck.IsChecked==true;preferences.UseSystemTitleBar=SystemTitleCheck.IsChecked==true;preferences.Save();if(preferences.UseSystemTitleBar!=previous.Item2)ApplyWindowAppearance();UpdateMotion();UpdatePreviewBounds();Notify("Appearance saved.");}
         catch(Exception ex){preferences.EnableAnimations=previous.Item1;preferences.UseSystemTitleBar=previous.Item2;ready=false;AnimationsCheck.IsChecked=previous.Item1;SystemTitleCheck.IsChecked=previous.Item2;ready=true;ApplyWindowAppearance();UpdateMotion();Notify("Could not save appearance: "+ex.Message,true);}
     }
     private void UpdateMotion(){UiMotion.SetAllowed(preferences.EnableAnimations);if(!UiMotion.Allowed){ContentScroll.BeginAnimation(OpacityProperty,null);ContentScroll.Opacity=1;}}
@@ -101,6 +109,7 @@ public partial class MainWindow:Window
     private void HandleKeyboard(object sender,System.Windows.Input.KeyEventArgs e)
     {
         if(new[]{ThemeBox,TrailBox,ClickBox,PreviewRole,ProfileBox,FpsBox,LibraryFilter}.Any(box=>box.IsDropDownOpen))return;
+        if(Navigation.SelectedIndex==0){if(e.Key==Key.Escape&&Discover.Selected!=null){Discover.Back();e.Handled=true;}else if(e.Key==Key.F6){if(Navigation.IsKeyboardFocusWithin)Discover.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));else Navigation.Focus();e.Handled=true;}return;}
         if(e.Key==Key.Enter&&Keyboard.Modifiers==ModifierKeys.Control&&ViewState.CanApply){ApplyDraft();e.Handled=true;}
         else if(e.Key==Key.Escape&&ViewState.CanCancel){CancelChanges(this,new RoutedEventArgs());e.Handled=true;}
         else if(e.Key==Key.F6){if(Navigation.IsKeyboardFocusWithin){if(Preview.IsVisible)Preview.Focus();else ContentScroll.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));}else if(ContentScroll.IsKeyboardFocusWithin)ConfigTabs.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));else Navigation.Focus();e.Handled=true;}
@@ -109,6 +118,7 @@ public partial class MainWindow:Window
     private void PreviewLayoutUpdated(object? sender,EventArgs e)=>UpdatePreviewBounds();
     private void UpdatePreviewBounds()
     {
+        if(Navigation.SelectedIndex==0){animatedPreview?.SetVisible(false);return;}
         if(!IsVisible||!Preview.IsLoaded||!Preview.IsVisible){engine.PreviewBounds=null;animatedPreview?.SetVisible(false);return;}
         var top=Preview.PointToScreen(new Point(0,0));var bottom=Preview.PointToScreen(new Point(Preview.ActualWidth,Preview.ActualHeight));
         var viewport=ContentScroll.PointToScreen(new Point(0,0));var viewportEnd=ContentScroll.PointToScreen(new Point(ContentScroll.ActualWidth,ContentScroll.ActualHeight));
@@ -137,7 +147,7 @@ public partial class MainWindow:Window
     private void BindCatalog()
     {
         bool wasReady=ready;ready=false;ThemeBox.ItemsSource=studio.Catalog.Themes;
-        BindThemeCards();TrailBox.ItemsSource=studio.Effects.Trails;TrailCards.ItemsSource=studio.Effects.Trails;ready=wasReady;
+        BindThemeCards();var trails=AllTrails;TrailBox.ItemsSource=trails;TrailCards.ItemsSource=trails;ready=wasReady;
     }
     private void BindThemeCards()
     {
@@ -154,6 +164,11 @@ public partial class MainWindow:Window
             bool selected=card.Theme.Id==Draft.CursorThemeId,applied=card.Theme.Id==studio.State.Applied.CursorThemeId;
             card.Status=selected&&applied?(IsDirty?"Selected · Applied · Modified":"Selected · Applied"):applied?"Applied":selected?"Selected · Modified":"";
         }
+        if(TrailCards!=null)foreach(var p in TrailCards.Items.Cast<TrailPreset>())
+        {
+            var applied=studio.State.Applied.Effects;bool matches=applied.Enabled&&applied.TrailEnabled&&p.Renderer==applied.TrailEffect&&p.Length==applied.Length&&p.Duration==applied.Duration&&p.Opacity==applied.Opacity&&p.Particles==applied.Particles&&p.Color.Equals(applied.Color,StringComparison.OrdinalIgnoreCase);bool selected=ReferenceEquals(TrailCards.SelectedItem,p);
+            p.StatusLabel=(selected?"Selected"+(IsDirty?" · Modified":""):"")+(matches?(selected?" · Applied":"Applied"):"");
+        }
     }
     private void FilterChanged(object sender,SelectionChangedEventArgs e)
     {
@@ -164,11 +179,12 @@ public partial class MainWindow:Window
     {
         e.Handled=true;if(((Button)sender).DataContext is not ThemeCardView card)return;
         bool existed=library.Favorites.Contains(card.Theme.Id);
-        try{if(existed)library.Favorites.Remove(card.Theme.Id);else library.Favorites.Add(card.Theme.Id);library.Save();BindThemeCards();}
+        try{library=ThemeLibraryPreferences.Load();if(existed)library.Favorites.Remove(card.Theme.Id);else library.Favorites.Add(card.Theme.Id);library.Save();BindThemeCards();Discover.Render();}
         catch(Exception ex){if(existed)library.Favorites.Add(card.Theme.Id);else library.Favorites.Remove(card.Theme.Id);Notify("Favorite could not be saved: "+ex.Message,true);}
     }
     private void ShowThemeDetails(CursorTheme selected)
     {
+        RemoveThemeButton.IsEnabled=!selected.IsSystem&&(selected.ManagedDownload||selected.LibraryCollection=="imported");
         ThemeDetailsTitle.Text=selected.Name+" · "+selected.Author;
         int cur=selected.SourceFiles.Count(f=>f.Path.EndsWith(".cur",StringComparison.OrdinalIgnoreCase)),ani=selected.SourceFiles.Count-cur;
         ThemeDetailsText.Text=selected.IsSystem?selected.Description:$"{selected.RoleSummary}\n{(selected.SourceFiles.Count>0?$"Source: {cur} CUR + {ani} ANI ({selected.SourceFiles.Count} files)":$"{selected.Roles.Count} role resources")} · {selected.AnimatedRoleCount} animated roles\nNative roles: {string.Join(", ",selected.Roles.Keys.Except(selected.InheritedRoles.Keys))}\nMissing from source: {(selected.InheritedRoles.Count==0?"None":string.Join(", ",selected.InheritedRoles.Keys))}\nFallback: {(selected.InheritedRoles.Count==0?"None":string.Join(", ",selected.InheritedRoles.Select(r=>r.Key+" ← "+r.Value)))}\nLicense: {(selected.License.Length>0?selected.License:"Local/built-in resources; see source terms")}\n{(selected.PublishedAt.Length>0?"Published: "+selected.PublishedAt:"")}";
@@ -188,7 +204,8 @@ public partial class MainWindow:Window
     {
         bool wasReady=ready;ready=false;var s=Draft.Effects;
         ThemeBox.SelectedItem=studio.Catalog.Themes.FirstOrDefault(t=>t.Id==Draft.CursorThemeId);ThemeCards.SelectedItem=ThemeCards.Items.Cast<ThemeCardView>().FirstOrDefault(t=>t.Theme.Id==Draft.CursorThemeId);
-        TrailBox.SelectedItem=studio.Effects.Trails.FirstOrDefault(p=>p.Id==s.TrailEffect);TrailCards.SelectedItem=TrailBox.SelectedItem;
+        TrailBox.SelectedItem=TrailBox.Items.Cast<TrailPreset>().FirstOrDefault(p=>p.Renderer==s.TrailEffect&&p.Length==s.Length&&p.Duration==s.Duration&&p.Opacity==s.Opacity&&p.Particles==s.Particles&&p.Color.Equals(s.Color,StringComparison.OrdinalIgnoreCase))??TrailBox.Items.Cast<TrailPreset>().FirstOrDefault(p=>p.Id==s.TrailEffect);TrailCards.SelectedItem=TrailBox.SelectedItem;
+        RemoveTrailButton.IsEnabled=TrailBox.SelectedItem is TrailPreset p&&p.ManagedDownload;
         EnabledCheck.IsChecked=s.Enabled;TrailCheck.IsChecked=s.TrailEnabled;LengthSlider.Value=s.Length;DurationSlider.Value=s.Duration;OpacitySlider.Value=s.Opacity*100;ParticleSlider.Value=s.Particles;ColorInput.Text=s.Color;
         ClickBox.SelectedIndex=s.ClickEffect=="off"||!s.ClickHalo?0:s.ClickEffect=="ring"?2:1;ClickDurationSlider.Value=s.HaloDuration;ClickRadiusSlider.Value=s.ClickRadius;ClickOpacitySlider.Value=s.ClickOpacity*100;
         UpdateParameterAvailability();
@@ -242,16 +259,42 @@ public partial class MainWindow:Window
     private void UpdatePageHeader()
     {
         int page=Navigation.SelectedIndex;var selected=ThemeBox.SelectedItem as CursorTheme;
-        ThemeTitle.Text=page==3?"Mix Studio":page==4?"Settings":selected?.Name??"Cursor library";
-        ThemeDescription.Text=page==3?"Your reusable cursor, motion and click combinations.":page==4?"Desktop behavior, appearance and local data.":selected?.Description??"Choose a local theme to preview.";
+        ThemeTitle.Text=page==2?"My Motion Trails":page==3?"Mix Studio":page==4?"Settings":selected?.Name??"Cursor library";
+        ThemeDescription.Text=page==2?"Your built-in effects and downloaded motion presets. Preview, adjust, then Apply.":page==3?"Your reusable cursor, motion and click combinations.":page==4?"Desktop behavior, appearance and local data.":selected?.Description??"Choose a local theme to preview.";
     }
     public void Refresh(){RestoreButton.IsEnabled=theme.HasBackup;((App)System.Windows.Application.Current).RefreshTray();}
+    private void FindMore(object sender,RoutedEventArgs e)=>Navigation.SelectedIndex=0;
+    private void TrailImageLoaded(object sender,RoutedEventArgs e)
+    {
+        if(sender is not System.Windows.Controls.Image image||image.DataContext is not TrailPreset p)return;
+        var key="trail:"+p.Id+":"+p.PackageSha256;if(!thumbnails.TryGetValue(key,out var bitmap))
+        {
+            var settings=new Settings();p.Apply(settings);var model=new TrailModel();for(int i=0;i<90;i++)model.Add(20+i*2.6,75+Math.Sin(i*.065)*25,i*2,settings);
+            var painter=new TrailPainter(model,settings){Width=280,Height=150,Now=180,PhysicalCoordinates=false};painter.Measure(new Size(280,150));painter.Arrange(new Rect(0,0,280,150));var rendered=new RenderTargetBitmap(280,150,96,96,PixelFormats.Pbgra32);rendered.Render(painter);rendered.Freeze();bitmap=rendered;thumbnails[key]=bitmap;
+        }
+        image.Source=bitmap;
+    }
+    private void RemoveSelectedTheme(object sender,RoutedEventArgs e)
+    {
+        if(ThemeBox.SelectedItem is not CursorTheme selected)return;
+        if(MessageBox.Show(this,"Remove "+selected.Name+" from your local library? Applied themes and Profile dependencies are protected. Stable Windows cursor files remain available.","Remove from library",MessageBoxButton.YesNo,MessageBoxImage.Question)!=MessageBoxResult.Yes)return;
+        try{Discover.Downloads.RemoveCursor(selected,studio,theme);Draft.CursorThemeId=studio.State.Applied.CursorThemeId;BindCatalog();LoadControls();Discover.Render();Notify("Theme removed from your library. Windows pointers were not changed.");}catch(Exception ex){Notify(ex.Message,true);}
+    }
+    private void RemoveSelectedTrail(object sender,RoutedEventArgs e)
+    {
+        if(TrailBox.SelectedItem is not TrailPreset selected)return;
+        if(MessageBox.Show(this,"Remove "+selected.Name+" from your motion library? Applied settings and saved Profile parameters stay available.","Remove motion preset",MessageBoxButton.YesNo,MessageBoxImage.Question)!=MessageBoxResult.Yes)return;
+        try{Discover.Downloads.RemoveTrail(selected,studio);BindCatalog();LoadControls();Discover.Render();Notify("Preset removed; applied parameters and Profiles are preserved.");}catch(Exception ex){Notify(ex.Message,true);}
+    }
     public void RefreshAppliedToggle(){Draft.Effects.Enabled=studio.LiveEffects.Enabled;LoadControls();}
     public void RefreshRestoredCursor(){Draft.CursorThemeId=studio.State.Applied.CursorThemeId;profileId=null;LoadControls();BindProfiles();}
     private void Navigate(object s,SelectionChangedEventArgs e)
     {
         if(CursorPage==null)return;int index=Navigation.SelectedIndex;CursorPage.Visibility=index==1?Visibility.Visible:Visibility.Collapsed;TrailPage.Visibility=index==2?Visibility.Visible:Visibility.Collapsed;MixPage.Visibility=index==3?Visibility.Visible:Visibility.Collapsed;SettingsPage.Visibility=index==4?Visibility.Visible:Visibility.Collapsed;
-        ThemeLibrary.Visibility=index is 0 or 1?Visibility.Visible:Visibility.Collapsed;PreviewContainer.Visibility=index<3?Visibility.Visible:Visibility.Collapsed;PageLabel.Text=new[]{"EXPLORE / LOCAL LIBRARY","CURSORS / NATIVE WINDOWS ROLES","TRAILS / MOTION PRESETS","MIX STUDIO / SAVED COMBINATIONS","SETTINGS / DESKTOP BEHAVIOR"}[Math.Clamp(index,0,4)];ContentScroll.ScrollToTop();UiMotion.Reveal(ContentScroll);
+        DiscoverHost.Visibility=index==0?Visibility.Visible:Visibility.Collapsed;StudioContent.Visibility=ConfigurationPanel.Visibility=index==0?Visibility.Collapsed:Visibility.Visible;
+        if(index==0)engine.PreviewBounds=null;
+        ThemeLibrary.Visibility=index==1?Visibility.Visible:Visibility.Collapsed;PreviewContainer.Visibility=index is 1 or 2?Visibility.Visible:Visibility.Collapsed;PageLabel.Text=new[]{"EXPLORE / DISCOVER","CURSORS / MY CURSOR THEMES","TRAILS / MY MOTION TRAILS","MIX STUDIO / SAVED COMBINATIONS","SETTINGS / DESKTOP BEHAVIOR"}[Math.Clamp(index,0,4)];ContentScroll.ScrollToTop();UiMotion.Reveal(ContentScroll);
+        if(index==1)ConfigTabs.SelectedIndex=1;else if(index==2)ConfigTabs.SelectedIndex=0;
         UpdatePageHeader();
         UpdatePreviewBounds();
     }
@@ -343,5 +386,5 @@ public partial class MainWindow:Window
         if(!ready)return;try{StartupRegistration.Set(StartupCheck.IsChecked==true,Environment.ProcessPath!);Notify("Sign-in startup updated.");}catch(Exception ex){Notify(ex.Message,true);ready=false;StartupCheck.IsChecked=StartupRegistration.Enabled;ready=true;}
     }
     private void OpenData(object s,RoutedEventArgs e){try{Directory.CreateDirectory(Storage.Root);Process.Start(new ProcessStartInfo("explorer.exe",Storage.Root){UseShellExecute=true});}catch(Exception ex){Notify(ex.Message,true);}}
-    public void DisposeResources(){if(disposed)return;disposed=true;statusTimer.Stop();animatedPreview.Dispose();SystemParameters.StaticPropertyChanged-=SystemMotionChanged;Preview.LayoutUpdated-=PreviewLayoutUpdated;engine.PreviewBounds=null;Preview.Dispose();Preview.Cursor=null;RoleGrid.Children.Clear();Mouse.UpdateCursor();foreach(var cursor in ownedCursors)cursor.Dispose();ownedCursors.Clear();cursors.Clear();thumbnails.Clear();}
+    public void DisposeResources(){if(disposed)return;disposed=true;statusTimer.Stop();Discover.Dispose();animatedPreview.Dispose();SystemParameters.StaticPropertyChanged-=SystemMotionChanged;Preview.LayoutUpdated-=PreviewLayoutUpdated;engine.PreviewBounds=null;Preview.Dispose();Preview.Cursor=null;RoleGrid.Children.Clear();Mouse.UpdateCursor();foreach(var cursor in ownedCursors)cursor.Dispose();ownedCursors.Clear();cursors.Clear();thumbnails.Clear();}
 }

@@ -1,0 +1,242 @@
+{
+  "passed": true,
+  "error": null,
+  "checks": [
+    {
+      "name": "Public official HTTPS catalog fetched and RSA-PSS signature verified",
+      "passed": true
+    },
+    {
+      "name": "Official catalog contains ten real published packages",
+      "passed": true
+    },
+    {
+      "name": "Explore discovers resources without workspace preview or Customize",
+      "passed": true
+    },
+    {
+      "name": "Existing bundled theme recognized without copying: cute-bunny-cute-kawaii",
+      "passed": true
+    },
+    {
+      "name": "Existing bundled theme recognized without copying: cute-cool-cat",
+      "passed": true
+    },
+    {
+      "name": "Existing bundled theme recognized without copying: cute-kawaii-cat-curs0rs",
+      "passed": true
+    },
+    {
+      "name": "Existing bundled theme recognized without copying: cute-kawaii-pink-heart",
+      "passed": true
+    },
+    {
+      "name": "Existing bundled theme recognized without copying: cute-pastel",
+      "passed": true
+    },
+    {
+      "name": "Search filters actual title, author and metadata",
+      "passed": true
+    },
+    {
+      "name": "Motion category reflects four data-only presets",
+      "passed": true
+    },
+    {
+      "name": "Details show signed package hash and actual role provenance",
+      "passed": true
+    },
+    {
+      "name": "Online ANI pack fetched, validated and loaded into real temporary WPF cursor preview",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Normal",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Help",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Working",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Busy",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Precision",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Text",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Handwriting",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Unavailable",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Vertical",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Horizontal",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: DiagonalNWSE",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: DiagonalNESW",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Move",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Alternate",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Link",
+      "passed": true
+    },
+    {
+      "name": "Try Live Preview neither installs nor applies nor changes desktop state",
+      "passed": true
+    },
+    {
+      "name": "Leaving details releases native preview and its staged resources",
+      "passed": true
+    },
+    {
+      "name": "Online-only favorite is persisted without installation",
+      "passed": true
+    },
+    {
+      "name": "Actual WPF Cancel button interrupts download and leaves no partial install",
+      "passed": true
+    },
+    {
+      "name": "Real network download atomically enters local cursor library",
+      "passed": true
+    },
+    {
+      "name": "Download never calls native Apply",
+      "passed": true
+    },
+    {
+      "name": "Duplicate download creates no duplicate theme",
+      "passed": true
+    },
+    {
+      "name": "Open in Cursors selects downloaded theme as Draft",
+      "passed": true
+    },
+    {
+      "name": "Local selection does not apply Windows pointers",
+      "passed": true
+    },
+    {
+      "name": "Downloaded cursor truly applies through original StudioService transaction",
+      "passed": true
+    },
+    {
+      "name": "Downloaded cursor can be saved in Profile",
+      "passed": true
+    },
+    {
+      "name": "Applied/Profile-referenced theme cannot be removed",
+      "passed": true
+    },
+    {
+      "name": "Cancel restores applied downloaded cursor and parameters",
+      "passed": true
+    },
+    {
+      "name": "Data-only motion preset uses the trusted live preview engine",
+      "passed": true
+    },
+    {
+      "name": "Downloaded motion preset opens in Trails and updates only Draft",
+      "passed": true
+    },
+    {
+      "name": "Motion preset applies independently while preserving cursor theme",
+      "passed": true
+    },
+    {
+      "name": "Downloaded motion card projects actual Applied parameters separately from ownership",
+      "passed": true
+    },
+    {
+      "name": "Cursor and motion installation records survive service restart with stable valid paths",
+      "passed": true
+    },
+    {
+      "name": "Bounded page creates 24 cards for 100 resources",
+      "passed": true
+    },
+    {
+      "name": "Bounded page creates 24 cards for 300 resources",
+      "passed": true
+    },
+    {
+      "name": "Bounded page creates 24 cards for 500 resources",
+      "passed": true
+    },
+    {
+      "name": "Compact details retain fixed download and Back actions",
+      "passed": true
+    },
+    {
+      "name": "Original pointer configuration restored after real downloaded-theme application",
+      "passed": true
+    },
+    {
+      "name": "Exact pre-test native pointer snapshot restored in finally",
+      "passed": true
+    }
+  ],
+  "performance": [
+    {
+      "count": 100,
+      "elements": 24,
+      "layoutMilliseconds": 26.4536,
+      "managedBytesDelta": 3023816,
+      "userHandlesDelta": 0
+    },
+    {
+      "count": 300,
+      "elements": 24,
+      "layoutMilliseconds": 24.7119,
+      "managedBytesDelta": 3033624,
+      "userHandlesDelta": 0
+    },
+    {
+      "count": 500,
+      "elements": 24,
+      "layoutMilliseconds": 25.4757,
+      "managedBytesDelta": 3008000,
+      "userHandlesDelta": 0
+    }
+  ],
+  "monitors": [
+    {
+      "Device": "\\\\.\\DISPLAY1",
+      "width": 2560,
+      "height": 1440
+    }
+  ],
+  "physicalDpi": 96,
+  "notes": "Actual official network, running WPF and native Apply under isolated data. Performance fixtures are explicitly synthetic and never published as online content."
+}

@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "guardRejectsActualWindowsJunction": true,
+  "independentTargetPreserved": true,
+  "notes": "Actual Windows junction inside isolated project artifacts. Production GuardRoot rejected it before resource writes. Test links are retained; no deletion or external target access."
+}

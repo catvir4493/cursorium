@@ -19,6 +19,8 @@ public sealed class CursorTheme
     public DateTimeOffset? ImportedAt {get;set;}
     public string PublishedAt {get;set;}="";
     public string PackageSha256 {get;set;}="";
+    public string Version {get;set;}="";
+    public bool ManagedDownload {get;set;}
     public Dictionary<string,string> InheritedRoles {get;set;}=new();
     public List<ThemeSourceFile> SourceFiles {get;set;}=new();
     [JsonIgnore] public int NativeRoleCount=>IsSystem?0:Roles.Count-InheritedRoles.Count;
@@ -38,8 +40,9 @@ public sealed class ThemeSourceFile
     public string Sha256 {get;set;}="";
 }
 
-public sealed class TrailPreset
+public sealed class TrailPreset:System.ComponentModel.INotifyPropertyChanged
 {
+    public int SchemaVersion {get;set;}=1;
     public string Id {get;set;}="";
     public string Name {get;set;}="";
     public string Description {get;set;}="";
@@ -48,9 +51,23 @@ public sealed class TrailPreset
     public double Opacity {get;set;}
     public int Particles {get;set;}
     public string Color {get;set;}="#91DEFF";
+    public string RendererType {get;set;}="";
+    public string Author {get;set;}="CURSORIUM";
+    public string Version {get;set;}="";
+    public string PackageSha256 {get;set;}="";
+    public bool ManagedDownload {get;set;}
+    [JsonIgnore] public string Renderer=>string.IsNullOrEmpty(RendererType)?Id:RendererType;
+    [JsonIgnore] public string Origin=>ManagedDownload?"Downloaded preset":"Built-in renderer";
+    private string statusLabel="";
+    [JsonIgnore] public string StatusLabel {get=>statusLabel;set{if(statusLabel==value)return;statusLabel=value;PropertyChanged?.Invoke(this,new(nameof(StatusLabel)));}}
+    public event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged;
+    public void Validate()
+    {
+        if(SchemaVersion!=1||!RemoteResource.ValidId(Id)||string.IsNullOrWhiteSpace(Name)||Name.Length>100||Renderer is not ("comet" or "minimal" or "neon" or "stardust")||!Settings.ValidColor(Color)||!double.IsFinite(Length)||Length is <10 or >360||!double.IsFinite(Duration)||Duration is <80 or >900||!double.IsFinite(Opacity)||Opacity is <.05 or >.85||Particles is <0 or >24)throw new InvalidDataException("Invalid trail preset.");
+    }
     public void Apply(Settings settings)
     {
-        settings.TrailEffect=Id;settings.Length=Length;settings.Duration=Duration;settings.Opacity=Opacity;settings.Particles=Particles;settings.Color=Color;settings.Preset=Name;
+        settings.TrailEffect=Renderer;settings.Length=Length;settings.Duration=Duration;settings.Opacity=Opacity;settings.Particles=Particles;settings.Color=Color;settings.Preset=Name;
     }
     public override string ToString()=>Name;
 }

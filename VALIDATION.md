@@ -1,3 +1,28 @@
+# v1.3.0 Discover & Install — 2026-10-13
+
+Release solution: 0 warnings/errors. Current iteration checks: core/native 180,
+desktop/input 85, interface 98, collection 28, online security 51 and real public
+network/WPF 51, all passed. Existing safety/transaction checks retained; local
+preview assertions moved to Cursors as Explore became discovery, and details
+receive actual CUR/ANI/motion interaction and download/apply/cancel checks.
+
+Actual display: one Windows 11 2560x1440, 96 DPI monitor. 125%/150% and alternate
+work areas are logical layout simulation; no claim of physical DPI changes,
+dual-screen this run, Windows 10, mixed DPI, long stress or full uninstall matrix.
+Five protected user files retain existence and SHA256 throughout isolated tests.
+100/300/500 explicit performance fixtures instantiate only 24 cards; measured
+layout 26.45/24.71/25.48 ms with USER delta zero. Original 8-mode short benchmark
+and 30 Cute-switch native handle measurements are included as short measurements.
+
+[Chinese delivery](docs/CURSORIUM-v1.3-DELIVERY.md),
+[actual screenshots](docs/CURSORIUM-v1.3-SCREENSHOTS.md),
+[passing reports](docs/validation/v1.3).
+Signed official catalog and real ZIP downloads are published separately in
+catvir4493/cursorium-library. RSA-PSS authenticity does not replace untrusted
+ZIP/native parsing. Key compromise, first-install replay and lack of transparency
+or expiry services remain explicit boundaries. No private publishing key or user
+configuration is included in source/release assets.
+
 # v1.2.1 ZIP directory safety patch
 
 Core/native checks: 180 passed, retaining all v1.2.0 checks and adding two

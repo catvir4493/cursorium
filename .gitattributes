@@ -4,3 +4,5 @@
 *.ani -text
 *.png -text
 *.ico -text
+*.sig -text
+tests/fixtures/online/*.json -text

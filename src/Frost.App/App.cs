@@ -26,9 +26,9 @@ public sealed class App:System.Windows.Application
     private static string InstanceId=>"FrostWhiteComet-"+WindowsIdentity.GetCurrent().User!.Value+(isolatedTest?"-verification":"")+(stateProbe?"-state-probe":"");
     [STAThread] public static int Main(string[] args)
     {
-        isolatedTest=args.Contains("--isolated-test")&&(args.Contains("--self-test")||args.Contains("--benchmark")||args.Contains("--state-probe")||args.Contains("--ui-review")||args.Contains("--collection-review"));
+        isolatedTest=args.Contains("--isolated-test")&&(args.Contains("--self-test")||args.Contains("--benchmark")||args.Contains("--state-probe")||args.Contains("--ui-review")||args.Contains("--collection-review")||args.Contains("--export-library")||args.Contains("--discover-review"));
         stateProbe=args.Contains("--state-probe");
-        if((args.Contains("--self-test")||args.Contains("--benchmark")||args.Contains("--state-probe")||args.Contains("--ui-review")||args.Contains("--collection-review"))&&!isolatedTest)return 2;
+        if((args.Contains("--self-test")||args.Contains("--benchmark")||args.Contains("--state-probe")||args.Contains("--ui-review")||args.Contains("--collection-review")||args.Contains("--export-library")||args.Contains("--discover-review"))&&!isolatedTest)return 2;
         if(isolatedTest)
         {
             int rootIndex=Array.IndexOf(args,"--test-data-root");
@@ -48,6 +48,7 @@ public sealed class App:System.Windows.Application
         }
         try
         {
+            if(args.Contains("--export-library")){int i=Array.IndexOf(args,"--export-library");LibraryPublisher.Export(args[i+1],args[i+2],args[i+3]);return 0;}
             if(args.Contains("--restore-theme")){StudioService.RestoreSavedState(new ThemeService());return 0;}
             if(args.Contains("--state-probe"))
             {
@@ -67,6 +68,7 @@ public sealed class App:System.Windows.Application
         studio=new StudioService(AppContext.BaseDirectory,theme);settings=studio.LiveEffects;engine=new(settings);
         if(args.Contains("--benchmark")){_ = DesktopVerification.Benchmark(this,engine,args);return;}
         panel=new(studio,engine,theme);MainWindow=panel;CreateTray();
+        if(args.Contains("--discover-review")){_ = DiscoverVerification.Run(this,args);return;}
         if(args.Contains("--collection-review")){_ = CollectionVerification.Run(this,args);return;}
         if(args.Contains("--ui-review")){_ = InterfaceVerification.CapturePages(this,args);return;}
         if(args.Contains("--self-test")){_ = DesktopVerification.Run(this,engine,args);return;}

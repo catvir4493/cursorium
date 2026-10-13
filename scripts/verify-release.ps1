@@ -1,4 +1,4 @@
-param([switch]$IsolatedUpgrade,[ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.2.1')
+param([switch]$IsolatedUpgrade,[ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.3.0')
 $ErrorActionPreference = 'Stop'
 $frostRoot = Split-Path -Parent $PSScriptRoot
 Set-Location -LiteralPath $frostRoot

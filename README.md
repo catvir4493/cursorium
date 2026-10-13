@@ -1,14 +1,14 @@
 # CURSORIUM — Cursor & Motion Studio
 
-Windows 鼠标主题与桌面特效管理工具，沿用原 FROST 项目的 **C# / .NET 8 / WPF / Win32**。本地运行，无账户、商店、注入或主题脚本。
+Windows 鼠标主题与桌面特效管理工具，沿用原 FROST 项目的 **C# / .NET 8 / WPF / Win32**。在线发现、校验下载，本地预览与应用；无账户、注入或主题脚本。
 
-![CURSORIUM Cute Collection](docs/images/v1.2/cute-collection.png)
+![CURSORIUM Explore](docs/images/v1.3/explore.png)
 
 源码：[catvir4493/cursorium](https://github.com/catvir4493/cursorium)。安装器与便携版：[GitHub Releases](https://github.com/catvir4493/cursorium/releases)。原 FROST 项目与历史继续保留在 [frost-white-comet](https://github.com/catvir4493/frost-white-comet)。
 
 v1.1 的 UI、状态与窗口框架升级、同尺寸前后对照和页面截图见 [交付记录](docs/CURSORIUM-v1.1-DELIVERY.md) 与 [截图对照](docs/CURSORIUM-v1.1-SCREENSHOTS.md)。
 
-当前安装及最新 Release 为 **v1.2.1**，追加 ZIP 目录计数安全补丁，保留 v1.2.0 的 tag 和 Release。
+本轮版本 **v1.3.0 — Discover & Install**：Explore 发现资源 → 内部详情与按需真实预览 → Download → Cursors / Trails 本地库 → Apply Changes。官方 [资源库](https://github.com/catvir4493/cursorium-library) 与 [签名目录](https://catvir4493.github.io/cursorium-library/catalog/v1/index.json) 独立更新。完整功能、真实测试及限制见 [中文交付](docs/CURSORIUM-v1.3-DELIVERY.md) 和 [WPF 截图](docs/CURSORIUM-v1.3-SCREENSHOTS.md)。v1.2.1 及此前 tag / Release 保留。
 
 v1.2 新增五套真实 Public Domain 可爱主题、分类/收藏、来源与角色详情、动画缩略预览、ZIP/目录映射确认导入。见 [中文交付报告](docs/CURSORIUM-v1.2-DELIVERY.md)、[来源与授权](docs/CURSORIUM-v1.2-SOURCES.md) 和 [实际截图](docs/CURSORIUM-v1.2-SCREENSHOTS.md)。
 
@@ -29,11 +29,11 @@ v1.2 新增五套真实 Public Domain 可爱主题、分类/收藏、来源与�
 
 关闭窗口会保留托盘进程；Quit 会释放特效引擎，Windows 指针主题继续保留。Restore original cursors 恢复安装第一套主题前保存的配置，包括原注册表类型和原本不存在的值。已有 FROST 的备份继续有效。
 
-安装器 `CURSORIUM-Setup-1.2.1-Release.exe` 按当前用户安装，无需管理员权限。安装本身不改变系统指针或默认开启登录启动。卸载先退出引擎并恢复备份；恢复失败时停止卸载。设置、导入主题、指针稳定副本与历史备份保留。
+安装器 `CURSORIUM-Setup-1.3.0-Release.exe` 按当前用户安装，无需管理员权限。安装本身不改变系统指针或默认开启登录启动。卸载先退出引擎并恢复备份；恢复失败时停止卸载。设置、导入主题、指针稳定副本与历史备份保留。
 
 ## 使用
 
-1. Explore / Cursors 选择指针主题；Trails 选择运动预设。
+1. Explore 搜索在线资源，打开详情；Try Live Preview 使用校验后的临时包。Download 只加入本地库，再 Open in Cursors / Trails 选择主题和预设。原有内置主题无需下载。
 2. 右侧 Trail / Cursor / Click 分组调整组合；消散时间、粒子数等在 Advanced settings。中央 Live Preview 可移动和左右点击，角色下拉框可测试系统角色。
 3. 按 Apply Changes。之后 Windows 指针和桌面效果使用该组合。
 4. Mix Studio 输入名称并 Create，或选择已有 Profile 修改后 Save。Rename 修改名称；Delete 只删除保存的 Profile。
@@ -55,6 +55,10 @@ v1.2 新增五套真实 Public Domain 可爱主题、分类/收藏、来源与�
   Backups/                      恢复后归档
   Themes/<stable-id>/            导入主题及 theme.json
   Theme/installed/<id>/<hash>/   不覆盖已使用文件的稳定原生指针资源
+  MotionLibrary/<id>.json        下载的白名单拖尾参数，原子安装记录
+  Online/catalog-cache.json      签名目录及原字节，可离线使用
+  Online/Media/                  有界静态 PNG 缓存
+  Online/Staging/session-*/       当前进程的临时下载和预览，不是个人库
   Theme/v1/                     旧版已安装资源，保留
   frost.log                     轮转错误日志
 ```
@@ -73,10 +77,10 @@ dotnet run --project src/Frost.App -c Release
 dotnet run --project tests/Frost.Verify -c Release -- assets/cursors
 dotnet run --project tests/Frost.Verify -c Release -- assets/themes/obsidian
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-release.ps1
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-cursorium.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-cursorium.ps1 -Discover
 ```
 
-完成验证并提交后，`scripts/publish-github.ps1` 推送并核对远程 main；正式版本增加 `-Release -Version 1.2.1 -NotesPath docs/releases/1.2.1.md` 会上传并校验下载文件，再发布 GitHub Release。凭据由 Git Credential Manager 在内存中读取。项目持续发布约定保存在 `AGENTS.md`：之后每次迭代完成验证后自动提交和上传。
+完成验证并提交后，`scripts/publish-github.ps1` 推送并核对远程 main；正式版本增加 `-Release -Version 1.3.0 -NotesPath docs/releases/1.3.0.md` 会上传并校验下载文件，再发布 GitHub Release。凭据由 Git Credential Manager 在内存中读取。项目持续发布约定保存在 `AGENTS.md`：之后每次迭代完成验证后自动提交和上传。
 
 `build-release.ps1` 生成自包含 Windows x64 便携 ZIP、安装器、主题 ZIP、源码 ZIP 和 SHA256 校验文件。`verify-cursorium.ps1` 使用独立数据目录；原生切换测试暂时改变系统指针，在结束时恢复测试前配置；桌面测试会短暂移动鼠标并使用 SendInput。现有用户设置与备份通过前后哈希检查保护。
 

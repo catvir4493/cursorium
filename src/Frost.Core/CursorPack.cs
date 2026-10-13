@@ -26,7 +26,7 @@ public sealed class CursorPack:IDisposable
             else
             {
                 if(!System.IO.Path.GetExtension(path).Equals(".zip",StringComparison.OrdinalIgnoreCase)||new FileInfo(path).Length>MaxTotalBytes)throw new InvalidDataException("Choose a ZIP up to 64 MiB.");
-                ValidateDirectoryHeader(path);using var zip=ZipFile.OpenRead(path);if(zip.Entries.Count>MaxEntries)throw new InvalidDataException("Too many ZIP entries.");
+                using var zip=OpenValidatedArchive(path);
                 foreach(var entry in zip.Entries)
                 {
                     var name=entry.FullName.Replace('\\','/');var parts=name.Split('/');
@@ -41,6 +41,26 @@ public sealed class CursorPack:IDisposable
         catch{pack.Dispose();throw;}
     }
     private static bool IsCursor(string name)=>System.IO.Path.GetExtension(name).ToLowerInvariant() is ".cur" or ".ani";
+    // Shared container boundary for local import and official data-only downloads.
+    // Scan before allocation, then validate every entry, including ignored files.
+    public static ZipArchive OpenValidatedArchive(string path)
+    {
+        if(new FileInfo(path).Length>MaxTotalBytes)throw new InvalidDataException("ZIP exceeds 64 MiB.");
+        ValidateDirectoryHeader(path);var zip=ZipFile.OpenRead(path);
+        try
+        {
+            if(zip.Entries.Count>MaxEntries)throw new InvalidDataException("Too many ZIP entries.");
+            var names=new HashSet<string>(StringComparer.OrdinalIgnoreCase);long total=0;
+            foreach(var entry in zip.Entries)
+            {
+                var name=entry.FullName.Replace('\\','/');var parts=name.Split('/');
+                if(name.Length>512||name.StartsWith('/')||name.Contains(':')||parts.Any(p=>p is "." or ".."||p.EndsWith('.')||p.EndsWith(' '))||parts.Any(p=>p.IndexOfAny(new[]{'\0','<','>','|','?','*'})>=0)||(entry.ExternalAttributes&0x400)!=0||((entry.ExternalAttributes>>16)&0xF000)==0xA000||!names.Add(name))throw new InvalidDataException("Unsafe, duplicate or linked ZIP path: "+name);
+                if(entry.Length>CursorResource.MaxBytes||entry.Length>Math.Max(1,entry.CompressedLength)*200||(total+=entry.Length)>MaxTotalBytes)throw new InvalidDataException("Unsafe expanded ZIP size or compression ratio.");
+            }
+            return zip;
+        }
+        catch{zip.Dispose();throw;}
+    }
     private static void ValidateDirectoryHeader(string path)
     {
         // Bound entry count before ZipArchive allocates its central-directory objects.

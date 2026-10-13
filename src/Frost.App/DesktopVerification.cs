@@ -93,7 +93,7 @@ public static class DesktopVerification
             }
             settings.PauseFullscreen=false;
             probe.Close();probe=null;await Task.Delay(350);
-            panel=app.Panel;panel.Show();await Task.Delay(300);
+            panel=app.Panel;panel.Show();((ListBox)panel.FindName("Navigation")).SelectedIndex=1;await Task.Delay(300);
             var liveBefore=JsonSerializer.Serialize(app.Studio.State.Applied,Storage.Json);
             var nativeBefore=JsonSerializer.Serialize(new ThemeService().Snapshot().Cursors);
             var length=(Slider)panel.FindName("LengthSlider");length.Value=147;
@@ -125,7 +125,7 @@ public static class DesktopVerification
             panel.ImportResources("Imported live theme",new Dictionary<string,string>{{"Normal",app.Studio.Catalog.Find("frost").Resource("Normal")},{"Busy",app.Studio.Catalog.Find("frost").Resource("Busy")}});
             Check(panel.Draft.CursorThemeId.StartsWith("import-")&&panel.ApplyDraft(),"CUR and ANI import through UI service can be applied");
             var renderHashes=new HashSet<string>();
-            navigation.SelectedIndex=0;panel.Activate();SetForegroundWindow(new WindowInteropHelper(panel).Handle);await Task.Delay(150);
+            navigation.SelectedIndex=1;panel.Activate();SetForegroundWindow(new WindowInteropHelper(panel).Handle);await Task.Delay(150);
             foreach(var preset in app.Studio.Effects.Trails)
             {
                 trails.SelectedItem=preset;Check(panel.ApplyDraft(),"Apply motion preset: "+preset.Id);
@@ -170,7 +170,7 @@ public static class DesktopVerification
                 finally{if(existed)startupKey.SetValue("FrostWhiteComet",originalValue!,originalKind);else startupKey.DeleteValue("FrostWhiteComet",false);panel.Refresh();}
             }
             panel.Close();Check(!panel.IsVisible,"Close panel keeps tray process running");((System.Windows.Forms.ToolStripMenuItem)app.TrayMenu.Items[0]).PerformClick();Check(panel.IsVisible,"Actual tray action shows studio");
-            navigation.SelectedIndex=0;themes.SelectedItem=app.Studio.Catalog.Find("frost");trails.SelectedItem=app.Studio.Effects.Trails.Single(p=>p.Id=="comet");((CheckBox)panel.FindName("TrailCheck")).IsChecked=true;
+            navigation.SelectedIndex=1;themes.SelectedItem=app.Studio.Catalog.Find("frost");trails.SelectedItem=app.Studio.Effects.Trails.Single(p=>p.Id=="comet");((CheckBox)panel.FindName("TrailCheck")).IsChecked=true;
             Check(panel.ApplyDraft(),"Apply final preview combination");await Task.Delay(150);Capture(panel,Path.Combine(output,"control-panel.png"));
             panel.Width=960;panel.Height=640;await Task.Delay(150);Check(((Button)panel.FindName("ApplyButton")).ActualWidth>100&&((LivePreview)panel.FindName("Preview")).ActualWidth>150,"Compact 960x640 DIP layout retains preview and Apply");Capture(panel,Path.Combine(output,"compact-panel.png"));
             // A fresh process reads the same data root, testing real process-restart persistence.
