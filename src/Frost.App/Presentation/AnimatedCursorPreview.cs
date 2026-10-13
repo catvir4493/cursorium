@@ -56,12 +56,27 @@ public sealed class AnimatedCursorPreview:IDisposable
         }
         return result.ToArray();
     }
+    public static BitmapSource DecodeInitialFrame(byte[] bytes)
+    {
+        int wanted=AniTimeline.Read(bytes).Sequence[0],current=0;
+        for(int i=12;i<bytes.Length;)
+        {
+            int size=checked((int)BitConverter.ToUInt32(bytes,i+4));
+            if(bytes.AsSpan(i,4).SequenceEqual("LIST"u8)&&size>=4&&bytes.AsSpan(i+8,4).SequenceEqual("fram"u8))
+                for(int f=i+12;f<i+8+size;){int length=checked((int)BitConverter.ToUInt32(bytes,f+4));if(current++==wanted)return DecodeFrame(bytes.AsSpan(f+8,length));f+=8+length+(length&1);}
+            i+=8+size+(size&1);
+        }
+        throw new InvalidDataException("ANI initial sequence frame is missing.");
+    }
     private static BitmapSource DecodeFrame(ReadOnlySpan<byte> frame)
     {
         var entry=frame.Slice(6,16);int length=checked((int)BitConverter.ToUInt32(entry[8..])),offset=checked((int)BitConverter.ToUInt32(entry[12..]));bool icon=BitConverter.ToUInt16(frame[2..])==1;
         // CreateIconFromResourceEx expects CUR image bits prefixed by the two WORD hotspots.
         var bits=new byte[length+(icon?0:4)];if(!icon)entry.Slice(4,4).CopyTo(bits);frame.Slice(offset,length).CopyTo(bits.AsSpan(icon?0:4));
-        var handle=CreateIconFromResourceEx(bits,(uint)bits.Length,icon,0x30000,48,48,0);
+        // Decode at the resource's native pixel size. Observation magnification belongs
+        // to the Image layout; frame timing and the native WPF cursor stay untouched.
+        int width=entry[0]==0?256:entry[0],height=entry[1]==0?256:entry[1];
+        var handle=CreateIconFromResourceEx(bits,(uint)bits.Length,icon,0x30000,width,height,0);
         if(handle==IntPtr.Zero)throw new IOException("Windows could not decode an ANI preview frame.");
         try{var source=System.Windows.Interop.Imaging.CreateBitmapSourceFromHIcon(handle,Int32Rect.Empty,BitmapSizeOptions.FromEmptyOptions());source.Freeze();return source;}
         finally{if(icon)DestroyIcon(handle);else Native.DestroyCursor(handle);}

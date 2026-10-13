@@ -12,6 +12,25 @@ namespace Frost.App;
 // It reads only project resources and never applies a Windows theme.
 internal static class LibraryPublisher
 {
+    // Media-only offline export from already validated package directories. It does
+    // not recreate packages or change their versions, role mappings or checksums.
+    public static void ExportCovers(string input,string output)
+    {
+        foreach(var folder in Directory.EnumerateDirectories(input).Order(StringComparer.Ordinal))
+        {
+            var themePath=Path.Combine(folder,"theme.json");var presetPath=Path.Combine(folder,"preset.json");
+            if(File.Exists(themePath))
+            {
+                var theme=ThemeCatalog.ReadTheme(themePath);
+                Presentation.ThemeCoverRenderer.Save(Presentation.ThemeCoverRenderer.Cursor(theme),Path.Combine(output,theme.Id+".png"));
+            }
+            else if(File.Exists(presetPath))
+            {
+                var preset=JsonSerializer.Deserialize<TrailPreset>(File.ReadAllText(presetPath),Storage.Json)!;preset.Validate();
+                Presentation.ThemeCoverRenderer.Save(Presentation.ThemeCoverRenderer.Trail(preset),Path.Combine(output,preset.Id+".png"));
+            }
+        }
+    }
     public static void Export(string source,string output,string privateKey)
     {
         Directory.CreateDirectory(output);var catalog=new RemoteCatalog{CatalogVersion="1.0.0"};

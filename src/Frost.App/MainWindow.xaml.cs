@@ -40,7 +40,7 @@ public partial class MainWindow:Window
         Discover.FavoritesChanged+=()=>{library=ThemeLibraryPreferences.Load();BindThemeCards();};
         Discover.OpenOwned+=item=>{studio.Catalog.Reload();BindCatalog();if(item.Type=="cursor"){Navigation.SelectedIndex=1;ThemeBox.SelectedItem=studio.Catalog.Find(item.Id);}else{Navigation.SelectedIndex=2;TrailBox.SelectedItem=TrailBox.Items.Cast<TrailPreset>().First(p=>p.Id==item.Id);}};
         Discover.PreviewBoundsChanged+=bounds=>{if(Navigation.SelectedIndex==0)engine.PreviewBounds=bounds is Rect r?new Native.Rect{Left=(int)r.Left,Top=(int)r.Top,Right=(int)r.Right,Bottom=(int)r.Bottom}:null;};
-        NavVersionLabel.Text="v1.3 · Discover & Install";
+        NavVersionLabel.Text="v1.3.1 · Visual refinement";
         try{preferences=UiPreferences.Load();}catch(Exception ex){Storage.Log(ex.ToString());Notify(ex.Message,true);}
         try{library=ThemeLibraryPreferences.Load();}catch(Exception ex){Storage.Log(ex.ToString());Notify(ex.Message,true);}
         LibraryFilter.SelectedItem=LibraryFilter.Items.Cast<ComboBoxItem>().FirstOrDefault(i=>(string)i.Tag==library.Filter)??LibraryFilter.Items[0];
@@ -74,7 +74,11 @@ public partial class MainWindow:Window
         bool compact=ActualWidth<1000;
         NavColumn.Width=new GridLength(compact?64:ActualWidth<1180?148:184);ParameterColumn.Width=new GridLength(ActualWidth<1000?280:320);
         foreach(var label in new[]{NavExploreLabel,NavCursorLabel,NavTrailLabel,NavMixLabel,NavSettingsLabel,WorkspaceLabel,NavRuntimeLabel,NavVersionLabel})label.Visibility=compact?Visibility.Collapsed:Visibility.Visible;
-        TestArea.Height=Math.Clamp((ActualHeight-170)*.40,200,540);EngineStatus.Visibility=compact?Visibility.Visible:Visibility.Collapsed;
+        // The entire preview panel stays around 260–320 DIP at normal sizes,
+        // leaving the library close to the current theme rather than below a banner.
+        TestArea.Height=Math.Clamp((ActualHeight-170)*.28,150,240);EngineStatus.Visibility=compact?Visibility.Visible:Visibility.Collapsed;
+        RoleGrid.Columns=ContentScroll.ActualWidth<500?3:5;
+        ResizeLibrary(ThemeCards);ResizeLibrary(TrailCards);
         Dispatcher.BeginInvoke(new Action(UpdateChromeInset),DispatcherPriority.Loaded);
     }
     private void UpdateChromeInset()
@@ -127,7 +131,7 @@ public partial class MainWindow:Window
     }
     private BitmapSource Thumbnail(CursorTheme selected,string role="Normal")
     {
-        var key=selected.Id+":"+role;if(thumbnails.TryGetValue(key,out var cached))return cached;
+        var key=selected.Id+":"+selected.Version+":"+selected.PackageSha256+":"+selected.DirectoryPath+":"+role;if(thumbnails.TryGetValue(key,out var cached))return cached;
         BitmapSource image;
         var resource=selected.IsSystem?theme.OriginalResource(role):selected.Resource(role);
         if(resource==null)
@@ -152,7 +156,7 @@ public partial class MainWindow:Window
     private void BindThemeCards()
     {
         bool previous=ready;ready=false;
-        ThemeCards.ItemsSource=studio.Catalog.Themes.Where(library.Includes).Select(t=>new ThemeCardView(t,Thumbnail(t),library.Favorites.Contains(t.Id))).ToArray();
+        ThemeCards.ItemsSource=studio.Catalog.Themes.Where(library.Includes).Select(t=>new ThemeCardView(t,Thumbnail(t),library.Favorites.Contains(t.Id),ThemeCover(t))).ToArray();
         ThemeCards.SelectedItem=ThemeCards.Items.Cast<ThemeCardView>().FirstOrDefault(t=>t.Theme.Id==Draft.CursorThemeId);
         LibraryCount.Text=$"{ThemeCards.Items.Count} themes";UpdateCardStates();ready=previous;
     }
@@ -169,6 +173,17 @@ public partial class MainWindow:Window
             var applied=studio.State.Applied.Effects;bool matches=applied.Enabled&&applied.TrailEnabled&&p.Renderer==applied.TrailEffect&&p.Length==applied.Length&&p.Duration==applied.Duration&&p.Opacity==applied.Opacity&&p.Particles==applied.Particles&&p.Color.Equals(applied.Color,StringComparison.OrdinalIgnoreCase);bool selected=ReferenceEquals(TrailCards.SelectedItem,p);
             p.StatusLabel=(selected?"Selected"+(IsDirty?" · Modified":""):"")+(matches?(selected?" · Applied":"Applied"):"");
         }
+    }
+    private BitmapSource ThemeCover(CursorTheme selected)
+    {
+        var key="cover:"+selected.Id+":"+selected.PackageSha256;if(!thumbnails.TryGetValue(key,out var cover)){cover=ThemeCoverRenderer.Cursor(selected,selected.IsSystem?role=>Thumbnail(selected,role):null);thumbnails[key]=cover;}return cover;
+    }
+    private void LibraryResized(object sender,SizeChangedEventArgs e)=>ResizeLibrary((ListBox)sender);
+    private void ResizeLibrary(ListBox libraryBox)
+    {
+        if(libraryBox==null||libraryBox.ActualWidth<=0)return;
+        double available=Math.Max(160,libraryBox.ActualWidth-6);int columns=Math.Clamp((int)(available/190),1,5);double width=Math.Floor(available/columns)-10;
+        foreach(var item in libraryBox.Items)if(libraryBox.ItemContainerGenerator.ContainerFromItem(item) is ListBoxItem cell)cell.Width=width;
     }
     private void FilterChanged(object sender,SelectionChangedEventArgs e)
     {
@@ -221,13 +236,14 @@ public partial class MainWindow:Window
         {
             Cursor? cursor=null;var resource=selected.IsSystem?theme.OriginalResource(role.Name):selected.Resource(role.Name);
             if(resource!=null){cursor=new Cursor(resource);ownedCursors.Add(cursor);}else cursor=SystemCursor(role.Name);cursors.Add(cursor);
-            var box=new StackPanel{Margin=new Thickness(3,8,3,10),Cursor=cursor,ToolTip=role.Name};box.Children.Add(new Image{Source=Thumbnail(selected,role.Name),Width=32,Height=32});box.Children.Add(new TextBlock{Text=role.Label,FontSize=10,TextAlignment=TextAlignment.Center,Margin=new Thickness(0,5,0,0)});RoleGrid.Children.Add(box);
+            var box=new StackPanel();var roleImage=new Image{Source=Thumbnail(selected,role.Name),Width=36,Height=36};RenderOptions.SetBitmapScalingMode(roleImage,BitmapScalingMode.NearestNeighbor);box.Children.Add(roleImage);box.Children.Add(new TextBlock{Text=role.Label,FontSize=11,TextAlignment=TextAlignment.Center,Margin=new Thickness(0,6,0,3)});box.Children.Add(new TextBlock{Text=selected.InheritedRoles.TryGetValue(role.Name,out var fallback)?"Inherited · "+fallback:selected.IsSystem?"System":"Native",FontSize=10,TextAlignment=TextAlignment.Center,Foreground=(Brush)FindResource("MutedBrush")});var button=new Button{Content=box,Tag=role.Name,Margin=new Thickness(3,6,3,6),Padding=new Thickness(4,8,4,8),Cursor=cursor,ToolTip=role.Name};System.Windows.Automation.AutomationProperties.SetName(button,"Preview role "+role.Name);button.Click+=(_,_)=>PreviewRole.SelectedItem=role.Name;RoleGrid.Children.Add(button);
         }
         SetPreviewCursor();
     }
     private void SetPreviewCursor()
     {
         int role=PreviewRole.SelectedIndex;Preview.Cursor=cursors.Count>role&&role>=0?cursors[role]:null;
+        for(int i=0;i<RoleGrid.Children.Count;i++)if(RoleGrid.Children[i] is Button button){button.Background=(Brush)FindResource(i==role?"SelectedBrush":"CardBrush");button.BorderBrush=(Brush)FindResource(i==role?"AccentBrush":"BorderBrush");}
         if(ThemeBox.SelectedItem is CursorTheme selected&&role>=0)
         {
             var name=CursorRoles.All[role].Name;animatedPreview.SetResource(selected.IsSystem?theme.OriginalResource(name):selected.Resource(name),Thumbnail(selected,name));UpdatePreviewBounds();
@@ -269,8 +285,7 @@ public partial class MainWindow:Window
         if(sender is not System.Windows.Controls.Image image||image.DataContext is not TrailPreset p)return;
         var key="trail:"+p.Id+":"+p.PackageSha256;if(!thumbnails.TryGetValue(key,out var bitmap))
         {
-            var settings=new Settings();p.Apply(settings);var model=new TrailModel();for(int i=0;i<90;i++)model.Add(20+i*2.6,75+Math.Sin(i*.065)*25,i*2,settings);
-            var painter=new TrailPainter(model,settings){Width=280,Height=150,Now=180,PhysicalCoordinates=false};painter.Measure(new Size(280,150));painter.Arrange(new Rect(0,0,280,150));var rendered=new RenderTargetBitmap(280,150,96,96,PixelFormats.Pbgra32);rendered.Render(painter);rendered.Freeze();bitmap=rendered;thumbnails[key]=bitmap;
+            bitmap=ThemeCoverRenderer.Trail(p);thumbnails[key]=bitmap;
         }
         image.Source=bitmap;
     }

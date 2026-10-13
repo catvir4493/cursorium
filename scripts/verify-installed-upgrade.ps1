@@ -1,4 +1,4 @@
-param([switch]$VerifyOnly,[ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.3.0')
+param([switch]$VerifyOnly,[ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.3.1')
 $ErrorActionPreference='Stop'
 $taskRoot=Split-Path -Parent $PSScriptRoot
 Set-Location -LiteralPath $taskRoot
@@ -7,8 +7,8 @@ $taskTarget=[IO.Path]::GetFullPath($taskRegistration.InstallLocation)
 if($taskTarget -ne 'D:\CURSORIUM'){throw 'Current authorized installation must be D:\CURSORIUM.'}
 $taskData=Join-Path $env:LOCALAPPDATA 'FrostWhiteComet'
 $taskPortable=Join-Path $taskRoot 'artifacts/cursorium-release/portable'
-$taskRollback=Join-Path $taskRoot ('artifacts/v1.3-installed/install-rollback-'+(Get-Date -Format 'yyyyMMdd-HHmmss'))
-if($VerifyOnly){$taskRollback=(Get-ChildItem -LiteralPath (Join-Path $taskRoot 'artifacts/v1.3-installed') -Directory -Filter 'install-rollback-*'|Sort-Object Name -Descending|Select-Object -First 1).FullName}else{New-Item -ItemType Directory -Path $taskRollback | Out-Null}
+$taskRollback=Join-Path $taskRoot ("artifacts/v$Version-installed/install-rollback-"+(Get-Date -Format 'yyyyMMdd-HHmmss'))
+if($VerifyOnly){$taskRollback=(Get-ChildItem -LiteralPath (Join-Path $taskRoot "artifacts/v$Version-installed") -Directory -Filter 'install-rollback-*'|Sort-Object Name -Descending|Select-Object -First 1).FullName}else{New-Item -ItemType Directory -Path $taskRollback | Out-Null}
 if(-not (Test-Path -LiteralPath (Join-Path $taskTarget 'frost-install.marker'))){throw 'Marked existing installation required.'}
 if([IO.Path]::GetFullPath($taskTarget).TrimEnd('\') -ne 'D:\CURSORIUM' -or (Get-Item -LiteralPath $taskTarget).Attributes -band [IO.FileAttributes]::ReparsePoint){throw 'Installation target validation failed.'}
 Add-Type -AssemblyName System.IO.Compression.FileSystem
@@ -78,8 +78,17 @@ $taskApp.Refresh()
 if($taskApp.HasExited){throw 'Installed main process exited during shortcut reopen.'}
 if((Read-CursorValues) -ne $taskNativeBefore){throw 'Launch changed native cursor scheme.'}
 $taskHashesAfter=Read-DataHashes
-foreach($taskName in $taskHashesBefore.Keys){if($taskHashesBefore[$taskName] -ne $taskHashesAfter[$taskName]){throw 'Launch changed existing protected data.'}}
-$taskReport=[ordered]@{schemaVersion=1;version=$Version;passed=$true;installerExitCode=0;installedFilesMatchedBySha256=$taskMatches;protectedDataAndResourceFiles=$taskHashesBefore.Count;allProtectedDataAndResourcesUnchanged=$true;nativeCursorValuesAndTypesPreserved=$true;previousInstallationAndDataBackedUp=$true;uninstallRegistrationVersion=$taskRegistry.DisplayVersion;startMenuLaunchTitle=$taskApp.MainWindowTitle;desktopReopensSameProcess=$true;observedProcessId=$taskOriginalPid;notes='Existing marked installation upgrade and actual shortcut launch. Does not establish fresh install, uninstall or failure-rollback roundtrip.'}
-$taskReport | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $taskRoot 'artifacts/v1.3-installed/installed-upgrade-report.json') -Encoding utf8
+$taskCatalogRefresh=@()
+foreach($taskName in $taskHashesBefore.Keys){
+  if($taskHashesBefore[$taskName] -ne $taskHashesAfter[$taskName]){
+    # The installer comparison above remains strict for every existing file.
+    # On actual startup, only the signed discovery cache may legitimately refresh.
+    # Settings, profiles, native resources, favorites and backups stay byte-exact.
+    if($taskName.Replace('\','/') -ne 'Online/catalog-cache.json' -or -not $taskHashesAfter[$taskName]){throw 'Launch changed existing protected data.'}
+    $taskCatalogRefresh+=@('Online/catalog-cache.json')
+  }
+}
+$taskReport=[ordered]@{schemaVersion=1;version=$Version;passed=$true;installerExitCode=0;installedFilesMatchedBySha256=$taskMatches;existingDataAndResourceFiles=$taskHashesBefore.Count;installationPreservedAllExistingFileHashes=$true;startupPreservedUserConfigurationAndNativeResources=$true;startupSignedCatalogCacheRefresh=$taskCatalogRefresh;nativeCursorValuesAndTypesPreserved=$true;previousInstallationAndDataBackedUp=$true;uninstallRegistrationVersion=$taskRegistry.DisplayVersion;startMenuLaunchTitle=$taskApp.MainWindowTitle;desktopReopensSameProcess=$true;observedProcessId=$taskOriginalPid;notes='Existing marked installation upgrade and actual shortcut launch. The app may refresh its signed discovery cache after launch; every other pre-existing file is checked byte-exact. Does not establish fresh install, uninstall or failure-rollback roundtrip.'}
+$taskReport | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $taskRoot "artifacts/v$Version-installed/installed-upgrade-report.json") -Encoding utf8
 $taskReport | ConvertTo-Json
 [Runtime.InteropServices.Marshal]::FinalReleaseComObject($taskShell) | Out-Null

@@ -1,0 +1,76 @@
+{
+  "Passed": true,
+  "CatalogVersion": "1.0.4",
+  "Checks": [
+    {
+      "Id": "cute-bunny-cute-kawaii",
+      "ActualPublishedCoverMatches": true,
+      "SHA256": "8a0548bcb5d65e7d1bf2437158736dcb6011359bf68d2a3fdf8232547e7f3351",
+      "PackageVersion": "1.0.0",
+      "PackageSHA256": "5b91eb342537bca782d99ed634fd40925155ad6d25f5d414e6392fbf74f810b7"
+    },
+    {
+      "Id": "cute-cool-cat",
+      "ActualPublishedCoverMatches": true,
+      "SHA256": "4aeff6c7352417d5528acd3fb7ff40a5299f70a725aa57959d5a78ddb4a76255",
+      "PackageVersion": "1.0.0",
+      "PackageSHA256": "f83777fbea02f46e90dc5c5f630b8130d1fa9d247cd3394a9bcfdb9d466cc5cb"
+    },
+    {
+      "Id": "cool-cat-superstar",
+      "ActualPublishedCoverMatches": true,
+      "SHA256": "7d17aaff7d099db2c8e16d3106407d8015ae7020ae957368ac30c78f6b308827",
+      "PackageVersion": "1.0.0",
+      "PackageSHA256": "07facb74c2e8e35cac8309d8a3f64bf5f87fbf0fb05ccfb85b8ba67c2ea29795"
+    },
+    {
+      "Id": "cute-kawaii-cat-curs0rs",
+      "ActualPublishedCoverMatches": true,
+      "SHA256": "251407528c7a1864a759bbcda2190c6a17d2ef728169f2a909de5c95c2252df8",
+      "PackageVersion": "1.0.0",
+      "PackageSHA256": "c0afa04473f93e9f200b7c6b619eda59b1c129d1a795579d4524e86cd317ba28"
+    },
+    {
+      "Id": "cute-kawaii-pink-heart",
+      "ActualPublishedCoverMatches": true,
+      "SHA256": "b6b0a359bb2e6cbde6860eb00bad2166f0c89a24df0469d9acb4d601f12dcd33",
+      "PackageVersion": "1.0.0",
+      "PackageSHA256": "39d5ace0ea309e64472174b28bfb17574ed00d1cc3c6ea7279a0dec74912e76a"
+    },
+    {
+      "Id": "cute-pastel",
+      "ActualPublishedCoverMatches": true,
+      "SHA256": "5e7359b0d2aae2598f0d23cac55279d1dfa52031907d3733822e1fed1609e783",
+      "PackageVersion": "1.0.0",
+      "PackageSHA256": "11de2b0a2653c24ff1610161367294a227f57f4514b60559e26ddd3074d9e3bc"
+    },
+    {
+      "Id": "neon-blue",
+      "ActualPublishedCoverMatches": true,
+      "SHA256": "7dee462a133146db12a2ac4603c029ea0177c8824ad527acc65e70855b9abd88",
+      "PackageVersion": "1.0.0",
+      "PackageSHA256": "35320c1274668f72f772af5d60fe973048042051713af9ed0afa67d623098bf2"
+    },
+    {
+      "Id": "sakura-pink",
+      "ActualPublishedCoverMatches": true,
+      "SHA256": "718bc932890a08122e70856fba7cf404a5c104686f92b4c76892b431db6171ca",
+      "PackageVersion": "1.0.0",
+      "PackageSHA256": "85ec0e81e591dc38aa4fccf71811362ab6c467a22567eb2499b37e734e326ab1"
+    },
+    {
+      "Id": "aurora-flow",
+      "ActualPublishedCoverMatches": true,
+      "SHA256": "04e84fa025ad8801814e0dedeccb5bec59edef0777f13dec2240be2925fd5293",
+      "PackageVersion": "1.0.0",
+      "PackageSHA256": "67738c30d34a5ca023fe7854e6a05b3e1ea3827d723a6aba960668ad37c2f47b"
+    },
+    {
+      "Id": "golden-spark",
+      "ActualPublishedCoverMatches": true,
+      "SHA256": "1902ecd6cdf81015256459e504e899c8e48b82c09f5ac6936295b556b2b35b14",
+      "PackageVersion": "1.0.0",
+      "PackageSHA256": "44ae1bde808f9df09f5d49af7e63692c0abd3a7e73eef16122e925b133b984c5"
+    }
+  ]
+}

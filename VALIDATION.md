@@ -1,3 +1,44 @@
+# v1.3.1 Visual Experience Refinement — 2026-10-14
+
+Release build: zero errors/warnings. Current checks: core/native 180,
+desktop/input 85, interface 98, collection 28, online security 51 and actual
+public network/WPF 80, all passed. Original online 51 retained with 29 added
+visual/state/lifecycle assertions. Original FROST and Obsidian resource suites:
+388 checks each. No native transaction, security protocol or renderer rewrite.
+
+Same-size old/new captures cover Explore, Details, Cursors and Trails; actual
+850x520 and 1680x980 windows included. Windows 11 build 26100, one 2560x1440 /
+96 DPI display. 125%/150% and alternate resolutions are logical layout checks,
+not physical DPI switches or dual-monitor evidence.
+
+72 actual pre-existing data/resource files retain hashes through development and
+isolated regression; five critical files separately checked by existence/hash.
+Upgrade checks compare all files before launch, then distinguish normal signed
+catalog-cache refresh from protected settings/profiles/backups/native files.
+Private snapshots/installation backups remain untracked.
+
+100/300/500 synthetic catalog fixtures each create 24 cards, measured final layout
+25.94/25.87/26.65 ms; USER delta 0. Thirty detail/search/back cycles: ~443 ms,
+GDI delta -4, USER delta 0. Thirty actual cute-theme switches: GDI 187 -> 173,
+USER 101 -> 81. Short measurements do not establish long-term leak/performance
+claims. Original eight-mode diagnostics remain available; isolated processes can
+coexist with the production tray and are not exclusive background CPU baselines.
+
+Ten offline regenerated real-resource PNG hashes match exactly. Official catalog
+1.0.4 changes cover URLs while preserving all ten package identities/hashes and
+licenses; fixed-key RSA-PSS verification and all safe download checks remain.
+Windows 10, physical mixed DPI, current dual-display, long stress, exclusive
+fullscreen/protected desktops and complete install/uninstall/failure matrices
+remain unverified.
+
+[Chinese delivery](docs/CURSORIUM-v1.3.1-DELIVERY.md),
+[real before/after screenshots](docs/CURSORIUM-v1.3.1-SCREENSHOTS.md),
+[passing reports](docs/validation/v1.3.1).
+
+The following records are historical evidence for their named versions.
+
+---
+
 # v1.3.0 Discover & Install — 2026-10-13
 
 Release solution: 0 warnings/errors. Current iteration checks: core/native 180,

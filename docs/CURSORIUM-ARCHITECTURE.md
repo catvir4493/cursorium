@@ -258,3 +258,31 @@ The independent cursorium-library repository publishes signed catalog v1 JSON,
 actual media, attribution and immutable Release ZIPs. Schema is documented in
 docs/catalog-v1.schema.json; adding reviewed compatible data needs a catalog update,
 not a desktop release. New executable renderers cannot be supplied by downloads.
+
+## v1.3.1 presentation refinement
+
+ThemeCoverRenderer is a static presentation helper shared by owned-theme cards
+and the offline media exporter. It reads validated original cursor frames (ANI
+sequence's initial frame at native size) and uses integer pixel enlargement.
+Trail covers call the existing TrailModel/TrailPainter with unchanged preset
+parameters and a deterministic simulated gesture; no new renderer is installed.
+The media-only generator never applies themes or recreates immutable packages.
+
+Discover retains 24-card paging, four media requests, signed catalog access and
+DownloadManager coordination. Card geometry uses the actual viewport. Frozen
+PNG decoding is shared by URL, capped at 24 entries/40 MiB, never upscales source
+images, and keeps the existing 24 MiB disk bound. Versioned cover URLs refresh
+media independently of resource version/hash, so owned themes need no download.
+
+Detail hero separates Overview/actions from collapsed Technical Details. Temporary
+verified previews retain original WPF cursors/hotspots and ANI timing. Observation
+zoom changes only Image layout, while role gallery buttons select the existing
+preview role; neither changes Draft or system state. Leaving details cancels its
+media, disposes preview resources, and clears scoped messages. Genuine background
+downloads keep their own progress feedback. Local cards keep Draft/Applied state
+projection and ownership separate. System recovery stays confirmed and accessible
+inside an expander; Apply/Cancel semantics and Profile data remain unchanged.
+
+Native services, safety parsers, downloader/catalog protocols and global desktop
+rendering are unchanged. The original physical preview exclusion remains; the
+application does not suppress applied desktop trails across its whole window.

@@ -1,0 +1,10 @@
+{
+  "version": "1.3.1",
+  "nativeUnchanged": true,
+  "passed": true,
+  "cuteThemes": 5,
+  "crossVolume": true,
+  "notes": "Actual existing installation/data copy upgraded in a bounded marked sandbox; own shortcut/registry namespace, no production IPC/startup writes. Cross-volume flag uses D: while Windows TEMP stays C:. Uninstall not exercised.",
+  "payloadFiles": 782,
+  "protectedFiles": 72
+}
