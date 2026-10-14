@@ -85,7 +85,7 @@ public sealed class ThemeCatalog
                 }
             }
             Storage.Write(Path.Combine(directory,"theme.json"),theme);ReadTheme(Path.Combine(directory,"theme.json"));
-            Directory.CreateDirectory(Path.GetDirectoryName(destination)!);Directory.Move(directory,destination);Reload();return Find(id);
+            Directory.CreateDirectory(Path.GetDirectoryName(destination)!);CursorPack.CommitThemeDirectory(directory,destination);Directory.Delete(directory,true);Reload();return Find(id);
         }
         catch
         {

@@ -63,7 +63,7 @@ public sealed class OfficialHttp:IDisposable
     public const string CatalogUrl="https://catvir4493.github.io/cursorium-library/catalog/v1/index.json";
     private readonly HttpClient client;
     private readonly TimeSpan requestTimeout;
-    public OfficialHttp(HttpMessageHandler? handler=null,TimeSpan? timeout=null){requestTimeout=timeout??TimeSpan.FromMinutes(2);if(requestTimeout<=TimeSpan.Zero||requestTimeout>TimeSpan.FromMinutes(2))throw new ArgumentOutOfRangeException(nameof(timeout));client=new(handler??new HttpClientHandler{AllowAutoRedirect=false,AutomaticDecompression=DecompressionMethods.None});client.Timeout=Timeout.InfiniteTimeSpan;client.DefaultRequestHeaders.UserAgent.ParseAdd("CURSORIUM/1.5.0");}
+    public OfficialHttp(HttpMessageHandler? handler=null,TimeSpan? timeout=null){requestTimeout=timeout??TimeSpan.FromMinutes(2);if(requestTimeout<=TimeSpan.Zero||requestTimeout>TimeSpan.FromMinutes(2))throw new ArgumentOutOfRangeException(nameof(timeout));client=new(handler??new HttpClientHandler{AllowAutoRedirect=false,AutomaticDecompression=DecompressionMethods.None});client.Timeout=Timeout.InfiniteTimeSpan;client.DefaultRequestHeaders.UserAgent.ParseAdd("CURSORIUM/1.5.1");}
     public static void ValidateUrl(Uri url,bool releaseRedirect)
     {
         if(url.Scheme!="https"||url.Port!=443||!string.IsNullOrEmpty(url.UserInfo)||!string.IsNullOrEmpty(url.Fragment))throw new InvalidDataException("Only official HTTPS resources are allowed.");

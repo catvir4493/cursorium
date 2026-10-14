@@ -1,0 +1,66 @@
+{
+  "passed": true,
+  "started": "2026-10-14T19:47:24.203823+00:00",
+  "ended": "2026-10-14T19:47:26.2097527+00:00",
+  "encrypted": true,
+  "resource": "simple-dot-star",
+  "packageSHA256": "085005a598259af1e8796d8c88914ba7528abca3eb4e1195aaef0d3321cc39b9",
+  "checks": [
+    {
+      "name": "Actual public catalog signature and schema validated",
+      "passed": true
+    },
+    {
+      "name": "Reported real theme downloads and validates all 15 roles",
+      "passed": true
+    },
+    {
+      "name": "Verified preview has not installed or applied the theme",
+      "passed": true
+    },
+    {
+      "name": "Cancelled theme copy never publishes a partial manifest",
+      "passed": true
+    },
+    {
+      "name": "Copy I/O failure removes only its partial destination and preserves the verified source",
+      "passed": true
+    },
+    {
+      "name": "Existing destination is rejected without overwriting or deleting it",
+      "passed": true
+    },
+    {
+      "name": "Separate preview survives installation",
+      "passed": true
+    },
+    {
+      "name": "Reported theme atomically enters the local library",
+      "passed": true
+    },
+    {
+      "name": "Installed real CUR/ANI resources retain role mapping",
+      "passed": true
+    },
+    {
+      "name": "Retry/duplicate install preserves immutable file hashes",
+      "passed": true
+    },
+    {
+      "name": "Installation survives catalog restart",
+      "passed": true
+    },
+    {
+      "name": "Local import retains safe fallback and works in the same filesystem",
+      "passed": true
+    },
+    {
+      "name": "Download, preview and local import leave all system cursor values/types unchanged",
+      "passed": true
+    },
+    {
+      "name": "Preview and installation release owned extraction directories",
+      "passed": true
+    }
+  ]
+}

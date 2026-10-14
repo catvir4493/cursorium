@@ -1,3 +1,14 @@
+# v1.5.1 Download filesystem compatibility — prerelease, 2026-10-14
+
+Reproduced Simple Dot or Star failure at DownloadManager.InstallCursor/Directory.Move
+under an encrypted, isolated LocalAppData root. Controlled copies now validate before
+atomic manifest commit. Real network/filesystem 14, core without native roundtrip 162,
+online security 51, curation/update 104, actual WPF/network 107 checks passed.
+WPF testing used encrypted isolated data and restored its original native snapshot.
+Repeated live previews now release the previous owned resources.
+See [patch delivery](docs/CURSORIUM-v1.5.1-DELIVERY.md) and
+[actual installed-theme screenshot](docs/validation/v1.5.1/simple-dot-star-installed.png).
+Historical v1.5 hardware/performance limitations below remain open.
 # v1.5.0 Stability, Performance & Compatibility — prerelease, 2026-10-14
 
 Target net10.0-windows; self-contained runtime 10.0.13. Release build: zero

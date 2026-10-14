@@ -1,5 +1,6 @@
 using System.IO.Compression;
 using System.Text.RegularExpressions;
+using System.Security.Cryptography;
 
 namespace Frost.Core;
 
@@ -113,6 +114,57 @@ public sealed class CursorPack:IDisposable
         CursorResource.Validate(path);Files.Add(new(original,path,CursorRoleRecognition.Match(original)));
     }
     public Dictionary<string,string[]> Candidates()=>CursorRoles.All.ToDictionary(r=>r.Name,r=>Files.Where(f=>f.SuggestedRole==r.Name).Select(f=>f.Path).ToArray());
+    // Some EFS-backed user folders permit file writes but refuse directory rename.
+    // Publish only the manifest atomically, after bounded, verified file copies.
+    // Until that commit, ThemeCatalog cannot discover a partial installation.
+    public static void CommitThemeDirectory(string source,string destination,CancellationToken cancellation=default)
+    {
+        DownloadManager.GuardRoot(source);DownloadManager.GuardRoot(destination);
+        if(Directory.Exists(destination)||File.Exists(destination))throw new IOException("Theme destination already exists; nothing was overwritten.");
+        ThemeCatalog.ReadTheme(Path.Combine(source,"theme.json"));
+        var files=new List<string>();int entries=0;long total=0;
+        void Scan(string directory,int depth)
+        {
+            if(depth>8)throw new InvalidDataException("Theme directory nesting exceeds the import limit.");
+            foreach(var path in Directory.EnumerateFileSystemEntries(directory))
+            {
+                cancellation.ThrowIfCancellationRequested();DownloadManager.GuardRoot(path);
+                if(++entries>MaxEntries)throw new InvalidDataException("Too many theme entries.");
+                if(Directory.Exists(path)){Scan(path,depth+1);continue;}
+                var name=Path.GetRelativePath(source,path);
+                bool metadata=name is "theme.json" or "NOTICE.txt";
+                if(!IsCursor(name)&&!metadata)throw new InvalidDataException("Unsupported theme installation file.");
+                var length=new FileInfo(path).Length;
+                if(length>(metadata?256*1024:CursorResource.MaxBytes)||(total+=length)>MaxTotalBytes)throw new InvalidDataException("Theme copy exceeds resource limits.");
+                files.Add(path);
+            }
+        }
+        Scan(source,0);cancellation.ThrowIfCancellationRequested();Directory.CreateDirectory(destination);
+        try
+        {
+            foreach(var path in files.Where(p=>!Path.GetRelativePath(source,p).Equals("theme.json",StringComparison.OrdinalIgnoreCase)))
+            {
+                cancellation.ThrowIfCancellationRequested();var target=Path.Combine(destination,Path.GetRelativePath(source,path));
+                Directory.CreateDirectory(Path.GetDirectoryName(target)!);DownloadManager.GuardRoot(target);
+                using(var input=new FileStream(path,FileMode.Open,FileAccess.Read,FileShare.Read))
+                using(var output=new FileStream(target,FileMode.CreateNew,FileAccess.Write,FileShare.None))
+                {
+                    var buffer=new byte[65536];long written=0;int count;
+                    while((count=input.Read(buffer))>0){cancellation.ThrowIfCancellationRequested();if((written+=count)>CursorResource.MaxBytes)throw new InvalidDataException("Theme file grew during installation.");output.Write(buffer,0,count);}
+                    output.Flush(true);
+                }
+                using var original=File.OpenRead(path);using var copied=File.OpenRead(target);
+                if(!SHA256.HashData(original).AsSpan().SequenceEqual(SHA256.HashData(copied)))throw new InvalidDataException("Theme copy checksum mismatch.");
+            }
+            var manifest=Path.Combine(destination,"validated-"+Guid.NewGuid().ToString("N")+".tmp");
+            Storage.WriteText(manifest,File.ReadAllText(Path.Combine(source,"theme.json")));ThemeCatalog.ReadTheme(manifest);
+            cancellation.ThrowIfCancellationRequested();File.Move(manifest,Path.Combine(destination,"theme.json"));
+        }
+        catch
+        {
+            DownloadManager.GuardRoot(destination);Directory.Delete(destination,true);throw;
+        }
+    }
     public void Dispose(){if(Directory.Exists(staging))Directory.Delete(staging,true);}
 }
 

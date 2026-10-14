@@ -1,4 +1,4 @@
-param([switch]$VerifyOnly,[ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.5.0')
+param([switch]$VerifyOnly,[ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.5.1')
 $ErrorActionPreference='Stop'
 $taskRoot=Split-Path -Parent $PSScriptRoot
 Set-Location -LiteralPath $taskRoot

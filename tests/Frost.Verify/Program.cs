@@ -17,6 +17,7 @@ internal static class Program
             int stability=Array.IndexOf(args,"--stability-tests");if(stability>=0){StabilityVerification.Run(Path.GetFullPath(args[stability+1]),Path.GetFullPath(args[stability+2]));return 0;}
             int curationIndex=Array.IndexOf(args,"--curation-tests");if(curationIndex>=0){CurationVerification.Run(Path.GetFullPath(args[curationIndex+1]),Path.GetFullPath(args[curationIndex+2]),Path.GetFullPath(args[curationIndex+3]),Path.GetFullPath(args[curationIndex+4])).GetAwaiter().GetResult();return 0;}
             int onlineIndex=Array.IndexOf(args,"--online-tests");if(onlineIndex>=0){OnlineVerification.Run(Path.GetFullPath(args[onlineIndex+1]),Path.GetFullPath(args[onlineIndex+2]),Path.GetFullPath(args[onlineIndex+3])).GetAwaiter().GetResult();return 0;}
+            int downloadIndex=Array.IndexOf(args,"--download-filesystem-tests");if(downloadIndex>=0){DownloadFilesystemVerification.Run(Path.GetFullPath(args[downloadIndex+1]),Path.GetFullPath(args[downloadIndex+2]),Path.GetFullPath(args[downloadIndex+3])).GetAwaiter().GetResult();return 0;}
             int packIndex=Array.IndexOf(args,"--pack-audit");
             if(packIndex>=0){CuteAcquisitionVerification.Run(Path.GetFullPath(args[packIndex+1]),Path.GetFullPath(args[packIndex+2]));return 0;}
             int studioIndex=Array.IndexOf(args,"--studio-tests");

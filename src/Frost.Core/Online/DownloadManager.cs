@@ -143,12 +143,12 @@ public sealed class DownloadManager
         var versionDirectory=Path.Combine(destination,resource.SHA256.ToLowerInvariant());bool created=false;
         try
         {
-            if(!Directory.Exists(versionDirectory)){Directory.Move(pack.DirectoryPath,versionDirectory);created=true;}
+            if(!Directory.Exists(versionDirectory)){CursorPack.CommitThemeDirectory(pack.DirectoryPath,versionDirectory,cancellation);created=true;}
             var installed=ThemeCatalog.ReadTheme(Path.Combine(versionDirectory,"theme.json"));var prefix=resource.SHA256.ToLowerInvariant()+"/";
             installed.Roles=installed.Roles.ToDictionary(p=>p.Key,p=>prefix+p.Value);foreach(var f in installed.SourceFiles)f.Path=prefix+f.Path;if(installed.Preview.Length>0)installed.Preview=prefix+installed.Preview;
             cancellation.ThrowIfCancellationRequested();Storage.Write(Path.Combine(destination,"theme.json"),installed);
         }
-        catch{if(created&&Directory.Exists(versionDirectory)&&!File.Exists(Path.Combine(destination,"theme.json")))Directory.Delete(versionDirectory,true);throw;}
+        catch{if(created&&Directory.Exists(versionDirectory))Directory.Delete(versionDirectory,true);throw;}
     }
     public void RemoveCursor(CursorTheme resource,StudioService studio,ThemeService native)
     {

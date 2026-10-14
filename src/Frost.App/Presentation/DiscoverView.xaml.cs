@@ -178,7 +178,7 @@ public partial class DiscoverView:UserControl,IDisposable
     private async void TryClicked(object sender,RoutedEventArgs e)=>await TryLivePreview();
     public async Task TryLivePreview()
     {
-        if(selected==null||previewOperation!=null||operation!=null)return;var item=selected;TryPreview.IsEnabled=false;previewOperation=CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token);UpdateDetailsState();CancelDownload.Visibility=Visibility.Visible;Progress.Visibility=Visibility.Visible;
+        if(selected==null||previewOperation!=null||operation!=null)return;ReleasePreview();var item=selected;TryPreview.IsEnabled=false;previewOperation=CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token);UpdateDetailsState();CancelDownload.Visibility=Visibility.Visible;Progress.Visibility=Visibility.Visible;
         try
         {
             var pack=await Downloads.FetchPreviewAsync(item,ProgressReporter(item),previewOperation.Token);if(disposed||selected?.Id!=item.Id||!IsVisible){pack.Dispose();return;}previewPack=pack;PreviewHost.Visibility=Visibility.Visible;Roles.Visibility=item.Type=="cursor"?Visibility.Visible:Visibility.Collapsed;

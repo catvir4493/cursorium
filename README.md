@@ -8,7 +8,7 @@ Windows 鼠标主题与桌面特效管理工具，沿用原 FROST 的 **C# / WPF
 
 v1.1 的 UI、状态与窗口框架升级、同尺寸前后对照和页面截图见 [交付记录](docs/CURSORIUM-v1.1-DELIVERY.md) 与 [截图对照](docs/CURSORIUM-v1.1-SCREENSHOTS.md)。
 
-当前候选 **v1.5.0 — Stability, Performance & Compatibility（预发布）**：.NET 10.0.13 自包含运行时、静止采样降频、减少参数复制与绘制分配、外部修改保护、真实中断恢复测试、安装生命周期与可持续诊断。尚未完成 Windows 10、物理混合 DPI 和 24/72 小时长测，**不是 Steam Ready**。见[中文交付](docs/CURSORIUM-v1.5-DELIVERY.md)、[兼容性矩阵](docs/CURSORIUM-v1.5-COMPATIBILITY.md)和[可复现诊断](docs/CURSORIUM-v1.5-DIAGNOSTICS.md)。v1.4.0 Stable 保留。
+当前候选 **v1.5.1 — Stability, Performance & Compatibility（预发布）**：.NET 10.0.13 自包含运行时、静止采样降频、减少参数复制与绘制分配、外部修改保护、真实中断恢复测试、安装生命周期与可持续诊断。尚未完成 Windows 10、物理混合 DPI 和 24/72 小时长测，**不是 Steam Ready**。见[中文交付](docs/CURSORIUM-v1.5-DELIVERY.md)、[兼容性矩阵](docs/CURSORIUM-v1.5-COMPATIBILITY.md)和[可复现诊断](docs/CURSORIUM-v1.5-DIAGNOSTICS.md)。v1.4.0 Stable 保留。v1.5.1 修复加密用户目录下的主题下载和本地导入失败，见[修复记录](docs/CURSORIUM-v1.5.1-DELIVERY.md)。
 
 v1.4.0 — Online Library Expansion & Curation：29 项真实在线资源、6 个独立签名合集、版本绑定与安全更新、可复用审核发布工具。本轮资源库、来源/授权与旧资源 ID 保持不变，见[来源台账](docs/CURSORIUM-v1.4-SOURCES.md)和[以后上架流程](docs/CURSORIUM-LIBRARY-WORKFLOW.md)。
 
@@ -35,7 +35,7 @@ v1.2 新增五套真实 Public Domain 可爱主题、分类/收藏、来源与�
 
 关闭窗口会保留托盘进程；Quit 会释放特效引擎，Windows 指针主题继续保留。Restore original cursors 恢复安装第一套主题前保存的配置，包括原注册表类型和原本不存在的值。已有 FROST 的备份继续有效。
 
-安装器 `CURSORIUM-Setup-1.5.0-Release.exe` 按当前用户安装，无需管理员权限。安装本身不改变系统指针或默认开启登录启动。卸载先退出引擎并恢复备份；恢复失败时停止卸载。设置、导入主题、指针稳定副本与历史备份保留。
+安装器 `CURSORIUM-Setup-1.5.1-Release.exe` 按当前用户安装，无需管理员权限。安装本身不改变系统指针或默认开启登录启动。卸载先退出引擎并恢复备份；恢复失败时停止卸载。设置、导入主题、指针稳定副本与历史备份保留。
 
 ## 使用
 
@@ -86,7 +86,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-release.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-cursorium.ps1 -Discover
 ```
 
-完成验证并提交后，`scripts/publish-github.ps1` 推送并核对远程 main；正式版本增加 `-Release -Prerelease -Version 1.5.0 -NotesPath docs/releases/1.5.0.md` 会上传并校验下载文件，再发布 GitHub Release。凭据由 Git Credential Manager 在内存中读取。项目持续发布约定保存在 `AGENTS.md`：之后每次迭代完成验证后自动提交和上传。
+完成验证并提交后，`scripts/publish-github.ps1` 推送并核对远程 main；正式版本增加 `-Release -Prerelease -Version 1.5.1 -NotesPath docs/releases/1.5.1.md` 会上传并校验下载文件，再发布 GitHub Release。凭据由 Git Credential Manager 在内存中读取。项目持续发布约定保存在 `AGENTS.md`：之后每次迭代完成验证后自动提交和上传。
 
 `build-release.ps1` 生成自包含 Windows x64 便携 ZIP、安装器、主题 ZIP、源码 ZIP 和 SHA256 校验文件。`verify-cursorium.ps1` 使用独立数据目录；原生切换测试暂时改变系统指针，在结束时恢复测试前配置；桌面测试会短暂移动鼠标并使用 SendInput。现有用户设置与备份通过前后哈希检查保护。
 
