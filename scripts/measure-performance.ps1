@@ -3,6 +3,7 @@ $ErrorActionPreference='Stop'
 $taskRoot=Split-Path -Parent $PSScriptRoot;Set-Location -LiteralPath $taskRoot
 $taskReport=[IO.Path]::GetFullPath((Join-Path $taskRoot $ReportDirectory));New-Item -ItemType Directory -Force -Path $taskReport | Out-Null
 $taskTargets=@((Get-Content -LiteralPath $TargetsPath -Raw|ConvertFrom-Json).targets)
+$taskDriverExe=Join-Path $taskTargets[-1].directory 'CursoriumPerformanceHost.exe'
 $taskInstalled='D:\CURSORIUM\FrostWhiteComet.exe';$taskWasRunning=$false;$taskHost=$null;$taskDriver=$null;$taskRuns=@();$taskStarted=[DateTimeOffset]::UtcNow
 if($Resume -and (Test-Path (Join-Path $taskReport 'execution.json'))){$previous=Get-Content (Join-Path $taskReport 'execution.json') -Raw|ConvertFrom-Json;if($previous.rounds -ne $Rounds -or $previous.seconds -ne $Seconds -or $previous.warmupSeconds -ne $WarmupSeconds){throw 'Resume must keep the original observation durations and rounds'};$taskRuns=@($previous.runs);$taskStarted=$previous.started}
 function Start-Measurement([string]$Exe,[string[]]$Arguments){$taskInfo=[Diagnostics.ProcessStartInfo]::new($Exe);$taskInfo.UseShellExecute=$false;$taskInfo.CreateNoWindow=$true;foreach($argument in $Arguments){$taskInfo.ArgumentList.Add($argument)};return [Diagnostics.Process]::Start($taskInfo)}
@@ -29,7 +30,7 @@ try{
     $readinessMs=$timer.Elapsed.TotalMilliseconds
     if($readyData.pid -ne $taskHost.Id){throw 'Readiness process mismatch'}
     if($mode -notin @('disabled','idle','opened-closed','harness-only','harness-timer8')){
-     $taskDriver=Start-Measurement $exe @('--drive','--input',$mode,'--seconds',"$($Seconds+$WarmupSeconds+1)",'--report',$output)
+     $taskDriver=Start-Measurement $taskDriverExe @('--drive','--input',$mode,'--seconds',"$($Seconds+$WarmupSeconds+1)",'--report',$output)
     }
     if(-not $taskHost.WaitForExit(($Seconds+$WarmupSeconds+60)*1000)-or $taskHost.ExitCode -ne 0){throw "Measurement failed: $name"}
     if($taskDriver){if(-not $taskDriver.WaitForExit(10000)-or $taskDriver.ExitCode -ne 0){throw 'Input driver did not exit safely'};$driverData=Get-Content (Join-Path $output 'driver.json') -Raw|ConvertFrom-Json;if(-not $driverData.passed){throw 'Input driver was cancelled; this run is not valid'};$taskDriver=$null}
@@ -41,7 +42,7 @@ try{
    }
   }
  }
- @{schemaVersion=1;started=$taskStarted;ended=[DateTimeOffset]::UtcNow;completed=$true;rounds=$Rounds;seconds=$Seconds;warmupSeconds=$WarmupSeconds;runs=$taskRuns;notes='Alternating target order across rounds and modes. Driver CPU is recorded separately. No profiling attached during timed runs; machine is interactive, not a dedicated laboratory.'}|ConvertTo-Json -Depth 6|Set-Content -LiteralPath (Join-Path $taskReport 'execution.json') -Encoding utf8
+ @{schemaVersion=1;started=$taskStarted;ended=[DateTimeOffset]::UtcNow;completed=$true;rounds=$Rounds;seconds=$Seconds;warmupSeconds=$WarmupSeconds;runs=$taskRuns;driverSHA256=(Get-FileHash (Join-Path $taskTargets[-1].directory 'CursoriumPerformanceHost.dll')).Hash;notes='Alternating target order across rounds and modes. Identical independent .NET 10 input-driver binary for all targets; its CPU is recorded separately. No profiling attached during timed runs; machine is interactive, not a dedicated laboratory.'}|ConvertTo-Json -Depth 6|Set-Content -LiteralPath (Join-Path $taskReport 'execution.json') -Encoding utf8
 }finally{
  foreach($process in @($taskDriver,$taskHost)){if($process -and -not $process.HasExited){$process.Kill();$process.WaitForExit(10000)|Out-Null}}
  if($taskWasRunning -and -not $NoProductionRestart){Start-Process -FilePath $taskInstalled -ArgumentList '--tray' -WindowStyle Hidden}
