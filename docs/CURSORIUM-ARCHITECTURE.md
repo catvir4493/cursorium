@@ -1,5 +1,39 @@
 # CURSORIUM architecture
 
+## v1.5 stability foundation
+
+The target is now .NET 10/WPF/Win32; self-contained x64 distributions pin runtime
+10.0.13. Frost executable names, namespaces, IPC, registry keys and user data paths
+remain compatible. v1.4/.NET 8 tags are reproducible rollback baselines.
+
+Idle sampling backs off to 80 ms with immediate Raw Input wake-up; active history
+expiry and physical coordinates are unchanged. Session changes clear transient
+effects and force environment re-evaluation. Display rebuild detaches the old render
+subscription before releasing input and overlays. Raw input disposal is idempotent.
+Settings cloning uses a typed copy, and painters retain coordinate/brush/pen delegates.
+Paint count/ticks expose CPU drawing diagnostics, never GPU presentation claims.
+
+New v1-compatible transaction journals include optional Intended registry values and
+the previous ownership record. Recovery accepts per-entry Before/Intended values;
+unknown external edits stop recovery with all evidence retained. `theme-ownership.json`
+records the last successful native selection. Automatic restore refuses subsequent
+external edits; legacy backups use managed-path checks. Legacy journals without
+Intended retain the old protocol. Recovery validates non-empty original role paths
+before writing. Immutable resources must match source SHA256 even when valid CUR files
+already exist. IsActive is read-only and no longer prepares/copies native resources.
+
+Profile and applied-state writers reject stale external file changes; future schemas
+are preserved. A failed applied-state commit still rolls native values back through
+ThemeService. Diagnostic roots reject real user data and linked roots.
+
+The installer recognizes both slash forms of ZIP directory entries (.NET 10 behavior),
+guards linked program trees before replacement/removal and recovers a marked `.previous`
+directory when interruption left the main directory absent. This is not a complete
+power-loss transaction for shortcuts/registration. Build staging is reset inside the
+verified artifacts output to avoid carrying old runtime files; distribution manifests
+contain relative file sizes/hashes. Future Steam boundaries and unverified scenarios
+are documented in [the compatibility matrix](CURSORIUM-v1.5-COMPATIBILITY.md).
+
 The original assemblies and namespaces remain `Frost.*`. This preserves installer, IPC,
 backup and published executable compatibility while the product becomes CURSORIUM.
 No new runtime dependency or UI framework was added.

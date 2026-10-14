@@ -5,8 +5,10 @@ namespace Frost.Core;
 public sealed class Settings
 {
     public int SchemaVersion {get;set;}=1;
-    public bool Enabled {get;set;}=true;
-    public bool TrailEnabled {get;set;}=true;
+    private bool enabled=true,trailEnabled=true;
+    public event Action? ActivityChanged;
+    public bool Enabled {get=>enabled;set{if(enabled==value)return;enabled=value;ActivityChanged?.Invoke();}}
+    public bool TrailEnabled {get=>trailEnabled;set{if(trailEnabled==value)return;trailEnabled=value;ActivityChanged?.Invoke();}}
     public string TrailEffect {get;set;}="comet";
     public double Length {get;set;}=110;
     public double Duration {get;set;}=260;
@@ -39,10 +41,10 @@ public sealed class Settings
         if(!ValidColor(Color))Color="#91DEFF";
     }
     public static bool ValidColor(string? value)=>value!=null&&System.Text.RegularExpressions.Regex.IsMatch(value,"^#[0-9a-fA-F]{6}$");
-    public Settings Clone()=>JsonSerializer.Deserialize<Settings>(JsonSerializer.Serialize(this,Storage.Json),Storage.Json)!;
+    public Settings Clone(){var copy=new Settings();copy.CopyFrom(this);return copy;}
     public void CopyFrom(Settings value)
     {
-        Enabled=value.Enabled;TrailEnabled=value.TrailEnabled;TrailEffect=value.TrailEffect;Length=value.Length;Duration=value.Duration;Opacity=value.Opacity;Particles=value.Particles;Color=value.Color;
+        SchemaVersion=value.SchemaVersion;Enabled=value.Enabled;TrailEnabled=value.TrailEnabled;TrailEffect=value.TrailEffect;Length=value.Length;Duration=value.Duration;Opacity=value.Opacity;Particles=value.Particles;Color=value.Color;
         ClickHalo=value.ClickHalo;HaloDuration=value.HaloDuration;ClickEffect=value.ClickEffect;ClickOpacity=value.ClickOpacity;ClickRadius=value.ClickRadius;
         Preset=value.Preset;FrameRate=value.FrameRate;PowerSaving=value.PowerSaving;PauseFullscreen=value.PauseFullscreen;
     }
@@ -56,7 +58,7 @@ public sealed class Settings
     public void Save(){Normalize();Storage.Write(PathName,this);}
     public static Settings Load()
     {
-        try{var result=File.Exists(PathName)?JsonSerializer.Deserialize<Settings>(File.ReadAllText(PathName)):new();result??=new();result.Normalize();return result;}
+        try{var result=File.Exists(PathName)?JsonSerializer.Deserialize<Settings>(File.ReadAllText(PathName)):new();result??=new();if(result.SchemaVersion!=1)throw new InvalidDataException("Unsupported legacy settings schema; original file preserved.");result.Normalize();return result;}
         catch(Exception ex)when(ex is IOException or JsonException){Storage.Log("Settings fallback: "+ex.Message);return new();}
     }
 }

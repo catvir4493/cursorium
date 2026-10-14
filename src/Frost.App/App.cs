@@ -27,12 +27,13 @@ public sealed class App:System.Windows.Application
     [STAThread] public static int Main(string[] args)
     {
         isolatedTest=args.Contains("--isolated-test")&&(args.Contains("--self-test")||args.Contains("--benchmark")||args.Contains("--state-probe")||args.Contains("--ui-review")||args.Contains("--collection-review")||args.Contains("--export-library")||args.Contains("--export-covers")||args.Contains("--verify-library-public")||args.Contains("--verify-library")||args.Contains("--audit-library")||args.Contains("--prepare-library")||args.Contains("--discover-review"));
+        if(args.Contains("--stability-review")){if(!args.Contains("--isolated-test"))return 2;isolatedTest=true;}
         stateProbe=args.Contains("--state-probe");
         if((args.Contains("--self-test")||args.Contains("--benchmark")||args.Contains("--state-probe")||args.Contains("--ui-review")||args.Contains("--collection-review")||args.Contains("--export-library")||args.Contains("--export-covers")||args.Contains("--verify-library-public")||args.Contains("--verify-library")||args.Contains("--audit-library")||args.Contains("--prepare-library")||args.Contains("--discover-review"))&&!isolatedTest)return 2;
         if(isolatedTest)
         {
             int rootIndex=Array.IndexOf(args,"--test-data-root");
-            Storage.UseTestingRoot(rootIndex>=0&&rootIndex+1<args.Length?args[rootIndex+1]:Path.Combine(AppContext.BaseDirectory,"test-data",Guid.NewGuid().ToString("N")));
+            Storage.UseTestingRoot(rootIndex>=0&&rootIndex+1<args.Length?args[rootIndex+1]:Path.Combine(Path.GetTempPath(),"CursoriumVerification-"+Guid.NewGuid().ToString("N")));
         }
         if(args.Contains("--fullscreen-probe"))
         {
@@ -73,6 +74,7 @@ public sealed class App:System.Windows.Application
         studio=new StudioService(AppContext.BaseDirectory,theme);settings=studio.LiveEffects;engine=new(settings);
         if(args.Contains("--benchmark")){_ = DesktopVerification.Benchmark(this,engine,args);return;}
         panel=new(studio,engine,theme);MainWindow=panel;CreateTray();
+        if(args.Contains("--stability-review")){_ = StabilityVerification.Run(this,engine,args);return;}
         if(args.Contains("--discover-review")){_ = DiscoverVerification.Run(this,args);return;}
         if(args.Contains("--collection-review")){_ = CollectionVerification.Run(this,args);return;}
         if(args.Contains("--ui-review")){_ = InterfaceVerification.CapturePages(this,args);return;}

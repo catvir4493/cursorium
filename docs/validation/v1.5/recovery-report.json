@@ -1,0 +1,144 @@
+{
+  "passed": true,
+  "error": null,
+  "started": "2026-10-14T13:44:21.5797633+00:00",
+  "ended": "2026-10-14T13:44:34.9309502+00:00",
+  "checks": [
+    {
+      "name": "Diagnostics reject production user data as test root",
+      "passed": true
+    },
+    {
+      "name": "Diagnostics reject ancestors of production data",
+      "passed": true
+    },
+    {
+      "name": "Diagnostics reject registered installation directory",
+      "passed": true
+    },
+    {
+      "name": "Status query creates no immutable files",
+      "passed": true
+    },
+    {
+      "name": "Actual process terminates after four native writes",
+      "passed": true
+    },
+    {
+      "name": "Abrupt exit retains durable journal",
+      "passed": true
+    },
+    {
+      "name": "Crash and abandoned mutex recover exact registry state",
+      "passed": true
+    },
+    {
+      "name": "Recovery restores prior absent original backup",
+      "passed": true
+    },
+    {
+      "name": "Second actual crash creates retry evidence",
+      "passed": true
+    },
+    {
+      "name": "Recovery refuses external edit",
+      "passed": true
+    },
+    {
+      "name": "External selection and journal retained",
+      "passed": true
+    },
+    {
+      "name": "Recovery retry succeeds after conflict resolution",
+      "passed": true
+    },
+    {
+      "name": "Automatic restore refuses external selection",
+      "passed": true
+    },
+    {
+      "name": "Refusal preserves first original backup",
+      "passed": true
+    },
+    {
+      "name": "Substituted valid immutable CUR rejected",
+      "passed": true
+    },
+    {
+      "name": "Rejected resource leaves active theme unchanged",
+      "passed": true
+    },
+    {
+      "name": "Ownership-aware restore returns exact original",
+      "passed": true
+    },
+    {
+      "name": "Unknown journal schema rejected",
+      "passed": true
+    },
+    {
+      "name": "Future journal bytes preserved",
+      "passed": true
+    },
+    {
+      "name": "Independent process owns native mutex",
+      "passed": true
+    },
+    {
+      "name": "Concurrent native operation times out safely",
+      "passed": true
+    },
+    {
+      "name": "Mutex owner exits normally",
+      "passed": true
+    },
+    {
+      "name": "Concurrency refusal performs no native writes",
+      "passed": true
+    },
+    {
+      "name": "Unavailable original resource stops recovery before writes",
+      "passed": true
+    },
+    {
+      "name": "Missing-resource recovery retains evidence and exact current native state",
+      "passed": true
+    },
+    {
+      "name": "Denied backup access stops restore safely",
+      "passed": true
+    },
+    {
+      "name": "Denied access leaves active Windows theme valid",
+      "passed": true
+    },
+    {
+      "name": "Diagnostic logs redact local paths and credential-shaped values",
+      "passed": true
+    },
+    {
+      "name": "External future Profile schema blocks stale writes",
+      "passed": true
+    },
+    {
+      "name": "Future Profile bytes preserved after stale write refusal",
+      "passed": true
+    },
+    {
+      "name": "Future Profile schema rejected on restart",
+      "passed": true
+    },
+    {
+      "name": "External studio edit blocks stale tray writes",
+      "passed": true
+    },
+    {
+      "name": "Future applied-state bytes preserved",
+      "passed": true
+    },
+    {
+      "name": "Allocation-light clone preserves every serialized setting",
+      "passed": true
+    }
+  ]
+}

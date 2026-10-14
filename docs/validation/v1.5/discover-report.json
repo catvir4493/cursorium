@@ -1,0 +1,457 @@
+{
+  "passed": true,
+  "error": null,
+  "checks": [
+    {
+      "name": "Public official HTTPS catalog fetched and RSA-PSS signature verified",
+      "passed": true
+    },
+    {
+      "name": "Expanded official catalog retains all ten original published resources",
+      "passed": true
+    },
+    {
+      "name": "Explore discovers resources without workspace preview or Customize",
+      "passed": true
+    },
+    {
+      "name": "Existing bundled theme recognized without copying: cute-bunny-cute-kawaii",
+      "passed": true
+    },
+    {
+      "name": "Existing bundled theme recognized without copying: cute-cool-cat",
+      "passed": true
+    },
+    {
+      "name": "Existing bundled theme recognized without copying: cute-kawaii-cat-curs0rs",
+      "passed": true
+    },
+    {
+      "name": "Existing bundled theme recognized without copying: cute-kawaii-pink-heart",
+      "passed": true
+    },
+    {
+      "name": "Existing bundled theme recognized without copying: cute-pastel",
+      "passed": true
+    },
+    {
+      "name": "Search filters actual title, author and metadata",
+      "passed": true
+    },
+    {
+      "name": "Motion category reflects all original and expanded trusted presets",
+      "passed": true
+    },
+    {
+      "name": "Independent public signed collections manifest loaded",
+      "passed": true
+    },
+    {
+      "name": "Actual collection card filters only declared members: Cute \u0026 Cozy",
+      "passed": true
+    },
+    {
+      "name": "Actual collection card filters only declared members: Minimal Workspace",
+      "passed": true
+    },
+    {
+      "name": "Actual collection card filters only declared members: Pixel Nostalgia",
+      "passed": true
+    },
+    {
+      "name": "Actual collection card filters only declared members: Neon \u0026 Cyber",
+      "passed": true
+    },
+    {
+      "name": "Actual collection card filters only declared members: Animated Favorites",
+      "passed": true
+    },
+    {
+      "name": "Actual collection card filters only declared members: Motion Essentials",
+      "passed": true
+    },
+    {
+      "name": "Local search includes actual collection names",
+      "passed": true
+    },
+    {
+      "name": "Installed filter recognizes five bundled Cute themes without downloading",
+      "passed": true
+    },
+    {
+      "name": "Not Installed is separate from Draft, favorites and media cache",
+      "passed": true
+    },
+    {
+      "name": "New Brown Cow ANI preview is functional and not installed",
+      "passed": true
+    },
+    {
+      "name": "Technical details are initially collapsed without discarding transparent package information",
+      "passed": true
+    },
+    {
+      "name": "Primary detail operation is visible above the fold at 1280x830",
+      "passed": true
+    },
+    {
+      "name": "Hero overview presents real coverage, license and package size",
+      "passed": true
+    },
+    {
+      "name": "Details show signed package hash and actual role provenance",
+      "passed": true
+    },
+    {
+      "name": "Online ANI pack fetched, validated and loaded into real temporary WPF cursor preview",
+      "passed": true
+    },
+    {
+      "name": "Observation magnification preserves native cursor, hotspot and ANI playback: 2x",
+      "passed": true
+    },
+    {
+      "name": "Observation magnification preserves native cursor, hotspot and ANI playback: 4x",
+      "passed": true
+    },
+    {
+      "name": "Observation magnification preserves native cursor, hotspot and ANI playback: 1x",
+      "passed": true
+    },
+    {
+      "name": "Verified role thumbnails and actual source-file metadata populate the detail hero",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Normal",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Help",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Working",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Busy",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Precision",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Text",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Handwriting",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Unavailable",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Vertical",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Horizontal",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: DiagonalNWSE",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: DiagonalNESW",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Move",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Alternate",
+      "passed": true
+    },
+    {
+      "name": "Temporary native preview role: Link",
+      "passed": true
+    },
+    {
+      "name": "Try Live Preview neither installs nor applies nor changes desktop state",
+      "passed": true
+    },
+    {
+      "name": "Leaving details releases native preview and its staged resources",
+      "passed": true
+    },
+    {
+      "name": "Returning to Explore stops ANI and clears scoped temporary preview feedback",
+      "passed": true
+    },
+    {
+      "name": "Online-only favorite is persisted without installation",
+      "passed": true
+    },
+    {
+      "name": "Actual WPF Cancel button interrupts download and leaves no partial install",
+      "passed": true
+    },
+    {
+      "name": "Real network download atomically enters local cursor library",
+      "passed": true
+    },
+    {
+      "name": "Download never calls native Apply",
+      "passed": true
+    },
+    {
+      "name": "Duplicate download creates no duplicate theme",
+      "passed": true
+    },
+    {
+      "name": "Open in Cursors selects downloaded theme as Draft",
+      "passed": true
+    },
+    {
+      "name": "Local role gallery has 15 distinct accessible native role buttons",
+      "passed": true
+    },
+    {
+      "name": "Role gallery updates preview without changing Draft: Normal",
+      "passed": true
+    },
+    {
+      "name": "Role gallery updates preview without changing Draft: Help",
+      "passed": true
+    },
+    {
+      "name": "Role gallery updates preview without changing Draft: Working",
+      "passed": true
+    },
+    {
+      "name": "Role gallery updates preview without changing Draft: Busy",
+      "passed": true
+    },
+    {
+      "name": "Role gallery updates preview without changing Draft: Precision",
+      "passed": true
+    },
+    {
+      "name": "Role gallery updates preview without changing Draft: Text",
+      "passed": true
+    },
+    {
+      "name": "Role gallery updates preview without changing Draft: Handwriting",
+      "passed": true
+    },
+    {
+      "name": "Role gallery updates preview without changing Draft: Unavailable",
+      "passed": true
+    },
+    {
+      "name": "Role gallery updates preview without changing Draft: Vertical",
+      "passed": true
+    },
+    {
+      "name": "Role gallery updates preview without changing Draft: Horizontal",
+      "passed": true
+    },
+    {
+      "name": "Role gallery updates preview without changing Draft: DiagonalNWSE",
+      "passed": true
+    },
+    {
+      "name": "Role gallery updates preview without changing Draft: DiagonalNESW",
+      "passed": true
+    },
+    {
+      "name": "Role gallery updates preview without changing Draft: Move",
+      "passed": true
+    },
+    {
+      "name": "Role gallery updates preview without changing Draft: Alternate",
+      "passed": true
+    },
+    {
+      "name": "Role gallery updates preview without changing Draft: Link",
+      "passed": true
+    },
+    {
+      "name": "System recovery is discoverable and initially collapsed",
+      "passed": true
+    },
+    {
+      "name": "Expanding System recovery exposes the existing confirmed native restore action",
+      "passed": true
+    },
+    {
+      "name": "Local selection does not apply Windows pointers",
+      "passed": true
+    },
+    {
+      "name": "Downloaded cursor truly applies through original StudioService transaction",
+      "passed": true
+    },
+    {
+      "name": "Downloaded cursor can be saved in Profile",
+      "passed": true
+    },
+    {
+      "name": "Applied/Profile-referenced theme cannot be removed",
+      "passed": true
+    },
+    {
+      "name": "Cancel restores applied downloaded cursor and parameters",
+      "passed": true
+    },
+    {
+      "name": "Data-only motion preset uses the trusted live preview engine",
+      "passed": true
+    },
+    {
+      "name": "Downloaded motion preset opens in Trails and updates only Draft",
+      "passed": true
+    },
+    {
+      "name": "Motion preset applies independently while preserving cursor theme",
+      "passed": true
+    },
+    {
+      "name": "Downloaded motion card projects actual Applied parameters separately from ownership",
+      "passed": true
+    },
+    {
+      "name": "Cursor and motion installation records survive service restart with stable valid paths",
+      "passed": true
+    },
+    {
+      "name": "Expanded Brown Cow downloads without changing the active Windows theme",
+      "passed": true
+    },
+    {
+      "name": "Downloaded new cursor enters the actual local Draft",
+      "passed": true
+    },
+    {
+      "name": "New curated Brown Cow truly applies via existing native transaction",
+      "passed": true
+    },
+    {
+      "name": "Installed update leaves Applied version and clean Draft pinned to old resources",
+      "passed": true
+    },
+    {
+      "name": "Installed update exposes an explicit preview action without editing saved Profiles",
+      "passed": true
+    },
+    {
+      "name": "Previewing same-ID installed update enables Apply and resolves latest resources",
+      "passed": true
+    },
+    {
+      "name": "Cancel returns to old applied cursor version and retains its resources",
+      "passed": true
+    },
+    {
+      "name": "Applying only motion after download keeps old cursor package pinned",
+      "passed": true
+    },
+    {
+      "name": "Explicit Apply commits updated cursor version through existing native transaction",
+      "passed": true
+    },
+    {
+      "name": "New original Ice Crystal is a real local motion preset, independently selected",
+      "passed": true
+    },
+    {
+      "name": "New preset applies real production Comet parameters",
+      "passed": true
+    },
+    {
+      "name": "Bounded page creates 24 cards for 100 resources",
+      "passed": true
+    },
+    {
+      "name": "Bounded page creates 24 cards for 300 resources",
+      "passed": true
+    },
+    {
+      "name": "Bounded page creates 24 cards for 500 resources",
+      "passed": true
+    },
+    {
+      "name": "Compact Explore reduces collections to accessible text controls, preserving grid space",
+      "passed": true
+    },
+    {
+      "name": "Compact details retain fixed download and Back actions",
+      "passed": true
+    },
+    {
+      "name": "Compact details keep the primary hero operation inside the actual window viewport",
+      "passed": true
+    },
+    {
+      "name": "Thirty detail/search/page cycles keep GDI and USER growth bounded",
+      "passed": true
+    },
+    {
+      "name": "Fast search and navigation retain bounded cards and correctly scoped feedback",
+      "passed": true
+    },
+    {
+      "name": "Original pointer configuration restored after real downloaded-theme application",
+      "passed": true
+    },
+    {
+      "name": "Exact pre-test native pointer snapshot restored in finally",
+      "passed": true
+    }
+  ],
+  "performance": [
+    {
+      "count": 100,
+      "elements": 24,
+      "layoutMilliseconds": 38.0987,
+      "managedBytesDelta": 4202312,
+      "userHandlesDelta": 0
+    },
+    {
+      "count": 300,
+      "elements": 24,
+      "layoutMilliseconds": 36.8664,
+      "managedBytesDelta": 4230672,
+      "userHandlesDelta": 0
+    },
+    {
+      "count": 500,
+      "elements": 24,
+      "layoutMilliseconds": 37.3912,
+      "managedBytesDelta": 4209880,
+      "userHandlesDelta": 0
+    },
+    {
+      "scenario": "30 detail/search/page cycles",
+      "elapsedMilliseconds": 838.3146,
+      "gdiHandlesDelta": -14,
+      "userHandlesDelta": 1,
+      "managedBytesDelta": 27488
+    }
+  ],
+  "monitors": [
+    {
+      "Device": "\\\\.\\DISPLAY1",
+      "width": 2560,
+      "height": 1440
+    }
+  ],
+  "physicalDpi": 96,
+  "notes": "Actual official network, running WPF and native Apply under isolated data. Performance fixtures are explicitly synthetic and never published as online content."
+}

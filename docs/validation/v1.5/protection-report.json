@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "permanentFiles": 102,
+  "at": "2026-10-14T13:38:45.3718103Z",
+  "permanentChanged": 0,
+  "nativeValuesAndTypesUnchanged": true,
+  "critical": [
+    {
+      "existedBefore": true,
+      "existsAfter": true,
+      "name": "settings.json",
+      "unchanged": true
+    },
+    {
+      "existedBefore": true,
+      "existsAfter": true,
+      "name": "studio.json",
+      "unchanged": true
+    },
+    {
+      "existedBefore": true,
+      "existsAfter": true,
+      "name": "profiles.json",
+      "unchanged": true
+    },
+    {
+      "existedBefore": true,
+      "existsAfter": true,
+      "name": "original-theme.json",
+      "unchanged": true
+    },
+    {
+      "existedBefore": false,
+      "existsAfter": false,
+      "name": "theme-transaction.json",
+      "unchanged": true
+    },
+    {
+      "existedBefore": false,
+      "existsAfter": false,
+      "name": "interface.json",
+      "unchanged": true
+    },
+    {
+      "existedBefore": false,
+      "existsAfter": false,
+      "name": "theme-ownership.json",
+      "unchanged": true
+    }
+  ],
+  "ephemeralOrCacheChanges": 0,
+  "notes": "Private registry snapshots and relative file hashes remain local. Log/setup-result and mutable cache/staging are distinguished from permanent resources."
+}

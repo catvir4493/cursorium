@@ -120,12 +120,18 @@ public sealed class ProfileManager
 {
     private readonly string path=Path.Combine(Storage.Root,"profiles.json");
     private ProfileDocument document=new();
+    private string? loadedText;
     public IReadOnlyList<StudioProfile> Profiles=>document.Profiles;
     public ProfileManager()
     {
         if(!File.Exists(path))return;
-        document=JsonSerializer.Deserialize<ProfileDocument>(File.ReadAllText(path),Storage.Json)??throw new InvalidDataException("Invalid profile file.");
-        if(document.SchemaVersion!=1||document.Profiles.Any(p=>string.IsNullOrWhiteSpace(p.Id)||p.Configuration?.Effects==null)||document.Profiles.Select(p=>p.Id).Distinct().Count()!=document.Profiles.Count)throw new InvalidDataException("Unsupported profile data. The original file was preserved.");
+        loadedText=File.ReadAllText(path);document=JsonSerializer.Deserialize<ProfileDocument>(loadedText,Storage.Json)??throw new InvalidDataException("Invalid profile file.");
+        if(document.SchemaVersion!=1||document.Profiles==null||document.Profiles.Any(p=>p==null||string.IsNullOrWhiteSpace(p.Id)||p.Configuration?.Effects==null)||document.Profiles.Select(p=>p.Id).Distinct().Count()!=document.Profiles.Count)throw new InvalidDataException("Unsupported profile data. The original file was preserved.");
+    }
+    private void Persist(ProfileDocument next)
+    {
+        if((File.Exists(path)?File.ReadAllText(path):null)!=loadedText)throw new IOException("Profiles changed outside this session. Reopen CURSORIUM before saving; the existing file was preserved.");
+        var text=JsonSerializer.Serialize(next,Storage.Json);Storage.WriteText(path,text);loadedText=text;document=next;
     }
     public StudioProfile Save(string? id,string name,StudioConfiguration configuration)
     {
@@ -133,7 +139,7 @@ public sealed class ProfileManager
         var next=JsonSerializer.Deserialize<ProfileDocument>(JsonSerializer.Serialize(document,Storage.Json),Storage.Json)!;
         var profile=id==null?null:next.Profiles.SingleOrDefault(p=>p.Id==id)??throw new ArgumentException("Profile no longer exists.");
         if(profile==null){profile=new();next.Profiles.Add(profile);}
-        profile.Name=name;profile.Configuration=configuration.Clone();Storage.Write(path,next);document=next;return profile;
+        profile.Name=name;profile.Configuration=configuration.Clone();Persist(next);return profile;
     }
     public void Rename(string id,string name)
     {
@@ -141,6 +147,6 @@ public sealed class ProfileManager
     }
     public void Delete(string id)
     {
-        var next=new ProfileDocument{Profiles=document.Profiles.Where(p=>p.Id!=id).ToList()};Storage.Write(path,next);document=next;
+        var next=new ProfileDocument{Profiles=document.Profiles.Where(p=>p.Id!=id).ToList()};Persist(next);
     }
 }

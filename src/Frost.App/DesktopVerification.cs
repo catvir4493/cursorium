@@ -212,32 +212,40 @@ public static class DesktopVerification
         string? originalConfig=File.Exists(Settings.PathName)?File.ReadAllText(Settings.PathName):null;
         Native.GetPhysicalCursorPos(out var original);var measurements=new List<object>();var s=engine.Windows[0].Painter.Settings;
         var primary=engine.Windows[0].Monitor.Monitor;var p=Process.GetCurrentProcess();
+        Window? inputTarget=null;var originalForeground=Native.GetForegroundWindow();
         try
         {
             s.Enabled=true;s.PauseFullscreen=false;s.ApplyPreset("Standard");
             // Allow deferred WPF/native window initialization to finish before steady-state measurement.
             s.Enabled=false;await Task.Delay(2000);
-            foreach(var mode in new[]{"disabled","idle","comet-60","minimal-60","neon-60","stardust-60","active-120","power-30"})
+            var modes=new List<string>{"disabled","idle","comet-60","minimal-60","neon-60","stardust-60","active-120","power-30"};
+            if(args.Contains("--extended-benchmark")){modes.AddRange(new[]{"fast-long","particles-high","click-halo","click-ring","click-off","effect-switch","tray-paused"});inputTarget=new Window{Title="CURSORIUM controlled benchmark input",Width=500,Height=300,Topmost=true,Content=new Border{Background=Brushes.MidnightBlue}};inputTarget.Show();Native.SetWindowPos(new WindowInteropHelper(inputTarget).Handle,(IntPtr)(-1),primary.Left+primary.Width/2-250,primary.Top+primary.Height/2-150,500,300,0x40);inputTarget.Activate();}
+            foreach(var mode in modes)
             {
                 s.Enabled=mode!="disabled";s.TrailEnabled=true;var effect=mode.Split('-')[0];
                 app.Studio.Effects.Trails.Single(t=>t.Id==(effect is "minimal" or "neon" or "stardust"?effect:"comet")).Apply(s);
                 s.FrameRate=mode=="active-120"?120:60;s.PowerSaving=mode=="power-30";
+                engine.PausedByUser=mode=="tray-paused";
+                if(mode is "fast-long" or "particles-high"){s.Length=360;s.Duration=900;s.Particles=24;if(mode=="particles-high")s.TrailEffect="stardust";}
+                if(mode.StartsWith("click-",StringComparison.Ordinal)){s.TrailEnabled=false;s.ClickHalo=true;s.ClickEffect=mode[6..];}
                 if(mode is "idle" or "disabled")Native.SetPhysicalCursorPos(primary.Left+primary.Width/2,primary.Top+primary.Height/2);
                 await Task.Delay(400);GC.Collect();GC.WaitForPendingFinalizers();GC.Collect();
-                var before=p.TotalProcessorTime;long frames=engine.RenderedFrames;long samples=engine.Samples;int gdi=GetGuiResources(p.Handle,0),user=GetGuiResources(p.Handle,1);var timer=Stopwatch.StartNew();
+                var before=p.TotalProcessorTime;long allocation=GC.GetTotalAllocatedBytes(),paintCount=engine.Windows.Sum(w=>w.Painter.PaintCount),paintTicks=engine.Windows.Sum(w=>w.Painter.PaintTicks);long frames=engine.RenderedFrames;long samples=engine.Samples;int gdi=GetGuiResources(p.Handle,0),user=GetGuiResources(p.Handle,1);var timer=Stopwatch.StartNew();
                 var positions=new HashSet<string>();int movingObservations=0;
                 while(timer.Elapsed.TotalSeconds<4)
                 {
-                    if(mode is not ("idle" or "disabled")){double t=timer.Elapsed.TotalSeconds;Native.SetPhysicalCursorPos(primary.Left+primary.Width/2+(int)(Math.Sin(t*7)*150),primary.Top+primary.Height/2+(int)(Math.Cos(t*10)*70));}else Native.SetPhysicalCursorPos(primary.Left+primary.Width/2,primary.Top+primary.Height/2);
+                    if(mode is not ("idle" or "disabled")){double t=timer.Elapsed.TotalSeconds*(mode=="fast-long"?4:1);Native.SetPhysicalCursorPos(primary.Left+primary.Width/2+(int)(Math.Sin(t*7)*150),primary.Top+primary.Height/2+(int)(Math.Cos(t*10)*70));}else Native.SetPhysicalCursorPos(primary.Left+primary.Width/2,primary.Top+primary.Height/2);
+                    if(mode.StartsWith("click-",StringComparison.Ordinal)&&inputTarget!=null&&Native.GetForegroundWindow()==new WindowInteropHelper(inputTarget).Handle){SendInput(2,new[]{new Input{Data=new Union{Mouse=new MouseInput{Flags=2}}},new Input{Data=new Union{Mouse=new MouseInput{Flags=4}}}},Marshal.SizeOf<Input>());}
+                    if(mode=="effect-switch")app.Studio.Effects.Trails[(int)(timer.Elapsed.TotalSeconds*4)%4].Apply(s);
                     await Task.Delay(8);
                     if(Native.GetPhysicalCursorPos(out var observed)&&positions.Count<100)positions.Add($"{observed.X},{observed.Y}");if(engine.Model.Points.Count>1)movingObservations++;
                 }
-                p.Refresh();double cpu=(p.TotalProcessorTime-before).TotalSeconds;measurements.Add(new{mode,seconds=timer.Elapsed.TotalSeconds,renderInvalidationsPerSecond=(engine.RenderedFrames-frames)/timer.Elapsed.TotalSeconds,samplesPerSecond=(engine.Samples-samples)/timer.Elapsed.TotalSeconds,cpuOneCorePercent=cpu/timer.Elapsed.TotalSeconds*100,cpuMachinePercent=cpu/timer.Elapsed.TotalSeconds/Environment.ProcessorCount*100,workingSet=p.WorkingSet64,gdiBefore=gdi,gdiAfter=GetGuiResources(p.Handle,0),userBefore=user,userAfter=GetGuiResources(p.Handle,1),observedDistinctPositions=positions.Count,movingObservations});
+                p.Refresh();double cpu=(p.TotalProcessorTime-before).TotalSeconds;long paints=engine.Windows.Sum(w=>w.Painter.PaintCount)-paintCount;measurements.Add(new{mode,seconds=timer.Elapsed.TotalSeconds,renderInvalidationsPerSecond=(engine.RenderedFrames-frames)/timer.Elapsed.TotalSeconds,samplesPerSecond=(engine.Samples-samples)/timer.Elapsed.TotalSeconds,cpuOneCorePercent=cpu/timer.Elapsed.TotalSeconds*100,cpuMachinePercent=cpu/timer.Elapsed.TotalSeconds/Environment.ProcessorCount*100,workingSet=p.WorkingSet64,privateBytes=p.PrivateMemorySize64,threads=p.Threads.Count,allocatedBytes=GC.GetTotalAllocatedBytes()-allocation,paintCount=paints,meanPaintMilliseconds=paints==0?0:(engine.Windows.Sum(w=>w.Painter.PaintTicks)-paintTicks)*1000d/Stopwatch.Frequency/paints,gdiBefore=gdi,gdiAfter=GetGuiResources(p.Handle,0),userBefore=user,userAfter=GetGuiResources(p.Handle,1),observedDistinctPositions=positions.Count,movingObservations});
             }
         }
         finally
         {
-            Native.SetPhysicalCursorPos(original.X,original.Y);File.WriteAllText(Path.Combine(output,"performance-report.json"),JsonSerializer.Serialize(new{measurements,monitorCount=Native.Monitors().Count,logicalProcessors=Environment.ProcessorCount,notes="Render rates count WPF invalidations, not GPU presentation. These short engine-only measurements include WPF and the current per-monitor layered surfaces; deferred initialization can affect early samples."},Storage.Json));app.ExitApp();
+            inputTarget?.Close();if(originalForeground!=IntPtr.Zero)SetForegroundWindow(originalForeground);engine.PausedByUser=false;Native.SetPhysicalCursorPos(original.X,original.Y);File.WriteAllText(Path.Combine(output,"performance-report.json"),JsonSerializer.Serialize(new{measurements,monitorCount=Native.Monitors().Count,logicalProcessors=Environment.ProcessorCount,runtime=System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription,notes="Render rates count WPF invalidations, not GPU presentation. Allocation and CPU include the 8ms input-driving harness. Extended clicks target an owned window; effect-switch changes trusted preset parameters, not native themes. Short measurements are not long-term evidence."},Storage.Json));app.ExitApp();
             if(originalConfig!=null)File.WriteAllText(Settings.PathName,originalConfig);else if(File.Exists(Settings.PathName))File.Delete(Settings.PathName);
         }
     }

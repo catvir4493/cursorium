@@ -1,0 +1,424 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "29 actual resources, including 19 reviewed additions",
+      "passed": true
+    },
+    {
+      "name": "Published identity and package immutable: cute-bunny-cute-kawaii",
+      "passed": true
+    },
+    {
+      "name": "Published identity and package immutable: cute-cool-cat",
+      "passed": true
+    },
+    {
+      "name": "Published identity and package immutable: cool-cat-superstar",
+      "passed": true
+    },
+    {
+      "name": "Published identity and package immutable: cute-kawaii-cat-curs0rs",
+      "passed": true
+    },
+    {
+      "name": "Published identity and package immutable: cute-kawaii-pink-heart",
+      "passed": true
+    },
+    {
+      "name": "Published identity and package immutable: cute-pastel",
+      "passed": true
+    },
+    {
+      "name": "Published identity and package immutable: neon-blue",
+      "passed": true
+    },
+    {
+      "name": "Published identity and package immutable: sakura-pink",
+      "passed": true
+    },
+    {
+      "name": "Published identity and package immutable: aurora-flow",
+      "passed": true
+    },
+    {
+      "name": "Published identity and package immutable: golden-spark",
+      "passed": true
+    },
+    {
+      "name": "Six independently signed collections with verified members",
+      "passed": true
+    },
+    {
+      "name": "Collection references only actual resources: cute-cozy",
+      "passed": true
+    },
+    {
+      "name": "Collection references only actual resources: minimal-workspace",
+      "passed": true
+    },
+    {
+      "name": "Collection references only actual resources: pixel-nostalgia",
+      "passed": true
+    },
+    {
+      "name": "Collection references only actual resources: neon-cyber",
+      "passed": true
+    },
+    {
+      "name": "Collection references only actual resources: animated-favorites",
+      "passed": true
+    },
+    {
+      "name": "Collection references only actual resources: motion-essentials",
+      "passed": true
+    },
+    {
+      "name": "Forged collection signature rejected",
+      "passed": true
+    },
+    {
+      "name": "Changed collection bytes rejected before parsing",
+      "passed": true
+    },
+    {
+      "name": "Invalid collections schema/member/URL/dependency rejected",
+      "passed": true
+    },
+    {
+      "name": "Invalid collections schema/member/URL/dependency rejected",
+      "passed": true
+    },
+    {
+      "name": "Invalid collections schema/member/URL/dependency rejected",
+      "passed": true
+    },
+    {
+      "name": "Invalid collections schema/member/URL/dependency rejected",
+      "passed": true
+    },
+    {
+      "name": "Invalid collections schema/member/URL/dependency rejected",
+      "passed": true
+    },
+    {
+      "name": "Invalid collections schema/member/URL/dependency rejected",
+      "passed": true
+    },
+    {
+      "name": "Concurrent collection refresh coalesces into one document/signature request pair",
+      "passed": true
+    },
+    {
+      "name": "Restart and offline retain the last verified collections",
+      "passed": true
+    },
+    {
+      "name": "Unknown future collections cache is preserved without overwrite",
+      "passed": true
+    },
+    {
+      "name": "Published package SHA256: basic-vlazteron",
+      "passed": true
+    },
+    {
+      "name": "Actual native 15-role cursor or bounded trusted preset: basic-vlazteron",
+      "passed": true
+    },
+    {
+      "name": "Attribution NOTICE included: basic-vlazteron",
+      "passed": true
+    },
+    {
+      "name": "Published package SHA256: dot-minimal",
+      "passed": true
+    },
+    {
+      "name": "Actual native 15-role cursor or bounded trusted preset: dot-minimal",
+      "passed": true
+    },
+    {
+      "name": "Attribution NOTICE included: dot-minimal",
+      "passed": true
+    },
+    {
+      "name": "Published package SHA256: golden-mhmd",
+      "passed": true
+    },
+    {
+      "name": "Actual native 15-role cursor or bounded trusted preset: golden-mhmd",
+      "passed": true
+    },
+    {
+      "name": "Attribution NOTICE included: golden-mhmd",
+      "passed": true
+    },
+    {
+      "name": "Published package SHA256: amber-rose",
+      "passed": true
+    },
+    {
+      "name": "Actual native 15-role cursor or bounded trusted preset: amber-rose",
+      "passed": true
+    },
+    {
+      "name": "Attribution NOTICE included: amber-rose",
+      "passed": true
+    },
+    {
+      "name": "Published package SHA256: brown-cow",
+      "passed": true
+    },
+    {
+      "name": "Actual native 15-role cursor or bounded trusted preset: brown-cow",
+      "passed": true
+    },
+    {
+      "name": "Attribution NOTICE included: brown-cow",
+      "passed": true
+    },
+    {
+      "name": "Published package SHA256: little-chicken",
+      "passed": true
+    },
+    {
+      "name": "Actual native 15-role cursor or bounded trusted preset: little-chicken",
+      "passed": true
+    },
+    {
+      "name": "Attribution NOTICE included: little-chicken",
+      "passed": true
+    },
+    {
+      "name": "Published package SHA256: discrete-vlasta",
+      "passed": true
+    },
+    {
+      "name": "Actual native 15-role cursor or bounded trusted preset: discrete-vlasta",
+      "passed": true
+    },
+    {
+      "name": "Attribution NOTICE included: discrete-vlasta",
+      "passed": true
+    },
+    {
+      "name": "Published package SHA256: lovely-sunshine",
+      "passed": true
+    },
+    {
+      "name": "Actual native 15-role cursor or bounded trusted preset: lovely-sunshine",
+      "passed": true
+    },
+    {
+      "name": "Attribution NOTICE included: lovely-sunshine",
+      "passed": true
+    },
+    {
+      "name": "Published package SHA256: simple-dot-star",
+      "passed": true
+    },
+    {
+      "name": "Actual native 15-role cursor or bounded trusted preset: simple-dot-star",
+      "passed": true
+    },
+    {
+      "name": "Attribution NOTICE included: simple-dot-star",
+      "passed": true
+    },
+    {
+      "name": "Published package SHA256: sakura-blossom",
+      "passed": true
+    },
+    {
+      "name": "Actual native 15-role cursor or bounded trusted preset: sakura-blossom",
+      "passed": true
+    },
+    {
+      "name": "Attribution NOTICE included: sakura-blossom",
+      "passed": true
+    },
+    {
+      "name": "Published package SHA256: ice-crystal",
+      "passed": true
+    },
+    {
+      "name": "Actual native 15-role cursor or bounded trusted preset: ice-crystal",
+      "passed": true
+    },
+    {
+      "name": "Attribution NOTICE included: ice-crystal",
+      "passed": true
+    },
+    {
+      "name": "Published package SHA256: lavender-dream",
+      "passed": true
+    },
+    {
+      "name": "Actual native 15-role cursor or bounded trusted preset: lavender-dream",
+      "passed": true
+    },
+    {
+      "name": "Attribution NOTICE included: lavender-dream",
+      "passed": true
+    },
+    {
+      "name": "Published package SHA256: emerald-stream",
+      "passed": true
+    },
+    {
+      "name": "Actual native 15-role cursor or bounded trusted preset: emerald-stream",
+      "passed": true
+    },
+    {
+      "name": "Attribution NOTICE included: emerald-stream",
+      "passed": true
+    },
+    {
+      "name": "Published package SHA256: sunset-glow",
+      "passed": true
+    },
+    {
+      "name": "Actual native 15-role cursor or bounded trusted preset: sunset-glow",
+      "passed": true
+    },
+    {
+      "name": "Attribution NOTICE included: sunset-glow",
+      "passed": true
+    },
+    {
+      "name": "Published package SHA256: cyber-pulse",
+      "passed": true
+    },
+    {
+      "name": "Actual native 15-role cursor or bounded trusted preset: cyber-pulse",
+      "passed": true
+    },
+    {
+      "name": "Attribution NOTICE included: cyber-pulse",
+      "passed": true
+    },
+    {
+      "name": "Published package SHA256: moonlight",
+      "passed": true
+    },
+    {
+      "name": "Actual native 15-role cursor or bounded trusted preset: moonlight",
+      "passed": true
+    },
+    {
+      "name": "Attribution NOTICE included: moonlight",
+      "passed": true
+    },
+    {
+      "name": "Published package SHA256: stardust-pink",
+      "passed": true
+    },
+    {
+      "name": "Actual native 15-role cursor or bounded trusted preset: stardust-pink",
+      "passed": true
+    },
+    {
+      "name": "Attribution NOTICE included: stardust-pink",
+      "passed": true
+    },
+    {
+      "name": "Published package SHA256: ocean-mist",
+      "passed": true
+    },
+    {
+      "name": "Actual native 15-role cursor or bounded trusted preset: ocean-mist",
+      "passed": true
+    },
+    {
+      "name": "Attribution NOTICE included: ocean-mist",
+      "passed": true
+    },
+    {
+      "name": "Published package SHA256: amber-whisper",
+      "passed": true
+    },
+    {
+      "name": "Actual native 15-role cursor or bounded trusted preset: amber-whisper",
+      "passed": true
+    },
+    {
+      "name": "Attribution NOTICE included: amber-whisper",
+      "passed": true
+    },
+    {
+      "name": "Duplicate package hashes refused by publication preflight",
+      "passed": true
+    },
+    {
+      "name": "Stable ID and package version project Update available",
+      "passed": true
+    },
+    {
+      "name": "Failed update hash preserves existing installation",
+      "passed": true
+    },
+    {
+      "name": "Update failure leaves atomic installation record byte-identical",
+      "passed": true
+    },
+    {
+      "name": "Cancelled update does not commit",
+      "passed": true
+    },
+    {
+      "name": "Verified update atomically installs new immutable version",
+      "passed": true
+    },
+    {
+      "name": "Every previously installed immutable resource remains byte-identical",
+      "passed": true
+    },
+    {
+      "name": "Cover-only catalog change does not request package update",
+      "passed": true
+    },
+    {
+      "name": "Resource downgrade refused without deleting newer version",
+      "passed": true
+    },
+    {
+      "name": "Same resource version with different package bytes rejected",
+      "passed": true
+    },
+    {
+      "name": "Author conflict is distinct from installed state",
+      "passed": true
+    },
+    {
+      "name": "Different author cannot overwrite an owned stable ID",
+      "passed": true
+    },
+    {
+      "name": "Applied and latest resource versions resolve independently through retained manifests",
+      "passed": true
+    },
+    {
+      "name": "Editing motion parameters preserves the previously applied cursor version",
+      "passed": true
+    },
+    {
+      "name": "Cloning and saved Profiles retain explicit immutable cursor version",
+      "passed": true
+    },
+    {
+      "name": "Repeated resource installation never rewrites an existing Profile",
+      "passed": true
+    },
+    {
+      "name": "A retained-version pin cannot escape the managed theme directory",
+      "passed": true
+    },
+    {
+      "name": "All curation/download/update checks preserve actual Windows cursor snapshot",
+      "passed": true
+    }
+  ],
+  "resources": 29,
+  "collections": 6,
+  "notes": "Update 1.0.1 is an isolated explicit test fixture, not an invented public resource. No system apply was performed."
+}

@@ -11,7 +11,7 @@ if(-not (Test-Path -LiteralPath $PrivateKeyPath -PathType Leaf)){throw 'Protecte
 if(Test-Path -LiteralPath $OutputDirectory){throw 'Use a fresh isolated output directory; existing evidence is preserved.'}
 & dotnet build (Join-Path $projectRoot 'Frost.sln') -c Release --nologo
 if($LASTEXITCODE -ne 0){throw 'Build failed.'}
-$start=[Diagnostics.ProcessStartInfo]::new((Join-Path $projectRoot 'src/Frost.App/bin/Release/net8.0-windows/FrostWhiteComet.exe'))
+$start=[Diagnostics.ProcessStartInfo]::new((Join-Path $projectRoot 'src/Frost.App/bin/Release/net10.0-windows/FrostWhiteComet.exe'))
 $start.UseShellExecute=$false;$start.CreateNoWindow=$true;$start.WorkingDirectory=$projectRoot
 foreach($argument in @('--isolated-test','--prepare-library',[IO.Path]::GetFullPath($ReviewPath),[IO.Path]::GetFullPath($SourcesDirectory),[IO.Path]::GetFullPath($PreviousCatalog),[IO.Path]::GetFullPath($OutputDirectory),[IO.Path]::GetFullPath($PrivateKeyPath),'--test-data-root',(Join-Path ([IO.Path]::GetFullPath($OutputDirectory)) 'publisher-data'))){$start.ArgumentList.Add($argument)}
 $process=[Diagnostics.Process]::Start($start)

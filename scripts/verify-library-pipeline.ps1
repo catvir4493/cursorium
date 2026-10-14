@@ -10,7 +10,7 @@ function Run-Preparation([hashtable]$Value,[string]$Name,[bool]$Success,[string]
  $log=Join-Path $ReportDirectory 'isolated-data/frost.log';$before=if(Test-Path -LiteralPath $log){(Get-Content -LiteralPath $log -Raw).Length}else{0}
  $path=Join-Path $ReportDirectory ($Name+'.review.json');$output=Join-Path $ReportDirectory $Name
  $Value|ConvertTo-Json -Depth 30|Set-Content -LiteralPath $path -Encoding utf8
- $start=[Diagnostics.ProcessStartInfo]::new((Join-Path $projectRoot 'src/Frost.App/bin/Release/net8.0-windows/FrostWhiteComet.exe'));$start.UseShellExecute=$false;$start.CreateNoWindow=$true;$start.WorkingDirectory=$projectRoot
+ $start=[Diagnostics.ProcessStartInfo]::new((Join-Path $projectRoot 'src/Frost.App/bin/Release/net10.0-windows/FrostWhiteComet.exe'));$start.UseShellExecute=$false;$start.CreateNoWindow=$true;$start.WorkingDirectory=$projectRoot
  foreach($a in @('--isolated-test','--prepare-library',$path,[IO.Path]::GetFullPath($SourcesDirectory),[IO.Path]::GetFullPath($PreviousCatalog),$output,$Key,'--test-data-root',(Join-Path $ReportDirectory 'isolated-data'))){$start.ArgumentList.Add($a)}
  $process=[Diagnostics.Process]::Start($start);if(-not $process.WaitForExit(30000)){throw 'Pipeline test timed out; inspect before retry.'}
  if(($process.ExitCode -eq 0) -ne $Success){throw "Unexpected preparation result: $Name"}

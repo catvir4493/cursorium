@@ -1,6 +1,6 @@
 # CURSORIUM — Cursor & Motion Studio
 
-Windows 鼠标主题与桌面特效管理工具，沿用原 FROST 项目的 **C# / .NET 8 / WPF / Win32**。在线发现、校验下载，本地预览与应用；无账户、注入或主题脚本。
+Windows 鼠标主题与桌面特效管理工具，沿用原 FROST 的 **C# / WPF / Win32**，v1.5 迁移至 **.NET 10 LTS**。在线发现、校验下载，本地预览与应用；无账户、注入或主题脚本。
 
 ![CURSORIUM Explore](docs/images/v1.4/explore.png)
 
@@ -8,7 +8,9 @@ Windows 鼠标主题与桌面特效管理工具，沿用原 FROST 项目的 **C#
 
 v1.1 的 UI、状态与窗口框架升级、同尺寸前后对照和页面截图见 [交付记录](docs/CURSORIUM-v1.1-DELIVERY.md) 与 [截图对照](docs/CURSORIUM-v1.1-SCREENSHOTS.md)。
 
-当前版本 **v1.4.0 — Online Library Expansion & Curation**：29 项真实在线资源、6 个独立签名合集、版本绑定与安全更新、可复用审核发布工具。新增 9 套指针与 10 套原创拖尾；没有为达到 30 项而纳入未批准资源。见 [中文交付](docs/CURSORIUM-v1.4-DELIVERY.md)、[作者与授权台账](docs/CURSORIUM-v1.4-SOURCES.md)、[实际 WPF 截图](docs/CURSORIUM-v1.4-SCREENSHOTS.md)和[以后上架流程](docs/CURSORIUM-LIBRARY-WORKFLOW.md)。
+当前候选 **v1.5.0 — Stability, Performance & Compatibility（预发布）**：.NET 10.0.13 自包含运行时、静止采样降频、减少参数复制与绘制分配、外部修改保护、真实中断恢复测试、安装生命周期与可持续诊断。尚未完成 Windows 10、物理混合 DPI 和 24/72 小时长测，**不是 Steam Ready**。见[中文交付](docs/CURSORIUM-v1.5-DELIVERY.md)、[兼容性矩阵](docs/CURSORIUM-v1.5-COMPATIBILITY.md)和[可复现诊断](docs/CURSORIUM-v1.5-DIAGNOSTICS.md)。v1.4.0 Stable 保留。
+
+v1.4.0 — Online Library Expansion & Curation：29 项真实在线资源、6 个独立签名合集、版本绑定与安全更新、可复用审核发布工具。本轮资源库、来源/授权与旧资源 ID 保持不变，见[来源台账](docs/CURSORIUM-v1.4-SOURCES.md)和[以后上架流程](docs/CURSORIUM-LIBRARY-WORKFLOW.md)。
 
 v1.3.1 — Visual Experience Refinement：真实封面、首屏详情操作、像素放大观察、可点击角色画廊与更清晰的本地库；见 [中文交付](docs/CURSORIUM-v1.3.1-DELIVERY.md) 和 [同尺寸截图对照](docs/CURSORIUM-v1.3.1-SCREENSHOTS.md)。
 
@@ -33,7 +35,7 @@ v1.2 新增五套真实 Public Domain 可爱主题、分类/收藏、来源与�
 
 关闭窗口会保留托盘进程；Quit 会释放特效引擎，Windows 指针主题继续保留。Restore original cursors 恢复安装第一套主题前保存的配置，包括原注册表类型和原本不存在的值。已有 FROST 的备份继续有效。
 
-安装器 `CURSORIUM-Setup-1.3.1-Release.exe` 按当前用户安装，无需管理员权限。安装本身不改变系统指针或默认开启登录启动。卸载先退出引擎并恢复备份；恢复失败时停止卸载。设置、导入主题、指针稳定副本与历史备份保留。
+安装器 `CURSORIUM-Setup-1.5.0-Release.exe` 按当前用户安装，无需管理员权限。安装本身不改变系统指针或默认开启登录启动。卸载先退出引擎并恢复备份；恢复失败时停止卸载。设置、导入主题、指针稳定副本与历史备份保留。
 
 ## 使用
 
@@ -73,7 +75,7 @@ v1.2 新增五套真实 Public Domain 可爱主题、分类/收藏、来源与�
 
 ## 构建与验证
 
-Windows + .NET 8 或更新 SDK；项目目标仍为 `net8.0-windows`。
+Windows + .NET 10 SDK；目标 `net10.0-windows`，保留 C# 12。原 .NET 8 复现基线为 `cursorium-v1.4.0`。
 
 ```powershell
 dotnet build Frost.sln -c Release
@@ -84,10 +86,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-release.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-cursorium.ps1 -Discover
 ```
 
-完成验证并提交后，`scripts/publish-github.ps1` 推送并核对远程 main；正式版本增加 `-Release -Version 1.3.0 -NotesPath docs/releases/1.3.0.md` 会上传并校验下载文件，再发布 GitHub Release。凭据由 Git Credential Manager 在内存中读取。项目持续发布约定保存在 `AGENTS.md`：之后每次迭代完成验证后自动提交和上传。
+完成验证并提交后，`scripts/publish-github.ps1` 推送并核对远程 main；正式版本增加 `-Release -Prerelease -Version 1.5.0 -NotesPath docs/releases/1.5.0.md` 会上传并校验下载文件，再发布 GitHub Release。凭据由 Git Credential Manager 在内存中读取。项目持续发布约定保存在 `AGENTS.md`：之后每次迭代完成验证后自动提交和上传。
 
 `build-release.ps1` 生成自包含 Windows x64 便携 ZIP、安装器、主题 ZIP、源码 ZIP 和 SHA256 校验文件。`verify-cursorium.ps1` 使用独立数据目录；原生切换测试暂时改变系统指针，在结束时恢复测试前配置；桌面测试会短暂移动鼠标并使用 SendInput。现有用户设置与备份通过前后哈希检查保护。
 
 `scripts/verify-release.ps1` 是安装/卸载测试，要求没有现存安装和活动备份；本次未对用户的现存安装运行它。
 
-目标 Windows 10 1703+ / Windows 11 x64；本次实测 Windows 11 build 26100、单屏 2560×1440、96 DPI。Windows 10、混合 DPI、多屏物理热插拔、安全桌面与游戏独占全屏仍需实机覆盖。紧凑 DIP 布局测试不能替代真实 DPI 硬件验证。全屏暂停是窗口范围启发式检测；不支持的环境安全暂停，不注入应用。
+本次实测 Windows 11 x64 build 26100、单屏 2560×1440、96 DPI。Windows 10 Enterprise LTSC 2021 仅是候选测试目标，未列为已验证支持；混合 DPI、多屏物理热插拔、安全桌面与游戏独占全屏仍需实机覆盖。紧凑 DIP 布局测试不能替代真实 DPI 硬件验证。全屏暂停是窗口范围启发式检测；不支持的环境安全暂停，不注入应用。

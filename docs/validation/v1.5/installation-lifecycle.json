@@ -1,0 +1,72 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "passed": true,
+      "name": "Installer expected exit 0 (remove=False)"
+    },
+    {
+      "passed": true,
+      "name": "Fresh isolated install creates marked payload"
+    },
+    {
+      "passed": true,
+      "name": "Isolated registration records requested version"
+    },
+    {
+      "passed": true,
+      "name": "Installer expected exit 0 (remove=False)"
+    },
+    {
+      "passed": true,
+      "name": "Repeated installation preserves imported cursor"
+    },
+    {
+      "passed": true,
+      "name": "Installer expected exit 0 (remove=False)"
+    },
+    {
+      "passed": true,
+      "name": "Interrupted rename is recovered before retry installation"
+    },
+    {
+      "passed": true,
+      "name": "Installer expected exit 1 (remove=True)"
+    },
+    {
+      "passed": true,
+      "name": "Linked program tree blocks uninstall without touching target"
+    },
+    {
+      "passed": true,
+      "name": "Installer expected exit 1 (remove=True)"
+    },
+    {
+      "passed": true,
+      "name": "Recovery failure blocks program and registration deletion"
+    },
+    {
+      "passed": true,
+      "name": "Installer expected exit 0 (remove=True)"
+    },
+    {
+      "passed": true,
+      "name": "Installed uninstaller helper actually deletes only owned program files"
+    },
+    {
+      "passed": true,
+      "name": "Uninstall retains user imported resource bytes"
+    },
+    {
+      "passed": true,
+      "name": "Isolated uninstall removes its own registration"
+    },
+    {
+      "passed": true,
+      "name": "Whole lifecycle preserves actual Windows cursor values and types"
+    }
+  ],
+  "ended": "2026-10-14T13:41:59.5362057Z",
+  "note": "Actual Windows installer with isolated Program/Data/shortcut/registration. No production uninstall, restart, physical drive removal, or power interruption.",
+  "started": "2026-10-14T13:41:52.1875316Z"
+}

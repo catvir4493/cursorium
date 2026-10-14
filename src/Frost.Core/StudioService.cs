@@ -5,6 +5,7 @@ namespace Frost.Core;
 public sealed class StudioService
 {
     private readonly ThemeService themes;
+    private string? loadedState;
     public ThemeCatalog Catalog {get;}
     public EffectCatalog Effects {get;}
     public ProfileManager Profiles {get;}
@@ -17,8 +18,8 @@ public sealed class StudioService
         this.themes=themes;themes.Recover();Catalog=new(applicationDirectory);Effects=EffectCatalog.Load(Path.Combine(applicationDirectory,"Catalog","effects.json"));Profiles=new();
         if(File.Exists(StatePath))
         {
-            State=JsonSerializer.Deserialize<StudioState>(File.ReadAllText(StatePath),Storage.Json)??throw new InvalidDataException("Invalid studio state.");
-            if(State.SchemaVersion!=1||State.Applied?.Effects==null)throw new InvalidDataException("Unsupported studio state schema; original file preserved.");
+            loadedState=File.ReadAllText(StatePath);State=JsonSerializer.Deserialize<StudioState>(loadedState,Storage.Json)??throw new InvalidDataException("Invalid studio state.");
+            if(State.SchemaVersion!=1||State.Applied?.Effects==null||State.Applied.Effects.SchemaVersion!=1)throw new InvalidDataException("Unsupported studio state schema; original file preserved.");
         }
         else State=new(){Applied=new(){CursorThemeId=themes.IsInstalled?"frost":"system",Effects=Settings.Load()}};
         State.Applied.Effects.Normalize();LiveEffects.CopyFrom(State.Applied.Effects);
@@ -46,8 +47,13 @@ public sealed class StudioService
         Validate(configuration);var selected=ResolveTheme(configuration);
         var next=new StudioState{Applied=configuration.Clone(),ProfileId=profileId,AppliedAt=DateTimeOffset.Now};
         next.Applied.CursorPackageSha256=selected.ManagedDownload?selected.PackageSha256:null;
-        themes.ApplyTheme(selected,()=>Storage.Write(StatePath,next));
-        State=next;LiveEffects.CopyFrom(next.Applied.Effects);LoadWarning=null;
+        themes.ApplyTheme(selected,()=>Persist(next));
+        loadedState=File.ReadAllText(StatePath);State=next;LiveEffects.CopyFrom(next.Applied.Effects);LoadWarning=null;
+    }
+    private void Persist(StudioState next)
+    {
+        if((File.Exists(StatePath)?File.ReadAllText(StatePath):null)!=loadedState)throw new IOException("Applied settings changed outside this session. Reopen CURSORIUM before applying; the existing state was preserved.");
+        Storage.Write(StatePath,next);
     }
     public CursorTheme ResolveTheme(StudioConfiguration configuration)
     {
@@ -61,7 +67,7 @@ public sealed class StudioService
     public void RestoreOriginal()
     {
         var next=new StudioState{Applied=State.Applied.Clone(),AppliedAt=DateTimeOffset.Now};next.Applied.CursorThemeId="system";next.Applied.CursorPackageSha256=null;
-        themes.Restore(()=>Storage.Write(StatePath,next));State=next;
+        themes.Restore(()=>Persist(next));loadedState=File.ReadAllText(StatePath);State=next;
     }
     public static void RestoreSavedState(ThemeService themes)
     {
@@ -82,6 +88,6 @@ public sealed class StudioService
     public void SetEffectsEnabled(bool enabled)
     {
         var next=new StudioState{Applied=State.Applied.Clone(),ProfileId=State.ProfileId,AppliedAt=State.AppliedAt};next.Applied.Effects.Enabled=enabled;
-        Storage.Write(StatePath,next);State=next;LiveEffects.CopyFrom(next.Applied.Effects);
+        Persist(next);loadedState=File.ReadAllText(StatePath);State=next;LiveEffects.CopyFrom(next.Applied.Effects);
     }
 }

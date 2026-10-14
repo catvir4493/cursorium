@@ -14,10 +14,11 @@ public sealed class TrailEngine:IDisposable
     private readonly Stopwatch clock=Stopwatch.StartNew();
     private readonly DispatcherTimer sampler;
     private RawMouse? mouse;
-    private double lastRender,lastEnvironmentCheck,lastTopmost;
+    private double lastRender,lastEnvironmentCheck,lastTopmost,lastMovement;
     private bool paused,dirty,hadContent;
     private bool disposed;
     private bool renderAttached;
+    private Native.Point? sampledPosition;
     public bool PausedByUser {get;set;}
     public Native.Rect? PreviewBounds {get;set;}
     private bool InsidePreview(Native.Point p)=>PreviewBounds is Native.Rect r&&p.X>=r.Left&&p.X<r.Right&&p.Y>=r.Top&&p.Y<r.Bottom;
@@ -26,15 +27,26 @@ public sealed class TrailEngine:IDisposable
     public TrailModel Model=>model;
     public long RenderedFrames{get;private set;}
     public long Samples{get;private set;}
+    public bool RenderingActive=>renderAttached;
     public TrailEngine(Settings settings)
     {
-        this.settings=settings;clicks=new(model);Rebuild();
-        sampler=new DispatcherTimer(DispatcherPriority.Input){Interval=TimeSpan.FromMilliseconds(8)};sampler.Tick+=Sample;sampler.Start();
-        SystemEvents.DisplaySettingsChanged+=DisplayChanged;SystemEvents.PowerModeChanged+=PowerChanged;
+        this.settings=settings;clicks=new(model);
+        sampler=new DispatcherTimer(DispatcherPriority.Input){Interval=TimeSpan.FromMilliseconds(8)};sampler.Tick+=Sample;Rebuild();sampler.Start();
+        settings.ActivityChanged+=SettingsChanged;SystemEvents.DisplaySettingsChanged+=DisplayChanged;SystemEvents.PowerModeChanged+=PowerChanged;SystemEvents.SessionSwitch+=SessionChanged;
+    }
+    private void SettingsChanged()
+    {
+        if(disposed)return;if(!sampler.Dispatcher.CheckAccess()){sampler.Dispatcher.BeginInvoke(new Action(SettingsChanged));return;}lastEnvironmentCheck=double.NegativeInfinity;
+        if(!settings.Enabled)
+        {
+            model.Clear();dirty=false;hadContent=false;DetachRender();
+            foreach(var w in windows){w.Painter.InvalidateVisual();w.Hide();}SetSamplingInterval(250);
+        }
+        else {model.Expire(clock.Elapsed.TotalMilliseconds,settings);foreach(var w in windows)w.Painter.InvalidateVisual();SetSamplingInterval(8);}
     }
     private void Rebuild()
     {
-        mouse?.Dispose();mouse=null;foreach(var w in windows)w.Close();windows.Clear();model.Clear();hadContent=false;
+        DetachRender();mouse?.Dispose();mouse=null;foreach(var w in windows)w.Close();windows.Clear();model.Clear();hadContent=false;dirty=false;
         foreach(var monitor in Native.Monitors()){var w=new OverlayWindow(monitor,model,settings);w.Show();windows.Add(w);}
         if(windows.Count>0)mouse=new RawMouse(windows[0].Handle,ObserveRaw);
     }
@@ -43,11 +55,14 @@ public sealed class TrailEngine:IDisposable
         if(!settings.Enabled||paused||!Native.GetPhysicalCursorPos(out var p))return;
         if(InsidePreview(p)){model.Clear();dirty|=hadContent;if(dirty)AttachRender();return;}
         double now=clock.Elapsed.TotalMilliseconds;if(settings.TrailEnabled)model.Add(p.X,p.Y,now,settings);dirty|=model.Points.Count>1;
+        lastMovement=now;SetSamplingInterval(settings.PowerSaving?16:8);
         clicks.Observe(buttons,p.X,p.Y,now,settings);dirty|=model.Halos.Count>0;if(dirty)AttachRender();
     }
     private void AttachRender(){if(!renderAttached){CompositionTarget.Rendering+=Render;renderAttached=true;}}
     private void DetachRender(){if(renderAttached){CompositionTarget.Rendering-=Render;renderAttached=false;}}
     private void DisplayChanged(object? s,EventArgs e)=>System.Windows.Application.Current.Dispatcher.BeginInvoke(new Action(()=>{if(!disposed)Rebuild();}));
+    private void SessionChanged(object sender,SessionSwitchEventArgs e)=>System.Windows.Application.Current.Dispatcher.BeginInvoke(new Action(()=>{if(disposed)return;model.Clear();lastEnvironmentCheck=double.NegativeInfinity;}));
+    private void SetSamplingInterval(double milliseconds){var interval=TimeSpan.FromMilliseconds(milliseconds);if(sampler.Interval!=interval)sampler.Interval=interval;}
     private void PowerChanged(object sender,PowerModeChangedEventArgs e)=>System.Windows.Application.Current.Dispatcher.BeginInvoke(new Action(()=>{if(disposed)return;if(e.Mode==PowerModes.Suspend)model.Clear();if(e.Mode==PowerModes.Resume)lastEnvironmentCheck=0;}));
     public void RefreshDisplays()=>Rebuild();
     private bool Fullscreen()
@@ -70,16 +85,18 @@ public sealed class TrailEngine:IDisposable
         {
             lastEnvironmentCheck=now;paused=PausedByUser||!Native.IsDefaultInputDesktop()||(settings.PauseFullscreen&&Fullscreen());
             Status=!settings.Enabled?"Effects disabled":PausedByUser?"Paused by user":paused?"Paused: fullscreen or secure desktop":!settings.TrailEnabled?"Click effects only":settings.PowerSaving?"Power saving · 30 FPS":"Running · "+settings.FrameRate+" FPS target";
-            sampler.Interval=TimeSpan.FromMilliseconds(!settings.Enabled||!settings.TrailEnabled?250:paused?100:settings.PowerSaving?16:8);
             foreach(var w in windows){if(!settings.Enabled||paused){if(w.IsVisible)w.Hide();}else if(!w.IsVisible)w.Show();}
         }
-        if(!settings.Enabled||paused){if(model.HasContent||model.Points.Count>0){model.Clear();foreach(var w in windows)w.Painter.InvalidateVisual();}hadContent=false;dirty=false;DetachRender();return;}
+        if(!settings.Enabled||paused){SetSamplingInterval(!settings.Enabled?250:100);if(model.HasContent||model.Points.Count>0){model.Clear();foreach(var w in windows)w.Painter.InvalidateVisual();}hadContent=false;dirty=false;DetachRender();return;}
         if(Native.GetPhysicalCursorPos(out var p))
         {
             if(InsidePreview(p)){model.Clear();dirty|=hadContent;}
-            else if(settings.TrailEnabled){model.Add(p.X,p.Y,now,settings);dirty|=model.Points.Count>1;}
+            else if(settings.TrailEnabled){if(sampledPosition==null||sampledPosition.Value.X!=p.X||sampledPosition.Value.Y!=p.Y)lastMovement=now;sampledPosition=p;model.Add(p.X,p.Y,now,settings);dirty|=model.Points.Count>1;}
         }
         model.Expire(now,settings);
+        // Raw Input immediately wakes actual mouse motion; retain a bounded fallback
+        // poll for programmatic pointer moves and environment changes while idle.
+        SetSamplingInterval(!settings.TrailEnabled?250:!model.HasContent&&now-lastMovement>settings.Duration?80:settings.PowerSaving?16:8);
         if(dirty||model.HasContent||hadContent)AttachRender();
     }
     private void Render(object? sender,EventArgs e)
@@ -96,6 +113,6 @@ public sealed class TrailEngine:IDisposable
     }
     public void Dispose()
     {
-        if(disposed)return;disposed=true;sampler.Stop();sampler.Tick-=Sample;DetachRender();SystemEvents.DisplaySettingsChanged-=DisplayChanged;SystemEvents.PowerModeChanged-=PowerChanged;mouse?.Dispose();foreach(var w in windows)w.Close();windows.Clear();
+        if(disposed)return;disposed=true;settings.ActivityChanged-=SettingsChanged;sampler.Stop();sampler.Tick-=Sample;DetachRender();SystemEvents.DisplaySettingsChanged-=DisplayChanged;SystemEvents.PowerModeChanged-=PowerChanged;SystemEvents.SessionSwitch-=SessionChanged;mouse?.Dispose();foreach(var w in windows)w.Close();windows.Clear();
     }
 }

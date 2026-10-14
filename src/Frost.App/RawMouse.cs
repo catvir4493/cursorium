@@ -11,6 +11,7 @@ public sealed class RawMouse:IDisposable
     private readonly HwndSource source;
     private readonly IntPtr buffer=Marshal.AllocHGlobal(256);
     private readonly Action<ClickButton> observe;
+    private bool disposed;
     public RawMouse(IntPtr hwnd,Action<ClickButton> observe)
     {
         this.observe=observe;source=HwndSource.FromHwnd(hwnd);source.AddHook(Hook);
@@ -31,5 +32,5 @@ public sealed class RawMouse:IDisposable
         }
         return IntPtr.Zero; // Let WPF/DefWindowProc clean up WM_INPUT; never consume legacy mouse messages.
     }
-    public void Dispose(){source.RemoveHook(Hook);RegisterRawInputDevices(new[]{new Device{Page=1,Usage=2,Flags=1,Target=IntPtr.Zero}},1,(uint)Marshal.SizeOf<Device>());Marshal.FreeHGlobal(buffer);}
+    public void Dispose(){if(disposed)return;disposed=true;source.RemoveHook(Hook);RegisterRawInputDevices(new[]{new Device{Page=1,Usage=2,Flags=1,Target=IntPtr.Zero}},1,(uint)Marshal.SizeOf<Device>());Marshal.FreeHGlobal(buffer);}
 }

@@ -15,7 +15,14 @@ public sealed class TrailPainter:FrameworkElement
     private Color color;
     private readonly Dictionary<int,Pen> pens=new();
     private readonly Dictionary<int,Brush> brushes=new();
-    public TrailPainter(TrailModel model,Settings settings){Model=model;Settings=settings;IsHitTestVisible=false;ClipToBounds=true;}
+    private readonly Func<double,Brush> brushFunction;
+    private readonly Func<double,double,Pen> penFunction;
+    private readonly Func<double,double,Point> localFunction;
+    private double scaleX=1,scaleY=1;
+    public long PaintCount {get;private set;}
+    public long PaintTicks {get;private set;}
+    public TrailPainter(TrailModel model,Settings settings){Model=model;Settings=settings;brushFunction=Brush;penFunction=Pen;localFunction=Local;IsHitTestVisible=false;ClipToBounds=true;}
+    private Point Local(double x,double y)=>new((x-OriginX)/scaleX,(y-OriginY)/scaleY);
     private Brush Brush(double alpha)
     {
         int key=Math.Clamp((int)(alpha*100),0,100);if(!brushes.TryGetValue(key,out var brush)){brush=new SolidColorBrush(Color.FromArgb((byte)(key*255/100),color.R,color.G,color.B));brush.Freeze();brushes[key]=brush;}return brush;
@@ -27,9 +34,13 @@ public sealed class TrailPainter:FrameworkElement
     }
     protected override void OnRender(DrawingContext dc)
     {
+        long started=System.Diagnostics.Stopwatch.GetTimestamp();
+        try{Paint(dc);}finally{PaintCount++;PaintTicks+=System.Diagnostics.Stopwatch.GetTimestamp()-started;}
+    }
+    private void Paint(DrawingContext dc)
+    {
         base.OnRender(dc);if(lastColor!=Settings.Color){lastColor=Settings.Color;color=CursorArtwork.ColorFrom(lastColor);pens.Clear();brushes.Clear();}
-        var dpi=VisualTreeHelper.GetDpi(this);double sx=PhysicalCoordinates?dpi.DpiScaleX:1,sy=PhysicalCoordinates?dpi.DpiScaleY:1;
-        Point Local(double x,double y)=>new((x-OriginX)/sx,(y-OriginY)/sy);
+        var dpi=VisualTreeHelper.GetDpi(this);scaleX=PhysicalCoordinates?dpi.DpiScaleX:1;scaleY=PhysicalCoordinates?dpi.DpiScaleY:1;
         var points=Model.Points;
         for(int i=1;Settings.TrailEnabled&&Settings.TrailEffect!="stardust"&&i<points.Count;i++)
         {
@@ -59,6 +70,6 @@ public sealed class TrailPainter:FrameworkElement
             }
             dc.DrawEllipse(Brush(alpha*.15),null,q,3,3);dc.DrawEllipse(Brush(alpha),null,q,.8,.8);
         }
-        ClickEffectPainter.Draw(dc,Model.Halos,Settings,Now,sx,Local,Brush,Pen);
+        if(Model.Halos.Count>0&&Settings.ClickHalo&&Settings.ClickEffect!="off")ClickEffectPainter.Draw(dc,Model.Halos,Settings,Now,scaleX,localFunction,brushFunction,penFunction);
     }
 }

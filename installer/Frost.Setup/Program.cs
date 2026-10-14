@@ -62,7 +62,9 @@ internal static class Program
         if(key?.GetValue("InstallLocation") is not string location||string.IsNullOrWhiteSpace(location))return defaultTarget;
         if(!Path.IsPathFullyQualified(location))throw new IOException("The registered installation path must be absolute.");
         var full=Path.GetFullPath(location).TrimEnd(Path.DirectorySeparatorChar);
-        if(string.Equals(full,Path.GetPathRoot(full)?.TrimEnd(Path.DirectorySeparatorChar),StringComparison.OrdinalIgnoreCase)||string.Equals(full,Path.GetFullPath(Storage.Root).TrimEnd(Path.DirectorySeparatorChar),StringComparison.OrdinalIgnoreCase)||!Directory.Exists(full))throw new IOException("The registered CURSORIUM installation is unavailable or unsafe. Reconnect its drive before retrying.");
+        if(string.Equals(full,Path.GetPathRoot(full)?.TrimEnd(Path.DirectorySeparatorChar),StringComparison.OrdinalIgnoreCase)||string.Equals(full,Path.GetFullPath(Storage.Root).TrimEnd(Path.DirectorySeparatorChar),StringComparison.OrdinalIgnoreCase))throw new IOException("The registered CURSORIUM installation is unavailable or unsafe. Reconnect its drive before retrying.");
+        RecoverPreviousTarget(full);
+        if(!Directory.Exists(full))throw new IOException("The registered installation is unavailable. Reconnect its drive before retrying.");
         for(var current=full;!string.IsNullOrEmpty(current);current=Path.GetDirectoryName(current))
             if((File.GetAttributes(current)&FileAttributes.ReparsePoint)!=0)throw new IOException("Linked installation directories are unsupported.");
         var marker=Path.Combine(full,"frost-install.marker");var executable=Path.Combine(full,"FrostWhiteComet.exe");
@@ -91,7 +93,7 @@ internal static class Program
         string parent=Path.GetDirectoryName(Path.GetFullPath(Target))!;DownloadManager.GuardRoot(parent);Directory.CreateDirectory(parent);
         string staging=Path.Combine(parent,".cursorium-setup-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(staging);
         File.WriteAllText(Path.Combine(staging,"cursorium-setup-owner.marker"),Path.GetFileName(staging));
-        string old=Target+".previous";
+        string old=Target+".previous";RecoverPreviousTarget(Target);
         try
         {
             using(var zip=new ZipArchive(payload,ZipArchiveMode.Read))
@@ -99,7 +101,7 @@ internal static class Program
                 foreach(var entry in zip.Entries)
                 {
                     string path=Path.GetFullPath(Path.Combine(staging,entry.FullName));if(!path.StartsWith(staging+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase))throw new IOException("Invalid path in the installer payload.");
-                    if(entry.FullName.EndsWith('/')){Directory.CreateDirectory(path);continue;}Directory.CreateDirectory(Path.GetDirectoryName(path)!);entry.ExtractToFile(path);
+                    if(entry.FullName.EndsWith('/')||entry.FullName.EndsWith('\\')){Directory.CreateDirectory(path);continue;}Directory.CreateDirectory(Path.GetDirectoryName(path)!);entry.ExtractToFile(path);
                 }
             }
             if(!File.Exists(Path.Combine(staging,"FrostWhiteComet.exe")))throw new IOException("The installer payload is missing the main executable.");
@@ -107,6 +109,7 @@ internal static class Program
             if(Directory.Exists(Target)&&!File.Exists(Path.Combine(Target,"frost-install.marker")))throw new IOException("The target directory is not a CURSORIUM installation. Installation has been stopped.");
             if(!Directory.Exists(Target)&&File.Exists(Shortcut))throw new IOException("A Start menu shortcut with this name already exists. Preserve or rename it before retrying.");
             if(Directory.Exists(old))throw new IOException("An unfinished upgrade backup exists: "+old);
+            if(Directory.Exists(Target))GuardProgramTree(Target);
             StopApp();Directory.CreateDirectory(Path.GetDirectoryName(Target)!);bool previous=Directory.Exists(Target);if(previous)Directory.Move(Target,old);
             try
             {
@@ -138,20 +141,34 @@ internal static class Program
     private static void DeleteOwned(string directory)
     {
         string full=Path.GetFullPath(directory);if(!string.Equals(full,Path.GetFullPath(Target),StringComparison.OrdinalIgnoreCase)&&!string.Equals(full,Path.GetFullPath(Target+".previous"),StringComparison.OrdinalIgnoreCase))throw new IOException("Deletion outside the owned installation paths was refused.");
-        if(!File.Exists(Path.Combine(full,"frost-install.marker")))throw new IOException("The installation marker is missing. Deletion was refused.");Directory.Delete(full,true);
+        if(!File.Exists(Path.Combine(full,"frost-install.marker")))throw new IOException("The installation marker is missing. Deletion was refused.");GuardProgramTree(full);Directory.Delete(full,true);
+    }
+    private static void GuardProgramTree(string root,int depth=0)
+    {
+        DownloadManager.GuardRoot(root);if(depth>32)throw new IOException("The installation tree exceeds cleanup limits.");
+        foreach(var entry in Directory.EnumerateFileSystemEntries(root))
+        {DownloadManager.GuardRoot(entry);if(Directory.Exists(entry))GuardProgramTree(entry,depth+1);}
+    }
+    private static void RecoverPreviousTarget(string target)
+    {
+        if(Directory.Exists(target)||!Directory.Exists(target+".previous"))return;
+        string previous=target+".previous";GuardProgramTree(previous);
+        var marker=Path.Combine(previous,"frost-install.marker");var exe=Path.Combine(previous,"FrostWhiteComet.exe");
+        if(!File.Exists(marker)||new FileInfo(marker).Length>4096||!File.ReadAllText(marker).StartsWith("CURSORIUM",StringComparison.Ordinal)||!File.Exists(exe)||!(System.Diagnostics.FileVersionInfo.GetVersionInfo(exe).ProductName??"").StartsWith("CURSORIUM",StringComparison.Ordinal))throw new IOException("An unverified interrupted upgrade directory was preserved. Automatic recovery refused.");
+        Directory.Move(previous,target);
     }
     private static string QuotePs(string value)=>"'"+value.Replace("'","''")+"'";
     private static void Uninstall()
     {
         if(!Directory.Exists(Target))return;
         if(!File.Exists(Path.Combine(Target,"frost-install.marker")))throw new IOException("The installation marker is missing. This directory will not be uninstalled.");
-        StopApp();StudioService.RestoreSavedState(new ThemeService()); // abort uninstall if native or state restoration fails
+        GuardProgramTree(Target);StopApp();StudioService.RestoreSavedState(new ThemeService()); // abort uninstall if native or state restoration fails
         if(!isolated)StartupRegistration.Set(false,Path.Combine(Target,"FrostWhiteComet.exe"));if(File.Exists(Shortcut))File.Delete(Shortcut);if(File.Exists(LegacyShortcut))File.Delete(LegacyShortcut);Registry.CurrentUser.DeleteSubKeyTree(UninstallKey,false);
         string current=Path.GetFullPath(Environment.ProcessPath!);
         if(current.StartsWith(Target+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase))
         {
             // Running uninstaller cannot delete itself. Hidden, native PowerShell helper only deletes this verified owned directory after we exit.
-            string script=$"$frostTarget={QuotePs(Target)}; $frostExpected={QuotePs(Path.GetFullPath(Target))}; while (Get-Process -Id {Environment.ProcessId} -ErrorAction SilentlyContinue) {{ Start-Sleep -Milliseconds 200 }}; if ([IO.Path]::GetFullPath($frostTarget) -eq $frostExpected -and (Test-Path -LiteralPath (Join-Path $frostTarget 'frost-install.marker'))) {{ Remove-Item -LiteralPath $frostTarget -Recurse -Force }}";
+            string script=$"$ErrorActionPreference='Stop'; $frostTarget={QuotePs(Target)}; $frostExpected={QuotePs(Path.GetFullPath(Target))}; while (Get-Process -Id {Environment.ProcessId} -ErrorAction SilentlyContinue) {{ Start-Sleep -Milliseconds 200 }}; if ([IO.Path]::GetFullPath($frostTarget) -eq $frostExpected -and (Test-Path -LiteralPath (Join-Path $frostTarget 'frost-install.marker'))) {{ foreach($entry in @(Get-Item -LiteralPath $frostTarget)+@(Get-ChildItem -LiteralPath $frostTarget -Recurse -Force)) {{ if($entry.Attributes -band [IO.FileAttributes]::ReparsePoint) {{ throw 'Linked installation cleanup refused' }} }}; Remove-Item -LiteralPath $frostTarget -Recurse -Force }}";
             Process.Start(new ProcessStartInfo("powershell.exe","-NoProfile -NonInteractive -WindowStyle Hidden -EncodedCommand "+Convert.ToBase64String(Encoding.Unicode.GetBytes(script))){UseShellExecute=false,CreateNoWindow=true});
         }
         else DeleteOwned(Target);

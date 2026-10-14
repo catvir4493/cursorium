@@ -1,0 +1,51 @@
+[
+  {
+    "command": "dotnet build Frost.sln -c Release",
+    "name": "Release build",
+    "passed": true,
+    "ended": "2026-10-14T13:28:43.256446Z",
+    "environment": "Windows 11 interactive desktop; isolated data",
+    "started": "2026-10-14T13:28:41.0271354Z"
+  },
+  {
+    "command": "scripts/verify-cursorium.ps1 -Discover -SkipBenchmark",
+    "name": "Retained and recovery regression",
+    "passed": true,
+    "ended": "2026-10-14T13:30:11.3151883Z",
+    "environment": "Windows 11 interactive desktop; isolated data",
+    "started": "2026-10-14T13:28:43.2674833Z"
+  },
+  {
+    "command": "dotnet run --project tests/Frost.Verify -c Release -- assets/cursors",
+    "name": "Native FROST resources",
+    "passed": true,
+    "ended": "2026-10-14T13:30:12.9377511Z",
+    "environment": "Windows 11 interactive desktop; isolated data",
+    "started": "2026-10-14T13:30:11.3162111Z"
+  },
+  {
+    "command": "dotnet run --project tests/Frost.Verify -c Release -- assets/themes/obsidian",
+    "name": "Native Obsidian resources",
+    "passed": true,
+    "ended": "2026-10-14T13:30:14.0732741Z",
+    "environment": "Windows 11 interactive desktop; isolated data",
+    "started": "2026-10-14T13:30:12.9389629Z"
+  },
+  {
+    "command": "dotnet run --project tests/Frost.Verify -c Release -- --curation-tests <retained signed stage> <previous catalog>",
+    "name": "Curation and immutable update regression",
+    "passed": true,
+    "ended": "2026-10-14T13:30:17.5484389Z",
+    "environment": "Windows 11 interactive desktop; isolated data",
+    "started": "2026-10-14T13:30:14.0749856Z"
+  },
+  {
+    "ended": "2026-10-14T15:44:34.9309502+02:00",
+    "environment": "Windows 11 interactive desktop; isolated data",
+    "passed": true,
+    "started": "2026-10-14T15:44:21.5797633+02:00",
+    "command": "dotnet run --project tests/Frost.Verify -c Release -- --stability-tests <app> <isolated output>",
+    "name": "Final recovery data-root and safety checks",
+    "evidence": "recovery-report.json"
+  }
+]

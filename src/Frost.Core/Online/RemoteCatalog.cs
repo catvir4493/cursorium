@@ -53,7 +53,7 @@ public sealed class RemoteResource
         var known=CursorRoles.All.Select(r=>r.Name).ToHashSet();
         if(SupportedRoles.Distinct().Count()!=SupportedRoles.Count||NativeRoles.Distinct().Count()!=NativeRoles.Count||SupportedRoles.Any(r=>!known.Contains(r))||NativeRoles.Any(r=>!SupportedRoles.Contains(r))||(Type=="cursor"&&SupportedRoles.Count!=15)||(Type=="trail"&&(SupportedRoles.Count!=0||NativeRoles.Count!=0||AnimatedCursorCount!=0)))throw new InvalidDataException("Invalid role coverage.");
     }
-    public void CheckCompatibility(){Validate();if(System.Version.Parse(MinimumClientVersion)>new System.Version(1,4,0))throw new InvalidDataException("This resource requires a newer CURSORIUM version.");}
+    public void CheckCompatibility(){Validate();if(System.Version.Parse(MinimumClientVersion)>new System.Version(1,5,0))throw new InvalidDataException("This resource requires a newer CURSORIUM version.");}
     public static bool ValidId(string? id)=>id!=null&&Regex.IsMatch(id,"^[a-z0-9][a-z0-9-]{0,79}$")&&id!="system";
 }
 
@@ -63,7 +63,7 @@ public sealed class OfficialHttp:IDisposable
     public const string CatalogUrl="https://catvir4493.github.io/cursorium-library/catalog/v1/index.json";
     private readonly HttpClient client;
     private readonly TimeSpan requestTimeout;
-    public OfficialHttp(HttpMessageHandler? handler=null,TimeSpan? timeout=null){requestTimeout=timeout??TimeSpan.FromMinutes(2);if(requestTimeout<=TimeSpan.Zero||requestTimeout>TimeSpan.FromMinutes(2))throw new ArgumentOutOfRangeException(nameof(timeout));client=new(handler??new HttpClientHandler{AllowAutoRedirect=false,AutomaticDecompression=DecompressionMethods.None});client.Timeout=Timeout.InfiniteTimeSpan;client.DefaultRequestHeaders.UserAgent.ParseAdd("CURSORIUM/1.4.0");}
+    public OfficialHttp(HttpMessageHandler? handler=null,TimeSpan? timeout=null){requestTimeout=timeout??TimeSpan.FromMinutes(2);if(requestTimeout<=TimeSpan.Zero||requestTimeout>TimeSpan.FromMinutes(2))throw new ArgumentOutOfRangeException(nameof(timeout));client=new(handler??new HttpClientHandler{AllowAutoRedirect=false,AutomaticDecompression=DecompressionMethods.None});client.Timeout=Timeout.InfiniteTimeSpan;client.DefaultRequestHeaders.UserAgent.ParseAdd("CURSORIUM/1.5.0");}
     public static void ValidateUrl(Uri url,bool releaseRedirect)
     {
         if(url.Scheme!="https"||url.Port!=443||!string.IsNullOrEmpty(url.UserInfo)||!string.IsNullOrEmpty(url.Fragment))throw new InvalidDataException("Only official HTTPS resources are allowed.");

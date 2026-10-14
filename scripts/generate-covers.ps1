@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$InputDirectory,[Parameter(Mandatory)][string]$OutputDirectory,[string]$ApplicationDirectory='src/Frost.App/bin/Release/net8.0-windows')
+param([Parameter(Mandatory)][string]$InputDirectory,[Parameter(Mandatory)][string]$OutputDirectory,[string]$ApplicationDirectory='src/Frost.App/bin/Release/net10.0-windows')
 $ErrorActionPreference='Stop'
 $repo=Split-Path -Parent $PSScriptRoot
 $inputRoot=[IO.Path]::GetFullPath($InputDirectory)

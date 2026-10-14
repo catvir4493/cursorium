@@ -1,4 +1,4 @@
-param([switch]$IsolatedUpgrade,[switch]$CrossVolume,[ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.4.0')
+param([switch]$IsolatedUpgrade,[switch]$CrossVolume,[ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.5.0')
 $ErrorActionPreference = 'Stop'
 $frostRoot = Split-Path -Parent $PSScriptRoot
 Set-Location -LiteralPath $frostRoot

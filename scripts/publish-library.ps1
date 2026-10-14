@@ -7,7 +7,7 @@ $catalog=Get-Content -LiteralPath $catalogFile -Raw | ConvertFrom-Json
 if($catalog.SchemaVersion -ne 1 -or $catalog.CatalogVersion -ne $Version){throw 'Catalog version mismatch.'}
 if(-not $PreviousCatalog){throw 'Supply the previous signed catalog captured before staging.'}
 $ExportPath=[IO.Path]::GetFullPath($ExportPath)
-$start=[Diagnostics.ProcessStartInfo]::new((Join-Path $projectRoot 'src/Frost.App/bin/Release/net8.0-windows/FrostWhiteComet.exe'))
+$start=[Diagnostics.ProcessStartInfo]::new((Join-Path $projectRoot 'src/Frost.App/bin/Release/net10.0-windows/FrostWhiteComet.exe'))
 $start.UseShellExecute=$false;$start.CreateNoWindow=$true
 foreach($arg in @('--isolated-test','--verify-library',$ExportPath,[IO.Path]::GetFullPath($PreviousCatalog),'--test-data-root',(Join-Path $ExportPath 'publisher-data'))){$start.ArgumentList.Add($arg)}
 $process=[Diagnostics.Process]::Start($start)

@@ -1,6 +1,7 @@
 param(
     [switch]$Release,
-    [ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.4.0',
+    [switch]$Prerelease,
+    [ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.5.0',
     [string]$NotesPath
 )
 $ErrorActionPreference='Stop'
@@ -63,7 +64,7 @@ $cursoriumApi="https://api.github.com/repos/$cursoriumRepository"
 $cursoriumReleases=Invoke-RestMethod -Uri "$cursoriumApi/releases?per_page=100" -Headers $cursoriumHeaders
 $cursoriumRelease=$cursoriumReleases | Where-Object tag_name -eq $cursoriumTag | Select-Object -First 1
 if(-not $cursoriumRelease){
-    $cursoriumBody=@{tag_name=$cursoriumTag;target_commitish=$cursoriumCommit;name="CURSORIUM v$Version";body=$cursoriumNotes;draft=$true;prerelease=$false} | ConvertTo-Json
+    $cursoriumBody=@{tag_name=$cursoriumTag;target_commitish=$cursoriumCommit;name="CURSORIUM v$Version";body=$cursoriumNotes;draft=$true;prerelease=[bool]$Prerelease} | ConvertTo-Json
     $cursoriumRelease=Invoke-RestMethod -Method Post -Uri "$cursoriumApi/releases" -Headers $cursoriumHeaders -ContentType 'application/json; charset=utf-8' -Body ([Text.Encoding]::UTF8.GetBytes($cursoriumBody))
 }
 foreach($cursoriumAsset in $cursoriumAssets){
@@ -86,10 +87,11 @@ foreach($cursoriumAsset in $cursoriumAssets){
 $cursoriumRelease=Invoke-RestMethod -Uri "$cursoriumApi/releases/$($cursoriumRelease.id)" -Headers $cursoriumHeaders
 if($cursoriumRelease.assets.Count -ne $cursoriumAssets.Count){throw 'Release asset list is incomplete or unexpected.'}
 if($cursoriumRelease.draft){
-    $cursoriumBody=@{draft=$false;make_latest='true'} | ConvertTo-Json
+    $cursoriumBody=@{draft=$false;prerelease=[bool]$Prerelease;make_latest=$(if($Prerelease){'false'}else{'true'})} | ConvertTo-Json
     $cursoriumRelease=Invoke-RestMethod -Method Patch -Uri "$cursoriumApi/releases/$($cursoriumRelease.id)" -Headers $cursoriumHeaders -ContentType 'application/json' -Body $cursoriumBody
 }
 if($cursoriumRelease.draft){throw 'Release remains a draft.'}
-$cursoriumSummary=[ordered]@{repository=$cursoriumRepository;commit=$cursoriumCommit;tag=$cursoriumTag;published=$true;releaseUrl=$cursoriumRelease.html_url;assets=@($cursoriumRelease.assets | Select-Object name,size,digest,browser_download_url)}
+if([bool]$cursoriumRelease.prerelease -ne [bool]$Prerelease){throw 'Published release classification does not match the requested gate.'}
+$cursoriumSummary=[ordered]@{repository=$cursoriumRepository;commit=$cursoriumCommit;tag=$cursoriumTag;published=$true;prerelease=$cursoriumRelease.prerelease;releaseUrl=$cursoriumRelease.html_url;assets=@($cursoriumRelease.assets | Select-Object name,size,digest,browser_download_url)}
 $cursoriumSummary | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath 'artifacts/github-publication.json' -Encoding utf8
 Write-Host "Release published and verified: $($cursoriumRelease.html_url)"

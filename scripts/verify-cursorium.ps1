@@ -10,6 +10,7 @@ New-Item -ItemType Directory -Path $cursoriumReport -Force | Out-Null
 # Preserve evidence that the user's existing backup/settings remain unchanged.
 $cursoriumData=Join-Path $env:LOCALAPPDATA 'FrostWhiteComet'
 $cursoriumProtected=@('original-theme.json','settings.json','studio.json','profiles.json','interface.json')
+$cursoriumProtected+=@('theme-transaction.json','theme-ownership.json')
 $cursoriumBefore=@{}
 foreach($cursoriumName in $cursoriumProtected){$cursoriumPath=Join-Path $cursoriumData $cursoriumName;$cursoriumBefore[$cursoriumName]=if(Test-Path -LiteralPath $cursoriumPath){(Get-FileHash -LiteralPath $cursoriumPath).Hash}else{$null}}
 function Invoke-CursoriumTest([string[]]$Arguments){
@@ -24,6 +25,8 @@ function Invoke-CursoriumTest([string[]]$Arguments){
 }
 & dotnet run --project tests/Frost.Verify -c Release -- --studio-tests $cursoriumApp $cursoriumReport --native-roundtrip 2>&1 | Tee-Object -FilePath (Join-Path $cursoriumReport 'core-console.txt')
 if($LASTEXITCODE -ne 0){throw 'Core/native transaction verification failed.'}
+& dotnet run --project tests/Frost.Verify -c Release -- --stability-tests $cursoriumApp (Join-Path $cursoriumReport 'recovery')
+if($LASTEXITCODE -ne 0){throw 'Crash/concurrency/external-change recovery verification failed.'}
 & dotnet run --project tests/Frost.Verify -c Release -- --online-tests $cursoriumApp (Join-Path $cursoriumRoot 'tests/fixtures/online') (Join-Path $cursoriumReport 'online-security')
 if($LASTEXITCODE -ne 0){throw 'Online download security verification failed.'}
 if($CurationStage){if(-not $PreviousCatalog){throw 'Curation verification needs the previous signed catalog.'};& dotnet run --project tests/Frost.Verify -c Release -- --curation-tests $cursoriumApp ([IO.Path]::GetFullPath($CurationStage)) ([IO.Path]::GetFullPath($PreviousCatalog)) (Join-Path $cursoriumReport 'curation');if($LASTEXITCODE -ne 0){throw 'Curation/update verification failed.'}}

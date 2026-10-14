@@ -1,3 +1,42 @@
+# v1.5.0 Stability, Performance & Compatibility — prerelease, 2026-10-14
+
+Target net10.0-windows; self-contained runtime 10.0.13. Release build: zero
+errors/warnings. Two mixed WPF/WinForms hosts explicitly retain manifest PerMonitorV2
+and exclude only WFO0003 (documented exception); no broad warning suppression added.
+Retained checks: core 180, desktop 85, interface 98, cached restart 99, collection 28,
+online security 51, curation/update 104, network/WPF 103, FROST/Obsidian 388 each.
+New crash/concurrency/external-edit/data-root/log checks: 34. Isolated installer
+lifecycle: 16, including installed self-removal helper, junction rejection and
+failure-blocked deletion. Cross-volume upgrade clone: 104 protected files and
+854 payload files; native values/types unchanged. Final assets may contain additional
+documentation files; the final upgrade report records their actual payload count.
+
+180.57 seconds / 156 real WPF show-hide/Profile/native-load/rebuild cycles passed;
+this is not a 24/72-hour pass. Native crash tests actually terminate child processes
+after four registry writes and then recover the pre-test snapshot. Original user
+critical JSON existence/hashes and 102 permanent files match the first private
+baseline; full native registry export also matches. No private backups are committed.
+
+Comparable eight-mode and separate fifteen-mode measurements, CSV resource samples,
+same-runtime copy microbenchmarks and actual normal-tray idle observations are saved.
+Idle sampling: 63.90 -> 10.48/s. Typed-copy allocation: 22.56 -> 2.56 MB per 20,000
+operations. Fifteen-second normal tray idle: 1.128 -> 0.720 percent of one CPU core,
+171.6 -> 172.4 MiB ending working set, GDI 227 and USER 88 unchanged. Some active
+four-second driver-loop CPU measurements increased. Those results remain explicit,
+not claimed as global CPU improvements; longer low-interference confirmation blocks
+Stable/Steam Ready. State-probe startup timing is not first-painted-frame timing.
+
+Only Windows 11 build 26100, one 2560x1440/96-DPI display was physically tested.
+Windows 10 LTSC candidate, physical DPI/mixed DPI, dual monitors, hotplug, lock/sleep,
+RDP/Explorer restart, exclusive games, long stress and complete historical lifecycle
+matrix remain unverified. .NET 8 v1.4.0 Stable remains available. See
+[Chinese delivery](docs/CURSORIUM-v1.5-DELIVERY.md),
+[compatibility and Steam blockers](docs/CURSORIUM-v1.5-COMPATIBILITY.md),
+[reproduction commands](docs/CURSORIUM-v1.5-DIAGNOSTICS.md), and
+[actual reports](docs/validation/v1.5). This is a prerelease, not Steam Ready.
+
+---
+
 # v1.4.0 Online Library Expansion & Curation — 2026-10-14
 
 Release source build: zero errors/warnings. Retained checks passed: core/native 180,

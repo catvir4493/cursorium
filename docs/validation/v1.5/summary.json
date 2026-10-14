@@ -1,0 +1,40 @@
+{
+  "selfContainedRuntime": "10.0.13",
+  "target": "net10.0-windows",
+  "baseline": "6886ea6f406894f7869977d4eaf476dcdcfa9641",
+  "checks": {
+    "discover": 103,
+    "interface": 98,
+    "installationLifecycle": 16,
+    "desktop": 85,
+    "recovery": 34,
+    "curation": 104,
+    "frostResources": 388,
+    "cachedInterface": 99,
+    "collection": 28,
+    "onlineSecurity": 51,
+    "core": 180,
+    "obsidianResources": 388
+  },
+  "classification": "prerelease",
+  "actualStress": {
+    "cycles": 156,
+    "seconds": 180.5669628
+  },
+  "steamReady": false,
+  "version": "1.5.0",
+  "limitations": [
+    "Windows 10 not tested",
+    "Physical dual/mixed DPI not tested",
+    "24/72h not run",
+    "Active CPU increases require investigation",
+    "Complete historical install/power-loss matrix not tested"
+  ],
+  "actualHardware": {
+    "dpi": 96,
+    "height": 1440,
+    "monitors": 1,
+    "os": "Windows 11 build 26100",
+    "width": 2560
+  }
+}

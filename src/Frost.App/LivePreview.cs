@@ -18,6 +18,8 @@ public sealed class LivePreview:Grid,IDisposable
     private readonly DispatcherTimer timer;
     private bool disposed;
     public long Frames {get;private set;}
+    public long PaintCount=>painter.PaintCount;
+    public long PaintTicks=>painter.PaintTicks;
     public TrailModel Model=>model;
     public LivePreview()
     {
@@ -26,7 +28,7 @@ public sealed class LivePreview:Grid,IDisposable
         timer=new DispatcherTimer(DispatcherPriority.Render){Interval=TimeSpan.FromMilliseconds(16)};
         timer.Tick+=Tick;
         MouseMove+=(_,e)=>{if(!settings.Enabled)return;var p=e.GetPosition(this);var dpi=System.Windows.Media.VisualTreeHelper.GetDpi(this);if(settings.TrailEnabled)model.Add(p.X*dpi.DpiScaleX,p.Y*dpi.DpiScaleY,clock.Elapsed.TotalMilliseconds,settings);Wake();};
-        MouseDown+=(_,e)=>{var p=e.GetPosition(this);var dpi=System.Windows.Media.VisualTreeHelper.GetDpi(this);clicks.Observe(e.ChangedButton==MouseButton.Right?ClickButton.Right:e.ChangedButton==MouseButton.Middle?ClickButton.Middle:ClickButton.Left,p.X*dpi.DpiScaleX,p.Y*dpi.DpiScaleY,clock.Elapsed.TotalMilliseconds,settings);Wake();};
+        MouseDown+=(_,e)=>{if(!settings.Enabled||disposed)return;var p=e.GetPosition(this);var dpi=System.Windows.Media.VisualTreeHelper.GetDpi(this);clicks.Observe(e.ChangedButton==MouseButton.Right?ClickButton.Right:e.ChangedButton==MouseButton.Middle?ClickButton.Middle:ClickButton.Left,p.X*dpi.DpiScaleX,p.Y*dpi.DpiScaleY,clock.Elapsed.TotalMilliseconds,settings);Wake();};
         IsVisibleChanged+=(_,_)=>{if(!IsVisible){timer.Stop();model.Clear();painter.InvalidateVisual();}};
     }
     public void Update(Settings value)
