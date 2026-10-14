@@ -22,6 +22,13 @@ Intended retain the old protocol. Recovery validates non-empty original role pat
 before writing. Immutable resources must match source SHA256 even when valid CUR files
 already exist. IsActive is read-only and no longer prepares/copies native resources.
 
+USER32 still rejects >=260-character cursor paths on the observed Windows build.
+Long source CUR/ANI files use bounded, immediately deleted validation copies; WPF
+preview opens a Stream. System installation never refers to those temporary copies:
+overlong immutable native targets fail before any registry write. Native roundtrip
+data roots are separate from descriptive report directories, and explicit tests cover
+both successful long-source preview and rejected long permanent targets.
+
 Profile and applied-state writers reject stale external file changes; future schemas
 are preserved. A failed applied-state commit still rolls native values back through
 ThemeService. Diagnostic roots reject real user data and linked roots.

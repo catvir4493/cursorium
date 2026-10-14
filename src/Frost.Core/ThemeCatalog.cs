@@ -97,6 +97,11 @@ public sealed class ThemeCatalog
 
 public static class CursorResource
 {
+    public static System.Windows.Input.Cursor OpenPreviewCursor(string path)
+    {
+        if(Path.GetFullPath(path).Length<260)return new System.Windows.Input.Cursor(path);
+        using var stream=File.OpenRead(path);return new System.Windows.Input.Cursor(stream);
+    }
     public const int MaxBytes=32*1024*1024;
     public static void Validate(string path)
     {

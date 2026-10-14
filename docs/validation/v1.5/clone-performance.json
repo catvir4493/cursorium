@@ -1,12 +1,12 @@
 {
   "oldClone": {
     "iterations": 20000,
-    "milliseconds": 129.7887,
+    "milliseconds": 126.2037,
     "allocatedBytes": 22560080
   },
   "newClone": {
     "iterations": 20000,
-    "milliseconds": 0.908,
+    "milliseconds": 0.9052,
     "allocatedBytes": 2560080
   },
   "notes": "Same process/runtime, 20,000 warmed operations; old production JSON algorithm versus typed copy. Not an end-to-end CPU or startup benchmark."

@@ -40,7 +40,27 @@ public static class Native
     public static void Check(bool success,string operation){if(!success)throw new Win32Exception(Marshal.GetLastWin32Error(),operation);}
     public static void ReloadCursors()=>Check(SystemParametersInfo(0x57,0,IntPtr.Zero,2),"Windows could not reload the cursor scheme");
     // LoadCursorFromFile returns a shared handle. LoadImage without LR_SHARED gives us an owned handle.
-    public static IntPtr LoadOwnedCursor(string path)=>LoadImage(IntPtr.Zero,path,2,0,0,0x10|0x40);
+    public static IntPtr LoadOwnedCursor(string path)
+    {
+        path=Path.GetFullPath(path);if(path.Length<260)return LoadImage(IntPtr.Zero,path,2,0,0,0x10|0x40);
+        // USER32 cursor file loading still rejects MAX_PATH even with longPathAware.
+        // This is a bounded validation/preview copy, never a registry resource path.
+        var extension=Path.GetExtension(path).ToLowerInvariant();
+        if(extension is not (".cur" or ".ani"))throw new InvalidDataException("Only native cursor data can be loaded.");
+        var temporary=Path.Combine(Path.GetTempPath(),"cursorium-native-"+Guid.NewGuid().ToString("N")+extension);
+        if(temporary.Length>=260)throw new IOException("Windows cursor loading requires a shorter temporary directory.");
+        DownloadManager.GuardRoot(temporary);IntPtr handle=IntPtr.Zero;
+        try
+        {
+            using(var source=new FileStream(path,FileMode.Open,FileAccess.Read,FileShare.Read))
+            {
+                if(source.Length is <22 or >33_554_432)throw new InvalidDataException("Invalid cursor loading size.");
+                using var target=new FileStream(temporary,FileMode.CreateNew,FileAccess.Write,FileShare.None);source.CopyTo(target);
+            }
+            handle=LoadImage(IntPtr.Zero,temporary,2,0,0,0x10|0x40);return handle;
+        }
+        finally{try{if(File.Exists(temporary))File.Delete(temporary);}catch{if(handle!=IntPtr.Zero)DestroyCursor(handle);throw;}}
+    }
     public static List<MonitorInfo> Monitors()
     {
         var list=new List<MonitorInfo>(); MonitorCallback callback=(IntPtr h,IntPtr d,ref Rect r,IntPtr p)=>{var info=new MonitorInfo{Size=Marshal.SizeOf<MonitorInfo>(),Device=""};if(GetMonitorInfo(h,ref info))list.Add(info);return true;};

@@ -47,5 +47,14 @@
     "command": "dotnet run --project tests/Frost.Verify -c Release -- --stability-tests <app> <isolated output>",
     "name": "Final recovery data-root and safety checks",
     "evidence": "recovery-report.json"
+  },
+  {
+    "environment": "Windows 11; actual native CUR/ANI and WPF stream cursor constructors",
+    "ended": "2026-10-14T15:57:33.2116694+02:00",
+    "evidence": "recovery-report.json",
+    "command": "dotnet run --project tests/Frost.Verify -c Release -- --stability-tests <app> <isolated output>",
+    "started": "2026-10-14T15:57:19.8666935+02:00",
+    "passed": true,
+    "name": "USER32 long-path validation, preview and install boundary"
   }
 ]

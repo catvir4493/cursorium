@@ -191,7 +191,7 @@ public partial class DiscoverView:UserControl,IDisposable
     private void RoleChanged(object sender,SelectionChangedEventArgs e){if(ready)ChangeRole();}
     private void ChangeRole()
     {
-        if(previewPack?.Cursor is not CursorTheme theme||Roles.SelectedItem is not string role)return;DetailPreview.Cursor=null;Mouse.UpdateCursor();cursor?.Dispose();cursor=new(theme.Resource(role));DetailPreview.Cursor=cursor;var handle=Native.LoadOwnedCursor(theme.Resource(role));if(handle==IntPtr.Zero)throw new IOException("Cannot load preview cursor.");
+        if(previewPack?.Cursor is not CursorTheme theme||Roles.SelectedItem is not string role)return;DetailPreview.Cursor=null;Mouse.UpdateCursor();cursor?.Dispose();cursor=CursorResource.OpenPreviewCursor(theme.Resource(role));DetailPreview.Cursor=cursor;var handle=Native.LoadOwnedCursor(theme.Resource(role));if(handle==IntPtr.Zero)throw new IOException("Cannot load preview cursor.");
         try{var image=System.Windows.Interop.Imaging.CreateBitmapSourceFromHIcon(handle,Int32Rect.Empty,BitmapSizeOptions.FromEmptyOptions());image.Freeze();animation.SetResource(theme.Resource(role),image);SetObservationSize();}finally{Native.DestroyCursor(handle);}UpdatePreviewBounds();
     }
     private void ZoomChanged(object sender,SelectionChangedEventArgs e){if(ready)SetObservationSize();}

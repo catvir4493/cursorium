@@ -26,6 +26,8 @@
 
 ## Steam 文件与生命周期边界
 
+USER32 永久指针路径上限：本机实测达到 260 字符时 LoadImage 失败，extended prefix 也失败。长来源文件可校验/预览，但永久系统资源路径必须 <260；否则 Apply 在注册表操作前明确拒绝。正常 LocalAppData 默认路径已验证；特别长的 Windows 用户名/数据根仍需额外验证。本版不声称支持任意长度的系统指针路径。
+
 - 程序和官方内置资源：安装目录内的 `FrostWhiteComet.exe`、自包含 .NET/WPF 依赖、Theme、Themes、Catalog、图标与文档。每个正式负载包含 `distribution-manifest.json`，列出相对路径、大小、SHA256；清单不包含自身哈希。
 - 可写数据：`%LOCALAPPDATA%/FrostWhiteComet`；导入资源 Themes、下载的 MotionLibrary、不可变 Theme/installed、Profile、收藏、原始备份、事务和界面偏好保留在此。不能随 Steam depot 更新覆盖。
 - 缓存：Online/Media 与进程世代标识 Staging；不是正式原生指针存储。Windows 当前引用的不可变文件禁止按普通缓存清理。

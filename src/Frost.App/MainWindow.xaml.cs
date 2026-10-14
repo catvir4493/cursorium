@@ -238,7 +238,7 @@ public partial class MainWindow:Window
         foreach(var role in CursorRoles.All)
         {
             Cursor? cursor=null;var resource=selected.IsSystem?theme.OriginalResource(role.Name):selected.Resource(role.Name);
-            if(resource!=null){cursor=new Cursor(resource);ownedCursors.Add(cursor);}else cursor=SystemCursor(role.Name);cursors.Add(cursor);
+            if(resource!=null){cursor=CursorResource.OpenPreviewCursor(resource);ownedCursors.Add(cursor);}else cursor=SystemCursor(role.Name);cursors.Add(cursor);
             var box=new StackPanel();var roleImage=new Image{Source=Thumbnail(selected,role.Name),Width=36,Height=36};RenderOptions.SetBitmapScalingMode(roleImage,BitmapScalingMode.NearestNeighbor);box.Children.Add(roleImage);box.Children.Add(new TextBlock{Text=role.Label,FontSize=11,TextAlignment=TextAlignment.Center,Margin=new Thickness(0,6,0,3)});box.Children.Add(new TextBlock{Text=selected.InheritedRoles.TryGetValue(role.Name,out var fallback)?"Inherited · "+fallback:selected.IsSystem?"System":"Native",FontSize=10,TextAlignment=TextAlignment.Center,Foreground=(Brush)FindResource("MutedBrush")});var button=new Button{Content=box,Tag=role.Name,Margin=new Thickness(3,6,3,6),Padding=new Thickness(4,8,4,8),Cursor=cursor,ToolTip=role.Name};System.Windows.Automation.AutomationProperties.SetName(button,"Preview role "+role.Name);button.Click+=(_,_)=>PreviewRole.SelectedItem=role.Name;RoleGrid.Children.Add(button);
         }
         SetPreviewCursor();

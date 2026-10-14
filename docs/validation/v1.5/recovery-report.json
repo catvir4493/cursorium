@@ -1,8 +1,8 @@
 {
   "passed": true,
   "error": null,
-  "started": "2026-10-14T13:44:21.5797633+00:00",
-  "ended": "2026-10-14T13:44:34.9309502+00:00",
+  "started": "2026-10-14T13:57:19.8666935+00:00",
+  "ended": "2026-10-14T13:57:33.2116694+00:00",
   "checks": [
     {
       "name": "Diagnostics reject production user data as test root",
@@ -18,6 +18,38 @@
     },
     {
       "name": "Status query creates no immutable files",
+      "passed": true
+    },
+    {
+      "name": "Explicit long-path cursor fixture: Normal",
+      "passed": true
+    },
+    {
+      "name": "Native validation and WPF stream preview support long source: Normal",
+      "passed": true
+    },
+    {
+      "name": "Explicit long-path cursor fixture: Busy",
+      "passed": true
+    },
+    {
+      "name": "Native validation and WPF stream preview support long source: Busy",
+      "passed": true
+    },
+    {
+      "name": "Long-path validation removes bounded temporary copies",
+      "passed": true
+    },
+    {
+      "name": "Overlong permanent native paths fail before Windows writes",
+      "passed": true
+    },
+    {
+      "name": "Unsupported native target creates no half-installed resources",
+      "passed": true
+    },
+    {
+      "name": "Long-path refusal preserves exact Windows values and types",
       "passed": true
     },
     {

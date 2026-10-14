@@ -14,7 +14,10 @@ internal static class CursoriumVerification
     private static string SnapshotValues(ThemeBackup backup)=>JsonSerializer.Serialize(new{backup.Cursors,backup.Scheme,backup.Schemes},Storage.Json);
     public static void Run(string appDirectory,string output,bool native)
     {
-        Directory.CreateDirectory(output);Storage.UseTestingRoot(Path.Combine(output,"core-data-"+Guid.NewGuid().ToString("N")));
+        // Keep descriptive reports independent of USER32's permanent cursor-path
+        // limit. Long source/preview and rejected long install paths have explicit
+        // stability checks; native roundtrips use a dedicated short isolated root.
+        Directory.CreateDirectory(output);Storage.UseTestingRoot(Path.Combine(Path.GetTempPath(),"CursoriumCore-"+Guid.NewGuid().ToString("N")));
         var theme=new ThemeService();var baseline=theme.Snapshot("CURSORIUM / frost","CURSORIUM / obsidian");bool success=false;string? error=null;
         try
         {

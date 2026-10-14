@@ -23,12 +23,14 @@
 
 ## 测试结果与失败修复
 
+最终深目录运行额外暴露 USER32 的 MAX_PATH 边界：260 字符原文件及其 extended-prefix 形式均返回 Win32 error 2，而短路径相同文件能加载。新增 8 项实际检查，长 CUR/ANI 来源使用有大小上限、立即清理的临时副本完成原生校验；WPF 使用 Stream 构造长路径预览。**永久 Windows 指针路径仍必须小于 260 字符**，超限在创建稳定目录/写注册表前拒绝，不把临时文件交给系统。原核心测试的数据根改为独立短隔离根，报告路径保持原名；长路径成功与安全拒绝均有独立断言，不靠缩短名称隐藏边界。
+
 已执行 Release 源码构建，**0 error / 0 warning**。WFO0003 只在两个使用既有 PerMonitorV2 manifest 的混合 WPF/WinForms 宿主排除；原因见[兼容性记录](CURSORIUM-v1.5-COMPATIBILITY.md)。
 
 |检查|本轮结果|
 |---|---:|
 |原核心/原生事务|180 通过|
-|新增中断/并发/外部修改/数据保护/日志|34 通过|
+|新增中断/并发/外部修改/数据保护/日志|42 通过|
 |FROST 原生资源|388 通过|
 |Obsidian 原生资源|388 通过|
 |真实桌面/Raw Input/点击穿透/全屏探针/托盘|85 通过|
@@ -46,7 +48,7 @@
 
 ## 性能与迁移决策
 
-Settings 两万次暖机复制：旧 JSON 算法约 22.56 MB，新复制约 2.56 MB，减少约 88.7% 分配；一次实测 129.79 ms → 0.91 ms。这个同进程微基准不等于整机 CPU 或启动速度提升。
+Settings 两万次暖机复制：旧 JSON 算法约 22.56 MB，新复制约 2.56 MB，减少约 88.7% 分配；一次实测 126.20 ms → 0.91 ms。这个同进程微基准不等于整机 CPU 或启动速度提升。
 
 原安装 .NET 8.0.24 和新自包含 .NET 10.0.13 以相同 8 模式脚本测量，期间退出生产实例，结束恢复托盘；新版另加快速长轨迹、高粒子、真实受控点击 Halo/Ring/Off、效果切换和暂停，共 15 模式。8 模式公平对照不创建点击窗口；15 模式的受控点击窗口使条件不同，结果单独保存。最终静止采样 **63.90 → 10.48 次/秒**；活动采样约 63 次/秒，禁用/暂停无绘制。Comet/Minimal/Neon/Stardust 的 CPU 绘制均值约 0.0247/0.0032/0.0089/0.0065 ms。绘制耗时不是 GPU 帧时间，invalidations 不是显示 FPS。
 
@@ -71,8 +73,8 @@ Settings 两万次暖机复制：旧 JSON 算法约 22.56 MB，新复制约 2.56
 
 迁移决策限于**预发布候选**：功能回归通过，但上述主动 CPU 升高还需专用机、更长时段与低干扰驱动复核；这是阻止本版标记 Stable / Steam Ready 的性能验收项。.NET 8 的 v1.4.0 Stable 仍作为可运行回退。
 
-- Core：Settings.cs、Storage.cs、ThemeService.cs、StudioService.cs、StudioModels.cs、Online/RemoteCatalog.cs。
-- App：App.cs、TrailEngine.cs、TrailPainter.cs、RawMouse.cs、LivePreview.cs、MainWindow.xaml.cs、新 StabilityVerification.cs、原 DesktopVerification.cs 的扩展基准。
+- Core：Native.cs、ThemeCatalog.cs 的长路径加载辅助、Settings.cs、Storage.cs、ThemeService.cs、StudioService.cs、StudioModels.cs、Online/RemoteCatalog.cs。
+- App：App.cs、TrailEngine.cs、TrailPainter.cs、RawMouse.cs、LivePreview.cs、MainWindow.xaml.cs、新 StabilityVerification.cs、原 DesktopVerification.cs 的扩展基准、DiscoverView.xaml.cs 的长路径预览调用。
 - 框架/安装：Directory.Build.props、两宿主 csproj、installer/Frost.Setup/Program.cs。
 - 工具：build-release、publish-github、verify-cursorium 和原资源发布路径适配；新增 save-stability-baseline、verify-stability-protection、verify-stability、verify-v1.5、verify-installation-lifecycle、measure-engine、measure-idle。
 - 自动化：tests/Frost.Verify/StabilityVerification.cs 及 Program.cs 新入口。主 UI 的 XAML、Token、控件、ThemeCatalog/安全 ZIP、在线签名协议、四种轨迹算法及原素材不重写。

@@ -5,7 +5,7 @@ errors/warnings. Two mixed WPF/WinForms hosts explicitly retain manifest PerMoni
 and exclude only WFO0003 (documented exception); no broad warning suppression added.
 Retained checks: core 180, desktop 85, interface 98, cached restart 99, collection 28,
 online security 51, curation/update 104, network/WPF 103, FROST/Obsidian 388 each.
-New crash/concurrency/external-edit/data-root/log checks: 34. Isolated installer
+New crash/concurrency/external-edit/data-root/log checks: 42. Isolated installer
 lifecycle: 16, including installed self-removal helper, junction rejection and
 failure-blocked deletion. Cross-volume upgrade clone: 104 protected files and
 854 payload files; native values/types unchanged. Final assets may contain additional

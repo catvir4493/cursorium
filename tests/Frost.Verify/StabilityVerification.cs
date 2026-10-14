@@ -42,6 +42,19 @@ internal static class StabilityVerification
             using(var registration=Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall\FrostWhiteComet"))if(registration?.GetValue("InstallLocation") is string location)Reject(()=>Storage.UseTestingRoot(location),"Diagnostics reject registered installation directory");
             var catalog=new ThemeCatalog(application);var frost=catalog.Find("frost");var dark=catalog.Find("obsidian");
             _=theme.IsActive(frost);Check(!Directory.Exists(Path.Combine(root,"Theme","installed")),"Status query creates no immutable files");
+            var longSource=Path.Combine(root,new string('l',90),new string('s',90));Directory.CreateDirectory(longSource);
+            var temporaryBefore=Directory.GetFiles(Path.GetTempPath(),"cursorium-native-*").OrderBy(p=>p).ToArray();
+            foreach(var role in new[]{"Normal","Busy"})
+            {
+                var file=Path.Combine(longSource,role+Path.GetExtension(frost.Resource(role)));File.Copy(frost.Resource(role),file);
+                Check(file.Length>=260,"Explicit long-path cursor fixture: "+role);CursorResource.Validate(file);
+                using var cursor=CursorResource.OpenPreviewCursor(file);Check(cursor!=null,"Native validation and WPF stream preview support long source: "+role);
+            }
+            Check(temporaryBefore.SequenceEqual(Directory.GetFiles(Path.GetTempPath(),"cursorium-native-*").OrderBy(p=>p)),"Long-path validation removes bounded temporary copies");
+            var longInstall=Path.Combine(root,new string('i',160));Storage.UseTestingRoot(longInstall);
+            try{Reject(()=>new ThemeService().ApplyTheme(frost),"Overlong permanent native paths fail before Windows writes");Check(!Directory.Exists(Path.Combine(longInstall,"Theme","installed")),"Unsupported native target creates no half-installed resources");}
+            finally{Storage.UseTestingRoot(root);}
+            Check(Values(before)==Values(theme.Snapshot("CURSORIUM / frost","CURSORIUM / obsidian")),"Long-path refusal preserves exact Windows values and types");
             using(var child=Start("crash",root,application)){Check(child.WaitForExit(15000)&&child.ExitCode==77,"Actual process terminates after four native writes");}
             Check(File.Exists(theme.JournalPath),"Abrupt exit retains durable journal");theme.Recover();
             Check(Values(before)==Values(theme.Snapshot("CURSORIUM / frost","CURSORIUM / obsidian")),"Crash and abandoned mutex recover exact registry state");

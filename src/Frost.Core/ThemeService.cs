@@ -126,7 +126,9 @@ public sealed class ThemeService
         if(!RemoteResource.ValidId(theme.Id))throw new InvalidDataException("Invalid cursor theme identity.");
         using var hash=IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
         foreach(var role in CursorRoles.All){var path=theme.Resource(role.Name);CursorResource.Validate(path);hash.AppendData(System.Text.Encoding.UTF8.GetBytes(role.Name+Path.GetExtension(path)));hash.AppendData(File.ReadAllBytes(path));}
-        var directory=Path.Combine(Storage.Root,"Theme","installed",theme.Id,Convert.ToHexString(hash.GetHashAndReset()).ToLowerInvariant());DownloadManager.GuardRoot(directory);Directory.CreateDirectory(directory);
+        var directory=Path.Combine(Storage.Root,"Theme","installed",theme.Id,Convert.ToHexString(hash.GetHashAndReset()).ToLowerInvariant());DownloadManager.GuardRoot(directory);
+        if(CursorRoles.All.Any(r=>Path.Combine(directory,r.Name+Path.GetExtension(theme.Resource(r.Name))).Length>=260))throw new InvalidDataException("Windows system cursor paths must be shorter than 260 characters. Use a shorter permanent data path; no Windows settings were changed.");
+        Directory.CreateDirectory(directory);
         var result=new Dictionary<string,string>();
         foreach(var role in CursorRoles.All)
         {
