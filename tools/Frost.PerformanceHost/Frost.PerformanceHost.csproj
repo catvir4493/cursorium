@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework Condition="'$(PerformanceTargetFramework)'!=''">$(PerformanceTargetFramework)</TargetFramework>
+    <OutputType>Exe</OutputType><UseWPF>true</UseWPF><UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings><AssemblyName>CursoriumPerformanceHost</AssemblyName>
+    <ApplicationManifest>../../src/Frost.App/app.manifest</ApplicationManifest>
+    <!-- WPF owns the existing PerMonitorV2 manifest; Forms only hosts the input target. -->
+    <NoWarn>$(NoWarn);WFAC010;WFO0003</NoWarn>
+  </PropertyGroup>
+</Project>

@@ -1,4 +1,4 @@
-param([string]$Version='1.5.1',[string]$ReportDirectory='artifacts/v1.5-installation')
+param([string]$Version='1.5.2',[string]$ReportDirectory='artifacts/v1.5-installation')
 $ErrorActionPreference='Stop'
 $taskRoot=Split-Path -Parent $PSScriptRoot
 $taskOutput=[IO.Path]::GetFullPath((Join-Path $taskRoot $ReportDirectory));New-Item -ItemType Directory -Force -Path $taskOutput | Out-Null

@@ -40,7 +40,7 @@ public partial class MainWindow:Window
         Discover.FavoritesChanged+=()=>{library=ThemeLibraryPreferences.Load();BindThemeCards();};
         Discover.OpenOwned+=item=>{studio.Catalog.Reload();BindCatalog();if(item.Type=="cursor"){Navigation.SelectedIndex=1;ThemeBox.SelectedItem=studio.Catalog.Find(item.Id);Draft.CursorThemeId=item.Id;Draft.CursorPackageSha256=studio.Catalog.Find(item.Id).ManagedDownload?studio.Catalog.Find(item.Id).PackageSha256:null;UpdateThemePreview();Changed();}else{Navigation.SelectedIndex=2;TrailBox.SelectedItem=TrailBox.Items.Cast<TrailPreset>().First(p=>p.Id==item.Id);}};
         Discover.PreviewBoundsChanged+=bounds=>{if(Navigation.SelectedIndex==0)engine.PreviewBounds=bounds is Rect r?new Native.Rect{Left=(int)r.Left,Top=(int)r.Top,Right=(int)r.Right,Bottom=(int)r.Bottom}:null;};
-        NavVersionLabel.Text="v1.5.1 · Stability preview";
+        NavVersionLabel.Text="v1.5.2 · Stability preview";
         try{preferences=UiPreferences.Load();}catch(Exception ex){Storage.Log(ex.ToString());Notify(ex.Message,true);}
         try{library=ThemeLibraryPreferences.Load();}catch(Exception ex){Storage.Log(ex.ToString());Notify(ex.Message,true);}
         LibraryFilter.SelectedItem=LibraryFilter.Items.Cast<ComboBoxItem>().FirstOrDefault(i=>(string)i.Tag==library.Filter)??LibraryFilter.Items[0];
