@@ -1,0 +1,210 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "Signed real catalog validates all ten metadata entries",
+      "passed": true
+    },
+    {
+      "name": "Altered signed catalog rejected",
+      "passed": true
+    },
+    {
+      "name": "Wrong catalog signature rejected",
+      "passed": true
+    },
+    {
+      "name": "Catalog cache commits only after signature and schema validation",
+      "passed": true
+    },
+    {
+      "name": "Actual streamed bytes report progress before managed install",
+      "passed": true
+    },
+    {
+      "name": "Installed state derives from committed theme manifest",
+      "passed": true
+    },
+    {
+      "name": "Duplicate download preserves every existing theme file",
+      "passed": true
+    },
+    {
+      "name": "Download has zero Windows pointer side effects",
+      "passed": true
+    },
+    {
+      "name": "Data-only motion preset maps to a trusted renderer and real parameters",
+      "passed": true
+    },
+    {
+      "name": "Atomic installation records survive manager restart",
+      "passed": true
+    },
+    {
+      "name": "Offline refresh retains the last signature-verified cache",
+      "passed": true
+    },
+    {
+      "name": "Unauthorized URL rejected: http://catvir4493.github.io/cursorium-library/catalog/v1/index.json",
+      "passed": true
+    },
+    {
+      "name": "Unauthorized URL rejected: https://example.com/cursorium.zip",
+      "passed": true
+    },
+    {
+      "name": "Unauthorized URL rejected: https://github.com/other/library/releases/download/v1/x.zip",
+      "passed": true
+    },
+    {
+      "name": "Unauthorized URL rejected: https://catvir4493.github.io/unrelated/index.json",
+      "passed": true
+    },
+    {
+      "name": "Unauthorized URL rejected: https://release-assets.githubusercontent.com/github-production-release-asset/x",
+      "passed": true
+    },
+    {
+      "name": "Unauthorized URL rejected: https://user@catvir4493.github.io/cursorium-library/catalog/v1/index.json",
+      "passed": true
+    },
+    {
+      "name": "Cross-domain redirect rejected before request",
+      "passed": true
+    },
+    {
+      "name": "Declared oversized download rejected",
+      "passed": true
+    },
+    {
+      "name": "Package declared size mismatch rejected",
+      "passed": true
+    },
+    {
+      "name": "Cancellation interrupts pending network and cleans temporary archive",
+      "passed": true
+    },
+    {
+      "name": "Cancelled download leaves no incomplete ZIP",
+      "passed": true
+    },
+    {
+      "name": "Request timeout interrupts a nonresponding server",
+      "passed": true
+    },
+    {
+      "name": "One bounded retry recovers a transient transport failure",
+      "passed": true
+    },
+    {
+      "name": "Persistent transport failure is reported",
+      "passed": true
+    },
+    {
+      "name": "Retry count is strictly bounded at two attempts",
+      "passed": true
+    },
+    {
+      "name": "Concurrent double download is refused by stable resource ID",
+      "passed": true
+    },
+    {
+      "name": "SHA256 mismatch refuses extraction and installation",
+      "passed": true
+    },
+    {
+      "name": "Incompatible client version rejected before download",
+      "passed": true
+    },
+    {
+      "name": "Stable ID collision refuses replacing bundled theme",
+      "passed": true
+    },
+    {
+      "name": "Unsupported, malformed or duplicate catalog safely rejected",
+      "passed": true
+    },
+    {
+      "name": "Unsupported, malformed or duplicate catalog safely rejected",
+      "passed": true
+    },
+    {
+      "name": "Unsupported, malformed or duplicate catalog safely rejected",
+      "passed": true
+    },
+    {
+      "name": "Unknown Windows role rejected",
+      "passed": true
+    },
+    {
+      "name": "Remote executable renderer rejected",
+      "passed": true
+    },
+    {
+      "name": "Nonfinite motion parameter rejected",
+      "passed": true
+    },
+    {
+      "name": "ZIP traversal rejected: ../outside.cur",
+      "passed": true
+    },
+    {
+      "name": "ZIP traversal rejected: /absolute.cur",
+      "passed": true
+    },
+    {
+      "name": "ZIP traversal rejected: a/../normal.cur",
+      "passed": true
+    },
+    {
+      "name": "ZIP traversal rejected: a\\..\\normal.cur",
+      "passed": true
+    },
+    {
+      "name": "ZIP traversal rejected: C:/normal.cur",
+      "passed": true
+    },
+    {
+      "name": "Duplicate ZIP names rejected",
+      "passed": true
+    },
+    {
+      "name": "ZIP symbolic link rejected",
+      "passed": true
+    },
+    {
+      "name": "ZIP compression bomb rejected",
+      "passed": true
+    },
+    {
+      "name": "Invalid cursor bytes rejected by production resource validator",
+      "passed": true
+    },
+    {
+      "name": "Executable package entry rejected without execution",
+      "passed": true
+    },
+    {
+      "name": "Online-only favorite persists without requiring download or current catalog",
+      "passed": true
+    },
+    {
+      "name": "Failed preview/install operations clean their owned staging trees",
+      "passed": true
+    },
+    {
+      "name": "Restart cleans a dead process's incomplete download session without marking it installed",
+      "passed": true
+    },
+    {
+      "name": "Recovery preserves a live process's preview and download session",
+      "passed": true
+    },
+    {
+      "name": "Newer motion schema is preserved and does not block existing local presets",
+      "passed": true
+    }
+  ],
+  "notes": "Production HTTP/catalog/download/ZIP/Win32 resource validators with injected network failures under isolated data. Real official network and real WPF workflow are verified separately."
+}

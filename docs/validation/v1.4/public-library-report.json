@@ -1,0 +1,516 @@
+{
+  "passed": true,
+  "catalogVersion": "1.1.1",
+  "resources": [
+    {
+      "id": "cute-bunny-cute-kawaii",
+      "version": "1.0.0",
+      "sha256": "5b91eb342537bca782d99ed634fd40925155ad6d25f5d414e6392fbf74f810b7",
+      "size": 29749,
+      "nativeRoles": 12,
+      "animatedRoles": 7,
+      "passed": true
+    },
+    {
+      "id": "cute-cool-cat",
+      "version": "1.0.0",
+      "sha256": "f83777fbea02f46e90dc5c5f630b8130d1fa9d247cd3394a9bcfdb9d466cc5cb",
+      "size": 38185,
+      "nativeRoles": 15,
+      "animatedRoles": 15,
+      "passed": true
+    },
+    {
+      "id": "cool-cat-superstar",
+      "version": "1.0.0",
+      "sha256": "07facb74c2e8e35cac8309d8a3f64bf5f87fbf0fb05ccfb85b8ba67c2ea29795",
+      "size": 39254,
+      "nativeRoles": 15,
+      "animatedRoles": 15,
+      "passed": true
+    },
+    {
+      "id": "cute-kawaii-cat-curs0rs",
+      "version": "1.0.0",
+      "sha256": "c0afa04473f93e9f200b7c6b619eda59b1c129d1a795579d4524e86cd317ba28",
+      "size": 11643,
+      "nativeRoles": 15,
+      "animatedRoles": 14,
+      "passed": true
+    },
+    {
+      "id": "cute-kawaii-pink-heart",
+      "version": "1.0.0",
+      "sha256": "39d5ace0ea309e64472174b28bfb17574ed00d1cc3c6ea7279a0dec74912e76a",
+      "size": 9016,
+      "nativeRoles": 15,
+      "animatedRoles": 10,
+      "passed": true
+    },
+    {
+      "id": "cute-pastel",
+      "version": "1.0.0",
+      "sha256": "11de2b0a2653c24ff1610161367294a227f57f4514b60559e26ddd3074d9e3bc",
+      "size": 232902,
+      "nativeRoles": 12,
+      "animatedRoles": 1,
+      "passed": true
+    },
+    {
+      "id": "neon-blue",
+      "version": "1.0.0",
+      "sha256": "35320c1274668f72f772af5d60fe973048042051713af9ed0afa67d623098bf2",
+      "size": 1143,
+      "nativeRoles": 0,
+      "animatedRoles": 0,
+      "passed": true
+    },
+    {
+      "id": "sakura-pink",
+      "version": "1.0.0",
+      "sha256": "85ec0e81e591dc38aa4fccf71811362ab6c467a22567eb2499b37e734e326ab1",
+      "size": 1133,
+      "nativeRoles": 0,
+      "animatedRoles": 0,
+      "passed": true
+    },
+    {
+      "id": "aurora-flow",
+      "version": "1.0.0",
+      "sha256": "67738c30d34a5ca023fe7854e6a05b3e1ea3827d723a6aba960668ad37c2f47b",
+      "size": 1149,
+      "nativeRoles": 0,
+      "animatedRoles": 0,
+      "passed": true
+    },
+    {
+      "id": "golden-spark",
+      "version": "1.0.0",
+      "sha256": "44ae1bde808f9df09f5d49af7e63692c0abd3a7e73eef16122e925b133b984c5",
+      "size": 1149,
+      "nativeRoles": 0,
+      "animatedRoles": 0,
+      "passed": true
+    },
+    {
+      "id": "basic-vlazteron",
+      "version": "1.0.0",
+      "sha256": "6fc170c870183609c8c0f1ea74cba5de73143da75dda8feeff7df9fdc13bceee",
+      "size": 12842,
+      "nativeRoles": 15,
+      "animatedRoles": 2,
+      "passed": true
+    },
+    {
+      "id": "dot-minimal",
+      "version": "1.0.0",
+      "sha256": "9fe2e3b78aa12082948bb8bdac52aebf2cc083e482637734b7327392c276b3a3",
+      "size": 15305,
+      "nativeRoles": 15,
+      "animatedRoles": 2,
+      "passed": true
+    },
+    {
+      "id": "golden-mhmd",
+      "version": "1.0.0",
+      "sha256": "4d376a0abdfc24588b280011a43dd49bb5901d889b373c96029de76e987b6d19",
+      "size": 37103,
+      "nativeRoles": 15,
+      "animatedRoles": 2,
+      "passed": true
+    },
+    {
+      "id": "amber-rose",
+      "version": "1.0.0",
+      "sha256": "a6275e5b23a3a5d07de517b89b1321a0337d93741cd2988e5c8a1b02b45d3353",
+      "size": 539218,
+      "nativeRoles": 15,
+      "animatedRoles": 2,
+      "passed": true
+    },
+    {
+      "id": "brown-cow",
+      "version": "1.0.0",
+      "sha256": "372a20beecc179c1b243f3f95109c850bfb65ebe8a40c5f3fef0f997567ed7e1",
+      "size": 32345,
+      "nativeRoles": 15,
+      "animatedRoles": 13,
+      "passed": true
+    },
+    {
+      "id": "little-chicken",
+      "version": "1.0.0",
+      "sha256": "b7a8f5eb6580adf8c4dd8ffa1570a7b2a38f096220847f39e130873824424be9",
+      "size": 286954,
+      "nativeRoles": 15,
+      "animatedRoles": 8,
+      "passed": true
+    },
+    {
+      "id": "discrete-vlasta",
+      "version": "1.0.0",
+      "sha256": "887abc33293c37ea00c7cae6ba0bb51aa141e4cb81503f1f5461b7b73a1e1927",
+      "size": 58590,
+      "nativeRoles": 15,
+      "animatedRoles": 3,
+      "passed": true
+    },
+    {
+      "id": "lovely-sunshine",
+      "version": "1.0.0",
+      "sha256": "170854cb38ec6fd31fcc03b60087aba79a400f05421d5364aea0271d3070696b",
+      "size": 165740,
+      "nativeRoles": 15,
+      "animatedRoles": 14,
+      "passed": true
+    },
+    {
+      "id": "simple-dot-star",
+      "version": "1.0.0",
+      "sha256": "085005a598259af1e8796d8c88914ba7528abca3eb4e1195aaef0d3321cc39b9",
+      "size": 29939,
+      "nativeRoles": 15,
+      "animatedRoles": 2,
+      "passed": true
+    },
+    {
+      "id": "sakura-blossom",
+      "version": "1.0.0",
+      "sha256": "515f3c1619bde282ce1d3b5fe5b8c15551090710b701ddbb1535f80b0d81ee28",
+      "size": 1205,
+      "nativeRoles": 0,
+      "animatedRoles": 0,
+      "passed": true
+    },
+    {
+      "id": "ice-crystal",
+      "version": "1.0.0",
+      "sha256": "55474046429fbeb8302aab8f0d8aa13686a3adb29cc86a6f82fc2af126499a35",
+      "size": 1195,
+      "nativeRoles": 0,
+      "animatedRoles": 0,
+      "passed": true
+    },
+    {
+      "id": "lavender-dream",
+      "version": "1.0.0",
+      "sha256": "5e0d65e4bbf2d3807ad2cdf72dccc70ec7692bb37eb421194c358b7713d41441",
+      "size": 1198,
+      "nativeRoles": 0,
+      "animatedRoles": 0,
+      "passed": true
+    },
+    {
+      "id": "emerald-stream",
+      "version": "1.0.0",
+      "sha256": "3e4d02bc71915a714ded4dd358246558261399f9139b6c5c7a824458c6021533",
+      "size": 1198,
+      "nativeRoles": 0,
+      "animatedRoles": 0,
+      "passed": true
+    },
+    {
+      "id": "sunset-glow",
+      "version": "1.0.0",
+      "sha256": "159340482ebcb192bfcae44b38859d8006b394ebd48b88d4ab2d0a05906b29d3",
+      "size": 1196,
+      "nativeRoles": 0,
+      "animatedRoles": 0,
+      "passed": true
+    },
+    {
+      "id": "cyber-pulse",
+      "version": "1.0.0",
+      "sha256": "12b118046bc38c00f7b2a6cf221e55fa12dcc3e458c6832fbdb522e3eb2affb8",
+      "size": 1199,
+      "nativeRoles": 0,
+      "animatedRoles": 0,
+      "passed": true
+    },
+    {
+      "id": "moonlight",
+      "version": "1.0.0",
+      "sha256": "f44293296ee4ca840ca0edf73f2eeaebdb15e3d115f7512a82a49b3fa9df987e",
+      "size": 1198,
+      "nativeRoles": 0,
+      "animatedRoles": 0,
+      "passed": true
+    },
+    {
+      "id": "stardust-pink",
+      "version": "1.0.0",
+      "sha256": "cbb8d28227fe7c86d50c1ea30ac002eb620f17e56ffab440a9bb48a84e53d9f8",
+      "size": 1197,
+      "nativeRoles": 0,
+      "animatedRoles": 0,
+      "passed": true
+    },
+    {
+      "id": "ocean-mist",
+      "version": "1.0.0",
+      "sha256": "59858329c178edd2844c2fa4b9d9319ca209c4dba3d27c8726dbbde311cc2d1b",
+      "size": 1200,
+      "nativeRoles": 0,
+      "animatedRoles": 0,
+      "passed": true
+    },
+    {
+      "id": "amber-whisper",
+      "version": "1.0.0",
+      "sha256": "2b697649debf8601e40875a4370cec74abba1db40b462dd0efdd8bbedaeb6595",
+      "size": 1203,
+      "nativeRoles": 0,
+      "animatedRoles": 0,
+      "passed": true
+    }
+  ],
+  "collections": 6,
+  "media": [
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/v1.3.1-r2/cute-bunny-cute-kawaii.png",
+      "sha256": "8a0548bcb5d65e7d1bf2437158736dcb6011359bf68d2a3fdf8232547e7f3351",
+      "width": 720,
+      "height": 540,
+      "size": 150790
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/v1.3.1-r2/cute-cool-cat.png",
+      "sha256": "4aeff6c7352417d5528acd3fb7ff40a5299f70a725aa57959d5a78ddb4a76255",
+      "width": 720,
+      "height": 540,
+      "size": 133074
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/v1.3.1-r2/cool-cat-superstar.png",
+      "sha256": "7d17aaff7d099db2c8e16d3106407d8015ae7020ae957368ac30c78f6b308827",
+      "width": 720,
+      "height": 540,
+      "size": 131884
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/v1.3.1-r2/cute-kawaii-cat-curs0rs.png",
+      "sha256": "251407528c7a1864a759bbcda2190c6a17d2ef728169f2a909de5c95c2252df8",
+      "width": 720,
+      "height": 540,
+      "size": 143942
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/v1.3.1-r2/cute-kawaii-pink-heart.png",
+      "sha256": "b6b0a359bb2e6cbde6860eb00bad2166f0c89a24df0469d9acb4d601f12dcd33",
+      "width": 720,
+      "height": 540,
+      "size": 144132
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/v1.3.1-r2/cute-pastel.png",
+      "sha256": "5e7359b0d2aae2598f0d23cac55279d1dfa52031907d3733822e1fed1609e783",
+      "width": 720,
+      "height": 540,
+      "size": 142704
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/v1.3.1-r2/neon-blue.png",
+      "sha256": "7dee462a133146db12a2ac4603c029ea0177c8824ad527acc65e70855b9abd88",
+      "width": 720,
+      "height": 540,
+      "size": 150112
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/v1.3.1-r2/sakura-pink.png",
+      "sha256": "718bc932890a08122e70856fba7cf404a5c104686f92b4c76892b431db6171ca",
+      "width": 720,
+      "height": 540,
+      "size": 157923
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/v1.3.1-r2/aurora-flow.png",
+      "sha256": "04e84fa025ad8801814e0dedeccb5bec59edef0777f13dec2240be2925fd5293",
+      "width": 720,
+      "height": 540,
+      "size": 152467
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/v1.3.1-r2/golden-spark.png",
+      "sha256": "1902ecd6cdf81015256459e504e899c8e48b82c09f5ac6936295b556b2b35b14",
+      "width": 720,
+      "height": 540,
+      "size": 147508
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/library-v1.1.0/basic-vlazteron.png",
+      "sha256": "b33a1e573488507847d8df58b3bcf5b6f72633e0bd9e9d6e7d952008b6f2bbad",
+      "width": 720,
+      "height": 540,
+      "size": 140763
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/library-v1.1.0/dot-minimal.png",
+      "sha256": "8f62582d916677bf5f68f789b4a525fea0054c91f0534425aaddd65019b4a767",
+      "width": 720,
+      "height": 540,
+      "size": 140775
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/library-v1.1.0/golden-mhmd.png",
+      "sha256": "ae8864db8eb9f8bcb2d3375646d828375df2d886865d2d2c0802afdbc406145a",
+      "width": 720,
+      "height": 540,
+      "size": 140754
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/library-v1.1.0/amber-rose.png",
+      "sha256": "08038f02f38156ada34b96c29a81751d692f34c83b14cb9d5b0c8275c24668b4",
+      "width": 720,
+      "height": 540,
+      "size": 143234
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/library-v1.1.0/brown-cow.png",
+      "sha256": "38b2ea521cc906cd9eb6175794e9d0a147f74a4e311035d771a982942acbf0f9",
+      "width": 720,
+      "height": 540,
+      "size": 136057
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/library-v1.1.0/little-chicken.png",
+      "sha256": "cfaaa0c7bf49dfee18ff357bbca7da4bf54dd89976a6f27b0b6094c8061988ea",
+      "width": 720,
+      "height": 540,
+      "size": 144323
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/library-v1.1.0/discrete-vlasta.png",
+      "sha256": "b3bb6ad751829d74ce8d2175c99fe5760440e8e9b03cc17e9681ac8d091d8147",
+      "width": 720,
+      "height": 540,
+      "size": 143286
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/library-v1.1.0/lovely-sunshine.png",
+      "sha256": "6b36a8f45892b153847d83086ab2e17a1c997cc3b27ea74b60ac7aa27421a4f4",
+      "width": 720,
+      "height": 540,
+      "size": 142806
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/library-v1.1.0/simple-dot-star.png",
+      "sha256": "3612ce81b1ce15188e4fe1ffc2ae173560d2cce0bb24b0a8519036ab2890a02f",
+      "width": 720,
+      "height": 540,
+      "size": 142592
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/library-v1.1.0/sakura-blossom.png",
+      "sha256": "209da2f8803997d85ad8e3580bee04bd7f44e0ffb8e5fa10518bbc5f812bedb9",
+      "width": 720,
+      "height": 540,
+      "size": 160177
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/library-v1.1.0/ice-crystal.png",
+      "sha256": "33df381ee0dbbe870772952c67157e73dcce34a2afafdfe8709f1eebd912a38c",
+      "width": 720,
+      "height": 540,
+      "size": 155718
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/library-v1.1.0/lavender-dream.png",
+      "sha256": "bb1b65d264fc033409a46b3d57fae5134a08096aabcc06ac08da238ca9f19562",
+      "width": 720,
+      "height": 540,
+      "size": 155368
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/library-v1.1.0/emerald-stream.png",
+      "sha256": "3ac16729de6007a756eed7306fd1b616e5665f3cd9f566b19893a6485b451f09",
+      "width": 720,
+      "height": 540,
+      "size": 152756
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/library-v1.1.0/sunset-glow.png",
+      "sha256": "7c9c56d92ba1c70b76e71bf300180b6076af3b96fc817c70b565d0c3480bbe93",
+      "width": 720,
+      "height": 540,
+      "size": 152112
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/library-v1.1.0/cyber-pulse.png",
+      "sha256": "73f48db156551de8ec1990e60988ff25fd36176fa0d6e371c5f484e25cf3f032",
+      "width": 720,
+      "height": 540,
+      "size": 136610
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/library-v1.1.0/moonlight.png",
+      "sha256": "b7a94e4dcc8554d9fcc414a6a52396aa719024e7c163f5f94f179ea1fa524f89",
+      "width": 720,
+      "height": 540,
+      "size": 160808
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/library-v1.1.0/stardust-pink.png",
+      "sha256": "7d984cd13a44aaf82ea98d022bcb299d076cda6e2d82466d67452e063f90cfba",
+      "width": 720,
+      "height": 540,
+      "size": 159814
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/library-v1.1.0/ocean-mist.png",
+      "sha256": "9ad94ef7a83b2d16915cf2b8bea0bbd085aef853772f1bb74577946fff1372a2",
+      "width": 720,
+      "height": 540,
+      "size": 147081
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/previews/library-v1.1.0/amber-whisper.png",
+      "sha256": "3d59be752ee02a6871fc6c80fb4614360893fb259868355ff45c9de138a3eeb5",
+      "width": 720,
+      "height": 540,
+      "size": 146173
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/collections/1.1.1/cute-cozy.png",
+      "sha256": "abe8fac07fe070eb11f6952382f1ee146ea48af2aa0243f894913fbbf23ef614",
+      "width": 720,
+      "height": 540,
+      "size": 209738
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/collections/1.1.1/minimal-workspace.png",
+      "sha256": "c03f533600b0854df9ec2ee2acb90e7d34b3e1eddc8de16467296f552c657cd0",
+      "width": 720,
+      "height": 540,
+      "size": 191882
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/collections/1.1.1/pixel-nostalgia.png",
+      "sha256": "da6cfd71f258d5eb1789790438d44ba69d24d142b5044bc430eb9ec52a801676",
+      "width": 720,
+      "height": 540,
+      "size": 201822
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/collections/1.1.1/neon-cyber.png",
+      "sha256": "6bcbda13a9dd6d0bc75b8024bb958a61db1d5c4eb6e08e8667d1ee4d7975f7b0",
+      "width": 720,
+      "height": 540,
+      "size": 228357
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/collections/1.1.1/animated-favorites.png",
+      "sha256": "a60bbd6abe7f5aec666bd93460ab34bf4f965a0e524731491dce2786430bcd36",
+      "width": 720,
+      "height": 540,
+      "size": 175249
+    },
+    {
+      "url": "https://catvir4493.github.io/cursorium-library/catalog/v1/collections/1.1.1/motion-essentials.png",
+      "sha256": "5849dffd3af5d9b99d20be5e74e83f4608ff2a99b990277d6cd757991943a8a6",
+      "width": 720,
+      "height": 540,
+      "size": 226393
+    }
+  ],
+  "notes": "Anonymous public HTTPS downloads, exact RSA-PSS signatures, all package SHA256 and production ZIP/CUR/ANI/native validation. No Windows Apply."
+}

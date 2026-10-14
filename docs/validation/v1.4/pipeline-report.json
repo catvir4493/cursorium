@@ -1,0 +1,76 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "missing-key",
+      "exitCode": 1,
+      "expectedSuccess": false,
+      "passed": true,
+      "verifiedFailureBoundary": "absent-private-key.pem"
+    },
+    {
+      "name": "unapproved-license",
+      "exitCode": 1,
+      "expectedSuccess": false,
+      "passed": true,
+      "verifiedFailureBoundary": "Incomplete/duplicate/unapproved"
+    },
+    {
+      "name": "source-hash-mismatch",
+      "exitCode": 1,
+      "expectedSuccess": false,
+      "passed": true,
+      "verifiedFailureBoundary": "Reviewed source changed"
+    },
+    {
+      "name": "duplicate-id",
+      "exitCode": 1,
+      "expectedSuccess": false,
+      "passed": true,
+      "verifiedFailureBoundary": "Duplicate batch resource ID"
+    },
+    {
+      "name": "duplicate-artwork",
+      "exitCode": 1,
+      "expectedSuccess": false,
+      "passed": true,
+      "verifiedFailureBoundary": "Duplicate cursor artwork"
+    },
+    {
+      "name": "missing-role-file",
+      "exitCode": 1,
+      "expectedSuccess": false,
+      "passed": true,
+      "verifiedFailureBoundary": "Role mapping is missing or ambiguous"
+    },
+    {
+      "name": "invalid-renderer",
+      "exitCode": 1,
+      "expectedSuccess": false,
+      "passed": true,
+      "verifiedFailureBoundary": "Invalid trail preset"
+    },
+    {
+      "name": "duplicate-catalog-version",
+      "exitCode": 1,
+      "expectedSuccess": false,
+      "passed": true,
+      "verifiedFailureBoundary": "Catalog version must advance"
+    },
+    {
+      "name": "valid-immutable-update",
+      "exitCode": 0,
+      "expectedSuccess": true,
+      "passed": true,
+      "verifiedFailureBoundary": ""
+    },
+    {
+      "name": "duplicate-package-version",
+      "exitCode": 1,
+      "expectedSuccess": false,
+      "passed": true,
+      "verifiedFailureBoundary": "Existing resource identity or immutable version conflict"
+    }
+  ],
+  "notes": "Real protected-key/pinned-public-key publisher, isolated staging only. No remote mutation and no Windows Apply. Signing key bytes are never logged or copied."
+}

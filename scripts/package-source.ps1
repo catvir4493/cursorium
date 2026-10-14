@@ -1,4 +1,4 @@
-param([ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.3.1')
+param([ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.4.0')
 $ErrorActionPreference='Stop'
 $frostRoot=Split-Path -Parent $PSScriptRoot
 $frostOutput=Join-Path $frostRoot "artifacts\CURSORIUM-Source-$Version.zip"

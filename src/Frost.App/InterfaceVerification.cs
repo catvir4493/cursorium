@@ -119,9 +119,12 @@ public static class InterfaceVerification
     }
     public static void CaptureWindow(Window window,string path)
     {
-        if(!Native.GetWindowRect(new WindowInteropHelper(window).Handle,out var rectangle))throw new IOException("Could not read screenshot bounds.");
-        using var bitmap=new System.Drawing.Bitmap(rectangle.Width,rectangle.Height);
-        using(var graphics=System.Drawing.Graphics.FromImage(bitmap))graphics.CopyFromScreen(rectangle.Left,rectangle.Top,0,0,bitmap.Size);
-        bitmap.Save(path,System.Drawing.Imaging.ImageFormat.Png);
+        // Capture the running, data-bound WPF window itself. Desktop BitBlt can
+        // return stale/occluding applications in a remote desktop session and
+        // accidentally expose unrelated private windows in published evidence.
+        if(!window.IsLoaded||!window.IsVisible)throw new IOException("The running WPF window must be visible for capture.");
+        window.UpdateLayout();var dpi=VisualTreeHelper.GetDpi(window);
+        var bitmap=new System.Windows.Media.Imaging.RenderTargetBitmap((int)Math.Ceiling(window.ActualWidth*dpi.DpiScaleX),(int)Math.Ceiling(window.ActualHeight*dpi.DpiScaleY),96*dpi.DpiScaleX,96*dpi.DpiScaleY,PixelFormats.Pbgra32);
+        bitmap.Render(window);var encoder=new System.Windows.Media.Imaging.PngBitmapEncoder();encoder.Frames.Add(System.Windows.Media.Imaging.BitmapFrame.Create(bitmap));using var file=File.Create(path);encoder.Save(file);
     }
 }

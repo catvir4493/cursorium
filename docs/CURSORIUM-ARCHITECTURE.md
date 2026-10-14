@@ -286,3 +286,41 @@ inside an expander; Apply/Cancel semantics and Profile data remain unchanged.
 Native services, safety parsers, downloader/catalog protocols and global desktop
 rendering are unchanged. The original physical preview exclusion remains; the
 application does not suppress applied desktop trails across its whole window.
+
+## v1.4 — curation, collections and immutable updates
+
+RemoteCollectionsService consumes a separate, strict, bounded JSON document and
+detached signature through OfficialHttp and RemoteCatalogService.VerifySignature.
+The catalog v1 Resources contract is unchanged. Collections validate member IDs
+against the verified catalog, cap count/size, reject rollback and unknown cache
+schemas, coalesce refreshes and retain a verified offline cache. Explore searches
+name, author, description, tags and collection names locally; Installed and Not
+Installed are ownership filters, independent of Draft/Applied/favorites. The
+existing 24-resource pagination, static covers and bounded media caches remain.
+
+LibraryPublisher's reviewed batch preparation reuses CursorPack, CursorResource,
+ThemeCatalog.ReadTheme, VerifiedResourcePack, ThemeCoverRenderer and TrailPainter.
+It checks original hashes, explicit filename mappings, author/license decisions,
+identity/version conflicts and duplicate source/package content before signing
+exact bytes with the protected existing key. Publication preflights packages and
+prepared media, publishes immutable Release assets, verifies public downloads,
+then fast-forwards Pages main. A metadata-only mode validates unchanged package
+identities/hashes and publishes tags/collections without an empty resource Release.
+See CURSORIUM-LIBRARY-WORKFLOW.md for the reusable workflow and failure behavior.
+
+DownloadManager rejects same-version package replacement, downgrade and author
+conflicts. Updates retain previous SHA directories; download never changes Windows.
+StudioConfiguration adds an optional CursorPackageSha256 pin without changing
+SchemaVersion 1. StudioService.ResolveTheme resolves retained, validated manifests
+inside the managed theme root; it does not replace native transactions. Legacy
+applied pins are inferred in memory from actual native state without rewriting
+existing Profile files. MainWindow previews the pinned version, offers an explicit
+installed-update action, and Cancel restores the applied pin. Applying only motion
+keeps old cursor resources. The original ThemeService backup/SPI transaction remains
+the sole Windows application path. Pins in saved Profiles prevent implicit updates.
+
+Verification captures rasterize the running, bound WPF window visual tree at its
+actual DPI. This avoids stale/occluding BitBlt content and private desktop leakage.
+It is real application rendering, not a concept image, but is not evidence of an
+unobstructed desktop screenshot or physical multi-DPI display switching. Native
+window/input tests remain separate.

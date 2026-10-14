@@ -1,4 +1,4 @@
-param([string]$ApplicationDirectory='artifacts/cursorium-release/portable',[switch]$SkipBenchmark,[switch]$Discover,[string]$ReportDirectory='artifacts/cursorium-verification')
+param([string]$ApplicationDirectory='artifacts/cursorium-release/portable',[switch]$SkipBenchmark,[switch]$Discover,[string]$ReportDirectory='artifacts/cursorium-verification',[string]$CurationStage,[string]$PreviousCatalog)
 $ErrorActionPreference='Stop'
 $cursoriumRoot=Split-Path -Parent $PSScriptRoot
 Set-Location -LiteralPath $cursoriumRoot
@@ -26,6 +26,7 @@ function Invoke-CursoriumTest([string[]]$Arguments){
 if($LASTEXITCODE -ne 0){throw 'Core/native transaction verification failed.'}
 & dotnet run --project tests/Frost.Verify -c Release -- --online-tests $cursoriumApp (Join-Path $cursoriumRoot 'tests/fixtures/online') (Join-Path $cursoriumReport 'online-security')
 if($LASTEXITCODE -ne 0){throw 'Online download security verification failed.'}
+if($CurationStage){if(-not $PreviousCatalog){throw 'Curation verification needs the previous signed catalog.'};& dotnet run --project tests/Frost.Verify -c Release -- --curation-tests $cursoriumApp ([IO.Path]::GetFullPath($CurationStage)) ([IO.Path]::GetFullPath($PreviousCatalog)) (Join-Path $cursoriumReport 'curation');if($LASTEXITCODE -ne 0){throw 'Curation/update verification failed.'}}
 $cursoriumTestingData=Join-Path $cursoriumReport ('desktop-data-'+[guid]::NewGuid().ToString('N'))
 Invoke-CursoriumTest @('--self-test','--isolated-test','--test-data-root',('"'+$cursoriumTestingData+'"'),'--report',('"'+$cursoriumReport+'"'))
 $cursoriumDesktop=Get-Content -LiteralPath (Join-Path $cursoriumReport 'desktop-report.json') -Raw | ConvertFrom-Json

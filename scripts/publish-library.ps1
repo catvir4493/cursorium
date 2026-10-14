@@ -1,10 +1,33 @@
-param([string]$LibraryPath='D:\codex-workspaces\cursorium-library',[string]$ExportPath,[string]$Version='1.0.0',[switch]$Prepared)
+param([string]$LibraryPath='D:\codex-workspaces\cursorium-library',[string]$ExportPath,[string]$Version='1.0.0',[switch]$Prepared,[string]$PreviousCatalog,[switch]$Resume,[switch]$MetadataOnly)
 $ErrorActionPreference='Stop'
 $projectRoot=Split-Path -Parent $PSScriptRoot
 if(-not $ExportPath){$ExportPath=Join-Path $projectRoot 'artifacts/library-export'}
 $catalogFile=Join-Path $ExportPath 'catalog/v1/index.json'
 $catalog=Get-Content -LiteralPath $catalogFile -Raw | ConvertFrom-Json
 if($catalog.SchemaVersion -ne 1 -or $catalog.CatalogVersion -ne $Version){throw 'Catalog version mismatch.'}
+if(-not $PreviousCatalog){throw 'Supply the previous signed catalog captured before staging.'}
+$ExportPath=[IO.Path]::GetFullPath($ExportPath)
+$start=[Diagnostics.ProcessStartInfo]::new((Join-Path $projectRoot 'src/Frost.App/bin/Release/net8.0-windows/FrostWhiteComet.exe'))
+$start.UseShellExecute=$false;$start.CreateNoWindow=$true
+foreach($arg in @('--isolated-test','--verify-library',$ExportPath,[IO.Path]::GetFullPath($PreviousCatalog),'--test-data-root',(Join-Path $ExportPath 'publisher-data'))){$start.ArgumentList.Add($arg)}
+$process=[Diagnostics.Process]::Start($start)
+if(-not $process.WaitForExit(60000) -or $process.ExitCode -ne 0){throw 'Preflight failed; previous public catalog is untouched. Inspect publisher-data/frost.log.'}
+$preflight=Get-Content -LiteralPath (Join-Path $ExportPath 'preflight.json') -Raw|ConvertFrom-Json
+if($MetadataOnly){
+ if(-not $Prepared -or -not $preflight.metadataOnly -or (git -C $LibraryPath status --porcelain) -or (git -C $LibraryPath remote get-url origin).Trim() -ne 'https://github.com/catvir4493/cursorium-library.git'){throw 'A clean reviewed metadata-only checkout with the expected remote is required.'}
+ foreach($file in Get-ChildItem -LiteralPath (Join-Path $ExportPath 'catalog') -File -Recurse){$target=Join-Path $LibraryPath ([IO.Path]::GetRelativePath($ExportPath,$file.FullName));if(-not (Test-Path -LiteralPath $target) -or (Get-FileHash -LiteralPath $target).Hash -ne (Get-FileHash -LiteralPath $file.FullName).Hash){throw 'Prepared metadata/media differs from signed staging.'}}
+ # Reuse the production anonymous downloader to prove unchanged package availability
+ # before promoting metadata. No release assets or published tags are modified.
+ $old=Get-Content -LiteralPath $PreviousCatalog -Raw|ConvertFrom-Json
+ $check=[Diagnostics.ProcessStartInfo]::new($start.FileName);$check.UseShellExecute=$false;$check.CreateNoWindow=$true
+ foreach($arg in @('--isolated-test','--verify-library-public',(Join-Path $ExportPath 'previous-public-verification'),$old.CatalogVersion,'--test-data-root',(Join-Path $ExportPath 'public-verifier-data'))){$check.ArgumentList.Add($arg)}
+ $running=[Diagnostics.Process]::Start($check);if(-not $running.WaitForExit(60000) -or $running.ExitCode -ne 0){throw 'Previous public resources could not be verified; signed catalog retained.'}
+ & git -C $LibraryPath push origin HEAD:refs/heads/main;if($LASTEXITCODE -ne 0){throw 'Metadata push failed; history will not be rewritten.'}
+ $commit=(git -C $LibraryPath rev-parse HEAD).Trim();$remote=(git -C $LibraryPath ls-remote origin refs/heads/main) -split '\s+';if($remote[0] -ne $commit){throw 'Remote metadata commit mismatch.'}
+ [ordered]@{commit=$commit;metadataOnly=$true;catalogVersion=$Version;packagesChanged=0;resources=$catalog.Resources.Count}|ConvertTo-Json|Set-Content -LiteralPath (Join-Path $ExportPath 'publication.json') -Encoding utf8
+ return
+}
+if($preflight.metadataOnly){throw 'Use -MetadataOnly for a catalog/media-only update; no empty resource Release will be created.'}
 # Credentials are only held in memory, never written to the library or application.
 $credentialLines=(@('protocol=https','host=github.com','') -join "`n" | git -c credential.interactive=false credential fill 2>$null)
 if($LASTEXITCODE -ne 0){throw 'GitHub credential unavailable.'}
@@ -19,50 +42,48 @@ function Invoke-LibraryGit([string[]]$Arguments){& git -C $LibraryPath @Argument
 if(-not (Test-Path -LiteralPath (Join-Path $LibraryPath '.git'))){if(Test-Path -LiteralPath $LibraryPath){throw 'Library path exists without Git; preserve it and choose an empty path.'};New-Item -ItemType Directory -Path $LibraryPath | Out-Null;Invoke-LibraryGit @('init','-b','main');Invoke-LibraryGit @('remote','add','origin',"https://github.com/$repository.git");Invoke-LibraryGit @('config','user.name',(git -C $projectRoot config user.name).Trim());Invoke-LibraryGit @('config','user.email',(git -C $projectRoot config user.email).Trim())}
 if((git -C $LibraryPath remote get-url origin).Trim() -ne "https://github.com/$repository.git"){throw 'Unexpected library remote.'}
 if(git -C $LibraryPath status --porcelain){throw 'Library checkout has uncommitted changes; preserve them before export.'}
-if(git -C $LibraryPath ls-remote origin "refs/tags/library-v$Version"){throw 'This library version is already published. Use a new immutable resource release version.'}
+if((git -C $LibraryPath ls-remote origin "refs/tags/library-v$Version") -and -not $Resume){throw 'This library version is already published. Use a new immutable resource release version.'}
 if(Test-Path -LiteralPath (Join-Path $LibraryPath 'catalog/v1/index.json')){$existing=Get-Content -LiteralPath (Join-Path $LibraryPath 'catalog/v1/index.json') -Raw|ConvertFrom-Json;if(-not $Prepared -and [version]$catalog.CatalogVersion -le [version]$existing.CatalogVersion){throw 'The new signed catalog must advance CatalogVersion.'}}
-if(-not $Prepared){
-Copy-Item -LiteralPath (Join-Path $ExportPath 'catalog') -Destination $LibraryPath -Recurse -Force
-Copy-Item -LiteralPath (Join-Path $ExportPath 'catalog-public-key.pem') -Destination $LibraryPath -Force
-Copy-Item -LiteralPath (Join-Path $projectRoot 'docs/CURSORIUM-v1.2-SOURCES.md') -Destination (Join-Path $LibraryPath 'SOURCES.md') -Force
-[IO.File]::WriteAllText((Join-Path $LibraryPath '.nojekyll'),'')
-[IO.File]::WriteAllText((Join-Path $LibraryPath '.gitignore'),"packages/`nwork/`n*.private.pem`n")
-[IO.File]::WriteAllText((Join-Path $LibraryPath '.gitattributes'),"catalog/** -text`n*.pem text eol=lf`n")
-[IO.File]::WriteAllText((Join-Path $LibraryPath 'README.md'),@'
-# CURSORIUM Library
-
-Official public, data-only catalog. Index: https://catvir4493.github.io/cursorium-library/catalog/v1/index.json
-
-Resources are versioned GitHub Release ZIPs, not executable plugins. Existing five Cute Collection IDs remain stable and bundled installations are recognized without another download. Cool Cat - Superstar uses Bobcat's original bonus ANI as Normal; no pixels, timing or hotspots were changed. Four original numeric motion presets use CURSORIUM's Comet, Neon and Stardust renderers.
-
-Authors and licenses are in SOURCES.md and each package NOTICE.txt. Original third-party sprites remain Public Domain; inherited FROST roles and original presets follow the application's MIT license. License statements were rechecked on 2026-10-13, and fresh original ZIP SHA256 values matched the reviewed source archive records.
-
-The exact UTF-8 index.json bytes have a detached 3072-bit RSA-PSS/SHA256 signature in index.json.sig. The client pins catalog-public-key.pem. The signing private key is maintained outside both repositories and all release assets. SHA256 verifies package bytes against signed metadata. HTTPS URLs and every redirect are restricted to this Pages site, this repository's Release downloads and GitHub's release asset CDN. A compromised signing key can authorize malicious data; native cursor validation remains required. Key rotation requires a reviewed client update. The first installation does not have an independent catalog expiry/transparency service.
-
-To add a resource: verify redistribution permission, validate every CUR/ANI and all 15 roles, retain provenance/NOTICE, build a data-only ZIP, create a new immutable library Release, calculate size and SHA256, add metadata and an actual resource-derived PNG cover, increase CatalogVersion, validate the runtime schema, sign the exact index bytes with the protected key, and commit/push the catalog. Never change an existing release asset, stable ID, or tag. New resources need no desktop release when compatible with cursorium-1.
-
-The application repository contains scripts/publish-library.ps1 and the --isolated-test --export-library publishing tool. Do not put packages, local staging, private keys, user settings or registry backups in this repository.
-'@)
-Invoke-LibraryGit @('add','catalog','catalog-public-key.pem','SOURCES.md','README.md','.gitignore','.gitattributes','.nojekyll')
-Invoke-LibraryGit @('commit','-m',"feat: publish signed resource catalog $Version")
-}
-Invoke-LibraryGit @('push','--set-upstream','origin','main')
+if(-not $Prepared){throw 'Commit reviewed catalog, media and attribution first, then use -Prepared.'}
+foreach($relative in @('catalog/v1/index.json','catalog/v1/index.json.sig','catalog/v1/collections/index.json','catalog/v1/collections/index.json.sig')){if((Get-FileHash -LiteralPath (Join-Path $LibraryPath $relative)).Hash -ne (Get-FileHash -LiteralPath (Join-Path $ExportPath $relative)).Hash){throw 'Prepared checkout differs from the verified stage.'}}
+foreach($file in Get-ChildItem -LiteralPath (Join-Path $ExportPath 'catalog') -File -Recurse){$relative=[IO.Path]::GetRelativePath($ExportPath,$file.FullName);$preparedFile=Join-Path $LibraryPath $relative;if(-not (Test-Path -LiteralPath $preparedFile) -or (Get-FileHash -LiteralPath $preparedFile).Hash -ne (Get-FileHash -LiteralPath $file.FullName).Hash){throw 'Prepared media differs from verified staging; nothing will be published.'}}
 $commit=(git -C $LibraryPath rev-parse HEAD).Trim();$remote=(git -C $LibraryPath ls-remote origin refs/heads/main) -split '\s+'
-if($remote[0] -ne $commit){throw 'Library remote commit mismatch.'}
-$tag="library-v$Version";Invoke-LibraryGit @('tag','-a',$tag,'-m',"CURSORIUM resource library $Version");Invoke-LibraryGit @('push','origin',"refs/tags/$tag")
-$notes="Ten verified data-only resources: five original Cute themes, Bobcat Superstar role-mapping variant and four original motion presets. See SOURCES.md and package NOTICE.txt. The desktop never automatically applies a download."
-$body=@{tag_name=$tag;target_commitish=$commit;name="CURSORIUM Library $Version";body=$notes;draft=$true}|ConvertTo-Json
-$release=Invoke-RestMethod -Method Post -Uri "$api/releases" -Headers $headers -ContentType 'application/json' -Body $body
+& git -C $LibraryPath merge-base --is-ancestor $remote[0] $commit
+if($LASTEXITCODE -ne 0){throw 'Prepared commit must fast-forward published main.'}
+$tag="library-v$Version"
+if(-not (git -C $LibraryPath tag --list $tag)){Invoke-LibraryGit @('tag','-a',$tag,'-m',"CURSORIUM resource library $Version")}
+if((git -C $LibraryPath rev-parse "$tag^{}").Trim() -ne $commit){throw 'Release tag differs from reviewed commit; it will not be moved.'}
+Invoke-LibraryGit @('push','origin',"refs/tags/$tag")
+$batch=@($catalog.Resources|Where-Object {$_.PackageUrl.StartsWith("https://github.com/$repository/releases/download/$tag/",[StringComparison]::Ordinal)})
+$notes="$($batch.Count) new reviewed data-only resources; $($catalog.Resources.Count) catalog resources. See SOURCES.md and package NOTICE.txt. Download never applies Windows pointers."
+$release=$null
+try{$release=Invoke-RestMethod "$api/releases/tags/$tag" -Headers $headers}catch{if([int]$_.Exception.Response.StatusCode -ne 404){throw}}
+if($release -and -not $Resume){throw 'Release exists; inspect it before using -Resume.'}
+if(-not $release){$body=@{tag_name=$tag;target_commitish=$commit;name="CURSORIUM Library $Version";body=$notes;draft=$true}|ConvertTo-Json;$release=Invoke-RestMethod -Method Post -Uri "$api/releases" -Headers $headers -ContentType 'application/json' -Body $body}
 $sums=@()
-foreach($resource in $catalog.Resources){$file=Get-Item -LiteralPath (Join-Path $ExportPath ('packages/'+$resource.Id+'.zip'));$hash=(Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash.ToLowerInvariant();if($hash -ne $resource.SHA256 -or $file.Length -ne $resource.PackageSize){throw 'Package checksum mismatch.'};$sums+="$hash  $($file.Name)"}
+foreach($resource in $batch){$file=Get-Item -LiteralPath (Join-Path $ExportPath ('packages/'+$resource.Id+'.zip'));$hash=(Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash.ToLowerInvariant();if($hash -ne $resource.SHA256 -or $file.Length -ne $resource.PackageSize){throw 'Package checksum mismatch.'};$sums+="$hash  $($file.Name)"}
 $sumsPath=Join-Path $ExportPath 'SHA256SUMS.txt';[IO.File]::WriteAllLines($sumsPath,$sums)
 foreach($file in @((Get-ChildItem -LiteralPath (Join-Path $ExportPath 'packages') -File -Filter '*.zip'))+(Get-Item -LiteralPath $sumsPath)){
  $uri=($release.upload_url -replace '\{.*\}$','')+'?name='+[Uri]::EscapeDataString($file.Name)
+ $hash=(Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+ $existing=@($release.assets|Where-Object name -eq $file.Name)
+ if($existing.Count){if($existing.Count -ne 1 -or $existing[0].size -ne $file.Length -or $existing[0].digest -ne ('sha256:'+$hash)){throw 'Existing immutable asset differs; it will not be replaced.'};continue}
+ if(-not $release.draft){throw 'Published release cannot be modified.'}
  $asset=Invoke-RestMethod -Method Post -Uri $uri -Headers $headers -InFile $file.FullName -ContentType 'application/octet-stream' -TimeoutSec 120
  $hash=(Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
  if($asset.size -ne $file.Length -or $asset.digest -ne ('sha256:'+$hash)){throw 'Uploaded library digest mismatch.'}
 }
-$release=Invoke-RestMethod -Method Patch -Uri "$api/releases/$($release.id)" -Headers $headers -ContentType 'application/json' -Body '{"draft":false}'
+if($release.draft){$release=Invoke-RestMethod -Method Patch -Uri "$api/releases/$($release.id)" -Headers $headers -ContentType 'application/json' -Body '{"draft":false}'}
+# Packages must be anonymously downloadable BEFORE promoting the signed Pages index.
+$publicDownloads=Join-Path $ExportPath 'public-downloads';New-Item -ItemType Directory -Path $publicDownloads -Force|Out-Null
+foreach($file in @((Get-ChildItem -LiteralPath (Join-Path $ExportPath 'packages') -File -Filter '*.zip'))+(Get-Item -LiteralPath $sumsPath)){
+ $target=Join-Path $publicDownloads $file.Name
+ Invoke-WebRequest "https://github.com/$repository/releases/download/$tag/$([Uri]::EscapeDataString($file.Name))" -OutFile $target -TimeoutSec 120
+ if((Get-FileHash -LiteralPath $target).Hash -ne (Get-FileHash -LiteralPath $file.FullName).Hash){throw 'Public package download mismatch; previous catalog retained.'}
+}
+Invoke-LibraryGit @('push','origin','HEAD:refs/heads/main')
+$remote=(git -C $LibraryPath ls-remote origin refs/heads/main) -split '\s+'
+if($remote[0] -ne $commit){throw 'Library remote commit mismatch.'}
 try{$pages=Invoke-RestMethod "$api/pages" -Headers $headers}catch{if([int]$_.Exception.Response.StatusCode -ne 404){throw};$pages=Invoke-RestMethod -Method Post -Uri "$api/pages" -Headers $headers -ContentType 'application/json' -Body '{"source":{"branch":"main","path":"/"}}'}
-[ordered]@{commit=$commit;repository=$repo.html_url;release=$release.html_url;pages=$pages.html_url;assets=$release.assets.Count} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $ExportPath 'publication.json') -Encoding UTF8
+[ordered]@{commit=$commit;repository=$repo.html_url;release=$release.html_url;pages=$pages.html_url;newPackages=$batch.Count;resources=$catalog.Resources.Count;publicDownloadsVerified=$sums.Count+1} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $ExportPath 'publication.json') -Encoding UTF8
 Write-Host "Library published: $($repo.html_url); release: $($release.html_url); Pages deployment pending verification."

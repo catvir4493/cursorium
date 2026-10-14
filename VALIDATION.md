@@ -1,3 +1,35 @@
+# v1.4.0 Online Library Expansion & Curation — 2026-10-14
+
+Release source build: zero errors/warnings. Retained checks passed: core/native 180,
+desktop/input 85, interface 98, cached WPF restart 99, collection 28, online security
+51. Added curation/update/version-pin checks: 104; actual public-network WPF checks:
+103; publisher boundary checks: 10. The actual installed 1.3.1 binary also passed
+98 checks while fetching/verifying the expanded catalog. Evidence:
+[summary](docs/validation/v1.4/summary.json), [delivery](docs/CURSORIUM-v1.4-DELIVERY.md),
+[audit](docs/CURSORIUM-v1.4-SOURCES.md), [WPF captures](docs/CURSORIUM-v1.4-SCREENSHOTS.md).
+
+29 actual resources, not the aspirational 30+: 9 newly approved full-role cursors,
+10 new original trusted-renderer presets, 10 preserved packages. Public verification
+refetched all 29 packages and 35 images; pinned RSA-PSS signatures, SHA256, sizes and
+production ZIP/CUR/ANI/native loading passed. Catalog 1.1.1 changes tags/collections,
+not resource package versions. 100/300/500-resource fixtures remain bounded to 24
+cards; timings/handles and eight short engine measurements are reported separately.
+
+Same-ID updates retain old immutable versions, explicit preview/Apply and correct
+Cancel/motion-only behavior. Tests use isolated data and restore exact native state;
+protected user JSON existence/hashes match. No user profiles, raw registry snapshots,
+private signing key or rollback archives are committed. The first BitBlt outputs
+captured an unrelated window and were excluded; public images rasterize the running
+WPF visual tree at its real DPI. They are not an unobstructed desktop capture claim.
+
+Observed hardware: Windows 11, one 2560x1440 monitor, 96 DPI. Physical 125/150%, dual
+monitors, Windows 10, mixed DPI, long-duration stress and the full install/uninstall
+matrix remain unverified. Logical layout simulations are explicitly not physical
+DPI tests. Guarded isolated/current installation upgrade reports remain local;
+release checksums and public-download verification accompany the final assets.
+
+---
+
 # v1.3.1 Visual Experience Refinement — 2026-10-14
 
 Release build: zero errors/warnings. Current checks: core/native 180,

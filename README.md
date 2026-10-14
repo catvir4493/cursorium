@@ -2,13 +2,15 @@
 
 Windows 鼠标主题与桌面特效管理工具，沿用原 FROST 项目的 **C# / .NET 8 / WPF / Win32**。在线发现、校验下载，本地预览与应用；无账户、注入或主题脚本。
 
-![CURSORIUM Explore](docs/images/v1.3.1/explore.png)
+![CURSORIUM Explore](docs/images/v1.4/explore.png)
 
 源码：[catvir4493/cursorium](https://github.com/catvir4493/cursorium)。安装器与便携版：[GitHub Releases](https://github.com/catvir4493/cursorium/releases)。原 FROST 项目与历史继续保留在 [frost-white-comet](https://github.com/catvir4493/frost-white-comet)。
 
 v1.1 的 UI、状态与窗口框架升级、同尺寸前后对照和页面截图见 [交付记录](docs/CURSORIUM-v1.1-DELIVERY.md) 与 [截图对照](docs/CURSORIUM-v1.1-SCREENSHOTS.md)。
 
-当前版本 **v1.3.1 — Visual Experience Refinement**：真实封面、首屏详情操作、像素放大观察、可点击角色画廊与更清晰的本地库；见 [中文交付](docs/CURSORIUM-v1.3.1-DELIVERY.md) 和 [同尺寸截图对照](docs/CURSORIUM-v1.3.1-SCREENSHOTS.md)。
+当前版本 **v1.4.0 — Online Library Expansion & Curation**：29 项真实在线资源、6 个独立签名合集、版本绑定与安全更新、可复用审核发布工具。新增 9 套指针与 10 套原创拖尾；没有为达到 30 项而纳入未批准资源。见 [中文交付](docs/CURSORIUM-v1.4-DELIVERY.md)、[作者与授权台账](docs/CURSORIUM-v1.4-SOURCES.md)、[实际 WPF 截图](docs/CURSORIUM-v1.4-SCREENSHOTS.md)和[以后上架流程](docs/CURSORIUM-LIBRARY-WORKFLOW.md)。
+
+v1.3.1 — Visual Experience Refinement：真实封面、首屏详情操作、像素放大观察、可点击角色画廊与更清晰的本地库；见 [中文交付](docs/CURSORIUM-v1.3.1-DELIVERY.md) 和 [同尺寸截图对照](docs/CURSORIUM-v1.3.1-SCREENSHOTS.md)。
 
 v1.3.0 的 Discover & Install 工作流继续保留：Explore 发现资源 → 内部详情与按需真实预览 → Download → Cursors / Trails 本地库 → Apply Changes。官方 [资源库](https://github.com/catvir4493/cursorium-library) 与 [签名目录](https://catvir4493.github.io/cursorium-library/catalog/v1/index.json) 独立更新。完整功能、真实测试及限制见 [中文交付](docs/CURSORIUM-v1.3-DELIVERY.md) 和 [WPF 截图](docs/CURSORIUM-v1.3-SCREENSHOTS.md)。v1.2.1 及此前 tag / Release 保留。
 

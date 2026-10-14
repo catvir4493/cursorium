@@ -86,7 +86,8 @@ public sealed class DownloadManager
         lock(sync){if(active.Contains(resource.Id))return "Downloading";}
         string? version=resource.Type=="cursor"?themes.Themes.FirstOrDefault(t=>t.Id==resource.Id)?.Version:LoadTrails().FirstOrDefault(p=>p.Id==resource.Id)?.Version;
         bool owned=resource.Type=="cursor"&&themes.Themes.Any(t=>t.Id==resource.Id);
-        if(owned&&themes.Themes.Any(t=>t.Id==resource.Id&&t.SourceUrl!=resource.SourceUrl))return "ID conflict";
+        if(owned&&themes.Themes.Any(t=>t.Id==resource.Id&&(t.SourceUrl!=resource.SourceUrl||t.Author!=resource.Author)))return "ID conflict";
+        if(resource.Type=="trail"&&LoadTrails().Any(p=>p.Id==resource.Id&&p.Author!=resource.Author))return "ID conflict";
         if(owned&&string.IsNullOrEmpty(version))return "Bundled owned";
         if(version==null)return "Online only";
         return Version.TryParse(version,out var installed)&&installed<Version.Parse(resource.Version)?"Update available":"Installed";
@@ -109,10 +110,15 @@ public sealed class DownloadManager
     }
     public async Task InstallAsync(RemoteResource resource,IProgress<DownloadProgress>? progress,CancellationToken cancellation)
     {
-        resource.CheckCompatibility();
+        resource.CheckCompatibility();cancellation.ThrowIfCancellationRequested();
         if(State(resource)=="ID conflict")throw new InvalidOperationException("This resource ID belongs to a different local theme. Nothing was overwritten.");
-        if(resource.Type=="cursor"&&themes.Themes.Any(t=>t.Id==resource.Id&&t.PackageSha256.Equals(resource.SHA256,StringComparison.OrdinalIgnoreCase)))return;
-        if(resource.Type=="trail"&&LoadTrails().Any(p=>p.Id==resource.Id&&p.PackageSha256.Equals(resource.SHA256,StringComparison.OrdinalIgnoreCase)))return;
+        var existingTheme=resource.Type=="cursor"?themes.Themes.FirstOrDefault(t=>t.Id==resource.Id):null;
+        var existingTrail=resource.Type=="trail"?LoadTrails().FirstOrDefault(t=>t.Id==resource.Id):null;
+        var version=existingTheme?.Version??existingTrail?.Version;var digest=existingTheme?.PackageSha256??existingTrail?.PackageSha256;
+        if(Version.TryParse(version,out var installedVersion)&&installedVersion>Version.Parse(resource.Version))throw new InvalidOperationException("The installed resource is newer. Downgrade refused; the existing version is preserved.");
+        if((existingTheme?.ManagedDownload==true||existingTrail!=null)&&version==resource.Version&&!string.IsNullOrEmpty(digest)&&!digest.Equals(resource.SHA256,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("Published package bytes changed without a new resource version. Existing installation preserved.");
+        if(resource.Type=="cursor"&&themes.Themes.Any(t=>t.Id==resource.Id&&t.Version==resource.Version&&t.PackageSha256.Equals(resource.SHA256,StringComparison.OrdinalIgnoreCase)))return;
+        if(resource.Type=="trail"&&LoadTrails().Any(p=>p.Id==resource.Id&&p.Version==resource.Version&&p.PackageSha256.Equals(resource.SHA256,StringComparison.OrdinalIgnoreCase)))return;
         lock(sync){if(!active.Add(resource.Id))throw new InvalidOperationException("This resource is already downloading.");}
         try
         {

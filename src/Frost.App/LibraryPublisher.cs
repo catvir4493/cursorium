@@ -10,7 +10,7 @@ namespace Frost.App;
 
 // Publishing tool: actual native cursor images and the production trail painter.
 // It reads only project resources and never applies a Windows theme.
-internal static class LibraryPublisher
+internal static partial class LibraryPublisher
 {
     // Media-only offline export from already validated package directories. It does
     // not recreate packages or change their versions, role mappings or checksums.

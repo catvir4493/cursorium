@@ -1,0 +1,166 @@
+{
+  "SchemaVersion": 1,
+  "Version": "1.1.1",
+  "MetadataOnly": true,
+  "ResourceTags": {
+    "neon-blue": [
+      "Neon",
+      "Motion"
+    ],
+    "sakura-pink": [
+      "Cute",
+      "Neon",
+      "Motion"
+    ],
+    "aurora-flow": [
+      "Neon",
+      "Motion",
+      "Comet"
+    ],
+    "golden-spark": [
+      "Gold",
+      "Motion",
+      "Stardust"
+    ],
+    "sakura-blossom": [
+      "Cute",
+      "Motion",
+      "Comet"
+    ],
+    "lavender-dream": [
+      "Cute",
+      "Motion",
+      "Stardust"
+    ],
+    "stardust-pink": [
+      "Cute",
+      "Motion",
+      "Stardust"
+    ],
+    "ice-crystal": [
+      "Neon",
+      "Motion",
+      "Comet"
+    ],
+    "sunset-glow": [
+      "Warm",
+      "Motion",
+      "Comet"
+    ],
+    "ocean-mist": [
+      "Soft",
+      "Motion",
+      "Stardust"
+    ]
+  },
+  "Cursors": [],
+  "Trails": [],
+  "Collections": [
+    {
+      "Id": "cute-cozy",
+      "Name": "Cute & Cozy",
+      "Description": "Original animals, hearts and gentle motion.",
+      "CoverUrl": "",
+      "ResourceIds": [
+        "brown-cow",
+        "lovely-sunshine",
+        "little-chicken",
+        "cute-bunny-cute-kawaii",
+        "cute-kawaii-cat-curs0rs",
+        "cute-kawaii-pink-heart",
+        "cute-pastel",
+        "cute-cool-cat",
+        "sakura-pink",
+        "sakura-blossom",
+        "lavender-dream",
+        "stardust-pink"
+      ]
+    },
+    {
+      "Id": "minimal-workspace",
+      "Name": "Minimal Workspace",
+      "Description": "Simple outlined geometry and quiet Minimal-renderer motion.",
+      "CoverUrl": "",
+      "ResourceIds": [
+        "dot-minimal",
+        "basic-vlazteron",
+        "simple-dot-star",
+        "moonlight",
+        "amber-whisper"
+      ]
+    },
+    {
+      "Id": "pixel-nostalgia",
+      "Name": "Pixel Nostalgia",
+      "Description": "Actual pixel art, preserved without smoothing.",
+      "CoverUrl": "",
+      "ResourceIds": [
+        "brown-cow",
+        "lovely-sunshine",
+        "cute-bunny-cute-kawaii",
+        "cute-kawaii-cat-curs0rs",
+        "cute-cool-cat",
+        "cool-cat-superstar"
+      ]
+    },
+    {
+      "Id": "neon-cyber",
+      "Name": "Neon & Cyber",
+      "Description": "Bright outlines, blue light and trusted motion renderers.",
+      "CoverUrl": "",
+      "ResourceIds": [
+        "amber-rose",
+        "cyber-pulse",
+        "neon-blue",
+        "emerald-stream",
+        "ice-crystal",
+        "aurora-flow"
+      ]
+    },
+    {
+      "Id": "animated-favorites",
+      "Name": "Animated Favorites",
+      "Description": "Functional ANI resources with original timing.",
+      "CoverUrl": "",
+      "ResourceIds": [
+        "brown-cow",
+        "lovely-sunshine",
+        "discrete-vlasta",
+        "amber-rose",
+        "cute-bunny-cute-kawaii",
+        "cute-cool-cat",
+        "cool-cat-superstar",
+        "cute-kawaii-cat-curs0rs",
+        "cute-kawaii-pink-heart",
+        "cute-pastel",
+        "dot-minimal",
+        "basic-vlazteron",
+        "golden-mhmd",
+        "little-chicken",
+        "simple-dot-star"
+      ]
+    },
+    {
+      "Id": "motion-essentials",
+      "Name": "Motion Essentials",
+      "Description": "Data-only examples of all four trusted renderers.",
+      "CoverUrl": "",
+      "ResourceIds": [
+        "ice-crystal",
+        "moonlight",
+        "stardust-pink",
+        "emerald-stream",
+        "neon-blue",
+        "sakura-pink",
+        "aurora-flow",
+        "golden-spark",
+        "sakura-blossom",
+        "lavender-dream",
+        "sunset-glow",
+        "cyber-pulse",
+        "ocean-mist",
+        "amber-whisper"
+      ]
+    }
+  ]
+}

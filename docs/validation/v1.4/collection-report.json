@@ -1,0 +1,130 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "Collection captures own actual foreground WPF window",
+      "passed": true
+    },
+    {
+      "name": "Cute filter presents exactly five real themes",
+      "passed": true
+    },
+    {
+      "name": "Filter choice persists across library reload",
+      "passed": true
+    },
+    {
+      "name": "Cute card selection changes Draft without changing Windows",
+      "passed": true
+    },
+    {
+      "name": "Cute preview leaves applied desktop effects and saved state unchanged",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Cat: actual pointer moves and draws inside local preview",
+      "passed": true
+    },
+    {
+      "name": "Kawaii Pink Heart: actual pointer moves and draws inside local preview",
+      "passed": true
+    },
+    {
+      "name": "Bunny Cute Kawaii: actual pointer moves and draws inside local preview",
+      "passed": true
+    },
+    {
+      "name": "Theme details show real native roles, missing roles and named fallback",
+      "passed": true
+    },
+    {
+      "name": "Favorite persists without changing selected Draft theme",
+      "passed": true
+    },
+    {
+      "name": "Favorites filter reuses theme ID without copying resources",
+      "passed": true
+    },
+    {
+      "name": "Built-in filter retains original system, FROST and Obsidian",
+      "passed": true
+    },
+    {
+      "name": "ANI thumbnail timer runs for visible functional preview",
+      "passed": true
+    },
+    {
+      "name": "ANI frames decoded once into bounded immutable WPF images",
+      "passed": true
+    },
+    {
+      "name": "ANI preview uses distinct actual source pixels, not a static first frame",
+      "passed": true
+    },
+    {
+      "name": "Visible ANI thumbnail advances according to source timing",
+      "passed": true
+    },
+    {
+      "name": "Disabling optional UI motion preserves functional cursor animation",
+      "passed": true
+    },
+    {
+      "name": "Hidden window stops ANI preview rendering",
+      "passed": true
+    },
+    {
+      "name": "Preview outside scrolling viewport stops ANI rendering",
+      "passed": true
+    },
+    {
+      "name": "Thirty animated theme switches release native/GDI resources within bounded growth",
+      "passed": true
+    },
+    {
+      "name": "Cute combination can be saved as a profile",
+      "passed": true
+    },
+    {
+      "name": "Cute Cat Apply performs actual Windows theme transaction",
+      "passed": true
+    },
+    {
+      "name": "Cards distinguish Applied Cat from Selected Pink draft",
+      "passed": true
+    },
+    {
+      "name": "Cancel restores applied cute theme, profile and parameters",
+      "passed": true
+    },
+    {
+      "name": "Restart restores applied cute combination and actual resources",
+      "passed": true
+    },
+    {
+      "name": "Real pack review maps complete canonical roles and exposes fallback",
+      "passed": true
+    },
+    {
+      "name": "Cute library retains reachable actions and filter at compact size",
+      "passed": true
+    },
+    {
+      "name": "Collection verification restores exact pre-test Windows pointer values",
+      "passed": true
+    }
+  ],
+  "physicalDpi": 96,
+  "monitors": [
+    {
+      "Width": 2560,
+      "Height": 1440
+    }
+  ],
+  "notes": "Actual WPF window captures and real cursor movement. Isolated data, native roundtrip restored. Handle figures cover 30 actual theme switches after thumbnail warmup.",
+  "cpuSeconds": 2.265625,
+  "gdiBefore": 202,
+  "gdiAfter": 188,
+  "userBefore": 103,
+  "userAfter": 84
+}

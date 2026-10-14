@@ -91,8 +91,10 @@ public sealed class EffectCatalog
 public sealed class StudioConfiguration
 {
     public string CursorThemeId {get;set;}="system";
+    // Optional v1-compatible pin. Existing profiles remain unchanged on disk.
+    public string? CursorPackageSha256 {get;set;}
     public Settings Effects {get;set;}=new();
-    public StudioConfiguration Clone()=>new(){CursorThemeId=CursorThemeId,Effects=Effects.Clone()};
+    public StudioConfiguration Clone()=>new(){CursorThemeId=CursorThemeId,CursorPackageSha256=CursorPackageSha256,Effects=Effects.Clone()};
 }
 public sealed class StudioState
 {

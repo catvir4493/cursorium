@@ -22,25 +22,45 @@ public sealed class StudioService
         }
         else State=new(){Applied=new(){CursorThemeId=themes.IsInstalled?"frost":"system",Effects=Settings.Load()}};
         State.Applied.Effects.Normalize();LiveEffects.CopyFrom(State.Applied.Effects);
+        // Infer a legacy applied version in memory only. Do not rewrite user data
+        // or profiles during migration, and never switch to an updated root manifest.
+        var current=Catalog.Themes.FirstOrDefault(t=>t.Id==State.Applied.CursorThemeId);
+        if(current?.ManagedDownload==true&&State.Applied.CursorPackageSha256==null)
+        {
+            var candidates=new List<CursorTheme>{current};
+            foreach(var folder in Directory.EnumerateDirectories(current.DirectoryPath).Where(d=>System.Text.RegularExpressions.Regex.IsMatch(Path.GetFileName(d),"^[a-fA-F0-9]{64}$")).Take(128))
+                try{candidates.Add(ThemeCatalog.ReadTheme(Path.Combine(folder,"theme.json")));}catch(Exception ex)when(ex is IOException or InvalidDataException or JsonException){Storage.Log("Retained version unavailable: "+ex.Message);}
+            var active=candidates.FirstOrDefault(t=>themes.IsActive(t));if(active!=null)State.Applied.CursorPackageSha256=active.PackageSha256;
+        }
         if(Catalog.Themes.All(t=>t.Id!=State.Applied.CursorThemeId))LoadWarning="The last cursor theme is unavailable. Import it again or select another theme before Apply.";
     }
     public void Validate(StudioConfiguration configuration)
     {
-        Catalog.Find(configuration.CursorThemeId);var s=configuration.Effects;
+        ResolveTheme(configuration);var s=configuration.Effects;
         if(!Effects.Trails.Any(p=>p.Id==s.TrailEffect)||s.ClickEffect is not ("off" or "halo" or "ring")||!Settings.ValidColor(s.Color))throw new ArgumentException("Select a valid effect and a #RRGGBB color.");
         if(!double.IsFinite(s.Length)||!double.IsFinite(s.Duration)||!double.IsFinite(s.Opacity)||!double.IsFinite(s.HaloDuration)||!double.IsFinite(s.ClickOpacity)||!double.IsFinite(s.ClickRadius))throw new ArgumentException("Effect parameters must be finite.");
         if(s.Length<10||s.Length>360||s.Duration<80||s.Duration>900||s.Opacity<.05||s.Opacity>.85||s.Particles<0||s.Particles>24||s.HaloDuration<80||s.HaloDuration>500||s.ClickOpacity<.05||s.ClickOpacity>.85||s.ClickRadius<8||s.ClickRadius>60)throw new ArgumentException("Effect parameters are outside the supported range.");
     }
     public void Apply(StudioConfiguration configuration,string? profileId=null)
     {
-        Validate(configuration);var selected=Catalog.Find(configuration.CursorThemeId);
+        Validate(configuration);var selected=ResolveTheme(configuration);
         var next=new StudioState{Applied=configuration.Clone(),ProfileId=profileId,AppliedAt=DateTimeOffset.Now};
+        next.Applied.CursorPackageSha256=selected.ManagedDownload?selected.PackageSha256:null;
         themes.ApplyTheme(selected,()=>Storage.Write(StatePath,next));
         State=next;LiveEffects.CopyFrom(next.Applied.Effects);LoadWarning=null;
     }
+    public CursorTheme ResolveTheme(StudioConfiguration configuration)
+    {
+        var current=Catalog.Find(configuration.CursorThemeId);var pin=configuration.CursorPackageSha256;
+        if(!current.ManagedDownload||pin==null||pin.Equals(current.PackageSha256,StringComparison.OrdinalIgnoreCase))return current;
+        if(!System.Text.RegularExpressions.Regex.IsMatch(pin,"^[a-fA-F0-9]{64}$"))throw new InvalidDataException("Invalid retained cursor version.");
+        var path=ThemeCatalog.SafeResource(current.DirectoryPath,pin.ToLowerInvariant()+"/theme.json");var retained=ThemeCatalog.ReadTheme(path);
+        if(retained.Id!=current.Id||retained.Author!=current.Author||retained.SourceUrl!=current.SourceUrl||!pin.Equals(retained.PackageSha256,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("Retained cursor version identity mismatch.");
+        return retained;
+    }
     public void RestoreOriginal()
     {
-        var next=new StudioState{Applied=State.Applied.Clone(),AppliedAt=DateTimeOffset.Now};next.Applied.CursorThemeId="system";
+        var next=new StudioState{Applied=State.Applied.Clone(),AppliedAt=DateTimeOffset.Now};next.Applied.CursorThemeId="system";next.Applied.CursorPackageSha256=null;
         themes.Restore(()=>Storage.Write(StatePath,next));State=next;
     }
     public static void RestoreSavedState(ThemeService themes)
@@ -53,7 +73,7 @@ public sealed class StudioService
             {
                 next=JsonSerializer.Deserialize<StudioState>(File.ReadAllText(StatePath),Storage.Json);
                 if(next?.SchemaVersion!=1||next.Applied?.Effects==null)next=null;
-                if(next!=null){next.Applied.CursorThemeId="system";next.ProfileId=null;next.AppliedAt=DateTimeOffset.Now;}
+                if(next!=null){next.Applied.CursorThemeId="system";next.Applied.CursorPackageSha256=null;next.ProfileId=null;next.AppliedAt=DateTimeOffset.Now;}
             }
             catch(JsonException){Storage.Log("Invalid studio state preserved during cursor restoration.");}
         }

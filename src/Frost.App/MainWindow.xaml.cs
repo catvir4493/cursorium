@@ -36,11 +36,11 @@ public partial class MainWindow:Window
     {
         this.studio=studio;this.engine=engine;this.theme=theme;Draft=studio.State.Applied.Clone();profileId=studio.State.ProfileId;InitializeComponent();DataContext=ViewState;animatedPreview=new(HeroImage);
         Discover=new(studio.Catalog);DiscoverHost.Content=Discover;
-        Discover.LibraryChanged+=()=>{studio.Catalog.Reload();BindCatalog();LoadControls();};
+        Discover.LibraryChanged+=RefreshOwnedLibrary;
         Discover.FavoritesChanged+=()=>{library=ThemeLibraryPreferences.Load();BindThemeCards();};
-        Discover.OpenOwned+=item=>{studio.Catalog.Reload();BindCatalog();if(item.Type=="cursor"){Navigation.SelectedIndex=1;ThemeBox.SelectedItem=studio.Catalog.Find(item.Id);}else{Navigation.SelectedIndex=2;TrailBox.SelectedItem=TrailBox.Items.Cast<TrailPreset>().First(p=>p.Id==item.Id);}};
+        Discover.OpenOwned+=item=>{studio.Catalog.Reload();BindCatalog();if(item.Type=="cursor"){Navigation.SelectedIndex=1;ThemeBox.SelectedItem=studio.Catalog.Find(item.Id);Draft.CursorThemeId=item.Id;Draft.CursorPackageSha256=studio.Catalog.Find(item.Id).ManagedDownload?studio.Catalog.Find(item.Id).PackageSha256:null;UpdateThemePreview();Changed();}else{Navigation.SelectedIndex=2;TrailBox.SelectedItem=TrailBox.Items.Cast<TrailPreset>().First(p=>p.Id==item.Id);}};
         Discover.PreviewBoundsChanged+=bounds=>{if(Navigation.SelectedIndex==0)engine.PreviewBounds=bounds is Rect r?new Native.Rect{Left=(int)r.Left,Top=(int)r.Top,Right=(int)r.Right,Bottom=(int)r.Bottom}:null;};
-        NavVersionLabel.Text="v1.3.1 · Visual refinement";
+        NavVersionLabel.Text="v1.4.0 · Curated library";
         try{preferences=UiPreferences.Load();}catch(Exception ex){Storage.Log(ex.ToString());Notify(ex.Message,true);}
         try{library=ThemeLibraryPreferences.Load();}catch(Exception ex){Storage.Log(ex.ToString());Notify(ex.Message,true);}
         LibraryFilter.SelectedItem=LibraryFilter.Items.Cast<ComboBoxItem>().FirstOrDefault(i=>(string)i.Tag==library.Filter)??LibraryFilter.Items[0];
@@ -168,6 +168,7 @@ public partial class MainWindow:Window
         {
             bool selected=card.Theme.Id==Draft.CursorThemeId,applied=card.Theme.Id==studio.State.Applied.CursorThemeId;
             card.Status=selected&&applied?(IsDirty?"Selected · Applied · Modified":"Selected · Applied"):applied?"Applied":selected?"Selected · Modified":"";
+            if(applied&&card.Theme.ManagedDownload&&studio.State.Applied.CursorPackageSha256!=null&&!card.Theme.PackageSha256.Equals(studio.State.Applied.CursorPackageSha256,StringComparison.OrdinalIgnoreCase))card.Status=(selected?"Selected · ":"")+"Older version applied";
         }
         if(TrailCards!=null)foreach(var p in TrailCards.Items.Cast<TrailPreset>())
         {
@@ -231,6 +232,7 @@ public partial class MainWindow:Window
     private void UpdateThemePreview()
     {
         if(ThemeBox.SelectedItem is not CursorTheme selected){ThemeTitle.Text="Unavailable cursor theme";ThemeDescription.Text=Draft.CursorThemeId;return;}
+        try{selected=studio.ResolveTheme(Draft);}catch(Exception ex)when(ex is IOException or InvalidDataException){Notify("Retained cursor version unavailable: "+ex.Message,true);return;}
         UpdatePageHeader();HeroImage.Source=Thumbnail(selected);ShowThemeDetails(selected);
         Preview.Cursor=null;RoleGrid.Children.Clear();Mouse.UpdateCursor();foreach(var cursor in ownedCursors)cursor.Dispose();ownedCursors.Clear();cursors.Clear();
         foreach(var role in CursorRoles.All)
@@ -247,6 +249,7 @@ public partial class MainWindow:Window
         for(int i=0;i<RoleGrid.Children.Count;i++)if(RoleGrid.Children[i] is Button button){button.Background=(Brush)FindResource(i==role?"SelectedBrush":"CardBrush");button.BorderBrush=(Brush)FindResource(i==role?"AccentBrush":"BorderBrush");}
         if(ThemeBox.SelectedItem is CursorTheme selected&&role>=0)
         {
+            try{selected=studio.ResolveTheme(Draft);}catch(Exception ex)when(ex is IOException or InvalidDataException){Notify(ex.Message,true);return;}
             var name=CursorRoles.All[role].Name;animatedPreview.SetResource(selected.IsSystem?theme.OriginalResource(name):selected.Resource(name),Thumbnail(selected,name));UpdatePreviewBounds();
         }
     }
@@ -264,6 +267,7 @@ public partial class MainWindow:Window
         if(DraftStatus==null)return;bool dirty=IsDirty,valid=Settings.ValidColor(ColorInput.Text);
         ViewState.CanApply=dirty&&valid&&ThemeBox.SelectedItem!=null&&!ViewState.IsBusy;ViewState.CanCancel=dirty&&!ViewState.IsBusy;ViewState.InvalidColor=!valid;
         ViewState.StateLabel=dirty?"Draft":"Applied";ViewState.DraftMessage=!valid?"Enter a valid color to apply.":dirty?"Unapplied changes · preview only":"Matches your applied combination";
+        if(PreviewLatestButton!=null)PreviewLatestButton.Visibility=ThemeBox.SelectedItem is CursorTheme installed&&installed.ManagedDownload&&Draft.CursorPackageSha256!=null&&!installed.PackageSha256.Equals(Draft.CursorPackageSha256,StringComparison.OrdinalIgnoreCase)?Visibility.Visible:Visibility.Collapsed;
         ViewState.ClickName=Draft.Effects.ClickHalo?Draft.Effects.ClickEffect:"off";ViewState.CursorName=(ThemeBox.SelectedItem as CursorTheme)?.Name??"Unavailable cursor";ViewState.TrailName=$"{(TrailBox.SelectedItem as TrailPreset)?.Name??Draft.Effects.TrailEffect} · {ViewState.ClickName} clicks";
         var saved=studio.Profiles.Profiles.FirstOrDefault(p=>p.Id==profileId);ViewState.HasProfile=saved!=null;
         ViewState.ProfileCaption=saved==null?"No saved profile selected":"Saved profile · "+saved.Name+(JsonSerializer.Serialize(saved.Configuration,Storage.Json)!=JsonSerializer.Serialize(Draft,Storage.Json)?" · modified":"");
@@ -302,8 +306,9 @@ public partial class MainWindow:Window
         if(MessageBox.Show(this,"Remove "+selected.Name+" from your motion library? Applied settings and saved Profile parameters stay available.","Remove motion preset",MessageBoxButton.YesNo,MessageBoxImage.Question)!=MessageBoxResult.Yes)return;
         try{Discover.Downloads.RemoveTrail(selected,studio);BindCatalog();LoadControls();Discover.Render();Notify("Preset removed; applied parameters and Profiles are preserved.");}catch(Exception ex){Notify(ex.Message,true);}
     }
+    internal void RefreshOwnedLibrary(){studio.Catalog.Reload();BindCatalog();LoadControls();}
     public void RefreshAppliedToggle(){Draft.Effects.Enabled=studio.LiveEffects.Enabled;LoadControls();}
-    public void RefreshRestoredCursor(){Draft.CursorThemeId=studio.State.Applied.CursorThemeId;profileId=null;LoadControls();BindProfiles();}
+    public void RefreshRestoredCursor(){Draft.CursorThemeId=studio.State.Applied.CursorThemeId;Draft.CursorPackageSha256=studio.State.Applied.CursorPackageSha256;profileId=null;LoadControls();BindProfiles();}
     private void Navigate(object s,SelectionChangedEventArgs e)
     {
         if(CursorPage==null)return;int index=Navigation.SelectedIndex;CursorPage.Visibility=index==1?Visibility.Visible:Visibility.Collapsed;TrailPage.Visibility=index==2?Visibility.Visible:Visibility.Collapsed;MixPage.Visibility=index==3?Visibility.Visible:Visibility.Collapsed;SettingsPage.Visibility=index==4?Visibility.Visible:Visibility.Collapsed;
@@ -314,7 +319,7 @@ public partial class MainWindow:Window
         UpdatePageHeader();
         UpdatePreviewBounds();
     }
-    private void ThemeChanged(object s,SelectionChangedEventArgs e){if(!ready||ThemeBox.SelectedItem is not CursorTheme selected)return;Draft.CursorThemeId=selected.Id;bool was=ready;ready=false;ThemeCards.SelectedItem=ThemeCards.Items.Cast<ThemeCardView>().FirstOrDefault(t=>t.Theme.Id==selected.Id);ready=was;UpdateThemePreview();Changed();}
+    private void ThemeChanged(object s,SelectionChangedEventArgs e){if(!ready||ThemeBox.SelectedItem is not CursorTheme selected)return;Draft.CursorThemeId=selected.Id;Draft.CursorPackageSha256=selected.ManagedDownload?selected.PackageSha256:null;bool was=ready;ready=false;ThemeCards.SelectedItem=ThemeCards.Items.Cast<ThemeCardView>().FirstOrDefault(t=>t.Theme.Id==selected.Id);ready=was;UpdateThemePreview();Changed();}
     private void ThemeCardChanged(object s,SelectionChangedEventArgs e){if(ready&&ThemeCards.SelectedItem is ThemeCardView card)ThemeBox.SelectedItem=card.Theme;}
     private void TrailChanged(object s,SelectionChangedEventArgs e){if(!ready||TrailBox.SelectedItem is not TrailPreset selected)return;selected.Apply(Draft.Effects);LoadControls();Changed();}
     private void TrailCardChanged(object s,SelectionChangedEventArgs e){if(ready&&TrailCards.SelectedItem is TrailPreset selected)TrailBox.SelectedItem=selected;}
@@ -333,13 +338,18 @@ public partial class MainWindow:Window
         ViewState.IsBusy=true;UpdateDraftStatus();
         try
         {
-            if(!Settings.ValidColor(ColorInput.Text))throw new ArgumentException("Enter a #RRGGBB color.");if(IsDirty)studio.Apply(Draft,profileId);Notify("Applied to desktop. Original cursors remain recoverable.");Refresh();return true;
+            if(!Settings.ValidColor(ColorInput.Text))throw new ArgumentException("Enter a #RRGGBB color.");if(IsDirty){studio.Apply(Draft,profileId);Draft.CursorPackageSha256=studio.State.Applied.CursorPackageSha256;}Notify("Applied to desktop. Original cursors remain recoverable.");Refresh();return true;
         }
         catch(Exception ex){Notify("Apply failed: "+ex.Message,true);Storage.Log(ex.ToString());return false;}
         finally{ViewState.IsBusy=false;UpdateDraftStatus();}
     }
     private void CancelChanges(object s,RoutedEventArgs e){profileId=studio.State.ProfileId;CopyDraft(studio.State.Applied);BindProfiles();Notify("Preview reset to your applied combination.");}
-    private void CopyDraft(StudioConfiguration value){Draft.CursorThemeId=value.CursorThemeId;Draft.Effects.CopyFrom(value.Effects);LoadControls();}
+    private void CopyDraft(StudioConfiguration value){Draft.CursorThemeId=value.CursorThemeId;Draft.CursorPackageSha256=value.CursorPackageSha256;Draft.Effects.CopyFrom(value.Effects);LoadControls();}
+    private void PreviewLatestCursor(object sender,RoutedEventArgs e)
+    {
+        if(ThemeBox.SelectedItem is not CursorTheme selected||!selected.ManagedDownload)return;
+        Draft.CursorPackageSha256=selected.PackageSha256;UpdateThemePreview();Changed();Notify("Previewing the latest installed cursor version. Apply Changes to activate it.");
+    }
     private void ProfileSelected(object s,SelectionChangedEventArgs e){if(!ready||ProfileBox.SelectedItem is not StudioProfile selected)return;profileId=selected.Id;ProfileName.Text=selected.Name;CopyDraft(selected.Configuration);BindProfiles();Notify("Profile loaded into preview. Press Apply to activate it.");}
     private void CreateProfile(object s,RoutedEventArgs e)=>WriteProfile(null);
     private void SaveProfile(object s,RoutedEventArgs e)=>WriteProfile(profileId);

@@ -17,6 +17,8 @@ public partial class DiscoverView:UserControl,IDisposable
     public const int PageSize=24;
     private readonly OfficialHttp http=new();
     public RemoteCatalogService Catalog {get;}
+    public RemoteCollectionsService Collections {get;}
+    public string? SelectedCollectionId {get;private set;}
     public DownloadManager Downloads {get;}
     private readonly ThemeCatalog themes;
     private readonly CancellationTokenSource lifetime=new();
@@ -31,6 +33,7 @@ public partial class DiscoverView:UserControl,IDisposable
     private string technicalSummary="";
     private int page;
     private bool ready,disposed;
+    private bool compactCollections;
     private readonly HashSet<string> failed=new();
     private IReadOnlyList<RemoteResource> resources=Array.Empty<RemoteResource>();
     public event Action<RemoteResource>? OpenOwned;
@@ -43,10 +46,11 @@ public partial class DiscoverView:UserControl,IDisposable
     internal bool StartedWithCachedCatalog {get;}
     public DiscoverView(ThemeCatalog themes)
     {
-        this.themes=themes;InitializeComponent();animation=new(AnimatedImage);Catalog=new(http);Downloads=new(http,themes);
+        this.themes=themes;InitializeComponent();animation=new(AnimatedImage);Catalog=new(http);Collections=new(http);if(Catalog.Current!=null)Collections.LoadCache(Catalog.Current);Downloads=new(http,themes);
         Sort.SelectedIndex=0;foreach(var role in CursorRoles.All)Roles.Items.Add(role.Name);Roles.SelectedIndex=0;ObservationZoom.SelectedIndex=0;
         DetailPreview.Update(new Settings{Enabled=false});ready=true;LoadCatalog();StartedWithCachedCatalog=Catalog.Current!=null;
         Loaded+=async(_,_)=>{Render();if(Catalog.Current==null)await RefreshCatalog();else _=RefreshCatalog();};
+        SizeChanged+=(_,_)=>{if(IsLoaded&&ready&&compactCollections!=(ActualHeight<650||ActualWidth<900))Render();};
         IsVisibleChanged+=(_,_)=>{if(!IsVisible){ReleasePreview();mediaOperation?.Cancel();detailMedia?.Cancel();if(operation==null)Status.Text=Catalog.Status;}else{Render();if(selected!=null)LoadDetailCover(selected);}};
         DetailPreview.LayoutUpdated+=(_,_)=>UpdatePreviewBounds();DetailScroll.ScrollChanged+=(_,_)=>UpdatePreviewBounds();
     }
@@ -56,18 +60,43 @@ public partial class DiscoverView:UserControl,IDisposable
         var top=DetailPreview.PointToScreen(new Point());var bottom=DetailPreview.PointToScreen(new Point(DetailPreview.ActualWidth,DetailPreview.ActualHeight));var start=DetailScroll.PointToScreen(new Point());var end=DetailScroll.PointToScreen(new Point(DetailScroll.ActualWidth,DetailScroll.ActualHeight));
         var bounds=Rect.Intersect(new Rect(top,bottom),new Rect(start,end));bool visible=!bounds.IsEmpty&&bounds.Height>0&&bounds.Width>0;animation.SetVisible(visible);PreviewBoundsChanged?.Invoke(visible?bounds:null);
     }
-    public async Task RefreshCatalog(){RefreshButton.IsEnabled=false;Status.Text="Loading the official catalog…";await Catalog.RefreshAsync(lifetime.Token);if(disposed)return;LoadCatalog();RefreshButton.IsEnabled=true;}
+    public async Task RefreshCatalog(){RefreshButton.IsEnabled=false;Status.Text="Loading the official catalog…";await Catalog.RefreshAsync(lifetime.Token);if(disposed)return;LoadCatalog();if(Catalog.Current!=null){Collections.LoadCache(Catalog.Current);await Collections.RefreshAsync(Catalog.Current,lifetime.Token);}if(disposed)return;Render();RefreshButton.IsEnabled=true;}
     private async void RefreshClicked(object sender,RoutedEventArgs e)=>await RefreshCatalog();
     private void LoadCatalog()
     {
-        resources=Catalog.Current?.Resources??new();var current=Category.SelectedItem as string;ready=false;Category.ItemsSource=new[]{"All","Cursor Themes","Motion Trails","Featured","Favorites"}.Concat(resources.SelectMany(r=>r.Tags).Distinct().Order()).ToArray();Category.SelectedItem=current;if(Category.SelectedIndex<0)Category.SelectedIndex=0;ready=true;Status.Text=Catalog.Status;Render();
+        resources=Catalog.Current?.Resources??new();var current=Category.SelectedItem as string;ready=false;Category.ItemsSource=new[]{"All","Cursor Themes","Motion Trails","Featured","Favorites","Animated","Installed","Not Installed"}.Concat(resources.SelectMany(r=>r.Tags).Distinct().Order()).Distinct().ToArray();Category.SelectedItem=current;if(Category.SelectedIndex<0)Category.SelectedIndex=0;ready=true;Status.Text=Catalog.Status;Render();
     }
     public void SetResourcesForVerification(IReadOnlyList<RemoteResource> values){resources=values;Render();}
     public IReadOnlyList<RemoteResource> Filtered()
     {
         string category=Category.SelectedItem as string??"All",search=Search.Text.Trim();HashSet<string> favorites=ThemeLibraryPreferences.Load().Favorites;
-        var query=resources.Where(r=>search.Length==0||(r.Name+" "+r.Author+" "+r.Description+" "+string.Join(' ',r.Tags)).Contains(search,StringComparison.OrdinalIgnoreCase)).Where(r=>category switch{"All"=>true,"Cursor Themes"=>r.Type=="cursor","Motion Trails"=>r.Type=="trail","Featured"=>r.Featured,"Favorites"=>favorites.Contains(r.Id),_=>r.Tags.Contains(category,StringComparer.OrdinalIgnoreCase)});
+        var collections=Collections.Current?.Collections??new();var collection=collections.FirstOrDefault(c=>c.Id==SelectedCollectionId);
+        var installed=themes.Themes.Select(t=>t.Id).Concat(Downloads.LoadTrails().Select(t=>t.Id)).ToHashSet(StringComparer.Ordinal);
+        var query=resources.Where(r=>collection==null||collection.ResourceIds.Contains(r.Id,StringComparer.Ordinal)).Where(r=>search.Length==0||(r.Name+" "+r.Author+" "+r.Description+" "+string.Join(' ',r.Tags)+" "+string.Join(' ',collections.Where(c=>c.ResourceIds.Contains(r.Id,StringComparer.Ordinal)).Select(c=>c.Name))).Contains(search,StringComparison.OrdinalIgnoreCase)).Where(r=>category switch{"All"=>true,"Cursor Themes"=>r.Type=="cursor","Motion Trails"=>r.Type=="trail","Featured"=>r.Featured,"Favorites"=>favorites.Contains(r.Id),"Animated"=>r.AnimatedCursorCount>0,"Installed"=>installed.Contains(r.Id),"Not Installed"=>!installed.Contains(r.Id),_=>r.Tags.Contains(category,StringComparer.OrdinalIgnoreCase)});
         return (Sort.SelectedIndex switch{1=>query.OrderByDescending(r=>r.AddedAt),2=>query.OrderBy(r=>r.Name,StringComparer.OrdinalIgnoreCase),_=>query.OrderByDescending(r=>r.Featured).ThenBy(r=>r.Name)}).ToArray();
+    }
+    public void SelectCollection(string? id)
+    {
+        if(id!=null&&Collections.Current?.Collections.All(c=>c.Id!=id)!=false)throw new ArgumentException("Unknown collection.");
+        SelectedCollectionId=id;page=0;Render();BrowseScroll.ScrollToTop();
+    }
+    private void ClearCollectionClicked(object sender,RoutedEventArgs e)=>SelectCollection(null);
+    private void RenderCollections()
+    {
+        compactCollections=ActualHeight<650||ActualWidth<900;
+        CollectionCards.Children.Clear();var collections=Collections.Current?.Collections;
+        CollectionsHost.Visibility=collections is {Count:>0}?Visibility.Visible:Visibility.Collapsed;
+        ClearCollection.Visibility=SelectedCollectionId==null?Visibility.Collapsed:Visibility.Visible;
+        CollectionHeading.Text=collections?.FirstOrDefault(c=>c.Id==SelectedCollectionId)?.Name??"Featured collections";
+        if(collections==null)return;
+        foreach(var collection in collections)
+        {
+            var content=new StackPanel();var image=new Image{Width=156,Height=78,Stretch=Stretch.UniformToFill};if(!compactCollections)content.Children.Add(image);
+            content.Children.Add(new TextBlock{Text=collection.Name,Margin=new Thickness(8),FontSize=12,TextTrimming=TextTrimming.CharacterEllipsis});
+            var button=new Button{Content=content,Width=158,Padding=new Thickness(),Margin=new Thickness(0,0,10,8),Style=(Style)FindResource("ResourceCardButton"),ToolTip=collection.Description,Tag=collection.Id};
+            System.Windows.Automation.AutomationProperties.SetName(button,"Collection "+collection.Name);button.Click+=(_,_)=>SelectCollection(collection.Id);CollectionCards.Children.Add(button);
+            if(!compactCollections&&IsVisible&&Browse.IsVisible)_=LoadCover(image,collection.CoverUrl,mediaOperation!.Token);
+        }
     }
     private void FilterChanged(object sender,RoutedEventArgs e){if(!ready)return;page=0;Render();BrowseScroll.ScrollToTop();}
     public void Render()
@@ -77,7 +106,7 @@ public partial class DiscoverView:UserControl,IDisposable
         if(!ready||disposed||!IsLoaded)return;mediaOperation?.Cancel();mediaOperation?.Dispose();mediaOperation=CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token);
         try
         {
-            var filtered=Filtered();int pages=Math.Max(1,(filtered.Count+PageSize-1)/PageSize);page=Math.Min(page,pages-1);Cards.Children.Clear();
+            RenderCollections();var filtered=Filtered();int pages=Math.Max(1,(filtered.Count+PageSize-1)/PageSize);page=Math.Min(page,pages-1);Cards.Children.Clear();
             EmptyMessage.Text=resources.Count==0?(Catalog.Current==null?Catalog.Status:"The online catalog is empty."):filtered.Count==0?"No resources match your search.":"";EmptyMessage.Visibility=filtered.Count==0?Visibility.Visible:Visibility.Collapsed;
             foreach(var item in filtered.Skip(page*PageSize).Take(PageSize))
             {
@@ -140,7 +169,7 @@ public partial class DiscoverView:UserControl,IDisposable
         if(selected==null||operation!=null)return;var item=selected;var state=Downloads.State(item);
         if(state is "Installed" or "Bundled owned"){OpenOwned?.Invoke(item);return;}
         operation=CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token);Download.IsEnabled=false;Download.Content="Downloading…";TryPreview.IsEnabled=false;Status.Text=item.Name+" · Downloading…";DetailStatus.Text="Downloading";Progress.IsIndeterminate=true;Progress.Value=0;CancelDownload.Visibility=Visibility.Visible;Progress.Visibility=Visibility.Visible;
-        try{await Downloads.InstallAsync(item,ProgressReporter(item),operation.Token);failed.Remove(item.Id);LibraryChanged?.Invoke();Status.Text=item.Name+" installed in your library. Preview and Apply there when ready.";}
+        try{await Downloads.InstallAsync(item,ProgressReporter(item),operation.Token);failed.Remove(item.Id);LibraryChanged?.Invoke();Status.Text=item.Name+(state=="Update available"?" updated in your library. Existing Windows pointers remain unchanged.":" installed in your library. Preview and Apply there when ready.");}
         catch(OperationCanceledException){Status.Text="Download cancelled. Nothing was applied to Windows.";}
         catch(Exception ex){failed.Add(item.Id);Status.Text="Download failed: "+ex.Message+" · Retry is available.";}
         finally{operation.Dispose();operation=null;TryPreview.IsEnabled=true;CancelDownload.Visibility=Visibility.Collapsed;Progress.Visibility=Visibility.Collapsed;if(!disposed)Render();}

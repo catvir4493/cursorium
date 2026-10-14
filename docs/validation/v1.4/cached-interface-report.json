@@ -1,0 +1,404 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "Actual WPF process restarts with the verified cached catalog and resolves shared card design resources",
+      "passed": true
+    },
+    {
+      "name": "Unchanged applied state disables Apply and Cancel",
+      "passed": true
+    },
+    {
+      "name": "Draft edit enables actions and exposes accurate state",
+      "passed": true
+    },
+    {
+      "name": "Invalid draft remains cancellable and cannot be applied",
+      "passed": true
+    },
+    {
+      "name": "Cancel restores applied configuration and button state",
+      "passed": true
+    },
+    {
+      "name": "Owned window receives foreground and slider keyboard focus after actual click",
+      "passed": true
+    },
+    {
+      "name": "Native keyboard arrow submitted to custom slider",
+      "passed": true
+    },
+    {
+      "name": "Custom slider retains actual keyboard value change and binding",
+      "passed": true
+    },
+    {
+      "name": "Custom toggle retains actual Space keyboard interaction",
+      "passed": true
+    },
+    {
+      "name": "Custom combo opens via actual F4 keyboard input",
+      "passed": true
+    },
+    {
+      "name": "Escape closes dropdown without cancelling the draft",
+      "passed": true
+    },
+    {
+      "name": "Saved Profile is identified separately from unapplied draft",
+      "passed": true
+    },
+    {
+      "name": "All 15 local preview roles retain cursor/thumbnail without changing configuration",
+      "passed": true
+    },
+    {
+      "name": "Explore exposes discovery controls while local preview and Customize remain in the owned library",
+      "passed": true
+    },
+    {
+      "name": "Real mouse movement renders the temporary combination in local preview",
+      "passed": true
+    },
+    {
+      "name": "Real mouse movement renders the temporary combination in local preview",
+      "passed": true
+    },
+    {
+      "name": "Settings view uses a real scrollable control: 0",
+      "passed": true
+    },
+    {
+      "name": "Settings view uses a real scrollable control: 1",
+      "passed": true
+    },
+    {
+      "name": "Settings view uses a real scrollable control: 2",
+      "passed": true
+    },
+    {
+      "name": "Advanced settings exposes bound fade slider",
+      "passed": true
+    },
+    {
+      "name": "Collapsed advanced settings hides uncommon controls",
+      "passed": true
+    },
+    {
+      "name": "Disable animations persists outside effect profiles",
+      "passed": true
+    },
+    {
+      "name": "System animation preference gates optional UI motion",
+      "passed": true
+    },
+    {
+      "name": "Native title bar fallback is functional and persisted",
+      "passed": true
+    },
+    {
+      "name": "Custom caption uses native WindowChrome sizing and hit testing",
+      "passed": true
+    },
+    {
+      "name": "Caption native hit-test returns HTCAPTION for drag and double-click",
+      "passed": true
+    },
+    {
+      "name": "Left frame native hit-test returns HTLEFT for resizing",
+      "passed": true
+    },
+    {
+      "name": "Custom maximize button invokes native window management",
+      "passed": true
+    },
+    {
+      "name": "Maximized caption controls stay inside monitor work area",
+      "passed": true
+    },
+    {
+      "name": "Custom restore button restores normal window",
+      "passed": true
+    },
+    {
+      "name": "Custom minimize button works",
+      "passed": true
+    },
+    {
+      "name": "Custom close preserves tray residency",
+      "passed": true
+    },
+    {
+      "name": "Tray reopens custom chrome window",
+      "passed": true
+    },
+    {
+      "name": "Actions remain reachable at logical work area for 1366;768 / 1",
+      "passed": true
+    },
+    {
+      "name": "Preview and settings remain separate for 1366;768 / 1",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 0 at 1366;768 / 1",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 1 at 1366;768 / 1",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 2 at 1366;768 / 1",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 3 at 1366;768 / 1",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 4 at 1366;768 / 1",
+      "passed": true
+    },
+    {
+      "name": "Actions remain reachable at logical work area for 1366;768 / 1,25",
+      "passed": true
+    },
+    {
+      "name": "Preview and settings remain separate for 1366;768 / 1,25",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 0 at 1366;768 / 1,25",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 1 at 1366;768 / 1,25",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 2 at 1366;768 / 1,25",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 3 at 1366;768 / 1,25",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 4 at 1366;768 / 1,25",
+      "passed": true
+    },
+    {
+      "name": "Actions remain reachable at logical work area for 1366;768 / 1,5",
+      "passed": true
+    },
+    {
+      "name": "Preview and settings remain separate for 1366;768 / 1,5",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 0 at 1366;768 / 1,5",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 1 at 1366;768 / 1,5",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 2 at 1366;768 / 1,5",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 3 at 1366;768 / 1,5",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 4 at 1366;768 / 1,5",
+      "passed": true
+    },
+    {
+      "name": "Actions remain reachable at logical work area for 1920;1080 / 1",
+      "passed": true
+    },
+    {
+      "name": "Preview and settings remain separate for 1920;1080 / 1",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 0 at 1920;1080 / 1",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 1 at 1920;1080 / 1",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 2 at 1920;1080 / 1",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 3 at 1920;1080 / 1",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 4 at 1920;1080 / 1",
+      "passed": true
+    },
+    {
+      "name": "Actions remain reachable at logical work area for 1920;1080 / 1,25",
+      "passed": true
+    },
+    {
+      "name": "Preview and settings remain separate for 1920;1080 / 1,25",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 0 at 1920;1080 / 1,25",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 1 at 1920;1080 / 1,25",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 2 at 1920;1080 / 1,25",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 3 at 1920;1080 / 1,25",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 4 at 1920;1080 / 1,25",
+      "passed": true
+    },
+    {
+      "name": "Actions remain reachable at logical work area for 1920;1080 / 1,5",
+      "passed": true
+    },
+    {
+      "name": "Preview and settings remain separate for 1920;1080 / 1,5",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 0 at 1920;1080 / 1,5",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 1 at 1920;1080 / 1,5",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 2 at 1920;1080 / 1,5",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 3 at 1920;1080 / 1,5",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 4 at 1920;1080 / 1,5",
+      "passed": true
+    },
+    {
+      "name": "Actions remain reachable at logical work area for 2560;1440 / 1",
+      "passed": true
+    },
+    {
+      "name": "Preview and settings remain separate for 2560;1440 / 1",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 0 at 2560;1440 / 1",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 1 at 2560;1440 / 1",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 2 at 2560;1440 / 1",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 3 at 2560;1440 / 1",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 4 at 2560;1440 / 1",
+      "passed": true
+    },
+    {
+      "name": "Actions remain reachable at logical work area for 2560;1440 / 1,25",
+      "passed": true
+    },
+    {
+      "name": "Preview and settings remain separate for 2560;1440 / 1,25",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 0 at 2560;1440 / 1,25",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 1 at 2560;1440 / 1,25",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 2 at 2560;1440 / 1,25",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 3 at 2560;1440 / 1,25",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 4 at 2560;1440 / 1,25",
+      "passed": true
+    },
+    {
+      "name": "Actions remain reachable at logical work area for 2560;1440 / 1,5",
+      "passed": true
+    },
+    {
+      "name": "Preview and settings remain separate for 2560;1440 / 1,5",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 0 at 2560;1440 / 1,5",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 1 at 2560;1440 / 1,5",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 2 at 2560;1440 / 1,5",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 3 at 2560;1440 / 1,5",
+      "passed": true
+    },
+    {
+      "name": "Page-specific actions reachable on page 4 at 2560;1440 / 1,5",
+      "passed": true
+    },
+    {
+      "name": "850x520 DIP window preserves reachable actions",
+      "passed": true
+    },
+    {
+      "name": "Long imported theme and saved profile names preserve pinned actions in compact layout",
+      "passed": true
+    },
+    {
+      "name": "UI review never applies draft or changes Windows cursor state",
+      "passed": true
+    }
+  ],
+  "physicalDpi": 96,
+  "notes": "Real WPF/native window capture and native hit tests at the observed physical DPI. Resolution/DPI matrix uses equivalent logical work areas, not physical monitor DPI changes. Controlled isolated data; no Apply or native cursor change.",
+  "captureMethod": "Running WPF visual tree rasterized at actual DPI; previous occluded BitBlt outputs are private and excluded."
+}

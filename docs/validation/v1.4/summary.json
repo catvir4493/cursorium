@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "checks": {
+    "core": 180,
+    "desktop": 85,
+    "interface": 98,
+    "cached-interface": 99,
+    "collection": 28,
+    "online-security": 51,
+    "curation": 104,
+    "discover": 103,
+    "pipeline": 10,
+    "old-client": 98
+  },
+  "notes": "Historical tests retained. Old-client checks used the actual installed 1.3.1 binary, which fetched and verified the expanded 1.1.0 catalog. Public metadata-only 1.1.1 is separately reverified."
+}
