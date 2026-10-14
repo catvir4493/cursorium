@@ -79,16 +79,26 @@ if($taskApp.HasExited){throw 'Installed main process exited during shortcut reop
 if((Read-CursorValues) -ne $taskNativeBefore){throw 'Launch changed native cursor scheme.'}
 $taskHashesAfter=Read-DataHashes
 $taskCatalogRefresh=@()
+$taskStagingCleanup=@()
 foreach($taskName in $taskHashesBefore.Keys){
   if($taskHashesBefore[$taskName] -ne $taskHashesAfter[$taskName]){
     # The installer comparison above remains strict for every existing file.
     # On actual startup, only the signed discovery cache may legitimately refresh.
     # Settings, profiles, native resources, favorites and backups stay byte-exact.
-    if($taskName.Replace('\','/') -ne 'Online/catalog-cache.json' -or -not $taskHashesAfter[$taskName]){throw 'Launch changed existing protected data.'}
-    $taskCatalogRefresh+=@('Online/catalog-cache.json')
+    $relative=$taskName.Replace('\','/')
+    if($relative -eq 'Online/catalog-cache.json' -and $taskHashesAfter[$taskName]){$taskCatalogRefresh+=@($relative);continue}
+    # DownloadManager's existing interrupted-session recovery may remove only
+    # disposable staging owned by a process generation that is no longer alive.
+    # An existing file with changed bytes, or any config/native/theme file, fails.
+    if(-not $taskHashesAfter[$taskName] -and $relative -match '^Online/Staging/session-(\d+)-(\d+)/(resource-[a-f0-9]{32}/.+|download-[a-f0-9]{32}\.zip)$'){
+      $oldProcessId=[int]$Matches[1];$oldStarted=[long]$Matches[2];$stillAlive=$false
+      try{$oldProcess=[Diagnostics.Process]::GetProcessById($oldProcessId);try{$stillAlive=$oldProcess.StartTime.ToUniversalTime().Ticks -eq $oldStarted}finally{$oldProcess.Dispose()}}catch [ArgumentException]{}catch [ComponentModel.Win32Exception]{$stillAlive=$true}
+      if(-not $stillAlive){$taskStagingCleanup+=@($relative);continue}
+    }
+    throw "Launch changed existing protected data: $relative"
   }
 }
-$taskReport=[ordered]@{schemaVersion=1;version=$Version;passed=$true;installerExitCode=0;installedFilesMatchedBySha256=$taskMatches;existingDataAndResourceFiles=$taskHashesBefore.Count;installationPreservedAllExistingFileHashes=$true;startupPreservedUserConfigurationAndNativeResources=$true;startupSignedCatalogCacheRefresh=$taskCatalogRefresh;nativeCursorValuesAndTypesPreserved=$true;previousInstallationAndDataBackedUp=$true;uninstallRegistrationVersion=$taskRegistry.DisplayVersion;startMenuLaunchTitle=$taskApp.MainWindowTitle;desktopReopensSameProcess=$true;observedProcessId=$taskOriginalPid;notes='Existing marked installation upgrade and actual shortcut launch. The app may refresh its signed discovery cache after launch; every other pre-existing file is checked byte-exact. Does not establish fresh install, uninstall or failure-rollback roundtrip.'}
+$taskReport=[ordered]@{schemaVersion=1;version=$Version;passed=$true;installerExitCode=0;installedFilesMatchedBySha256=$taskMatches;existingDataAndResourceFiles=$taskHashesBefore.Count;installationPreservedAllExistingFileHashes=$true;startupPreservedUserConfigurationAndNativeResources=$true;startupSignedCatalogCacheRefresh=$taskCatalogRefresh;startupAbandonedStagingCleanup=$taskStagingCleanup;nativeCursorValuesAndTypesPreserved=$true;previousInstallationAndDataBackedUp=$true;uninstallRegistrationVersion=$taskRegistry.DisplayVersion;startMenuLaunchTitle=$taskApp.MainWindowTitle;desktopReopensSameProcess=$true;observedProcessId=$taskOriginalPid;notes='Existing marked installation upgrade and actual shortcut launch. Installer preserves every pre-existing hash before launch. Startup may refresh the signed catalog and clean missing disposable staging from a dead process generation; all other configuration/native/resource files remain byte-exact. Does not establish fresh install, uninstall or failure-rollback roundtrip.'}
 $taskReport | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $taskRoot "artifacts/v$Version-installed/installed-upgrade-report.json") -Encoding utf8
 $taskReport | ConvertTo-Json
 [Runtime.InteropServices.Marshal]::FinalReleaseComObject($taskShell) | Out-Null

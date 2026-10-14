@@ -68,7 +68,7 @@ Release 源码构建零错误、零警告；FROST 与 Obsidian 各 388 项原生
 
 沿用 build-release.ps1、verify-release.ps1、verify-installed-upgrade.ps1 和 publish-github.ps1。正式目标为 [cursorium-v1.4.0](https://github.com/catvir4493/cursorium/releases/tag/cursorium-v1.4.0)，包含安装器、自包含 x64 便携版、内置主题包、源码包及 SHA256。新增在线数据包由独立 library Release 分发，不假称已全部内置到桌面主题 ZIP。
 
-安装路径保持 **D:\CURSORIUM**。候选安装器已在真实旧安装与用户数据的隔离副本中完成跨卷升级：84 个受保护文件哈希不变、839 个负载文件一致、五套 Cute 存在，真实系统指针值/类型不变；[已脱敏报告](validation/v1.4/isolated-upgrade-report.json)。升级必须先通过真实现有安装/数据副本的隔离跨卷验证，再备份当前安装、数据、快捷方式和注册表，使用原有安全安装器替换，核对版本、负载哈希、快捷方式、原生指针与用户数据。原始机器备份及最终安装报告留在本机忽略的 artifacts/v1.4.0-installed，不进入 GitHub；最终交付消息报告实际执行结果。正式资产校验表与包分别发布，不能用预先写入文档的哈希冒充最终文件验证。
+安装路径保持 **D:\CURSORIUM**。候选安装器已在真实旧安装与用户数据的隔离副本中完成跨卷升级：84 个受保护文件哈希不变、839 个负载文件一致、五套 Cute 存在，真实系统指针值/类型不变；[已脱敏报告](validation/v1.4/isolated-upgrade-report.json)。升级必须先通过真实现有安装/数据副本的隔离跨卷验证，再备份当前安装、数据、快捷方式和注册表，使用原有安全安装器替换，核对版本、负载哈希、快捷方式、原生指针与用户数据。首次真实升级已成功启动 v1.4，配置/收藏/Profile/原始备份哈希不变；检查器曾将旧进程的两份临时预览文件清理误判为数据损坏，现已将允许范围收紧为可证明已结束会话下的缺失临时文件，永久资源与已有文件内容变化仍一律失败。见[保护核对](validation/v1.4/current-upgrade-protection-audit.json)。原始机器备份及最终安装报告留在本机忽略的 artifacts/v1.4.0-installed，不进入 GitHub；最终交付消息报告实际执行结果。正式资产校验表与包分别发布，不能用预先写入文档的哈希冒充最终文件验证。
 
 ## 未解决与未实测
 

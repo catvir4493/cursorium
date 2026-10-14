@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "file": "settings.json",
+      "existenceUnchanged": true,
+      "sha256Unchanged": true
+    },
+    {
+      "file": "studio.json",
+      "existenceUnchanged": true,
+      "sha256Unchanged": true
+    },
+    {
+      "file": "profiles.json",
+      "existenceUnchanged": true,
+      "sha256Unchanged": true
+    },
+    {
+      "file": "original-theme.json",
+      "existenceUnchanged": true,
+      "sha256Unchanged": true
+    },
+    {
+      "file": "interface.json",
+      "existenceUnchanged": true,
+      "sha256Unchanged": true
+    },
+    {
+      "file": "library.json",
+      "existenceUnchanged": true,
+      "sha256Unchanged": true
+    }
+  ],
+  "disposableOldPreviewFilesCleaned": 2,
+  "note": "First actual 1.3.1-to-1.4 installer preserved every pre-launch hash; startup verifier initially rejected two expired preview staging files. All actual user configuration bytes match the pre-upgrade backup. A subsequent formal package/shortcut verification is kept locally."
+}
