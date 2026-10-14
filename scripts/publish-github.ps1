@@ -92,6 +92,37 @@ if($cursoriumRelease.draft){
 }
 if($cursoriumRelease.draft){throw 'Release remains a draft.'}
 if([bool]$cursoriumRelease.prerelease -ne [bool]$Prerelease){throw 'Published release classification does not match the requested gate.'}
+# Server digests alone do not exercise the public download route. Refetch every
+# asset anonymously, bounded by the already verified local size, before completion.
+$cursoriumPublicRoot=Join-Path $cursoriumRoot "artifacts/remote-v$Version"
+New-Item -ItemType Directory -Force -Path $cursoriumPublicRoot | Out-Null
+$cursoriumPublicChecks=@()
+foreach($cursoriumAsset in $cursoriumRelease.assets){
+    $cursoriumLocal=$cursoriumAssets | Where-Object Name -eq $cursoriumAsset.name | Select-Object -First 1
+    $cursoriumUri=[Uri]$cursoriumAsset.browser_download_url
+    if($cursoriumUri.Scheme -ne 'https' -or $cursoriumUri.Host -ne 'github.com' -or -not $cursoriumUri.AbsolutePath.StartsWith("/$cursoriumRepository/releases/download/$cursoriumTag/",[StringComparison]::Ordinal)){throw 'Unexpected public release download URL.'}
+    $cursoriumDownload=Join-Path $cursoriumPublicRoot $cursoriumLocal.Name
+    $cursoriumRequest=[Net.HttpWebRequest]::Create($cursoriumUri)
+    $cursoriumRequest.UserAgent='CURSORIUM-public-release-verification'
+    $cursoriumRequest.Timeout=600000;$cursoriumRequest.ReadWriteTimeout=600000
+    $cursoriumResponse=$null;$cursoriumInput=$null;$cursoriumOutput=$null
+    try{
+        $cursoriumResponse=$cursoriumRequest.GetResponse();$cursoriumInput=$cursoriumResponse.GetResponseStream()
+        $cursoriumOutput=[IO.FileStream]::new($cursoriumDownload,[IO.FileMode]::Create,[IO.FileAccess]::Write,[IO.FileShare]::None)
+        $cursoriumBuffer=New-Object byte[] 65536;$cursoriumCount=0L
+        while(($cursoriumRead=$cursoriumInput.Read($cursoriumBuffer,0,$cursoriumBuffer.Length)) -gt 0){
+            $cursoriumCount+=$cursoriumRead;if($cursoriumCount -gt $cursoriumLocal.Length){throw 'Public download exceeded verified artifact size.'}
+            $cursoriumOutput.Write($cursoriumBuffer,0,$cursoriumRead)
+        }
+        $cursoriumOutput.Flush($true)
+        if($cursoriumCount -ne $cursoriumLocal.Length){throw 'Public download size mismatch.'}
+    }finally{if($cursoriumOutput){$cursoriumOutput.Dispose()};if($cursoriumInput){$cursoriumInput.Dispose()};if($cursoriumResponse){$cursoriumResponse.Dispose()}}
+    $cursoriumActual=(Get-FileHash -LiteralPath $cursoriumDownload -Algorithm SHA256).Hash
+    if($cursoriumActual -ne (Get-FileHash -LiteralPath $cursoriumLocal.FullName -Algorithm SHA256).Hash){throw 'Public download SHA256 mismatch.'}
+    $cursoriumPublicChecks+=@{name=$cursoriumLocal.Name;size=$cursoriumLocal.Length;sha256=$cursoriumActual;verified=$true}
+    Write-Host "Public bytes downloaded and verified: $($cursoriumLocal.Name)"
+}
+@{passed=$true;verifiedAt=(Get-Date).ToUniversalTime().ToString('O');commit=$cursoriumCommit;release=$cursoriumRelease.html_url;assets=$cursoriumPublicChecks} | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $cursoriumPublicRoot 'public-download-verification.json') -Encoding utf8
 $cursoriumSummary=[ordered]@{repository=$cursoriumRepository;commit=$cursoriumCommit;tag=$cursoriumTag;published=$true;prerelease=$cursoriumRelease.prerelease;releaseUrl=$cursoriumRelease.html_url;assets=@($cursoriumRelease.assets | Select-Object name,size,digest,browser_download_url)}
 $cursoriumSummary | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath 'artifacts/github-publication.json' -Encoding utf8
 Write-Host "Release published and verified: $($cursoriumRelease.html_url)"

@@ -82,6 +82,10 @@ Settings 两万次暖机复制：旧 JSON 算法约 22.56 MB，新复制约 2.56
 
 ## 发布、当前安装与限制
 
+真实安装候选已在保护流程下完成升级：D:\CURSORIUM 的版本 1.5.0，104 个原有数据/资源文件哈希不变，880 个候选负载文件匹配，桌面/开始菜单均打开同一新进程，原生指针值/类型不变。升级前用户数据隔离副本通过 99 项缓存 WPF 检查；另以很深的 Unicode 数据根运行真实自包含 WPF，98 项界面检查通过。报告见 [current-installation-upgrade.json](validation/v1.5/current-installation-upgrade.json)；回退 ZIP、原始注册表和数据副本仍只在本机。正式最终构建可能仅增加文档文件，最终负载数量/提交由本机终验记录及 Release 校验回执确定。
+
+同一测量阶段的五次进程/state-probe 中位数为 .NET 8 **158.18 ms**、.NET 10 **189.33 ms**。这项目录/状态就绪对照是变慢的，不能宣传启动全面加速，更不能充当首次绘制耗时。原始回执见 [startup-net8.json](validation/v1.5/startup-net8.json) 与 [startup-net10.json](validation/v1.5/startup-net10.json)。
+
 目标 [v1.5.0 预发布](https://github.com/catvir4493/cursorium/releases/tag/cursorium-v1.5.0)，安装器、便携版、主题包、源码和 SHA256 继续由现有脚本构建。只有通过隔离升级并再次备份/核对后，才升级 D:\CURSORIUM。最终实际提交、安装与公开下载校验以交付终验记录为准；尚未完成的步骤不能凭这个目标链接当作成功。
 
 本轮未完成真实 Windows 10、双屏、混合 DPI、物理 DPI/刷新率切换、热插拔、锁屏/用户切换、睡眠、电源/RDP/Explorer 重启、独占游戏、24/72 小时和完整历史升级/断电矩阵。已测跨进程全屏探针不代表所有游戏。诊断中的软件 Overlay 重建不代表真实热插拔。遗留品牌/目录/IPC 兼容身份留到 v1.6；Steamworks/Workshop 尚未接入。

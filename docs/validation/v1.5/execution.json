@@ -1,60 +1,42 @@
-[
-  {
-    "command": "dotnet build Frost.sln -c Release",
-    "name": "Release build",
-    "passed": true,
-    "ended": "2026-10-14T13:28:43.256446Z",
-    "environment": "Windows 11 interactive desktop; isolated data",
-    "started": "2026-10-14T13:28:41.0271354Z"
-  },
-  {
-    "command": "scripts/verify-cursorium.ps1 -Discover -SkipBenchmark",
-    "name": "Retained and recovery regression",
-    "passed": true,
-    "ended": "2026-10-14T13:30:11.3151883Z",
-    "environment": "Windows 11 interactive desktop; isolated data",
-    "started": "2026-10-14T13:28:43.2674833Z"
-  },
-  {
-    "command": "dotnet run --project tests/Frost.Verify -c Release -- assets/cursors",
-    "name": "Native FROST resources",
-    "passed": true,
-    "ended": "2026-10-14T13:30:12.9377511Z",
-    "environment": "Windows 11 interactive desktop; isolated data",
-    "started": "2026-10-14T13:30:11.3162111Z"
-  },
-  {
-    "command": "dotnet run --project tests/Frost.Verify -c Release -- assets/themes/obsidian",
-    "name": "Native Obsidian resources",
-    "passed": true,
-    "ended": "2026-10-14T13:30:14.0732741Z",
-    "environment": "Windows 11 interactive desktop; isolated data",
-    "started": "2026-10-14T13:30:12.9389629Z"
-  },
-  {
-    "command": "dotnet run --project tests/Frost.Verify -c Release -- --curation-tests <retained signed stage> <previous catalog>",
-    "name": "Curation and immutable update regression",
-    "passed": true,
-    "ended": "2026-10-14T13:30:17.5484389Z",
-    "environment": "Windows 11 interactive desktop; isolated data",
-    "started": "2026-10-14T13:30:14.0749856Z"
-  },
-  {
-    "ended": "2026-10-14T15:44:34.9309502+02:00",
-    "environment": "Windows 11 interactive desktop; isolated data",
-    "passed": true,
-    "started": "2026-10-14T15:44:21.5797633+02:00",
-    "command": "dotnet run --project tests/Frost.Verify -c Release -- --stability-tests <app> <isolated output>",
-    "name": "Final recovery data-root and safety checks",
-    "evidence": "recovery-report.json"
-  },
-  {
-    "environment": "Windows 11; actual native CUR/ANI and WPF stream cursor constructors",
-    "ended": "2026-10-14T15:57:33.2116694+02:00",
-    "evidence": "recovery-report.json",
-    "command": "dotnet run --project tests/Frost.Verify -c Release -- --stability-tests <app> <isolated output>",
-    "started": "2026-10-14T15:57:19.8666935+02:00",
-    "passed": true,
-    "name": "USER32 long-path validation, preview and install boundary"
-  }
+﻿[
+    {
+        "passed":  true,
+        "name":  "Release build",
+        "started":  "2026-10-14T14:00:36.3985846Z",
+        "environment":  "Windows 11 interactive desktop; isolated data",
+        "command":  "dotnet build Frost.sln -c Release",
+        "ended":  "2026-10-14T14:00:38.7514932Z"
+    },
+    {
+        "passed":  true,
+        "name":  "Retained and recovery regression",
+        "started":  "2026-10-14T14:00:38.7645846Z",
+        "environment":  "Windows 11 interactive desktop; isolated data",
+        "command":  "scripts/verify-cursorium.ps1 -Discover -SkipBenchmark",
+        "ended":  "2026-10-14T14:02:05.3619607Z"
+    },
+    {
+        "passed":  true,
+        "name":  "Native FROST resources",
+        "started":  "2026-10-14T14:02:05.3629605Z",
+        "environment":  "Windows 11 interactive desktop; isolated data",
+        "command":  "dotnet run --project tests/Frost.Verify -c Release -- assets/cursors",
+        "ended":  "2026-10-14T14:02:06.6724677Z"
+    },
+    {
+        "passed":  true,
+        "name":  "Native Obsidian resources",
+        "started":  "2026-10-14T14:02:06.6734675Z",
+        "environment":  "Windows 11 interactive desktop; isolated data",
+        "command":  "dotnet run --project tests/Frost.Verify -c Release -- assets/themes/obsidian",
+        "ended":  "2026-10-14T14:02:07.8503318Z"
+    },
+    {
+        "passed":  true,
+        "name":  "Curation and immutable update regression",
+        "started":  "2026-10-14T14:02:07.8525684Z",
+        "environment":  "Windows 11 interactive desktop; isolated data",
+        "command":  "dotnet run --project tests/Frost.Verify -c Release -- --curation-tests \u003cretained signed stage\u003e \u003cprevious catalog\u003e",
+        "ended":  "2026-10-14T14:02:11.7201064Z"
+    }
 ]

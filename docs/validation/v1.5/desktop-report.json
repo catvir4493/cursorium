@@ -357,10 +357,10 @@
       "dpi": 96
     }
   ],
-  "elapsedSeconds": 11.9471559,
-  "cpuSeconds": 6.015625,
-  "workingSetBefore": 183676928,
-  "workingSetAfter": 269471744,
+  "elapsedSeconds": 12.1163562,
+  "cpuSeconds": 5.78125,
+  "workingSetBefore": 183926784,
+  "workingSetAfter": 264773632,
   "gdiBefore": 227,
   "gdiAfter": 248,
   "userBefore": 88,

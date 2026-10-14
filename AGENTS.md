@@ -23,7 +23,7 @@ another request. This authorization persists for this project.
 
 ## Verification and data protection
 
-- Keep the existing .NET 8/WPF/Win32 stack and FROST resources. Preserve cursor backups,
+- Keep the .NET 10/WPF/Win32 target adopted by the v1.5 preview and the .NET 8 v1.4 rollback baseline, plus FROST resources. Preserve cursor backups,
   per-operation rollback, physical coordinates, input pass-through and non-activation.
 - Build code changes with `dotnet build Frost.sln -c Release`. Run checks appropriate to
   the changed behavior; native resources use `tests/Frost.Verify`. UI/engine/native
@@ -36,6 +36,9 @@ another request. This authorization persists for this project.
   snapshots, installation rollback archives or the user's profiles/settings.
 - Release assets belong in GitHub Releases, not the source tree. Keep source and release
   contents aligned. Publish only after local checks and checksum verification.
+- Unresolved hardware, long-duration or active-performance gates require an explicitly
+  labeled prerelease (`publish-github.ps1 -Release -Prerelease`); never claim Steam Ready
+  from short or simulated checks. Publishing refetches public asset bytes and verifies hashes.
 - Read credentials through Git Credential Manager in process memory. Never print or save
   authentication tokens. Credential unavailability is a real blocker to report, not a
   reason to invent a successful upload.

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "version": "1.5.0",
+  "passed": true,
+  "installerExitCode": 0,
+  "installedFilesMatchedBySha256": 880,
+  "existingDataAndResourceFiles": 104,
+  "installationPreservedAllExistingFileHashes": true,
+  "startupPreservedUserConfigurationAndNativeResources": true,
+  "startupSignedCatalogCacheRefresh": [],
+  "startupAbandonedStagingCleanup": [],
+  "nativeCursorValuesAndTypesPreserved": true,
+  "previousInstallationAndDataBackedUp": true,
+  "uninstallRegistrationVersion": "1.5.0",
+  "startMenuLaunchTitle": "CURSORIUM — Cursor & Motion Studio",
+  "desktopReopensSameProcess": true,
+  "notes": "Existing marked installation upgrade and actual shortcut launch. Installer preserves every pre-existing hash before launch. Startup may refresh the signed catalog and clean missing disposable staging from a dead process generation; all other configuration/native/resource files remain byte-exact. Does not establish fresh install, uninstall or failure-rollback roundtrip."
+}

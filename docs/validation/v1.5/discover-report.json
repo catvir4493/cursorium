@@ -419,30 +419,30 @@
     {
       "count": 100,
       "elements": 24,
-      "layoutMilliseconds": 38.0987,
-      "managedBytesDelta": 4202312,
+      "layoutMilliseconds": 41.803,
+      "managedBytesDelta": 4210528,
       "userHandlesDelta": 0
     },
     {
       "count": 300,
       "elements": 24,
-      "layoutMilliseconds": 36.8664,
-      "managedBytesDelta": 4230672,
+      "layoutMilliseconds": 41.0716,
+      "managedBytesDelta": 4185664,
       "userHandlesDelta": 0
     },
     {
       "count": 500,
       "elements": 24,
-      "layoutMilliseconds": 37.3912,
-      "managedBytesDelta": 4209880,
+      "layoutMilliseconds": 42.019,
+      "managedBytesDelta": 4201504,
       "userHandlesDelta": 0
     },
     {
       "scenario": "30 detail/search/page cycles",
-      "elapsedMilliseconds": 838.3146,
+      "elapsedMilliseconds": 862.1167,
       "gdiHandlesDelta": -14,
-      "userHandlesDelta": 1,
-      "managedBytesDelta": 27488
+      "userHandlesDelta": 0,
+      "managedBytesDelta": 9192
     }
   ],
   "monitors": [

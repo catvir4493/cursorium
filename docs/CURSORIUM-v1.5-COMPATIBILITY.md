@@ -33,6 +33,7 @@ USER32 永久指针路径上限：本机实测达到 260 字符时 LoadImage 失
 - 缓存：Online/Media 与进程世代标识 Staging；不是正式原生指针存储。Windows 当前引用的不可变文件禁止按普通缓存清理。
 - 托盘：关闭面板隐藏，Quit 停止引擎并释放窗口/输入/托盘；已安装 Windows 光标独立保留。
 - 将来卸载接口：复用 `--restore-theme` 与 `StudioService.RestoreSavedState`；必须先成功恢复，再删除受管理程序。外部指针修改、缺失资源、无权限、未知 schema 导致恢复失败时停止删除。
+- 旧 IPC 请求返回成功不等于对端恢复已完成。未来 Steam 卸载应先停止实例，再使用同步恢复入口并核对结果；当前安装器已按停止实例/直接事务恢复的顺序执行。安装版 Uninstall.exe 包含安装负载，明显大于轻量恢复工具；未来 Steam depot 应使用便携负载和专门生命周期接入，不复制这个大型卸载器。
 - 本轮保留 FrostWhiteComet.exe、Frost.*、原 HKCU Run/卸载键和管道/互斥体。商业品牌/路径迁移留给 v1.6，不能直接批量重命名。
 - 未集成 Steamworks、Workshop、默认遥测或账户。GitHub 固定公钥、RSA-PSS、官方域名、SHA256 和安全导入边界不变。
 

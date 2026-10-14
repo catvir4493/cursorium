@@ -11,6 +11,12 @@ scripts/verify-v1.5.ps1
 scripts/verify-installation-lifecycle.ps1 -Version 1.5.0
 scripts/verify-release.ps1 -IsolatedUpgrade -CrossVolume -Version 1.5.0
 
+# 输入驱动基准与真实正常托盘空闲分开；-Exclusive 会退出并恢复原安装进程
+scripts/measure-engine.ps1 -ApplicationDirectory D:\CURSORIUM -Exclusive -ReportDirectory artifacts/engine-baseline
+scripts/measure-engine.ps1 -Extended -Exclusive -ReportDirectory artifacts/engine-extended
+# 必须先有默认位置的保护快照；短时正常启动候选，结束核对永久数据与原生状态
+scripts/measure-idle.ps1
+
 # 短时：实际 WPF 显隐、Profile 持久化、CUR/ANI 加载释放、Overlay 重建
 scripts/verify-stability.ps1 -DurationSeconds 120 -StartupCycles 5
 # 不会自动改 Windows 指针，也不发送鼠标点击；运动是明确的本地预览夹具

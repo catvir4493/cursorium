@@ -1,0 +1,29 @@
+{
+  "started": "2026-10-14T13:34:28.9791189Z",
+  "passed": true,
+  "notes": "State probe is process/native catalog readiness, not first painted frame. Benchmark CPU includes the input-driving harness. Other unrelated machine workload is uncontrolled.",
+  "ended": "2026-10-14T13:35:08.3133766Z",
+  "startupStateProbes": [
+    {
+      "cycle": 0,
+      "milliseconds": 165.7295
+    },
+    {
+      "cycle": 1,
+      "milliseconds": 158.1193
+    },
+    {
+      "cycle": 2,
+      "milliseconds": 158.3537
+    },
+    {
+      "cycle": 3,
+      "milliseconds": 158.1829
+    },
+    {
+      "cycle": 4,
+      "milliseconds": 157.7901
+    }
+  ],
+  "exclusiveApplicationInstance": true
+}

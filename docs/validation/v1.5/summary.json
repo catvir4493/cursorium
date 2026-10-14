@@ -36,5 +36,14 @@
     "monitors": 1,
     "os": "Windows 11 build 26100",
     "width": 2560
+  },
+  "currentInstallation": {
+    "protectedPreexistingFiles": 104,
+    "unicodeLongSourceWpfChecks": 98,
+    "currentDataCloneWpfChecks": 99,
+    "version": "1.5.0 preview",
+    "candidatePayloadFiles": 880,
+    "path": "D:\\CURSORIUM",
+    "actualUpgrade": true
   }
 }
