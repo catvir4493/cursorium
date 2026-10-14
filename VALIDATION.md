@@ -5,11 +5,19 @@ errors/warnings. Two mixed WPF/WinForms hosts explicitly retain manifest PerMoni
 and exclude only WFO0003 (documented exception); no broad warning suppression added.
 Retained checks: core 180, desktop 85, interface 98, cached restart 99, collection 28,
 online security 51, curation/update 104, network/WPF 103, FROST/Obsidian 388 each.
-New crash/concurrency/external-edit/data-root/log checks: 42. Isolated installer
+New crash/concurrency/external-edit/data-root/log checks: 44. Isolated installer
 lifecycle: 16, including installed self-removal helper, junction rejection and
 failure-blocked deletion. Cross-volume upgrade clone: 104 protected files and
 854 payload files; native values/types unchanged. Final assets may contain additional
 documentation files; the final upgrade report records their actual payload count.
+
+Additional deferred-tray/real IPC checks: 11, cached first show 12, no-panel actual
+tray Quit 5. First-show draft preservation and source resource lookup passed.
+Actual normal --tray before first UI: baseline 176.6 MiB/GDI 227/USER 88 versus
+candidate 141.7 MiB/GDI 28/USER 23, single-core CPU 1.130 -> 0.617% over 15 seconds.
+This is a short startup-tray comparison; opening the UI retains it for draft continuity.
+ScrollChanged now explicitly updates ANI visibility and overlay exclusion; the
+existing 28 collection assertions, including the original timing check, pass.
 
 180.57 seconds / 156 real WPF show-hide/Profile/native-load/rebuild cycles passed;
 this is not a 24/72-hour pass. Native crash tests actually terminate child processes

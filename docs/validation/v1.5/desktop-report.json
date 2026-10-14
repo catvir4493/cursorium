@@ -357,13 +357,13 @@
       "dpi": 96
     }
   ],
-  "elapsedSeconds": 12.1163562,
-  "cpuSeconds": 5.78125,
-  "workingSetBefore": 183926784,
-  "workingSetAfter": 264773632,
+  "elapsedSeconds": 12.067893,
+  "cpuSeconds": 6.15625,
+  "workingSetBefore": 187330560,
+  "workingSetAfter": 282382336,
   "gdiBefore": 227,
   "gdiAfter": 248,
   "userBefore": 88,
-  "userAfter": 105,
+  "userAfter": 104,
   "notes": "Input tests used SendInput on this interactive desktop. FPS settings are targets, not measured throughput. Resource figures include UI creation and screenshots."
 }

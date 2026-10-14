@@ -21,6 +21,7 @@ public sealed class App:System.Windows.Application
     internal MainWindow Panel=>panel!;
     internal StudioService Studio=>studio;
     internal Forms.ContextMenuStrip TrayMenu=>tray!.ContextMenuStrip!;
+    internal bool PanelCreated=>panel!=null;
     private static bool isolatedTest;
     private static bool stateProbe;
     private static string InstanceId=>"FrostWhiteComet-"+WindowsIdentity.GetCurrent().User!.Value+(isolatedTest?"-verification":"")+(stateProbe?"-state-probe":"");
@@ -28,6 +29,7 @@ public sealed class App:System.Windows.Application
     {
         isolatedTest=args.Contains("--isolated-test")&&(args.Contains("--self-test")||args.Contains("--benchmark")||args.Contains("--state-probe")||args.Contains("--ui-review")||args.Contains("--collection-review")||args.Contains("--export-library")||args.Contains("--export-covers")||args.Contains("--verify-library-public")||args.Contains("--verify-library")||args.Contains("--audit-library")||args.Contains("--prepare-library")||args.Contains("--discover-review"));
         if(args.Contains("--stability-review")){if(!args.Contains("--isolated-test"))return 2;isolatedTest=true;}
+        if(args.Contains("--tray-lifecycle-review")){if(!args.Contains("--isolated-test"))return 2;isolatedTest=true;}
         stateProbe=args.Contains("--state-probe");
         if((args.Contains("--self-test")||args.Contains("--benchmark")||args.Contains("--state-probe")||args.Contains("--ui-review")||args.Contains("--collection-review")||args.Contains("--export-library")||args.Contains("--export-covers")||args.Contains("--verify-library-public")||args.Contains("--verify-library")||args.Contains("--audit-library")||args.Contains("--prepare-library")||args.Contains("--discover-review"))&&!isolatedTest)return 2;
         if(isolatedTest)
@@ -73,6 +75,8 @@ public sealed class App:System.Windows.Application
         DispatcherUnhandledException+=(_,e)=>{Storage.Log(e.Exception.ToString());e.Handled=true;MessageBox.Show("An error occurred. FROST will exit safely; the installed cursor theme remains.\n"+e.Exception.Message);ExitApp();};
         studio=new StudioService(AppContext.BaseDirectory,theme);settings=studio.LiveEffects;engine=new(settings);
         if(args.Contains("--benchmark")){_ = DesktopVerification.Benchmark(this,engine,args);return;}
+        if(args.Contains("--tray-lifecycle-review")){CreateTray();_ = Listen();_ = TrayLifecycleVerification.Run(this,engine,args);return;}
+        if(args.Contains("--tray")&&!isolatedTest){CreateTray();_ = Listen();return;}
         panel=new(studio,engine,theme);MainWindow=panel;CreateTray();
         if(args.Contains("--stability-review")){_ = StabilityVerification.Run(this,engine,args);return;}
         if(args.Contains("--discover-review")){_ = DiscoverVerification.Run(this,args);return;}
@@ -108,7 +112,7 @@ public sealed class App:System.Windows.Application
         tray=new Forms.NotifyIcon{Icon=new System.Drawing.Icon(iconStream),Text="CURSORIUM — Cursor & Motion Studio",ContextMenuStrip=menu,Visible=true};tray.DoubleClick+=(_,_)=>ShowPanel();
     }
     public void RefreshTray(){if(enabledItem!=null)enabledItem.Checked=settings.Enabled;if(pauseItem!=null)pauseItem.Checked=engine?.PausedByUser==true;}
-    private void ShowPanel(){panel?.Refresh();panel?.Show();if(panel!=null){panel.WindowState=WindowState.Normal;panel.Activate();}}
+    private void ShowPanel(){if(panel==null){panel=new(studio,engine!,theme);MainWindow=panel;}panel.Refresh();panel.Show();panel.WindowState=WindowState.Normal;panel.Activate();}
     public void ExitApp(int exitCode=0)
     {
         if(Exiting)return;Exiting=true;lifetime.Cancel();panel?.DisposeResources();engine?.Dispose();

@@ -122,9 +122,9 @@
       "Height": 1440
     }
   ],
-  "seconds": 6.1226365,
-  "cpuSeconds": 2.609375,
-  "workingSet": 273776640,
+  "seconds": 6.1181887,
+  "cpuSeconds": 2.703125,
+  "workingSet": 272166912,
   "gdiBefore": 202,
   "gdiAfter": 188,
   "userBefore": 102,

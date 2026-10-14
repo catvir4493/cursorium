@@ -49,6 +49,8 @@ internal static class StabilityVerification
                 var file=Path.Combine(longSource,role+Path.GetExtension(frost.Resource(role)));File.Copy(frost.Resource(role),file);
                 Check(file.Length>=260,"Explicit long-path cursor fixture: "+role);CursorResource.Validate(file);
                 using var cursor=CursorResource.OpenPreviewCursor(file);Check(cursor!=null,"Native validation and WPF stream preview support long source: "+role);
+                bool released=true;for(int cycle=0;cycle<32;cycle++){var owned=Native.LoadOwnedCursor(file);if(owned==IntPtr.Zero)throw new IOException("Repeated long-path native load failed.");released&=Native.DestroyCursor(owned);}
+                Check(released,"Repeated long-source native handles are owned and released: "+role);
             }
             Check(temporaryBefore.SequenceEqual(Directory.GetFiles(Path.GetTempPath(),"cursorium-native-*").OrderBy(p=>p)),"Long-path validation removes bounded temporary copies");
             var longInstall=Path.Combine(root,new string('i',160));Storage.UseTestingRoot(longInstall);

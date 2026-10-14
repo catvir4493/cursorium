@@ -36,6 +36,8 @@ scripts/verify-stability.ps1 -DurationSeconds 259200 -StartupCycles 100 -ReportD
 
 ## 24/72 小时验收步骤
 
+`verify-cursorium.ps1` 另外自动执行 --tray-lifecycle-review：首次没有窗口，分进程 IPC 打开、编辑草稿后关闭/重开、签名缓存首次显示及 --quit-without-panel 的真实托盘退出。11/12/5 项断言不修改 Windows 指针。正常 --tray 在首次打开前节省 UI 资源；已经打开后的草稿保留意味着不会立即销毁整个 UI。
+
 1. 在专用 Windows 测试机保存安装、数据、原生值/类型与资源哈希；记录 OS、CPU、显示器/DPI、刷新率和进程。
 2. 执行对应长测，保存 CSV/JSON；至少每小时观察资源趋势，不只比较首尾。
 3. 另行执行真实输入、跨屏、全屏暂停、锁屏、睡眠、RDP、Explorer 重启场景；记录物理操作和时间。当前短测不替代这些操作。

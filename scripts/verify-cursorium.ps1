@@ -34,6 +34,19 @@ $cursoriumTestingData=Join-Path $cursoriumReport ('desktop-data-'+[guid]::NewGui
 Invoke-CursoriumTest @('--self-test','--isolated-test','--test-data-root',('"'+$cursoriumTestingData+'"'),'--report',('"'+$cursoriumReport+'"'))
 $cursoriumDesktop=Get-Content -LiteralPath (Join-Path $cursoriumReport 'desktop-report.json') -Raw | ConvertFrom-Json
 if($cursoriumDesktop.passed -ne $true){throw 'Desktop report contains a failure.'}
+Invoke-CursoriumTest @('--tray-lifecycle-review','--isolated-test','--test-data-root',('"'+(Join-Path $cursoriumReport ('tray-data-'+[guid]::NewGuid().ToString('N')))+'"'),'--report',('"'+(Join-Path $cursoriumReport 'tray-lifecycle')+'"'))
+$cursoriumTray=Get-Content -LiteralPath (Join-Path $cursoriumReport 'tray-lifecycle/tray-lifecycle-report.json') -Raw | ConvertFrom-Json
+if($cursoriumTray.passed -ne $true){throw 'Deferred tray/IPC lifecycle report failed.'}
+$cursoriumCachedTrayData=Join-Path $cursoriumReport ('cached-tray-data-'+[guid]::NewGuid().ToString('N'))
+New-Item -ItemType Directory -Force -Path (Join-Path $cursoriumCachedTrayData 'Online') | Out-Null
+$cursoriumCachedTrayJson=@{SchemaVersion=1;Catalog=[Convert]::ToBase64String([IO.File]::ReadAllBytes((Join-Path $cursoriumRoot 'tests/fixtures/online/index.json')));Signature=[Convert]::ToBase64String([IO.File]::ReadAllBytes((Join-Path $cursoriumRoot 'tests/fixtures/online/index.json.sig')))} | ConvertTo-Json
+[IO.File]::WriteAllText((Join-Path $cursoriumCachedTrayData 'Online/catalog-cache.json'),$cursoriumCachedTrayJson,[Text.UTF8Encoding]::new($false))
+Invoke-CursoriumTest @('--tray-lifecycle-review','--require-cached-catalog','--isolated-test','--test-data-root',('"'+$cursoriumCachedTrayData+'"'),'--report',('"'+(Join-Path $cursoriumReport 'cached-tray-lifecycle')+'"'))
+$cursoriumCachedTray=Get-Content -LiteralPath (Join-Path $cursoriumReport 'cached-tray-lifecycle/tray-lifecycle-report.json') -Raw | ConvertFrom-Json
+if($cursoriumCachedTray.passed -ne $true){throw 'Deferred shell signed-cache startup failed.'}
+Invoke-CursoriumTest @('--tray-lifecycle-review','--quit-without-panel','--isolated-test','--test-data-root',('"'+(Join-Path $cursoriumReport ('tray-quit-data-'+[guid]::NewGuid().ToString('N')))+'"'),'--report',('"'+(Join-Path $cursoriumReport 'tray-quit')+'"'))
+$cursoriumTrayQuit=Get-Content -LiteralPath (Join-Path $cursoriumReport 'tray-quit/tray-lifecycle-report.json') -Raw | ConvertFrom-Json
+if($cursoriumTrayQuit.passed -ne $true){throw 'Tray exit without constructing a shell failed.'}
 $cursoriumUiData=Join-Path $cursoriumReport ('ui-data-'+[guid]::NewGuid().ToString('N'))
 Invoke-CursoriumTest @('--ui-review','--isolated-test','--test-data-root',('"'+$cursoriumUiData+'"'),'--report',('"'+(Join-Path $cursoriumReport 'interface')+'"'))
 # Restart a real WPF process with the signed cache it just created. Native/service

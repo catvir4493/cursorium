@@ -1,42 +1,42 @@
-﻿[
-    {
-        "passed":  true,
-        "name":  "Release build",
-        "started":  "2026-10-14T14:00:36.3985846Z",
-        "environment":  "Windows 11 interactive desktop; isolated data",
-        "command":  "dotnet build Frost.sln -c Release",
-        "ended":  "2026-10-14T14:00:38.7514932Z"
-    },
-    {
-        "passed":  true,
-        "name":  "Retained and recovery regression",
-        "started":  "2026-10-14T14:00:38.7645846Z",
-        "environment":  "Windows 11 interactive desktop; isolated data",
-        "command":  "scripts/verify-cursorium.ps1 -Discover -SkipBenchmark",
-        "ended":  "2026-10-14T14:02:05.3619607Z"
-    },
-    {
-        "passed":  true,
-        "name":  "Native FROST resources",
-        "started":  "2026-10-14T14:02:05.3629605Z",
-        "environment":  "Windows 11 interactive desktop; isolated data",
-        "command":  "dotnet run --project tests/Frost.Verify -c Release -- assets/cursors",
-        "ended":  "2026-10-14T14:02:06.6724677Z"
-    },
-    {
-        "passed":  true,
-        "name":  "Native Obsidian resources",
-        "started":  "2026-10-14T14:02:06.6734675Z",
-        "environment":  "Windows 11 interactive desktop; isolated data",
-        "command":  "dotnet run --project tests/Frost.Verify -c Release -- assets/themes/obsidian",
-        "ended":  "2026-10-14T14:02:07.8503318Z"
-    },
-    {
-        "passed":  true,
-        "name":  "Curation and immutable update regression",
-        "started":  "2026-10-14T14:02:07.8525684Z",
-        "environment":  "Windows 11 interactive desktop; isolated data",
-        "command":  "dotnet run --project tests/Frost.Verify -c Release -- --curation-tests \u003cretained signed stage\u003e \u003cprevious catalog\u003e",
-        "ended":  "2026-10-14T14:02:11.7201064Z"
-    }
+[
+  {
+    "name": "Release build",
+    "command": "dotnet build Frost.sln -c Release",
+    "environment": "Windows 11 interactive desktop; isolated data",
+    "ended": "2026-10-14T14:28:59.2386831Z",
+    "started": "2026-10-14T14:28:56.8860346Z",
+    "passed": true
+  },
+  {
+    "name": "Retained and recovery regression",
+    "command": "scripts/verify-cursorium.ps1 -Discover -SkipBenchmark",
+    "environment": "Windows 11 interactive desktop; isolated data",
+    "ended": "2026-10-14T14:30:32.0605961Z",
+    "started": "2026-10-14T14:28:59.2503328Z",
+    "passed": true
+  },
+  {
+    "name": "Native FROST resources",
+    "command": "dotnet run --project tests/Frost.Verify -c Release -- assets/cursors",
+    "environment": "Windows 11 interactive desktop; isolated data",
+    "ended": "2026-10-14T14:30:33.3538983Z",
+    "started": "2026-10-14T14:30:32.0616302Z",
+    "passed": true
+  },
+  {
+    "name": "Native Obsidian resources",
+    "command": "dotnet run --project tests/Frost.Verify -c Release -- assets/themes/obsidian",
+    "environment": "Windows 11 interactive desktop; isolated data",
+    "ended": "2026-10-14T14:30:34.4951531Z",
+    "started": "2026-10-14T14:30:33.3549808Z",
+    "passed": true
+  },
+  {
+    "name": "Curation and immutable update regression",
+    "command": "dotnet run --project tests/Frost.Verify -c Release -- --curation-tests <retained signed stage> <previous catalog>",
+    "environment": "Windows 11 interactive desktop; isolated data",
+    "ended": "2026-10-14T14:30:37.9314391Z",
+    "started": "2026-10-14T14:30:34.4968327Z",
+    "passed": true
+  }
 ]

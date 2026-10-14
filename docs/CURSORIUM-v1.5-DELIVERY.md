@@ -10,6 +10,10 @@
 
 ## 实际实现与原因
 
+补充后台优化：正常 `--tray` 登录启动只创建引擎和真实托盘，第一次 Open/IPC 才创建原 WPF 窗口；打开后仍保留同一窗口与草稿。实际子进程 IPC、缓存首次显示、关闭驻留和无窗口 Quit 分别通过 **11 / 12 / 5** 项检查。独占、同一已保护配置各 15 秒正常托盘对照：.NET 8 基线 **176.6 MiB / GDI 227 / USER 88 / 单核 CPU 1.130%**，延后窗口候选 **141.7 MiB / GDI 28 / USER 23 / 0.617%**。两次均无观测鼠标移动。收益适用于首次未打开界面；打开后保留草稿及 UI，不能承诺关闭后立即返回该内存水平。见 [idle-lazy-comparison.json](validation/v1.5/idle-lazy-comparison.json)。
+
+集合回归曾暴露滚动后的 ANI 可见状态偶尔未刷新。现显式订阅/释放 ScrollChanged 来更新预览动画和桌面排除矩形，不依赖其他布局事件偶然触发；保留原 60 ms 检查与全部 28 项集合断言，修复后整套通过。
+
 1. **.NET 10 LTS**：目标 net10.0-windows，自包含 x64 明确使用 10.0.13。WPF、P/Invoke、Raw Input、ANI、WindowChrome、事务和安装器继续复用。没有新增 NuGet 包。保留 .NET 8 的 tag、源码、构建、180 项核心及短时测量基线。
 2. **静止采样降频**：Raw Input 仍立即采样实际运动，静止后 fallback 由活跃间隔退至 80 ms；禁用 250 ms、暂停低频检查。显示重建先解除旧渲染订阅；会话变化清空并重检，RawMouse.Dispose 可重复调用。
 3. **即时关闭**：降低轮询频率后旧 60 ms 关闭断言暴露延迟。新增设置活动事件，禁用直接清空/隐藏并解除渲染，重新启用恢复活跃轮询；没有放宽旧测试。
@@ -23,14 +27,14 @@
 
 ## 测试结果与失败修复
 
-最终深目录运行额外暴露 USER32 的 MAX_PATH 边界：260 字符原文件及其 extended-prefix 形式均返回 Win32 error 2，而短路径相同文件能加载。新增 8 项实际检查，长 CUR/ANI 来源使用有大小上限、立即清理的临时副本完成原生校验；WPF 使用 Stream 构造长路径预览。**永久 Windows 指针路径仍必须小于 260 字符**，超限在创建稳定目录/写注册表前拒绝，不把临时文件交给系统。原核心测试的数据根改为独立短隔离根，报告路径保持原名；长路径成功与安全拒绝均有独立断言，不靠缩短名称隐藏边界。
+最终深目录运行额外暴露 USER32 的 MAX_PATH 边界：260 字符原文件及其 extended-prefix 形式均返回 Win32 error 2，而短路径相同文件能加载。新增 10 项实际检查，长 CUR/ANI 来源使用有大小上限、立即清理的临时副本完成原生校验；WPF 使用 Stream 构造长路径预览。**永久 Windows 指针路径仍必须小于 260 字符**，超限在创建稳定目录/写注册表前拒绝，不把临时文件交给系统。原核心测试的数据根改为独立短隔离根，报告路径保持原名；长路径成功与安全拒绝均有独立断言，不靠缩短名称隐藏边界。
 
 已执行 Release 源码构建，**0 error / 0 warning**。WFO0003 只在两个使用既有 PerMonitorV2 manifest 的混合 WPF/WinForms 宿主排除；原因见[兼容性记录](CURSORIUM-v1.5-COMPATIBILITY.md)。
 
 |检查|本轮结果|
 |---|---:|
 |原核心/原生事务|180 通过|
-|新增中断/并发/外部修改/数据保护/日志|42 通过|
+|新增中断/并发/外部修改/数据保护/日志|44 通过|
 |FROST 原生资源|388 通过|
 |Obsidian 原生资源|388 通过|
 |真实桌面/Raw Input/点击穿透/全屏探针/托盘|85 通过|
@@ -75,6 +79,7 @@ Settings 两万次暖机复制：旧 JSON 算法约 22.56 MB，新复制约 2.56
 
 - Core：Native.cs、ThemeCatalog.cs 的长路径加载辅助、Settings.cs、Storage.cs、ThemeService.cs、StudioService.cs、StudioModels.cs、Online/RemoteCatalog.cs。
 - App：App.cs、TrailEngine.cs、TrailPainter.cs、RawMouse.cs、LivePreview.cs、MainWindow.xaml.cs、新 StabilityVerification.cs、原 DesktopVerification.cs 的扩展基准、DiscoverView.xaml.cs 的长路径预览调用。
+- 托盘生命周期：TrayLifecycleVerification.cs 验证真正的分进程 IPC 和延后窗口创建；verify-cursorium.ps1 纳入三种运行模式。
 - 框架/安装：Directory.Build.props、两宿主 csproj、installer/Frost.Setup/Program.cs。
 - 工具：build-release、publish-github、verify-cursorium 和原资源发布路径适配；新增 save-stability-baseline、verify-stability-protection、verify-stability、verify-v1.5、verify-installation-lifecycle、measure-engine、measure-idle。
 - 自动化：tests/Frost.Verify/StabilityVerification.cs 及 Program.cs 新入口。主 UI 的 XAML、Token、控件、ThemeCatalog/安全 ZIP、在线签名协议、四种轨迹算法及原素材不重写。

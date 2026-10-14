@@ -51,6 +51,7 @@ public partial class MainWindow:Window
         statusTimer=new DispatcherTimer{Interval=TimeSpan.FromMilliseconds(400)};statusTimer.Tick+=(_,_)=>{EngineStatus.Text=engine.Status;NavRuntimeLabel.Text=engine.Status;RuntimeIndicator.Fill=(Brush)FindResource(studio.LiveEffects.Enabled&&!engine.PausedByUser?"SuccessBrush":"QuietBrush");RestoreButton.IsEnabled=theme.HasBackup;};
         IsVisibleChanged+=(_,_)=>{if(IsVisible)statusTimer.Start();else statusTimer.Stop();UpdatePreviewBounds();};
         Preview.LayoutUpdated+=PreviewLayoutUpdated;
+        ContentScroll.ScrollChanged+=PreviewScrollChanged;
         Preview.MouseEnter+=(_,_)=>PreviewHint.Visibility=Visibility.Collapsed;
         Preview.MouseLeave+=(_,_)=>PreviewHint.Visibility=Visibility.Visible;
         Closing+=(_,e)=>{if(!((App)System.Windows.Application.Current).Exiting){e.Cancel=true;Hide();}};
@@ -121,8 +122,10 @@ public partial class MainWindow:Window
     }
     private void Notify(string message,bool error=false){ViewState.Notification=message;ViewState.NotificationError=error;Feedback.Text=message;Feedback.Foreground=(Brush)FindResource(error?"ErrorBrush":"SuccessBrush");}
     private void PreviewLayoutUpdated(object? sender,EventArgs e)=>UpdatePreviewBounds();
+    private void PreviewScrollChanged(object sender,ScrollChangedEventArgs e)=>UpdatePreviewBounds();
     private void UpdatePreviewBounds()
     {
+        if(disposed)return;
         if(Navigation.SelectedIndex==0){animatedPreview?.SetVisible(false);return;}
         if(!IsVisible||!Preview.IsLoaded||!Preview.IsVisible){engine.PreviewBounds=null;animatedPreview?.SetVisible(false);return;}
         var top=Preview.PointToScreen(new Point(0,0));var bottom=Preview.PointToScreen(new Point(Preview.ActualWidth,Preview.ActualHeight));
@@ -412,5 +415,5 @@ public partial class MainWindow:Window
         if(!ready)return;try{StartupRegistration.Set(StartupCheck.IsChecked==true,Environment.ProcessPath!);Notify("Sign-in startup updated.");}catch(Exception ex){Notify(ex.Message,true);ready=false;StartupCheck.IsChecked=StartupRegistration.Enabled;ready=true;}
     }
     private void OpenData(object s,RoutedEventArgs e){try{Directory.CreateDirectory(Storage.Root);Process.Start(new ProcessStartInfo("explorer.exe",Storage.Root){UseShellExecute=true});}catch(Exception ex){Notify(ex.Message,true);}}
-    public void DisposeResources(){if(disposed)return;disposed=true;statusTimer.Stop();Discover.Dispose();animatedPreview.Dispose();SystemParameters.StaticPropertyChanged-=SystemMotionChanged;Preview.LayoutUpdated-=PreviewLayoutUpdated;engine.PreviewBounds=null;Preview.Dispose();Preview.Cursor=null;RoleGrid.Children.Clear();Mouse.UpdateCursor();foreach(var cursor in ownedCursors)cursor.Dispose();ownedCursors.Clear();cursors.Clear();thumbnails.Clear();}
+    public void DisposeResources(){if(disposed)return;disposed=true;statusTimer.Stop();ContentScroll.ScrollChanged-=PreviewScrollChanged;Discover.Dispose();animatedPreview.Dispose();SystemParameters.StaticPropertyChanged-=SystemMotionChanged;Preview.LayoutUpdated-=PreviewLayoutUpdated;engine.PreviewBounds=null;Preview.Dispose();Preview.Cursor=null;RoleGrid.Children.Clear();Mouse.UpdateCursor();foreach(var cursor in ownedCursors)cursor.Dispose();ownedCursors.Clear();cursors.Clear();thumbnails.Clear();}
 }

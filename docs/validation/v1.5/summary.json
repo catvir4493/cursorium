@@ -7,14 +7,17 @@
     "interface": 98,
     "installationLifecycle": 16,
     "desktop": 85,
-    "recovery": 42,
+    "recovery": 44,
     "curation": 104,
     "frostResources": 388,
     "cachedInterface": 99,
     "collection": 28,
     "onlineSecurity": 51,
     "core": 180,
-    "obsidianResources": 388
+    "obsidianResources": 388,
+    "deferredTray": 11,
+    "cachedDeferredTray": 12,
+    "trayQuitWithoutPanel": 5
   },
   "classification": "prerelease",
   "actualStress": {

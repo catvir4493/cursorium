@@ -6,6 +6,12 @@ The target is now .NET 10/WPF/Win32; self-contained x64 distributions pin runtim
 10.0.13. Frost executable names, namespaces, IPC, registry keys and user data paths
 remain compatible. v1.4/.NET 8 tags are reproducible rollback baselines.
 
+Normal --tray startup constructs only StudioService, the engine and NotifyIcon;
+Open/IPC creates the existing MainWindow on demand. Once opened, the same window
+retains its draft on hide/reopen. Preview visibility also follows ScrollChanged
+explicitly, and subscriptions are released on disposal. Dedicated real IPC checks
+cover uncached/cached first show and quitting before a shell ever exists.
+
 Idle sampling backs off to 80 ms with immediate Raw Input wake-up; active history
 expiry and physical coordinates are unchanged. Session changes clear transient
 effects and force environment re-evaluation. Display rebuild detaches the old render

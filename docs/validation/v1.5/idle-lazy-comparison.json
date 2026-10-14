@@ -1,0 +1,265 @@
+{
+  "measurements": [
+    {
+      "cpuOneCorePercent": 1.129913633642102,
+      "seconds": 15.2088214,
+      "mode": "baseline",
+      "observedPointerChanges": 0,
+      "version": "1.4.0+6886ea6f406894f7869977d4eaf476dcdcfa9641",
+      "samples": [
+        {
+          "gdi": 227,
+          "seconds": 1.012364,
+          "user": 88,
+          "privateBytes": 122404864,
+          "threads": 19,
+          "workingSet": 191606784
+        },
+        {
+          "gdi": 227,
+          "seconds": 2.0225525,
+          "user": 88,
+          "privateBytes": 115666944,
+          "threads": 19,
+          "workingSet": 184877056
+        },
+        {
+          "gdi": 227,
+          "seconds": 3.0376835,
+          "user": 88,
+          "privateBytes": 115666944,
+          "threads": 19,
+          "workingSet": 184877056
+        },
+        {
+          "gdi": 227,
+          "seconds": 4.0518827,
+          "user": 88,
+          "privateBytes": 115666944,
+          "threads": 19,
+          "workingSet": 184877056
+        },
+        {
+          "gdi": 227,
+          "seconds": 5.0645256,
+          "user": 88,
+          "privateBytes": 115613696,
+          "threads": 18,
+          "workingSet": 184848384
+        },
+        {
+          "gdi": 227,
+          "seconds": 6.0775168,
+          "user": 88,
+          "privateBytes": 115687424,
+          "threads": 19,
+          "workingSet": 185106432
+        },
+        {
+          "gdi": 227,
+          "seconds": 7.0950508,
+          "user": 88,
+          "privateBytes": 115687424,
+          "threads": 19,
+          "workingSet": 185106432
+        },
+        {
+          "gdi": 227,
+          "seconds": 8.1084244,
+          "user": 88,
+          "privateBytes": 115687424,
+          "threads": 19,
+          "workingSet": 185106432
+        },
+        {
+          "gdi": 227,
+          "seconds": 9.1230308,
+          "user": 88,
+          "privateBytes": 115687424,
+          "threads": 19,
+          "workingSet": 185106432
+        },
+        {
+          "gdi": 227,
+          "seconds": 10.1375216,
+          "user": 88,
+          "privateBytes": 115687424,
+          "threads": 19,
+          "workingSet": 185106432
+        },
+        {
+          "gdi": 227,
+          "seconds": 11.1511959,
+          "user": 88,
+          "privateBytes": 115687424,
+          "threads": 19,
+          "workingSet": 185106432
+        },
+        {
+          "gdi": 227,
+          "seconds": 12.1609504,
+          "user": 88,
+          "privateBytes": 115613696,
+          "threads": 18,
+          "workingSet": 185053184
+        },
+        {
+          "gdi": 227,
+          "seconds": 13.1749014,
+          "user": 88,
+          "privateBytes": 115613696,
+          "threads": 18,
+          "workingSet": 185053184
+        },
+        {
+          "gdi": 227,
+          "seconds": 14.1873883,
+          "user": 88,
+          "privateBytes": 115613696,
+          "threads": 18,
+          "workingSet": 185053184
+        },
+        {
+          "gdi": 227,
+          "seconds": 15.1975273,
+          "user": 88,
+          "privateBytes": 115687424,
+          "threads": 19,
+          "workingSet": 185167872
+        }
+      ],
+      "cpuMachinePercent": 0.040352557393256314
+    },
+    {
+      "cpuOneCorePercent": 0.6168989853409996,
+      "seconds": 15.1968701,
+      "mode": "net10-candidate",
+      "observedPointerChanges": 0,
+      "version": "1.5.0+9a65841ff9f0ca29ed63122d898d43ca6b97e591",
+      "samples": [
+        {
+          "gdi": 28,
+          "seconds": 1.0107362,
+          "user": 23,
+          "privateBytes": 97247232,
+          "threads": 19,
+          "workingSet": 154931200
+        },
+        {
+          "gdi": 28,
+          "seconds": 2.0256508,
+          "user": 23,
+          "privateBytes": 90624000,
+          "threads": 19,
+          "workingSet": 148389888
+        },
+        {
+          "gdi": 28,
+          "seconds": 3.0492914,
+          "user": 23,
+          "privateBytes": 90624000,
+          "threads": 19,
+          "workingSet": 148389888
+        },
+        {
+          "gdi": 28,
+          "seconds": 4.0620862,
+          "user": 23,
+          "privateBytes": 90624000,
+          "threads": 19,
+          "workingSet": 148389888
+        },
+        {
+          "gdi": 28,
+          "seconds": 5.0744108,
+          "user": 23,
+          "privateBytes": 90624000,
+          "threads": 19,
+          "workingSet": 148389888
+        },
+        {
+          "gdi": 28,
+          "seconds": 6.0835676,
+          "user": 23,
+          "privateBytes": 90624000,
+          "threads": 19,
+          "workingSet": 148389888
+        },
+        {
+          "gdi": 28,
+          "seconds": 7.0989729,
+          "user": 23,
+          "privateBytes": 90656768,
+          "threads": 19,
+          "workingSet": 148643840
+        },
+        {
+          "gdi": 28,
+          "seconds": 8.1089643,
+          "user": 23,
+          "privateBytes": 90656768,
+          "threads": 19,
+          "workingSet": 148643840
+        },
+        {
+          "gdi": 28,
+          "seconds": 9.1191468,
+          "user": 23,
+          "privateBytes": 90656768,
+          "threads": 19,
+          "workingSet": 148643840
+        },
+        {
+          "gdi": 28,
+          "seconds": 10.1303453,
+          "user": 23,
+          "privateBytes": 90656768,
+          "threads": 19,
+          "workingSet": 148643840
+        },
+        {
+          "gdi": 28,
+          "seconds": 11.1431837,
+          "user": 23,
+          "privateBytes": 90656768,
+          "threads": 19,
+          "workingSet": 148643840
+        },
+        {
+          "gdi": 28,
+          "seconds": 12.1560124,
+          "user": 23,
+          "privateBytes": 90656768,
+          "threads": 19,
+          "workingSet": 148643840
+        },
+        {
+          "gdi": 28,
+          "seconds": 13.1702544,
+          "user": 23,
+          "privateBytes": 90656768,
+          "threads": 19,
+          "workingSet": 148643840
+        },
+        {
+          "gdi": 28,
+          "seconds": 14.1842951,
+          "user": 23,
+          "privateBytes": 90578944,
+          "threads": 18,
+          "workingSet": 148602880
+        },
+        {
+          "gdi": 28,
+          "seconds": 15.1911926,
+          "user": 23,
+          "privateBytes": 90578944,
+          "threads": 18,
+          "workingSet": 148602880
+        }
+      ],
+      "cpuMachinePercent": 0.022032097485780604
+    }
+  ],
+  "notes": "Actual normal tray processes using the same backed-up production configuration. No test Apply, synthetic movement or tight in-process driver loop. First 5 seconds excluded; this is a short idle observation, not a whole-machine energy or first-frame benchmark."
+}

@@ -1,8 +1,8 @@
 {
   "passed": true,
   "error": null,
-  "started": "2026-10-14T14:00:43.5365163+00:00",
-  "ended": "2026-10-14T14:00:56.9327813+00:00",
+  "started": "2026-10-14T14:29:03.5411265+00:00",
+  "ended": "2026-10-14T14:29:17.0512989+00:00",
   "checks": [
     {
       "name": "Diagnostics reject production user data as test root",
@@ -29,11 +29,19 @@
       "passed": true
     },
     {
+      "name": "Repeated long-source native handles are owned and released: Normal",
+      "passed": true
+    },
+    {
       "name": "Explicit long-path cursor fixture: Busy",
       "passed": true
     },
     {
       "name": "Native validation and WPF stream preview support long source: Busy",
+      "passed": true
+    },
+    {
+      "name": "Repeated long-source native handles are owned and released: Busy",
       "passed": true
     },
     {

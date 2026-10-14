@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "error": null,
+  "started": "2026-10-14T14:29:34.0611691+00:00",
+  "ended": "2026-10-14T14:29:35.3590513+00:00",
+  "checks": [
+    {
+      "name": "Tray startup defers the actual WPF shell",
+      "passed": true
+    },
+    {
+      "name": "Deferred shell retains per-monitor desktop overlays",
+      "passed": true
+    },
+    {
+      "name": "Deferred shell retains real tray operations",
+      "passed": true
+    },
+    {
+      "name": "Separate process sends real existing IPC show request",
+      "passed": true
+    },
+    {
+      "name": "First IPC request constructs and loads the real WPF window",
+      "passed": true
+    },
+    {
+      "name": "Actual close hides to the running tray",
+      "passed": true
+    },
+    {
+      "name": "Second real IPC show request succeeds",
+      "passed": true
+    },
+    {
+      "name": "Reopen retains the same window and its edited in-memory draft",
+      "passed": true
+    },
+    {
+      "name": "Real tray pause works after deferred construction",
+      "passed": true
+    },
+    {
+      "name": "Real tray resume works after deferred construction",
+      "passed": true
+    },
+    {
+      "name": "Lazy shell and IPC lifecycle never Apply system cursors",
+      "passed": true
+    }
+  ],
+  "beforeShell": {
+    "workingSet": 156475392,
+    "gdi": 28,
+    "user": 24
+  },
+  "afterShell": {
+    "workingSet": 214888448,
+    "gdi": 241,
+    "user": 108
+  },
+  "notes": "Actual isolated tray, separate-process IPC, WPF first show, close/reopen and tray actions. User data and system pointers are unchanged."
+}

@@ -1,4 +1,4 @@
-param([string]$CandidateDirectory='artifacts/v1.5-candidate-current',[ValidateRange(5,120)][int]$Seconds=15,[string]$ReportDirectory='artifacts/v1.5-idle')
+param([string]$CandidateDirectory='artifacts/v1.5-candidate-current',[string]$BaselineDirectory='D:\CURSORIUM',[ValidateRange(5,120)][int]$Seconds=15,[string]$ReportDirectory='artifacts/v1.5-idle')
 $ErrorActionPreference='Stop'
 $taskRoot=Split-Path -Parent $PSScriptRoot
 $taskReport=Join-Path $taskRoot $ReportDirectory;New-Item -ItemType Directory -Force -Path $taskReport | Out-Null
@@ -14,13 +14,14 @@ public static class IdleProbeNative {
 }
 '@
 $taskInstalled='D:\CURSORIUM\FrostWhiteComet.exe'
+$taskBaseline=if([IO.Path]::IsPathRooted($BaselineDirectory)){$BaselineDirectory}else{Join-Path $taskRoot $BaselineDirectory}
 $taskRunning=@(Get-CimInstance Win32_Process -Filter "Name='FrostWhiteComet.exe'")
 if(@($taskRunning | Where-Object ExecutablePath -ne $taskInstalled).Count){throw 'Finish other test/portable instances before idle measurement'}
 function Launch([string]$Exe,[string]$Arguments){$taskStart=[Diagnostics.ProcessStartInfo]::new($Exe);$taskStart.UseShellExecute=$false;$taskStart.CreateNoWindow=$true;$taskStart.Arguments=$Arguments;return [Diagnostics.Process]::Start($taskStart)}
 $taskRows=@();$taskProcess=$null
 try {
  if($taskRunning.Count){$taskStop=Launch $taskInstalled '--shutdown';if(-not $taskStop.WaitForExit(10000)){throw 'Production shutdown timed out'};Start-Sleep -Milliseconds 500}
- foreach($taskEntry in @(@('net8-installed',$taskInstalled),@('net10-candidate',(Join-Path (Join-Path $taskRoot $CandidateDirectory) 'FrostWhiteComet.exe')))){
+ foreach($taskEntry in @(@('baseline',(Join-Path $taskBaseline 'FrostWhiteComet.exe')),@('net10-candidate',(Join-Path (Join-Path $taskRoot $CandidateDirectory) 'FrostWhiteComet.exe')))){
   $taskProcess=Launch $taskEntry[1] '--tray';Start-Sleep -Seconds 5
   if($taskProcess.HasExited){throw 'Normal tray startup failed'}
   $taskProcess.Refresh();$taskCpu=$taskProcess.TotalProcessorTime;$taskClock=[Diagnostics.Stopwatch]::StartNew();$taskSamples=@();$taskPointer=[IdleProbeNative+Point]::new();[IdleProbeNative]::GetPhysicalCursorPos([ref]$taskPointer)|Out-Null;$taskMoves=0
