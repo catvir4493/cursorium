@@ -21,6 +21,7 @@ internal static class Program
     private static bool isolated;
     [STAThread]static int Main(string[] args)
     {
+        if(!DistributionProfile.Current.UsesCommunityInstaller)return 2;
         silent=args.Contains("--silent");bool remove=args.Contains("--uninstall")||string.Equals(Path.GetFileName(Environment.ProcessPath),"Uninstall.exe",StringComparison.OrdinalIgnoreCase);
         if(args.Contains("--isolated-test"))
         {
@@ -39,7 +40,7 @@ internal static class Program
             isolated=true;Target=Path.Combine(root,"Program");Shortcut=Path.Combine(root,"CURSORIUM.lnk");LegacyShortcut=Path.Combine(root,"FROST.lnk");UninstallKey+="-"+Path.GetFileName(root);Storage.UseTestingRoot(Path.Combine(root,"Data"));
         }
         else if(args.Contains("--test-install-root")||args.Contains("--test-install-base"))return 2;
-        using var gate=new Mutex(true,@"Local\FrostWhiteComet.Setup",out bool first);
+        using var gate=new Mutex(true,ProductIdentity.SetupMutex,out bool first);
         if(!first){if(!silent)Forms.MessageBox.Show("Another installer is already running.");return 2;}
         try
         {
