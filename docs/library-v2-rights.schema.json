@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CURSORIUM independently signed Library v2 rights sidecar",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "SchemaVersion",
+    "Version",
+    "CatalogSha256",
+    "Resources"
+  ],
+  "properties": {
+    "SchemaVersion": {
+      "const": 2
+    },
+    "Version": {
+      "type": "string"
+    },
+    "CatalogSha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "Resources": {
+      "type": "array",
+      "maxItems": 2100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "StableId",
+          "Version",
+          "Scope",
+          "PackageSha256",
+          "Author",
+          "SourceUrl",
+          "License",
+          "LicenseEvidence",
+          "CommercialClearance",
+          "RedistributionPermission",
+          "AttributionRequired",
+          "ReviewStatus",
+          "MinimumClientVersion",
+          "DistributionChannel",
+          "WithdrawalStatus",
+          "ReviewNote"
+        ],
+        "properties": {
+          "StableId": {
+            "type": "string"
+          },
+          "Version": {
+            "type": "string"
+          },
+          "Scope": {
+            "enum": [
+              "Online",
+              "Bundled"
+            ]
+          },
+          "PackageSha256": {
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{64}$"
+          },
+          "Author": {
+            "type": "string"
+          },
+          "SourceUrl": {
+            "type": "string"
+          },
+          "License": {
+            "type": "string"
+          },
+          "LicenseEvidence": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 8,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "Url",
+                "Sha256",
+                "Kind"
+              ],
+              "properties": {
+                "Url": {
+                  "type": "string",
+                  "format": "uri",
+                  "pattern": "^https://"
+                },
+                "Sha256": {
+                  "type": "string",
+                  "pattern": "^[a-fA-F0-9]{64}$"
+                },
+                "Kind": {
+                  "enum": [
+                    "SourcePage",
+                    "PackageNotice",
+                    "RepositoryLicense",
+                    "RepositorySource"
+                  ]
+                }
+              }
+            }
+          },
+          "CommercialClearance": {
+            "enum": [
+              "Approved",
+              "Needs Review",
+              "Denied"
+            ]
+          },
+          "RedistributionPermission": {
+            "enum": [
+              "Allowed",
+              "AllowedWithNotice",
+              "Needs Review",
+              "Denied"
+            ]
+          },
+          "AttributionRequired": {
+            "type": "boolean"
+          },
+          "ReviewStatus": {
+            "enum": [
+              "Reviewed",
+              "Needs Review",
+              "Rejected"
+            ]
+          },
+          "MinimumClientVersion": {
+            "type": "string"
+          },
+          "DistributionChannel": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 3,
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "Development",
+                "Community",
+                "Steam"
+              ]
+            }
+          },
+          "WithdrawalStatus": {
+            "enum": [
+              "Active",
+              "Withdrawn"
+            ]
+          },
+          "ReviewNote": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,3 +1,34 @@
+# v1.6.0 Commercial Foundation & Library Architecture — Preview, 2026-10-15
+
+Automatic input remains paused; no live deployment, Windows Apply or Restore.
+Development/Community/Steam compiled identities and non-window probes passed.
+Steam is an experimental local payload with no AppID/SDK/SteamPipe/Cloud and native
+writes disabled; uncleared Cute files are absent. Community retains five bundles.
+Root MIT and published history remain intact. Runtime/apphost supplier notices are
+included without relicensing third-party components.
+
+Final foundation checks: 144 on self-contained 10.0.13, exact candidate Core;
+real pinned RSA-PSS and 29 package audits, bounded JSON/cache, controlled HTTP,
+portable data and isolated migration, including explicitly simulated versions.
+Retained safe subset: core 162 without native roundtrip, online 51, curation 104,
+actual public-network encrypted filesystem 14, FROST/Obsidian 388 each; Python
+protocol 17. Unknown channel compilation and real NTFS junction migration were
+rejected. A private backup copy parsed on .NET 10.0.13 with one existing Profile
+and 15 original role files available; no actual native restoration was attempted.
+
+Signed Library v2 rights revision 1.0.0 is publicly verified at the official Pages
+endpoint, commit 5a62639. Existing v1 catalog, six collections and all 29 package
+identities/hashes remain unchanged. Fourteen original MIT online presets qualify
+for the content whitelist; fifteen third-party cursor packages remain Needs Review.
+
+Full WPF/native safety, incomplete performance matrix/natural input/native CPU,
+Windows 10, physical dual/mixed DPI and 24/72h remain Pending, not waived or replaced
+by test counts. Steam integration, live identity migration/backup handover, Cloud
+transport/conflicts and remaining commercial rights are additional blockers.
+Production D:\CURSORIUM remains v1.5.1; v1.4.0 remains Latest Stable.
+See [Chinese delivery](docs/CURSORIUM-v1.6-DELIVERY.md) and
+[actual sanitized evidence](docs/validation/v1.6).
+
 # v1.5.2 Performance Verification & Release Hardening — Preview, 2026-10-15
 
 Actual Windows 11 build 26100, one 2560x1440 / 96-DPI display. User paused

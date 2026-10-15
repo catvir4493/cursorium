@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "commit": "5a62639ff061401b458c2edd5a21327ba2022432",
+  "rightsVersion": "1.0.0",
+  "network": {
+    "passed": true,
+    "version": "1.0.0",
+    "online": 29,
+    "steamApproved": 14,
+    "catalogSha256": "03ecff4b1cc6899717c2a7552930baf98a535911e018fa33a021b5c59a73a018",
+    "sha256": "8A0A29DBA1275B838F67135E785665AB714319C9246AC28484B6E0679D5310D8"
+  },
+  "packagesChanged": 0,
+  "v1Unchanged": true
+}

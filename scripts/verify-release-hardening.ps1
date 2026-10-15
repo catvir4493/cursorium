@@ -1,4 +1,4 @@
-param([ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.5.2',[string]$ReportDirectory='artifacts/release-hardening')
+param([ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.6.0',[string]$ReportDirectory='artifacts/release-hardening')
 $ErrorActionPreference='Stop';$taskRoot=Split-Path -Parent $PSScriptRoot;Set-Location -LiteralPath $taskRoot
 . (Join-Path $PSScriptRoot 'performance-storage.ps1')
 $taskReport=Get-PerformanceOutputPath $ReportDirectory;New-Item -ItemType Directory -Force -Path $taskReport|Out-Null

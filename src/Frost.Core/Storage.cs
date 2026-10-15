@@ -5,12 +5,17 @@ public static class Storage
 {
     // Keep the original location so existing settings and cursor backups survive an upgrade.
     private static string? testingRoot;
-    public static string Root=>testingRoot??Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"FrostWhiteComet");
+    public static bool IsIsolated=>testingRoot!=null;
+    public static string Root=>testingRoot??DistributionProfile.Current.DataRoot(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
     public static void UseTestingRoot(string path)
     {
         var full=Path.GetFullPath(path).TrimEnd(Path.DirectorySeparatorChar);
         var live=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"FrostWhiteComet");
         if(full.Length==0||string.Equals(full,Path.GetPathRoot(full)?.TrimEnd(Path.DirectorySeparatorChar),StringComparison.OrdinalIgnoreCase)||string.Equals(full,live,StringComparison.OrdinalIgnoreCase)||full.StartsWith(live+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase)||live.StartsWith(full+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("Diagnostic data must be isolated from the real user data and volume roots.");
+        foreach(var channel in Enum.GetValues<DistributionChannel>()){
+            var root=new DistributionProfile(channel).DataRoot(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
+            if(full.Equals(root,StringComparison.OrdinalIgnoreCase)||full.StartsWith(root+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase)||root.StartsWith(full+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("Diagnostic data must be isolated from every channel's live data.");
+        }
         using(var registration=Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall\FrostWhiteComet"))
             if(registration?.GetValue("InstallLocation") is string location)
             {var installed=Path.GetFullPath(location).TrimEnd(Path.DirectorySeparatorChar);if(full.Equals(installed,StringComparison.OrdinalIgnoreCase)||full.StartsWith(installed+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("Diagnostic data must not be stored in the installed program directory.");}

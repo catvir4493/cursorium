@@ -1,0 +1,22 @@
+[
+  {
+    "name": "core",
+    "passed": true,
+    "checks": 162
+  },
+  {
+    "name": "online",
+    "passed": true,
+    "checks": 51
+  },
+  {
+    "name": "curation",
+    "passed": true,
+    "checks": 104
+  },
+  {
+    "name": "filesystem",
+    "passed": true,
+    "checks": 14
+  }
+]

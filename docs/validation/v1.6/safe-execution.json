@@ -1,0 +1,98 @@
+{
+  "scope": "Non-input, non-Apply subset only",
+  "pending": [
+    "Performance matrix",
+    "Natural input",
+    "Native CPU profiling",
+    "Full WPF/native regression",
+    "Windows 10",
+    "Physical dual/mixed DPI",
+    "24h/72h"
+  ],
+  "steps": [
+    {
+      "name": "Build",
+      "passed": true,
+      "ended": "2026-10-15T10:11:48.4463098+00:00",
+      "command": "dotnet build Frost.sln -c Release",
+      "started": "2026-10-15T10:11:45.342276+00:00"
+    },
+    {
+      "name": "Exact runtime verifier",
+      "passed": true,
+      "ended": "2026-10-15T10:11:51.287183+00:00",
+      "command": "dotnet publish tests/Frost.Verify -c Release -r win-x64 --self-contained true -p:CursoriumChannel=Community; copy deployed Core and compare SHA256",
+      "started": "2026-10-15T10:11:48.4490474+00:00"
+    },
+    {
+      "name": "Commercial foundation",
+      "passed": true,
+      "ended": "2026-10-15T10:11:55.0158679+00:00",
+      "command": "Frost.Verify --foundation-tests <candidate> tests/fixtures/commercial <retained packages> <report>",
+      "started": "2026-10-15T10:11:51.288187+00:00"
+    },
+    {
+      "name": "Retained core",
+      "passed": true,
+      "ended": "2026-10-15T10:11:56.6761209+00:00",
+      "command": "Frost.Verify --studio-tests <candidate> <report> (without native roundtrip)",
+      "started": "2026-10-15T10:11:55.0168285+00:00"
+    },
+    {
+      "name": "Retained online security",
+      "passed": true,
+      "ended": "2026-10-15T10:11:59.1141175+00:00",
+      "command": "Frost.Verify --online-tests <candidate> tests/fixtures/online <report>",
+      "started": "2026-10-15T10:11:56.6770335+00:00"
+    },
+    {
+      "name": "Retained curation/update",
+      "passed": true,
+      "ended": "2026-10-15T10:12:02.253916+00:00",
+      "command": "Frost.Verify --curation-tests <candidate> <retained signed stage> <previous catalog> <report>",
+      "started": "2026-10-15T10:11:59.1152619+00:00"
+    },
+    {
+      "name": "Actual public-network filesystem",
+      "passed": true,
+      "ended": "2026-10-15T10:12:05.6808759+00:00",
+      "command": "Frost.Verify --download-filesystem-tests <candidate> <report> <fresh isolated encrypted data>",
+      "started": "2026-10-15T10:12:02.2584198+00:00"
+    },
+    {
+      "name": "FROST native file validation",
+      "passed": true,
+      "ended": "2026-10-15T10:12:05.8159967+00:00",
+      "command": "Frost.Verify assets/cursors",
+      "started": "2026-10-15T10:12:05.6816621+00:00"
+    },
+    {
+      "name": "Obsidian native file validation",
+      "passed": true,
+      "ended": "2026-10-15T10:12:05.9240698+00:00",
+      "command": "Frost.Verify assets/themes/obsidian",
+      "started": "2026-10-15T10:12:05.8167876+00:00"
+    },
+    {
+      "name": "Retained performance protocol tests",
+      "passed": true,
+      "ended": "2026-10-15T10:12:06.0712679+00:00",
+      "command": "python -B -m unittest discover -s tests -p test_performance_summary.py (no benchmark/input)",
+      "started": "2026-10-15T10:12:05.9250209+00:00"
+    },
+    {
+      "name": "Unknown build channel rejected",
+      "passed": true,
+      "ended": "2026-10-15T10:12:06.8467838+00:00",
+      "command": "dotnet build src/Frost.Core -p:CursoriumChannel=Unknown (expected failure)",
+      "started": "2026-10-15T10:12:06.0720202+00:00"
+    },
+    {
+      "name": "Actual migration junction rejected",
+      "passed": true,
+      "ended": "2026-10-15T10:12:10.3494921+00:00",
+      "command": "Foundation migration CLI in a marked sandbox with an NTFS junction; no production paths",
+      "started": "2026-10-15T10:12:06.8476169+00:00"
+    }
+  ]
+}

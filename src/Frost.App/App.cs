@@ -24,9 +24,13 @@ public sealed class App:System.Windows.Application
     internal bool PanelCreated=>panel!=null;
     private static bool isolatedTest;
     private static bool stateProbe;
-    private static string InstanceId=>"FrostWhiteComet-"+WindowsIdentity.GetCurrent().User!.Value+(isolatedTest?"-verification":"")+(stateProbe?"-state-probe":"");
+    private static string InstanceId=>ProductIdentity.InstancePrefix+WindowsIdentity.GetCurrent().User!.Value+(isolatedTest?"-verification":"")+(stateProbe?"-state-probe":"");
     [STAThread] public static int Main(string[] args)
     {
+        if(args.Contains("--foundation-probe")){
+            int i=Array.IndexOf(args,"--test-data-root");if(!args.Contains("--isolated-test")||i<0||i+1>=args.Length)return 2;
+            Storage.UseTestingRoot(args[i+1]);Storage.Write(Path.Combine(Storage.Root,"foundation-probe.json"),ProductIdentity.Describe());return 0;
+        }
         isolatedTest=args.Contains("--isolated-test")&&(args.Contains("--self-test")||args.Contains("--benchmark")||args.Contains("--state-probe")||args.Contains("--ui-review")||args.Contains("--collection-review")||args.Contains("--export-library")||args.Contains("--export-covers")||args.Contains("--verify-library-public")||args.Contains("--verify-library")||args.Contains("--audit-library")||args.Contains("--prepare-library")||args.Contains("--discover-review"));
         if(args.Contains("--stability-review")){if(!args.Contains("--isolated-test"))return 2;isolatedTest=true;}
         if(args.Contains("--tray-lifecycle-review")){if(!args.Contains("--isolated-test"))return 2;isolatedTest=true;}
@@ -46,6 +50,7 @@ public sealed class App:System.Windows.Application
         using var mutex=new Mutex(true,@"Local\"+InstanceId,out bool first);
         if(!first)
         {
+            if(!DistributionProfile.Current.UsesCommunityInstaller)return 2; // Never forward restore/show into a different channel.
             try{using var pipe=new NamedPipeClientStream(".",InstanceId,PipeDirection.Out);pipe.Connect(3000);using var w=new StreamWriter(pipe);w.WriteLine(args.Contains("--shutdown")?"shutdown":args.Contains("--restore-theme")?"restore":"show");return 0;}
             catch(Exception ex){MessageBox.Show("Cannot contact the running instance: "+ex.Message);return 1;}
         }

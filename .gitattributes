@@ -6,3 +6,4 @@
 *.ico -text
 *.sig -text
 tests/fixtures/online/*.json -text
+tests/fixtures/commercial/*.json -text

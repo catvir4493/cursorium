@@ -1,4 +1,4 @@
-param([ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.5.2',[string]$OutputDirectory='artifacts')
+param([ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.6.0',[string]$OutputDirectory='artifacts')
 $ErrorActionPreference='Stop'
 $frostRoot=Split-Path -Parent $PSScriptRoot
 . (Join-Path $PSScriptRoot 'performance-storage.ps1')
@@ -11,7 +11,7 @@ try {
     # Archive the committed objects, independent of checkout CRLF conversion.
     # Untracked/private scratch files cannot enter the public source delivery.
     if(git -C $frostRoot status --porcelain --untracked-files=no){throw 'Commit tracked changes before packaging source for a versioned delivery.'}
-    $frostPaths=@('src','tools','tests','installer','scripts','assets','docs','Directory.Build.props','Frost.sln','README.md','VALIDATION.md','LICENSE','AGENTS.md','.gitignore','.gitattributes')
+    $frostPaths=@('src','tools','tests','installer','scripts','assets','docs','Directory.Build.props','Frost.sln','README.md','VALIDATION.md','LICENSE','THIRD-PARTY-NOTICES.md','AGENTS.md','.gitignore','.gitattributes')
     & git -C $frostRoot archive --format=zip "--output=$frostTemporary" HEAD -- @frostPaths
     if($LASTEXITCODE -ne 0){throw 'Committed source archive creation failed.'}
     # git archive honors *.ps1 eol=crlf from .gitattributes even when reading HEAD.

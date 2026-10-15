@@ -1,0 +1,52 @@
+{
+  "projectPackageReferences": 0,
+  "checkedAt": "2026-10-15T10:15:41.3057304+00:00",
+  "coreclrAuthenticode": "Valid",
+  "note": "Actual retained supplier packages; digest is integrity evidence, not independent copyright clearance. Exact source licenses copied into channel payloads.",
+  "components": [
+    {
+      "version": "10.0.13",
+      "sha512": "55suoRAIf6dVjOdPhHxIElDa2GBoqVZI70bG4zq+f2pHQbGV6yDvztsXdit4pxc3Ea79X0Kfo78Kncjt9NauIQ==",
+      "matchesRetainedPackageDigest": true,
+      "notices": [
+        {
+          "file": "LICENSE.TXT",
+          "sha256": "D7A68596AB69B06F51CA278A6545148E4269A9381C26D597C13DF5D88E08CF5B"
+        },
+        {
+          "file": "THIRD-PARTY-NOTICES.TXT",
+          "sha256": "6D15E10A101C6BFFF2AB4429ED061BF76C456FC4B23AD6B03E0D0F8377148A21"
+        }
+      ],
+      "package": "microsoft.netcore.app.runtime.win-x64"
+    },
+    {
+      "version": "10.0.13",
+      "sha512": "g8vz2rWeSNYimFNYUqXUy7yVkKJOQycy9ksNt59122iv+y7Y5KrR/PwoSCQgXO3KBJbf4uEdK0LuCr8OaVwQcw==",
+      "matchesRetainedPackageDigest": true,
+      "notices": [
+        {
+          "file": "LICENSE",
+          "sha256": "A89886665765362EB77E0F8E26602C924520041D1711B2EEDC136434FE4D01AB"
+        }
+      ],
+      "package": "microsoft.windowsdesktop.app.runtime.win-x64"
+    },
+    {
+      "version": "10.0.13",
+      "sha512": "pOsn0cBhrZpyplii9TTHuixb9w0PcnQZzJxa67z7/1BDdGck9ATUVXmO8UUrSnHI63+RepeMgR/Mx7jjV48o6A==",
+      "matchesRetainedPackageDigest": true,
+      "notices": [
+        {
+          "file": "LICENSE.TXT",
+          "sha256": "D7A68596AB69B06F51CA278A6545148E4269A9381C26D597C13DF5D88E08CF5B"
+        },
+        {
+          "file": "THIRD-PARTY-NOTICES.TXT",
+          "sha256": "6D15E10A101C6BFFF2AB4429ED061BF76C456FC4B23AD6B03E0D0F8377148A21"
+        }
+      ],
+      "package": "microsoft.netcore.app.host.win-x64"
+    }
+  ]
+}

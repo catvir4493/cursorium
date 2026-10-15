@@ -1,0 +1,1274 @@
+{
+  "reviewedAt": "2026-10-15T10:16:52.703005+00:00",
+  "online": 29,
+  "bundledAdditional": 6,
+  "records": [
+    {
+      "StableId": "cute-bunny-cute-kawaii",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "5b91eb342537bca782d99ed634fd40925155ad6d25f5d414e6392fbf74f810b7",
+      "Author": "goat",
+      "SourceUrl": "https://www.rw-designer.com/cursor-set/bunny-cute-kawaii",
+      "License": "Release to Public Domain (RealWorld); inherited FROST resources: project MIT license",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.0.0/cute-bunny-cute-kawaii.zip",
+          "Sha256": "f31257e63264320e9538319ae3947c1e3e16b76262c5e1e2919cfcaa13dae426",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://www.rw-designer.com/cursor-set/bunny-cute-kawaii",
+          "Sha256": "7e9919fe3992896234de1c331066c839c4b74197c588095a583a57942c7e5b3e",
+          "Kind": "SourcePage"
+        }
+      ],
+      "CommercialClearance": "Needs Review",
+      "RedistributionPermission": "Needs Review",
+      "AttributionRequired": true,
+      "ReviewStatus": "Needs Review",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Needs commercial provenance review. Site license declaration and package NOTICE retained; no independent chain-of-title certification. Existing Community availability unchanged.",
+      "CurFiles": 8,
+      "AniFiles": 7,
+      "NativeRoles": 12,
+      "InheritedRoles": 3,
+      "NoticeSha256": "f31257e63264320e9538319ae3947c1e3e16b76262c5e1e2919cfcaa13dae426",
+      "SourcePageFetched": true,
+      "ObservedSourceLicense": "Release to Public Domain"
+    },
+    {
+      "StableId": "cute-cool-cat",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "f83777fbea02f46e90dc5c5f630b8130d1fa9d247cd3394a9bcfdb9d466cc5cb",
+      "Author": "Bobcat",
+      "SourceUrl": "https://www.rw-designer.com/cursor-set/cool-cat",
+      "License": "Release to Public Domain (RealWorld); inherited FROST resources: project MIT license",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.0.0/cute-cool-cat.zip",
+          "Sha256": "74e683861a8a29adecd820704dd4ec63e862c0e4c3eb7311dc1b51b971c14b1e",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://www.rw-designer.com/cursor-set/cool-cat",
+          "Sha256": "7d3a09d2c1ba2ce06947534371f3a4476d6a4942309e69575dc0d7e5965633b9",
+          "Kind": "SourcePage"
+        }
+      ],
+      "CommercialClearance": "Needs Review",
+      "RedistributionPermission": "Needs Review",
+      "AttributionRequired": true,
+      "ReviewStatus": "Needs Review",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Needs commercial provenance review. Site license declaration and package NOTICE retained; no independent chain-of-title certification. Existing Community availability unchanged.",
+      "CurFiles": 0,
+      "AniFiles": 19,
+      "NativeRoles": 15,
+      "InheritedRoles": 0,
+      "NoticeSha256": "74e683861a8a29adecd820704dd4ec63e862c0e4c3eb7311dc1b51b971c14b1e",
+      "SourcePageFetched": true,
+      "ObservedSourceLicense": "Release to Public Domain"
+    },
+    {
+      "StableId": "cool-cat-superstar",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "07facb74c2e8e35cac8309d8a3f64bf5f87fbf0fb05ccfb85b8ba67c2ea29795",
+      "Author": "Bobcat",
+      "SourceUrl": "https://www.rw-designer.com/cursor-set/cool-cat",
+      "License": "Release to Public Domain (RealWorld); inherited FROST resources: project MIT license",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.0.0/cool-cat-superstar.zip",
+          "Sha256": "10e55198badb5d37ca427acf91974fd2a6350dc86b3c24364947ff051ec16ea6",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://www.rw-designer.com/cursor-set/cool-cat",
+          "Sha256": "7d3a09d2c1ba2ce06947534371f3a4476d6a4942309e69575dc0d7e5965633b9",
+          "Kind": "SourcePage"
+        }
+      ],
+      "CommercialClearance": "Needs Review",
+      "RedistributionPermission": "Needs Review",
+      "AttributionRequired": true,
+      "ReviewStatus": "Needs Review",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Needs commercial provenance review. Site license declaration and package NOTICE retained; no independent chain-of-title certification. Existing Community availability unchanged.",
+      "CurFiles": 0,
+      "AniFiles": 20,
+      "NativeRoles": 15,
+      "InheritedRoles": 0,
+      "NoticeSha256": "10e55198badb5d37ca427acf91974fd2a6350dc86b3c24364947ff051ec16ea6",
+      "SourcePageFetched": true,
+      "ObservedSourceLicense": "Release to Public Domain"
+    },
+    {
+      "StableId": "cute-kawaii-cat-curs0rs",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "c0afa04473f93e9f200b7c6b619eda59b1c129d1a795579d4524e86cd317ba28",
+      "Author": "MUFFET!! (archive: Sun_l1ght)",
+      "SourceUrl": "https://www.rw-designer.com/cursor-set/kawaii-cat-curs0rs",
+      "License": "Release to Public Domain (RealWorld); inherited FROST resources: project MIT license",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.0.0/cute-kawaii-cat-curs0rs.zip",
+          "Sha256": "b91ffa20af15fc7d1dd9efe24e0488b35be9b509a2734f2290ca9dad0fb806d7",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://www.rw-designer.com/cursor-set/kawaii-cat-curs0rs",
+          "Sha256": "9b3a7c59381ff4bdbb9b06b3c56af534cfa1fe8d030e48ac262c665eded98b24",
+          "Kind": "SourcePage"
+        }
+      ],
+      "CommercialClearance": "Needs Review",
+      "RedistributionPermission": "Needs Review",
+      "AttributionRequired": true,
+      "ReviewStatus": "Needs Review",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Needs commercial provenance review. Site license declaration and package NOTICE retained; no independent chain-of-title certification. Existing Community availability unchanged. Author aliases/archive attribution require confirmation.",
+      "CurFiles": 1,
+      "AniFiles": 14,
+      "NativeRoles": 15,
+      "InheritedRoles": 0,
+      "NoticeSha256": "b91ffa20af15fc7d1dd9efe24e0488b35be9b509a2734f2290ca9dad0fb806d7",
+      "SourcePageFetched": true,
+      "ObservedSourceLicense": "Release to Public Domain"
+    },
+    {
+      "StableId": "cute-kawaii-pink-heart",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "39d5ace0ea309e64472174b28bfb17574ed00d1cc3c6ea7279a0dec74912e76a",
+      "Author": "bobalover (archive: yurilover)",
+      "SourceUrl": "https://www.rw-designer.com/cursor-set/kawaii-pink-heart",
+      "License": "Release to Public Domain (RealWorld); inherited FROST resources: project MIT license",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.0.0/cute-kawaii-pink-heart.zip",
+          "Sha256": "0c19883f1c660e1df171ae4401694edadf2d91384d0ca659fe91c47669c01d35",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://www.rw-designer.com/cursor-set/kawaii-pink-heart",
+          "Sha256": "29eb6d7648ae9315c252cb4df3dc04933ff105230eb909cd86afdb690eaef176",
+          "Kind": "SourcePage"
+        }
+      ],
+      "CommercialClearance": "Needs Review",
+      "RedistributionPermission": "Needs Review",
+      "AttributionRequired": true,
+      "ReviewStatus": "Needs Review",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Needs commercial provenance review. Site license declaration and package NOTICE retained; no independent chain-of-title certification. Existing Community availability unchanged. Author aliases/archive attribution require confirmation.",
+      "CurFiles": 6,
+      "AniFiles": 10,
+      "NativeRoles": 15,
+      "InheritedRoles": 0,
+      "NoticeSha256": "0c19883f1c660e1df171ae4401694edadf2d91384d0ca659fe91c47669c01d35",
+      "SourcePageFetched": true,
+      "ObservedSourceLicense": "Release to Public Domain"
+    },
+    {
+      "StableId": "cute-pastel",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "11de2b0a2653c24ff1610161367294a227f57f4514b60559e26ddd3074d9e3bc",
+      "Author": "saraantie · shapes: quackyduck",
+      "SourceUrl": "https://www.rw-designer.com/cursor-set/pastel",
+      "License": "Release to Public Domain (RealWorld); inherited FROST resources: project MIT license",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.0.0/cute-pastel.zip",
+          "Sha256": "9c42d7eb85f91da57a96fed52125877ad9f09d06f17b98f9b1c916842461468f",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://www.rw-designer.com/cursor-set/pastel",
+          "Sha256": "713885342da357c1ef1dd52d793c024a0a33b32075408f83222431038eb233e7",
+          "Kind": "SourcePage"
+        }
+      ],
+      "CommercialClearance": "Needs Review",
+      "RedistributionPermission": "Needs Review",
+      "AttributionRequired": true,
+      "ReviewStatus": "Needs Review",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Needs commercial provenance review. Site license declaration and package NOTICE retained; no independent chain-of-title certification. Existing Community availability unchanged. Source credits quackyduck shapes; derivative permission chain remains open.",
+      "CurFiles": 15,
+      "AniFiles": 1,
+      "NativeRoles": 12,
+      "InheritedRoles": 3,
+      "NoticeSha256": "9c42d7eb85f91da57a96fed52125877ad9f09d06f17b98f9b1c916842461468f",
+      "SourcePageFetched": true,
+      "ObservedSourceLicense": "Release to Public Domain"
+    },
+    {
+      "StableId": "neon-blue",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "35320c1274668f72f772af5d60fe973048042051713af9ed0afa67d623098bf2",
+      "Author": "CURSORIUM",
+      "SourceUrl": "https://github.com/catvir4493/cursorium",
+      "License": "MIT",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.0.0/neon-blue.zip",
+          "Sha256": "8b7d39b3d07052f635c08f9b07a769f4084763fb11579bdd517d0e89a26af1ac",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://github.com/catvir4493/cursorium/blob/7ed2719a7a842e201b3e2fb38a992bf711e8fd9d/LICENSE",
+          "Sha256": "d6312280d7e4db889af37bd62ac4a642bcd23228274c556d417ac549921dc5c6",
+          "Kind": "RepositoryLicense"
+        }
+      ],
+      "CommercialClearance": "Approved",
+      "RedistributionPermission": "AllowedWithNotice",
+      "AttributionRequired": true,
+      "ReviewStatus": "Reviewed",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community",
+        "Steam"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Original data-only preset; retain project MIT and supplier notices. This is not Steam integration approval. Legacy package NOTICE lacks a source URL; this signed evidence supplies its immutable repository license link. Historical package is not rewritten.",
+      "CurFiles": 0,
+      "AniFiles": 0,
+      "NativeRoles": 0,
+      "InheritedRoles": 0,
+      "NoticeSha256": "8b7d39b3d07052f635c08f9b07a769f4084763fb11579bdd517d0e89a26af1ac",
+      "SourcePageFetched": false,
+      "ObservedSourceLicense": null
+    },
+    {
+      "StableId": "sakura-pink",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "85ec0e81e591dc38aa4fccf71811362ab6c467a22567eb2499b37e734e326ab1",
+      "Author": "CURSORIUM",
+      "SourceUrl": "https://github.com/catvir4493/cursorium",
+      "License": "MIT",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.0.0/sakura-pink.zip",
+          "Sha256": "8b7d39b3d07052f635c08f9b07a769f4084763fb11579bdd517d0e89a26af1ac",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://github.com/catvir4493/cursorium/blob/7ed2719a7a842e201b3e2fb38a992bf711e8fd9d/LICENSE",
+          "Sha256": "d6312280d7e4db889af37bd62ac4a642bcd23228274c556d417ac549921dc5c6",
+          "Kind": "RepositoryLicense"
+        }
+      ],
+      "CommercialClearance": "Approved",
+      "RedistributionPermission": "AllowedWithNotice",
+      "AttributionRequired": true,
+      "ReviewStatus": "Reviewed",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community",
+        "Steam"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Original data-only preset; retain project MIT and supplier notices. This is not Steam integration approval. Legacy package NOTICE lacks a source URL; this signed evidence supplies its immutable repository license link. Historical package is not rewritten.",
+      "CurFiles": 0,
+      "AniFiles": 0,
+      "NativeRoles": 0,
+      "InheritedRoles": 0,
+      "NoticeSha256": "8b7d39b3d07052f635c08f9b07a769f4084763fb11579bdd517d0e89a26af1ac",
+      "SourcePageFetched": false,
+      "ObservedSourceLicense": null
+    },
+    {
+      "StableId": "aurora-flow",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "67738c30d34a5ca023fe7854e6a05b3e1ea3827d723a6aba960668ad37c2f47b",
+      "Author": "CURSORIUM",
+      "SourceUrl": "https://github.com/catvir4493/cursorium",
+      "License": "MIT",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.0.0/aurora-flow.zip",
+          "Sha256": "8b7d39b3d07052f635c08f9b07a769f4084763fb11579bdd517d0e89a26af1ac",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://github.com/catvir4493/cursorium/blob/7ed2719a7a842e201b3e2fb38a992bf711e8fd9d/LICENSE",
+          "Sha256": "d6312280d7e4db889af37bd62ac4a642bcd23228274c556d417ac549921dc5c6",
+          "Kind": "RepositoryLicense"
+        }
+      ],
+      "CommercialClearance": "Approved",
+      "RedistributionPermission": "AllowedWithNotice",
+      "AttributionRequired": true,
+      "ReviewStatus": "Reviewed",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community",
+        "Steam"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Original data-only preset; retain project MIT and supplier notices. This is not Steam integration approval. Legacy package NOTICE lacks a source URL; this signed evidence supplies its immutable repository license link. Historical package is not rewritten.",
+      "CurFiles": 0,
+      "AniFiles": 0,
+      "NativeRoles": 0,
+      "InheritedRoles": 0,
+      "NoticeSha256": "8b7d39b3d07052f635c08f9b07a769f4084763fb11579bdd517d0e89a26af1ac",
+      "SourcePageFetched": false,
+      "ObservedSourceLicense": null
+    },
+    {
+      "StableId": "golden-spark",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "44ae1bde808f9df09f5d49af7e63692c0abd3a7e73eef16122e925b133b984c5",
+      "Author": "CURSORIUM",
+      "SourceUrl": "https://github.com/catvir4493/cursorium",
+      "License": "MIT",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.0.0/golden-spark.zip",
+          "Sha256": "8b7d39b3d07052f635c08f9b07a769f4084763fb11579bdd517d0e89a26af1ac",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://github.com/catvir4493/cursorium/blob/7ed2719a7a842e201b3e2fb38a992bf711e8fd9d/LICENSE",
+          "Sha256": "d6312280d7e4db889af37bd62ac4a642bcd23228274c556d417ac549921dc5c6",
+          "Kind": "RepositoryLicense"
+        }
+      ],
+      "CommercialClearance": "Approved",
+      "RedistributionPermission": "AllowedWithNotice",
+      "AttributionRequired": true,
+      "ReviewStatus": "Reviewed",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community",
+        "Steam"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Original data-only preset; retain project MIT and supplier notices. This is not Steam integration approval. Legacy package NOTICE lacks a source URL; this signed evidence supplies its immutable repository license link. Historical package is not rewritten.",
+      "CurFiles": 0,
+      "AniFiles": 0,
+      "NativeRoles": 0,
+      "InheritedRoles": 0,
+      "NoticeSha256": "8b7d39b3d07052f635c08f9b07a769f4084763fb11579bdd517d0e89a26af1ac",
+      "SourcePageFetched": false,
+      "ObservedSourceLicense": null
+    },
+    {
+      "StableId": "basic-vlazteron",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "6fc170c870183609c8c0f1ea74cba5de73143da75dda8feeff7df9fdc13bceee",
+      "Author": "Vlazteron",
+      "SourceUrl": "https://www.rw-designer.com/cursor-set/basic-3",
+      "License": "Release to Public Domain (RealWorld)",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.1.0/basic-vlazteron.zip",
+          "Sha256": "953bc1f070970644f9d96f9f1c6b23c0c1ff383105585b565fd9b059438b7fd5",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://www.rw-designer.com/cursor-set/basic-3",
+          "Sha256": "58534a0746b2f1d0816310036f9055766b84a3cdf74976264d03592a7bd79dc3",
+          "Kind": "SourcePage"
+        }
+      ],
+      "CommercialClearance": "Needs Review",
+      "RedistributionPermission": "Needs Review",
+      "AttributionRequired": true,
+      "ReviewStatus": "Needs Review",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Needs commercial provenance review. Site license declaration and package NOTICE retained; no independent chain-of-title certification. Existing Community availability unchanged.",
+      "CurFiles": 13,
+      "AniFiles": 2,
+      "NativeRoles": 15,
+      "InheritedRoles": 0,
+      "NoticeSha256": "953bc1f070970644f9d96f9f1c6b23c0c1ff383105585b565fd9b059438b7fd5",
+      "SourcePageFetched": true,
+      "ObservedSourceLicense": "Release to Public Domain"
+    },
+    {
+      "StableId": "dot-minimal",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "9fe2e3b78aa12082948bb8bdac52aebf2cc083e482637734b7327392c276b3a3",
+      "Author": "EdibleInk",
+      "SourceUrl": "https://www.rw-designer.com/cursor-set/dot-minimal",
+      "License": "Release to Public Domain (RealWorld)",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.1.0/dot-minimal.zip",
+          "Sha256": "011d1422ce669c71dd4e227dbacd4d6c7c9943ceb62597899a9a2a768c89c27a",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://www.rw-designer.com/cursor-set/dot-minimal",
+          "Sha256": "57e42f95929a2365602ecb76a43ee6361edd01847409973d1d5d3a5ab5067da5",
+          "Kind": "SourcePage"
+        }
+      ],
+      "CommercialClearance": "Needs Review",
+      "RedistributionPermission": "Needs Review",
+      "AttributionRequired": true,
+      "ReviewStatus": "Needs Review",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Needs commercial provenance review. Site license declaration and package NOTICE retained; no independent chain-of-title certification. Existing Community availability unchanged.",
+      "CurFiles": 13,
+      "AniFiles": 2,
+      "NativeRoles": 15,
+      "InheritedRoles": 0,
+      "NoticeSha256": "011d1422ce669c71dd4e227dbacd4d6c7c9943ceb62597899a9a2a768c89c27a",
+      "SourcePageFetched": true,
+      "ObservedSourceLicense": "Release to Public Domain"
+    },
+    {
+      "StableId": "golden-mhmd",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "4d376a0abdfc24588b280011a43dd49bb5901d889b373c96029de76e987b6d19",
+      "Author": "Mhmd.Jb",
+      "SourceUrl": "https://www.rw-designer.com/cursor-set/golden-2",
+      "License": "Release to Public Domain (RealWorld)",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.1.0/golden-mhmd.zip",
+          "Sha256": "71c76ee8528bb4a7a3a5da569a9b3aafbe13e2b03ea980e443f0c4032f1e3bce",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://www.rw-designer.com/cursor-set/golden-2",
+          "Sha256": "c0dcde65211ffd5fc3c4a68262ef62af51d75d237596ad73de869efdbc920871",
+          "Kind": "SourcePage"
+        }
+      ],
+      "CommercialClearance": "Needs Review",
+      "RedistributionPermission": "Needs Review",
+      "AttributionRequired": true,
+      "ReviewStatus": "Needs Review",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Needs commercial provenance review. Site license declaration and package NOTICE retained; no independent chain-of-title certification. Existing Community availability unchanged.",
+      "CurFiles": 15,
+      "AniFiles": 4,
+      "NativeRoles": 15,
+      "InheritedRoles": 0,
+      "NoticeSha256": "71c76ee8528bb4a7a3a5da569a9b3aafbe13e2b03ea980e443f0c4032f1e3bce",
+      "SourcePageFetched": true,
+      "ObservedSourceLicense": "Release to Public Domain"
+    },
+    {
+      "StableId": "amber-rose",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "a6275e5b23a3a5d07de517b89b1321a0337d93741cd2988e5c8a1b02b45d3353",
+      "Author": "nibbler",
+      "SourceUrl": "https://www.rw-designer.com/cursor-set/amber-rose",
+      "License": "Release to Public Domain (RealWorld)",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.1.0/amber-rose.zip",
+          "Sha256": "f0e15c8ccad47f967309e488b4e2662c71a9bffce1d72bdf2f2034a11f8c0a4a",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://www.rw-designer.com/cursor-set/amber-rose",
+          "Sha256": "a25c3249bed6ca42667a422085ef323d854befeef78fdc96ae4462e14a023113",
+          "Kind": "SourcePage"
+        }
+      ],
+      "CommercialClearance": "Needs Review",
+      "RedistributionPermission": "Needs Review",
+      "AttributionRequired": true,
+      "ReviewStatus": "Needs Review",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Needs commercial provenance review. Site license declaration and package NOTICE retained; no independent chain-of-title certification. Existing Community availability unchanged.",
+      "CurFiles": 30,
+      "AniFiles": 9,
+      "NativeRoles": 15,
+      "InheritedRoles": 0,
+      "NoticeSha256": "f0e15c8ccad47f967309e488b4e2662c71a9bffce1d72bdf2f2034a11f8c0a4a",
+      "SourcePageFetched": true,
+      "ObservedSourceLicense": "Release to Public Domain"
+    },
+    {
+      "StableId": "brown-cow",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "372a20beecc179c1b243f3f95109c850bfb65ebe8a40c5f3fef0f997567ed7e1",
+      "Author": "Lier",
+      "SourceUrl": "https://www.rw-designer.com/cursor-set/brown-cow",
+      "License": "Release to Public Domain (RealWorld)",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.1.0/brown-cow.zip",
+          "Sha256": "6968f7abba56784ae8c609f603172709c6811d208e401a1beaf9cd4c25d1e09f",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://www.rw-designer.com/cursor-set/brown-cow",
+          "Sha256": "cac2fb3be380981efe42becacf959072334fe48aca1baf7b5490f4a4c4a1b8d4",
+          "Kind": "SourcePage"
+        }
+      ],
+      "CommercialClearance": "Needs Review",
+      "RedistributionPermission": "Needs Review",
+      "AttributionRequired": true,
+      "ReviewStatus": "Needs Review",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Needs commercial provenance review. Site license declaration and package NOTICE retained; no independent chain-of-title certification. Existing Community availability unchanged.",
+      "CurFiles": 8,
+      "AniFiles": 23,
+      "NativeRoles": 15,
+      "InheritedRoles": 0,
+      "NoticeSha256": "6968f7abba56784ae8c609f603172709c6811d208e401a1beaf9cd4c25d1e09f",
+      "SourcePageFetched": true,
+      "ObservedSourceLicense": "Release to Public Domain"
+    },
+    {
+      "StableId": "little-chicken",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "b7a8f5eb6580adf8c4dd8ffa1570a7b2a38f096220847f39e130873824424be9",
+      "Author": "Sirea",
+      "SourceUrl": "https://www.rw-designer.com/cursor-set/little-chicken",
+      "License": "Attribution Required (CC by; RealWorld)",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.1.0/little-chicken.zip",
+          "Sha256": "59d3f2b61ae66bd5e0db8b3c6ff758f1b53490d259c9de54b6fad3f295d71d5b",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://www.rw-designer.com/cursor-set/little-chicken",
+          "Sha256": "b7c93d6c532f0b6ebaa055e9101303e873143b3f85921fff5415797ee934d297",
+          "Kind": "SourcePage"
+        }
+      ],
+      "CommercialClearance": "Needs Review",
+      "RedistributionPermission": "Needs Review",
+      "AttributionRequired": true,
+      "ReviewStatus": "Needs Review",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Needs commercial provenance review. Site license declaration and package NOTICE retained; no independent chain-of-title certification. Existing Community availability unchanged. Source does not identify a CC BY version; obtain precise terms and attribution before Steam inclusion.",
+      "CurFiles": 7,
+      "AniFiles": 11,
+      "NativeRoles": 15,
+      "InheritedRoles": 0,
+      "NoticeSha256": "59d3f2b61ae66bd5e0db8b3c6ff758f1b53490d259c9de54b6fad3f295d71d5b",
+      "SourcePageFetched": true,
+      "ObservedSourceLicense": "Attribution Required (CC by)"
+    },
+    {
+      "StableId": "discrete-vlasta",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "887abc33293c37ea00c7cae6ba0bb51aa141e4cb81503f1f5461b7b73a1e1927",
+      "Author": "Vlasta",
+      "SourceUrl": "https://www.rw-designer.com/cursor-set/discrete",
+      "License": "Attribution Required (CC by; RealWorld)",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.1.0/discrete-vlasta.zip",
+          "Sha256": "428eb7046a07ea4b8c5ab74e644fbc58d4319ef1429df20951b6b4fc36dc3016",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://www.rw-designer.com/cursor-set/discrete",
+          "Sha256": "73b89808ba1dec78970a6d64f61c94fae0c78e3f4f6aaf27ed74b808bba4ca0c",
+          "Kind": "SourcePage"
+        }
+      ],
+      "CommercialClearance": "Needs Review",
+      "RedistributionPermission": "Needs Review",
+      "AttributionRequired": true,
+      "ReviewStatus": "Needs Review",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Needs commercial provenance review. Site license declaration and package NOTICE retained; no independent chain-of-title certification. Existing Community availability unchanged. Source does not identify a CC BY version; obtain precise terms and attribution before Steam inclusion.",
+      "CurFiles": 16,
+      "AniFiles": 4,
+      "NativeRoles": 15,
+      "InheritedRoles": 0,
+      "NoticeSha256": "428eb7046a07ea4b8c5ab74e644fbc58d4319ef1429df20951b6b4fc36dc3016",
+      "SourcePageFetched": true,
+      "ObservedSourceLicense": "Attribution Required (CC by)"
+    },
+    {
+      "StableId": "lovely-sunshine",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "170854cb38ec6fd31fcc03b60087aba79a400f05421d5364aea0271d3070696b",
+      "Author": "LegionEagles22",
+      "SourceUrl": "https://www.rw-designer.com/cursor-set/lovely-sunshine",
+      "License": "Release to Public Domain (RealWorld)",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.1.0/lovely-sunshine.zip",
+          "Sha256": "9243fa6778e135d904223a9edd310f2868087017acce83b96951e04249d0dcb1",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://www.rw-designer.com/cursor-set/lovely-sunshine",
+          "Sha256": "7a9c7d9e2eceb7b52859e58c8f0c05fc8e63aed6b380b558677a3f51946b7ed9",
+          "Kind": "SourcePage"
+        }
+      ],
+      "CommercialClearance": "Needs Review",
+      "RedistributionPermission": "Needs Review",
+      "AttributionRequired": true,
+      "ReviewStatus": "Needs Review",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Needs commercial provenance review. Site license declaration and package NOTICE retained; no independent chain-of-title certification. Existing Community availability unchanged.",
+      "CurFiles": 1,
+      "AniFiles": 16,
+      "NativeRoles": 15,
+      "InheritedRoles": 0,
+      "NoticeSha256": "9243fa6778e135d904223a9edd310f2868087017acce83b96951e04249d0dcb1",
+      "SourcePageFetched": true,
+      "ObservedSourceLicense": "Release to Public Domain"
+    },
+    {
+      "StableId": "simple-dot-star",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "085005a598259af1e8796d8c88914ba7528abca3eb4e1195aaef0d3321cc39b9",
+      "Author": "'pix",
+      "SourceUrl": "https://www.rw-designer.com/cursor-set/simple-dot-or-star",
+      "License": "Release to Public Domain (RealWorld)",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.1.0/simple-dot-star.zip",
+          "Sha256": "1f0a97b1c4e07b9ec9ea961ab9455c2a6c2eb12ab7d2c88c365992dbed2a5cf0",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://www.rw-designer.com/cursor-set/simple-dot-or-star",
+          "Sha256": "55c7dcf901a3fb150fa8d4011fe6c872d2ae8f52f29941a868a91c9084dec3a1",
+          "Kind": "SourcePage"
+        }
+      ],
+      "CommercialClearance": "Needs Review",
+      "RedistributionPermission": "Needs Review",
+      "AttributionRequired": true,
+      "ReviewStatus": "Needs Review",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Needs commercial provenance review. Site license declaration and package NOTICE retained; no independent chain-of-title certification. Existing Community availability unchanged.",
+      "CurFiles": 16,
+      "AniFiles": 2,
+      "NativeRoles": 15,
+      "InheritedRoles": 0,
+      "NoticeSha256": "1f0a97b1c4e07b9ec9ea961ab9455c2a6c2eb12ab7d2c88c365992dbed2a5cf0",
+      "SourcePageFetched": true,
+      "ObservedSourceLicense": "Release to Public Domain"
+    },
+    {
+      "StableId": "sakura-blossom",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "515f3c1619bde282ce1d3b5fe5b8c15551090710b701ddbb1535f80b0d81ee28",
+      "Author": "CURSORIUM",
+      "SourceUrl": "https://github.com/catvir4493/cursorium",
+      "License": "MIT",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.1.0/sakura-blossom.zip",
+          "Sha256": "49b02a7f4b88ca394ce24fd7f3b7efffaa52a5dfe7ed1c8cd772020ff1b30bff",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://github.com/catvir4493/cursorium/blob/7ed2719a7a842e201b3e2fb38a992bf711e8fd9d/LICENSE",
+          "Sha256": "d6312280d7e4db889af37bd62ac4a642bcd23228274c556d417ac549921dc5c6",
+          "Kind": "RepositoryLicense"
+        }
+      ],
+      "CommercialClearance": "Approved",
+      "RedistributionPermission": "AllowedWithNotice",
+      "AttributionRequired": true,
+      "ReviewStatus": "Reviewed",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community",
+        "Steam"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Original data-only preset; retain project MIT and supplier notices. This is not Steam integration approval.",
+      "CurFiles": 0,
+      "AniFiles": 0,
+      "NativeRoles": 0,
+      "InheritedRoles": 0,
+      "NoticeSha256": "49b02a7f4b88ca394ce24fd7f3b7efffaa52a5dfe7ed1c8cd772020ff1b30bff",
+      "SourcePageFetched": false,
+      "ObservedSourceLicense": null
+    },
+    {
+      "StableId": "ice-crystal",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "55474046429fbeb8302aab8f0d8aa13686a3adb29cc86a6f82fc2af126499a35",
+      "Author": "CURSORIUM",
+      "SourceUrl": "https://github.com/catvir4493/cursorium",
+      "License": "MIT",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.1.0/ice-crystal.zip",
+          "Sha256": "49b02a7f4b88ca394ce24fd7f3b7efffaa52a5dfe7ed1c8cd772020ff1b30bff",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://github.com/catvir4493/cursorium/blob/7ed2719a7a842e201b3e2fb38a992bf711e8fd9d/LICENSE",
+          "Sha256": "d6312280d7e4db889af37bd62ac4a642bcd23228274c556d417ac549921dc5c6",
+          "Kind": "RepositoryLicense"
+        }
+      ],
+      "CommercialClearance": "Approved",
+      "RedistributionPermission": "AllowedWithNotice",
+      "AttributionRequired": true,
+      "ReviewStatus": "Reviewed",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community",
+        "Steam"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Original data-only preset; retain project MIT and supplier notices. This is not Steam integration approval.",
+      "CurFiles": 0,
+      "AniFiles": 0,
+      "NativeRoles": 0,
+      "InheritedRoles": 0,
+      "NoticeSha256": "49b02a7f4b88ca394ce24fd7f3b7efffaa52a5dfe7ed1c8cd772020ff1b30bff",
+      "SourcePageFetched": false,
+      "ObservedSourceLicense": null
+    },
+    {
+      "StableId": "lavender-dream",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "5e0d65e4bbf2d3807ad2cdf72dccc70ec7692bb37eb421194c358b7713d41441",
+      "Author": "CURSORIUM",
+      "SourceUrl": "https://github.com/catvir4493/cursorium",
+      "License": "MIT",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.1.0/lavender-dream.zip",
+          "Sha256": "49b02a7f4b88ca394ce24fd7f3b7efffaa52a5dfe7ed1c8cd772020ff1b30bff",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://github.com/catvir4493/cursorium/blob/7ed2719a7a842e201b3e2fb38a992bf711e8fd9d/LICENSE",
+          "Sha256": "d6312280d7e4db889af37bd62ac4a642bcd23228274c556d417ac549921dc5c6",
+          "Kind": "RepositoryLicense"
+        }
+      ],
+      "CommercialClearance": "Approved",
+      "RedistributionPermission": "AllowedWithNotice",
+      "AttributionRequired": true,
+      "ReviewStatus": "Reviewed",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community",
+        "Steam"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Original data-only preset; retain project MIT and supplier notices. This is not Steam integration approval.",
+      "CurFiles": 0,
+      "AniFiles": 0,
+      "NativeRoles": 0,
+      "InheritedRoles": 0,
+      "NoticeSha256": "49b02a7f4b88ca394ce24fd7f3b7efffaa52a5dfe7ed1c8cd772020ff1b30bff",
+      "SourcePageFetched": false,
+      "ObservedSourceLicense": null
+    },
+    {
+      "StableId": "emerald-stream",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "3e4d02bc71915a714ded4dd358246558261399f9139b6c5c7a824458c6021533",
+      "Author": "CURSORIUM",
+      "SourceUrl": "https://github.com/catvir4493/cursorium",
+      "License": "MIT",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.1.0/emerald-stream.zip",
+          "Sha256": "49b02a7f4b88ca394ce24fd7f3b7efffaa52a5dfe7ed1c8cd772020ff1b30bff",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://github.com/catvir4493/cursorium/blob/7ed2719a7a842e201b3e2fb38a992bf711e8fd9d/LICENSE",
+          "Sha256": "d6312280d7e4db889af37bd62ac4a642bcd23228274c556d417ac549921dc5c6",
+          "Kind": "RepositoryLicense"
+        }
+      ],
+      "CommercialClearance": "Approved",
+      "RedistributionPermission": "AllowedWithNotice",
+      "AttributionRequired": true,
+      "ReviewStatus": "Reviewed",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community",
+        "Steam"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Original data-only preset; retain project MIT and supplier notices. This is not Steam integration approval.",
+      "CurFiles": 0,
+      "AniFiles": 0,
+      "NativeRoles": 0,
+      "InheritedRoles": 0,
+      "NoticeSha256": "49b02a7f4b88ca394ce24fd7f3b7efffaa52a5dfe7ed1c8cd772020ff1b30bff",
+      "SourcePageFetched": false,
+      "ObservedSourceLicense": null
+    },
+    {
+      "StableId": "sunset-glow",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "159340482ebcb192bfcae44b38859d8006b394ebd48b88d4ab2d0a05906b29d3",
+      "Author": "CURSORIUM",
+      "SourceUrl": "https://github.com/catvir4493/cursorium",
+      "License": "MIT",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.1.0/sunset-glow.zip",
+          "Sha256": "49b02a7f4b88ca394ce24fd7f3b7efffaa52a5dfe7ed1c8cd772020ff1b30bff",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://github.com/catvir4493/cursorium/blob/7ed2719a7a842e201b3e2fb38a992bf711e8fd9d/LICENSE",
+          "Sha256": "d6312280d7e4db889af37bd62ac4a642bcd23228274c556d417ac549921dc5c6",
+          "Kind": "RepositoryLicense"
+        }
+      ],
+      "CommercialClearance": "Approved",
+      "RedistributionPermission": "AllowedWithNotice",
+      "AttributionRequired": true,
+      "ReviewStatus": "Reviewed",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community",
+        "Steam"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Original data-only preset; retain project MIT and supplier notices. This is not Steam integration approval.",
+      "CurFiles": 0,
+      "AniFiles": 0,
+      "NativeRoles": 0,
+      "InheritedRoles": 0,
+      "NoticeSha256": "49b02a7f4b88ca394ce24fd7f3b7efffaa52a5dfe7ed1c8cd772020ff1b30bff",
+      "SourcePageFetched": false,
+      "ObservedSourceLicense": null
+    },
+    {
+      "StableId": "cyber-pulse",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "12b118046bc38c00f7b2a6cf221e55fa12dcc3e458c6832fbdb522e3eb2affb8",
+      "Author": "CURSORIUM",
+      "SourceUrl": "https://github.com/catvir4493/cursorium",
+      "License": "MIT",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.1.0/cyber-pulse.zip",
+          "Sha256": "49b02a7f4b88ca394ce24fd7f3b7efffaa52a5dfe7ed1c8cd772020ff1b30bff",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://github.com/catvir4493/cursorium/blob/7ed2719a7a842e201b3e2fb38a992bf711e8fd9d/LICENSE",
+          "Sha256": "d6312280d7e4db889af37bd62ac4a642bcd23228274c556d417ac549921dc5c6",
+          "Kind": "RepositoryLicense"
+        }
+      ],
+      "CommercialClearance": "Approved",
+      "RedistributionPermission": "AllowedWithNotice",
+      "AttributionRequired": true,
+      "ReviewStatus": "Reviewed",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community",
+        "Steam"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Original data-only preset; retain project MIT and supplier notices. This is not Steam integration approval.",
+      "CurFiles": 0,
+      "AniFiles": 0,
+      "NativeRoles": 0,
+      "InheritedRoles": 0,
+      "NoticeSha256": "49b02a7f4b88ca394ce24fd7f3b7efffaa52a5dfe7ed1c8cd772020ff1b30bff",
+      "SourcePageFetched": false,
+      "ObservedSourceLicense": null
+    },
+    {
+      "StableId": "moonlight",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "f44293296ee4ca840ca0edf73f2eeaebdb15e3d115f7512a82a49b3fa9df987e",
+      "Author": "CURSORIUM",
+      "SourceUrl": "https://github.com/catvir4493/cursorium",
+      "License": "MIT",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.1.0/moonlight.zip",
+          "Sha256": "49b02a7f4b88ca394ce24fd7f3b7efffaa52a5dfe7ed1c8cd772020ff1b30bff",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://github.com/catvir4493/cursorium/blob/7ed2719a7a842e201b3e2fb38a992bf711e8fd9d/LICENSE",
+          "Sha256": "d6312280d7e4db889af37bd62ac4a642bcd23228274c556d417ac549921dc5c6",
+          "Kind": "RepositoryLicense"
+        }
+      ],
+      "CommercialClearance": "Approved",
+      "RedistributionPermission": "AllowedWithNotice",
+      "AttributionRequired": true,
+      "ReviewStatus": "Reviewed",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community",
+        "Steam"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Original data-only preset; retain project MIT and supplier notices. This is not Steam integration approval.",
+      "CurFiles": 0,
+      "AniFiles": 0,
+      "NativeRoles": 0,
+      "InheritedRoles": 0,
+      "NoticeSha256": "49b02a7f4b88ca394ce24fd7f3b7efffaa52a5dfe7ed1c8cd772020ff1b30bff",
+      "SourcePageFetched": false,
+      "ObservedSourceLicense": null
+    },
+    {
+      "StableId": "stardust-pink",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "cbb8d28227fe7c86d50c1ea30ac002eb620f17e56ffab440a9bb48a84e53d9f8",
+      "Author": "CURSORIUM",
+      "SourceUrl": "https://github.com/catvir4493/cursorium",
+      "License": "MIT",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.1.0/stardust-pink.zip",
+          "Sha256": "49b02a7f4b88ca394ce24fd7f3b7efffaa52a5dfe7ed1c8cd772020ff1b30bff",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://github.com/catvir4493/cursorium/blob/7ed2719a7a842e201b3e2fb38a992bf711e8fd9d/LICENSE",
+          "Sha256": "d6312280d7e4db889af37bd62ac4a642bcd23228274c556d417ac549921dc5c6",
+          "Kind": "RepositoryLicense"
+        }
+      ],
+      "CommercialClearance": "Approved",
+      "RedistributionPermission": "AllowedWithNotice",
+      "AttributionRequired": true,
+      "ReviewStatus": "Reviewed",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community",
+        "Steam"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Original data-only preset; retain project MIT and supplier notices. This is not Steam integration approval.",
+      "CurFiles": 0,
+      "AniFiles": 0,
+      "NativeRoles": 0,
+      "InheritedRoles": 0,
+      "NoticeSha256": "49b02a7f4b88ca394ce24fd7f3b7efffaa52a5dfe7ed1c8cd772020ff1b30bff",
+      "SourcePageFetched": false,
+      "ObservedSourceLicense": null
+    },
+    {
+      "StableId": "ocean-mist",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "59858329c178edd2844c2fa4b9d9319ca209c4dba3d27c8726dbbde311cc2d1b",
+      "Author": "CURSORIUM",
+      "SourceUrl": "https://github.com/catvir4493/cursorium",
+      "License": "MIT",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.1.0/ocean-mist.zip",
+          "Sha256": "49b02a7f4b88ca394ce24fd7f3b7efffaa52a5dfe7ed1c8cd772020ff1b30bff",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://github.com/catvir4493/cursorium/blob/7ed2719a7a842e201b3e2fb38a992bf711e8fd9d/LICENSE",
+          "Sha256": "d6312280d7e4db889af37bd62ac4a642bcd23228274c556d417ac549921dc5c6",
+          "Kind": "RepositoryLicense"
+        }
+      ],
+      "CommercialClearance": "Approved",
+      "RedistributionPermission": "AllowedWithNotice",
+      "AttributionRequired": true,
+      "ReviewStatus": "Reviewed",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community",
+        "Steam"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Original data-only preset; retain project MIT and supplier notices. This is not Steam integration approval.",
+      "CurFiles": 0,
+      "AniFiles": 0,
+      "NativeRoles": 0,
+      "InheritedRoles": 0,
+      "NoticeSha256": "49b02a7f4b88ca394ce24fd7f3b7efffaa52a5dfe7ed1c8cd772020ff1b30bff",
+      "SourcePageFetched": false,
+      "ObservedSourceLicense": null
+    },
+    {
+      "StableId": "amber-whisper",
+      "Version": "1.0.0",
+      "Scope": "Online",
+      "PackageSha256": "2b697649debf8601e40875a4370cec74abba1db40b462dd0efdd8bbedaeb6595",
+      "Author": "CURSORIUM",
+      "SourceUrl": "https://github.com/catvir4493/cursorium",
+      "License": "MIT",
+      "LicenseEvidence": [
+        {
+          "Url": "https://github.com/catvir4493/cursorium-library/releases/download/library-v1.1.0/amber-whisper.zip",
+          "Sha256": "49b02a7f4b88ca394ce24fd7f3b7efffaa52a5dfe7ed1c8cd772020ff1b30bff",
+          "Kind": "PackageNotice"
+        },
+        {
+          "Url": "https://github.com/catvir4493/cursorium/blob/7ed2719a7a842e201b3e2fb38a992bf711e8fd9d/LICENSE",
+          "Sha256": "d6312280d7e4db889af37bd62ac4a642bcd23228274c556d417ac549921dc5c6",
+          "Kind": "RepositoryLicense"
+        }
+      ],
+      "CommercialClearance": "Approved",
+      "RedistributionPermission": "AllowedWithNotice",
+      "AttributionRequired": true,
+      "ReviewStatus": "Reviewed",
+      "MinimumClientVersion": "1.6.0",
+      "DistributionChannel": [
+        "Development",
+        "Community",
+        "Steam"
+      ],
+      "WithdrawalStatus": "Active",
+      "ReviewNote": "Original data-only preset; retain project MIT and supplier notices. This is not Steam integration approval.",
+      "CurFiles": 0,
+      "AniFiles": 0,
+      "NativeRoles": 0,
+      "InheritedRoles": 0,
+      "NoticeSha256": "49b02a7f4b88ca394ce24fd7f3b7efffaa52a5dfe7ed1c8cd772020ff1b30bff",
+      "SourcePageFetched": false,
+      "ObservedSourceLicense": null
+    }
+  ],
+  "sourceFetches": [
+    {
+      "fetched": true,
+      "status": 200,
+      "at": "2026-10-15T09:40:42.8638701+00:00",
+      "url": "https://www.rw-designer.com/cursor-set/amber-rose",
+      "sha256": "A25C3249BED6CA42667A422085EF323D854BEFEEF78FDC96AE4462E14A023113"
+    },
+    {
+      "fetched": true,
+      "status": 200,
+      "at": "2026-10-15T09:40:43.1414269+00:00",
+      "url": "https://www.rw-designer.com/cursor-set/basic-3",
+      "sha256": "58534A0746B2F1D0816310036F9055766B84A3CDF74976264D03592A7BD79DC3"
+    },
+    {
+      "fetched": true,
+      "status": 200,
+      "at": "2026-10-15T09:40:43.341256+00:00",
+      "url": "https://www.rw-designer.com/cursor-set/brown-cow",
+      "sha256": "CAC2FB3BE380981EFE42BECACF959072334FE48ACA1BAF7B5490F4A4C4A1B8D4"
+    },
+    {
+      "fetched": true,
+      "status": 200,
+      "at": "2026-10-15T09:40:43.5045654+00:00",
+      "url": "https://www.rw-designer.com/cursor-set/bunny-cute-kawaii",
+      "sha256": "7E9919FE3992896234DE1C331066C839C4B74197C588095A583A57942C7E5B3E"
+    },
+    {
+      "fetched": true,
+      "status": 200,
+      "at": "2026-10-15T09:40:43.6567934+00:00",
+      "url": "https://www.rw-designer.com/cursor-set/cool-cat",
+      "sha256": "7D3A09D2C1BA2CE06947534371F3A4476D6A4942309E69575DC0D7E5965633B9"
+    },
+    {
+      "fetched": true,
+      "status": 200,
+      "at": "2026-10-15T09:40:43.8307245+00:00",
+      "url": "https://www.rw-designer.com/cursor-set/discrete",
+      "sha256": "73B89808BA1DEC78970A6D64F61C94FAE0C78E3F4F6AAF27ED74B808BBA4CA0C"
+    },
+    {
+      "fetched": true,
+      "status": 200,
+      "at": "2026-10-15T09:40:43.9979515+00:00",
+      "url": "https://www.rw-designer.com/cursor-set/dot-minimal",
+      "sha256": "57E42F95929A2365602ECB76A43EE6361EDD01847409973D1D5D3A5AB5067DA5"
+    },
+    {
+      "fetched": true,
+      "status": 200,
+      "at": "2026-10-15T09:40:44.1600765+00:00",
+      "url": "https://www.rw-designer.com/cursor-set/golden-2",
+      "sha256": "C0DCDE65211FFD5FC3C4A68262EF62AF51D75D237596AD73DE869EFDBC920871"
+    },
+    {
+      "fetched": true,
+      "status": 200,
+      "at": "2026-10-15T09:40:44.3188136+00:00",
+      "url": "https://www.rw-designer.com/cursor-set/kawaii-cat-curs0rs",
+      "sha256": "9B3A7C59381FF4BDBB9B06B3C56AF534CFA1FE8D030E48AC262C665EDED98B24"
+    },
+    {
+      "fetched": true,
+      "status": 200,
+      "at": "2026-10-15T09:40:44.4668164+00:00",
+      "url": "https://www.rw-designer.com/cursor-set/kawaii-pink-heart",
+      "sha256": "29EB6D7648AE9315C252CB4DF3DC04933FF105230EB909CD86AFDB690EAEF176"
+    },
+    {
+      "fetched": true,
+      "status": 200,
+      "at": "2026-10-15T09:40:44.6134986+00:00",
+      "url": "https://www.rw-designer.com/cursor-set/little-chicken",
+      "sha256": "B7C93D6C532F0B6EBAA055E9101303E873143B3F85921FFF5415797EE934D297"
+    },
+    {
+      "fetched": true,
+      "status": 200,
+      "at": "2026-10-15T09:40:44.7551451+00:00",
+      "url": "https://www.rw-designer.com/cursor-set/lovely-sunshine",
+      "sha256": "7A9C7D9E2ECEB7B52859E58C8F0C05FC8E63AED6B380B558677A3F51946B7ED9"
+    },
+    {
+      "fetched": true,
+      "status": 200,
+      "at": "2026-10-15T09:40:44.8946037+00:00",
+      "url": "https://www.rw-designer.com/cursor-set/pastel",
+      "sha256": "713885342DA357C1EF1DD52D793C024A0A33B32075408F83222431038EB233E7"
+    },
+    {
+      "fetched": true,
+      "status": 200,
+      "at": "2026-10-15T09:40:45.0362472+00:00",
+      "url": "https://www.rw-designer.com/cursor-set/simple-dot-or-star",
+      "sha256": "55C7DCF901A3FB150FA8D4011FE6C872D2AE8F52F29941A868A91C9084DEC3A1"
+    },
+    {
+      "fetched": true,
+      "status": 200,
+      "at": "2026-10-15T09:40:45.2608062+00:00",
+      "url": "https://www.rw-designer.com/licenses",
+      "sha256": "3BE1FFA762064D0AF0273DC0C42F50672D6E7E851DA5F0603C563686CD580E22"
+    },
+    {
+      "fetched": true,
+      "status": 200,
+      "at": "2026-10-15T09:40:45.418866+00:00",
+      "url": "https://raw.githubusercontent.com/dotnet/runtime/v10.0.3/LICENSE.TXT",
+      "sha256": "CFC21F5E8BD655AE997EEC916138B707B1D290B83272C02A95C9F821B8C87310"
+    },
+    {
+      "fetched": true,
+      "status": 200,
+      "at": "2026-10-15T09:40:45.7784517+00:00",
+      "url": "https://raw.githubusercontent.com/dotnet/wpf/v10.0.3/LICENSE.TXT",
+      "sha256": "AE48DF11A335DC1A615F4F938B69CBA73BCF4485C4F97AF49B38EFB0F216353B"
+    }
+  ],
+  "note": "Package hashes/NOTICE inspected. Commercial approval is limited to original MIT data; third-party resources remain Needs Review."
+}

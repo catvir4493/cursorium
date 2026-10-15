@@ -99,13 +99,14 @@ public sealed class ThemeService
     }
     private static Mutex EnterGate()
     {
-        var gate=new Mutex(false,@"Local\FrostWhiteComet.Theme");bool entered;
+        var gate=new Mutex(false,ProductIdentity.ThemeMutex);bool entered;
         try{entered=gate.WaitOne(TimeSpan.FromSeconds(10));}catch(AbandonedMutexException){entered=true;}
         if(!entered){gate.Dispose();throw new IOException("Another cursor operation is in progress.");}return gate;
     }
-    public void Recover(){using var gate=EnterGate();try{RecoverInternal();}finally{gate.ReleaseMutex();}}
+    public void Recover(){if(File.Exists(JournalPath))DistributionProfile.DemandNativeWrites();using var gate=EnterGate();try{RecoverInternal();}finally{gate.ReleaseMutex();}}
     private void Transaction(string[] schemeNames,Action action,Func<ThemeBackup,ThemeBackup>? intended=null)
     {
+        DistributionProfile.DemandNativeWrites();
         using var gate=EnterGate();
         try
         {
@@ -152,6 +153,7 @@ public sealed class ThemeService
     }
     public void ApplyTheme(CursorTheme theme,Action? commit=null)
     {
+        DistributionProfile.DemandNativeWrites();
         if(theme.IsSystem){Restore(commit);return;}
         var paths=Prepare(theme);var name="CURSORIUM / "+theme.Id;
         Transaction(new[]{name},()=>
@@ -173,6 +175,7 @@ public sealed class ThemeService
     }
     public void Restore(Action? commit=null)
     {
+        if(HasBackup)DistributionProfile.DemandNativeWrites();
         if(!HasBackup){commit?.Invoke();return;}
         var backupText=File.ReadAllText(BackupPath);var backup=ParseBackup(backupText);
         void EnsureOwned()

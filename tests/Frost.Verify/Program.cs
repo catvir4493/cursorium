@@ -13,6 +13,7 @@ internal static class Program
     {
         try
         {
+            int foundation=Array.IndexOf(args,"--foundation-tests");if(foundation>=0){FoundationVerification.Run(Path.GetFullPath(args[foundation+1]),Path.GetFullPath(args[foundation+2]),Path.GetFullPath(args[foundation+3]),Path.GetFullPath(args[foundation+4]),Path.GetFullPath(args[foundation+5])).GetAwaiter().GetResult();return 0;}
             int child=Array.IndexOf(args,"--stability-child");if(child>=0)return StabilityVerification.Child(args[child+1],args[child+2],args[child+3]);
             int stability=Array.IndexOf(args,"--stability-tests");if(stability>=0){StabilityVerification.Run(Path.GetFullPath(args[stability+1]),Path.GetFullPath(args[stability+2]));return 0;}
             int curationIndex=Array.IndexOf(args,"--curation-tests");if(curationIndex>=0){CurationVerification.Run(Path.GetFullPath(args[curationIndex+1]),Path.GetFullPath(args[curationIndex+2]),Path.GetFullPath(args[curationIndex+3]),Path.GetFullPath(args[curationIndex+4])).GetAwaiter().GetResult();return 0;}

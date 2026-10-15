@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "installer", "installer", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frost.Setup", "installer\Frost.Setup\Frost.Setup.csproj", "{BE9BD3D2-E1E9-4482-9668-A38339D2DA69}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frost.Foundation", "tools\Frost.Foundation\Frost.Foundation.csproj", "{33105E99-30F8-4DAF-B334-46F720178424}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +93,18 @@ Global
 		{BE9BD3D2-E1E9-4482-9668-A38339D2DA69}.Release|x64.Build.0 = Release|Any CPU
 		{BE9BD3D2-E1E9-4482-9668-A38339D2DA69}.Release|x86.ActiveCfg = Release|Any CPU
 		{BE9BD3D2-E1E9-4482-9668-A38339D2DA69}.Release|x86.Build.0 = Release|Any CPU
+		{33105E99-30F8-4DAF-B334-46F720178424}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33105E99-30F8-4DAF-B334-46F720178424}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33105E99-30F8-4DAF-B334-46F720178424}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{33105E99-30F8-4DAF-B334-46F720178424}.Debug|x64.Build.0 = Debug|Any CPU
+		{33105E99-30F8-4DAF-B334-46F720178424}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{33105E99-30F8-4DAF-B334-46F720178424}.Debug|x86.Build.0 = Debug|Any CPU
+		{33105E99-30F8-4DAF-B334-46F720178424}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33105E99-30F8-4DAF-B334-46F720178424}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33105E99-30F8-4DAF-B334-46F720178424}.Release|x64.ActiveCfg = Release|Any CPU
+		{33105E99-30F8-4DAF-B334-46F720178424}.Release|x64.Build.0 = Release|Any CPU
+		{33105E99-30F8-4DAF-B334-46F720178424}.Release|x86.ActiveCfg = Release|Any CPU
+		{33105E99-30F8-4DAF-B334-46F720178424}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,5 +115,6 @@ Global
 		{D29E1E77-D8E9-4D12-97EB-454C029EBA7F} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 		{06DBE2B3-E87C-45AD-B2EB-6B7C67DD4F0B} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{BE9BD3D2-E1E9-4482-9668-A38339D2DA69} = {1860D2E4-5C43-71D5-59A5-599A4DE1DF67}
+		{33105E99-30F8-4DAF-B334-46F720178424} = {07C2787E-EAC7-C090-1BA3-A61EC2A24D84}
 	EndGlobalSection
 EndGlobal

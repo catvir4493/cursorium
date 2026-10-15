@@ -1,4 +1,4 @@
-param([ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.5.2',[string]$ReportPath='artifacts/release-assets-verification.json')
+param([ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.6.0',[string]$ReportPath='artifacts/release-assets-verification.json')
 $ErrorActionPreference='Stop';$taskRoot=Split-Path -Parent $PSScriptRoot;Set-Location -LiteralPath $taskRoot
 $taskStarted=[DateTimeOffset]::UtcNow;$taskCommit=(git rev-parse HEAD).Trim();if($LASTEXITCODE -ne 0){throw 'Git revision is unavailable'}
 if(git status --porcelain --untracked-files=no){throw 'Commit tracked changes before verifying release/source identity'}
@@ -7,8 +7,16 @@ $taskProduct=[Diagnostics.FileVersionInfo]::GetVersionInfo((Join-Path $taskPorta
 if($taskProduct -ne "$Version+$taskCommit"){throw 'Portable build does not belong to the current version and commit; rebuild after committing.'}
 $taskManifest=Get-Content -LiteralPath (Join-Path $taskPortable 'distribution-manifest.json') -Raw|ConvertFrom-Json
 if($taskManifest.schemaVersion -ne 1 -or $taskManifest.version -ne $Version){throw 'Distribution manifest version is invalid'}
+if($taskManifest.channel -ne 'Community' -or $taskManifest.programUpdateOwner -ne 'ManualCommunityInstaller' -or $taskManifest.steamIntegrated -or $taskManifest.cloudIntegrated){throw 'GitHub installer releases require a Community channel payload, never experimental Steam bytes'}
+foreach($notice in @('LICENSE','THIRD-PARTY-NOTICES.md','licenses/dotnet-runtime-LICENSE.TXT','licenses/dotnet-runtime-THIRD-PARTY-NOTICES.TXT','licenses/windowsdesktop-LICENSE.txt','licenses/dotnet-apphost-LICENSE.TXT','licenses/dotnet-apphost-THIRD-PARTY-NOTICES.TXT')){if(-not(Test-Path -LiteralPath (Join-Path $taskPortable $notice))){throw 'Required distributed license/NOTICE is missing'}}
 $taskRuntime=Get-Content -LiteralPath (Join-Path $taskPortable 'FrostWhiteComet.runtimeconfig.json') -Raw|ConvertFrom-Json
 if($taskRuntime.runtimeOptions.tfm -ne 'net10.0' -or @($taskRuntime.runtimeOptions.includedFrameworks).Count -ne 2 -or @($taskRuntime.runtimeOptions.includedFrameworks|Where-Object {$_.name -notin @('Microsoft.NETCore.App','Microsoft.WindowsDesktop.App') -or $_.version -ne '10.0.13'}).Count){throw 'Portable application must retain the verified .NET 10.0.13 self-contained desktop runtime'}
+$taskProbe=Join-Path $taskRoot ('artifacts/release-channel-probe-'+[guid]::NewGuid().ToString('N'))
+$taskStart=[Diagnostics.ProcessStartInfo]::new((Join-Path $taskPortable 'FrostWhiteComet.exe'));$taskStart.UseShellExecute=$false;$taskStart.CreateNoWindow=$true
+foreach($arg in @('--foundation-probe','--isolated-test','--test-data-root',$taskProbe)){$taskStart.ArgumentList.Add($arg)}
+$taskProcess=[Diagnostics.Process]::Start($taskStart);if(-not $taskProcess.WaitForExit(30000)-or $taskProcess.ExitCode -ne 0){throw 'Built channel metadata probe failed'}
+$taskIdentity=Get-Content -LiteralPath (Join-Path $taskProbe 'foundation-probe.json') -Raw|ConvertFrom-Json
+if($taskIdentity.channel -ne 'Community' -or $taskIdentity.steamIntegrated -or $taskIdentity.cloudIntegrated -or -not $taskIdentity.liveNativeWrites){throw 'Actual executable is not a Community channel build'}
 function Hash-Stream([IO.Stream]$Stream){$algorithm=[Security.Cryptography.SHA256]::Create();try{return [BitConverter]::ToString($algorithm.ComputeHash($Stream)).Replace('-','')}finally{$algorithm.Dispose()}}
 function Hash-GitBlob([IO.Stream]$Stream,[long]$Length,[string]$Format){
  $algorithm=if($Format -eq 'sha1'){[Security.Cryptography.SHA1]::Create()}elseif($Format -eq 'sha256'){[Security.Cryptography.SHA256]::Create()}else{throw 'Unsupported Git object hash format'}
@@ -35,7 +43,7 @@ try{
 $taskSource=[IO.Compression.ZipFile]::OpenRead((Join-Path $taskRoot "artifacts/CURSORIUM-Source-$Version.zip"));$taskSourceChecks=0
 try{
  $objectFormat=(git rev-parse --show-object-format).Trim();if($LASTEXITCODE -ne 0){throw 'Git object format is unavailable'}
- $tracked=@(git -c core.quotepath=false ls-tree -r HEAD -- src tools tests installer scripts assets docs Directory.Build.props Frost.sln README.md VALIDATION.md LICENSE AGENTS.md .gitignore .gitattributes)
+ $tracked=@(git -c core.quotepath=false ls-tree -r HEAD -- src tools tests installer scripts assets docs Directory.Build.props Frost.sln README.md VALIDATION.md LICENSE THIRD-PARTY-NOTICES.md AGENTS.md .gitignore .gitattributes)
  if($LASTEXITCODE -ne 0){throw 'Committed source listing failed'}
  $expected=@{};foreach($file in $tracked){if($file -notmatch '^(100644|100755) blob ([A-Fa-f0-9]+)\t(.+)$'){throw 'Only regular committed files belong in source delivery'};$expected[$Matches[3]]=$Matches[2]};$seen=@{}
  if(@($taskSource.Entries|Where-Object {-not $_.FullName.EndsWith('/')} ).Count -ne $expected.Count){throw 'Source ZIP must contain exactly the committed delivery sources'}

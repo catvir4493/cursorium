@@ -1,0 +1,35 @@
+[
+  {
+    "privatePayloadOnly": false,
+    "liveNativeWrites": false,
+    "bundledCuteThemes": 5,
+    "channel": "Development",
+    "compiledProbePassed": true,
+    "steamIntegrated": false,
+    "dataRootTemplate": "%LOCALAPPDATA%/CURSORIUM/Development",
+    "updateOwner": "Developer",
+    "steamAppId": null
+  },
+  {
+    "privatePayloadOnly": false,
+    "liveNativeWrites": true,
+    "bundledCuteThemes": 5,
+    "channel": "Community",
+    "compiledProbePassed": true,
+    "steamIntegrated": false,
+    "dataRootTemplate": "%LOCALAPPDATA%/FrostWhiteComet",
+    "updateOwner": "ManualCommunityInstaller",
+    "steamAppId": null
+  },
+  {
+    "privatePayloadOnly": true,
+    "liveNativeWrites": false,
+    "bundledCuteThemes": 0,
+    "channel": "Steam",
+    "compiledProbePassed": true,
+    "steamIntegrated": false,
+    "dataRootTemplate": "%LOCALAPPDATA%/CURSORIUM/Steam",
+    "updateOwner": "SteamPipePlanned",
+    "steamAppId": null
+  }
+]

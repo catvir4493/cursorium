@@ -1,1 +1,5 @@
-<Project><PropertyGroup><TargetFramework>net10.0-windows</TargetFramework><Nullable>enable</Nullable><ImplicitUsings>disable</ImplicitUsings><EnableWindowsTargeting>true</EnableWindowsTargeting><LangVersion>12</LangVersion><Deterministic>true</Deterministic><RuntimeFrameworkVersion Condition="'$(SelfContained)'=='true'">10.0.13</RuntimeFrameworkVersion></PropertyGroup></Project>
+<Project>
+  <PropertyGroup><TargetFramework>net10.0-windows</TargetFramework><Nullable>enable</Nullable><ImplicitUsings>disable</ImplicitUsings><EnableWindowsTargeting>true</EnableWindowsTargeting><LangVersion>12</LangVersion><Deterministic>true</Deterministic><RuntimeFrameworkVersion Condition="'$(SelfContained)'=='true'">10.0.13</RuntimeFrameworkVersion><CursoriumChannel Condition="'$(CursoriumChannel)'==''">Development</CursoriumChannel></PropertyGroup>
+  <ItemGroup><AssemblyMetadata Include="Cursorium.Channel" Value="$(CursoriumChannel)"/></ItemGroup>
+  <Target Name="ValidateCursoriumChannel" BeforeTargets="PrepareForBuild"><Error Condition="'$(CursoriumChannel)'!='Development' and '$(CursoriumChannel)'!='Community' and '$(CursoriumChannel)'!='Steam'" Text="Unsupported CURSORIUM distribution channel."/></Target>
+</Project>

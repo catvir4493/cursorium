@@ -54,6 +54,7 @@ public sealed class DownloadManager
 {
     private readonly OfficialHttp http;
     private readonly ThemeCatalog themes;
+    public RemoteRightsService Rights {get;}
     private readonly SynchronizationContext? ownerContext=SynchronizationContext.Current;
     private readonly object sync=new();
     private readonly HashSet<string> active=new(StringComparer.Ordinal);
@@ -62,7 +63,7 @@ public sealed class DownloadManager
     public List<string> Warnings {get;}=new();
     public DownloadManager(OfficialHttp http,ThemeCatalog themes)
     {
-        this.http=http;this.themes=themes;GuardRoot(Storage.Root);var root=Path.Combine(Storage.Root,"Online","Staging");GuardRoot(root);Directory.CreateDirectory(root);
+        this.http=http;this.themes=themes;Rights=new(http);GuardRoot(Storage.Root);var root=Path.Combine(Storage.Root,"Online","Staging");GuardRoot(root);Directory.CreateDirectory(root);
         using var process=System.Diagnostics.Process.GetCurrentProcess();StagingRoot=Path.Combine(root,$"session-{process.Id}-{process.StartTime.ToUniversalTime().Ticks}");
         foreach(var directory in Directory.EnumerateDirectories(root))
         {
@@ -94,6 +95,7 @@ public sealed class DownloadManager
     }
     public async Task<VerifiedResourcePack> FetchPreviewAsync(RemoteResource resource,IProgress<DownloadProgress>? progress,CancellationToken cancellation)
     {
+        await Rights.DemandAsync(resource,cancellation).ConfigureAwait(false);
         resource.CheckCompatibility();GuardRoot(StagingRoot);Directory.CreateDirectory(StagingRoot);var archive=Path.Combine(StagingRoot,"download-"+Guid.NewGuid().ToString("N")+".zip");
         try
         {
@@ -110,6 +112,7 @@ public sealed class DownloadManager
     }
     public async Task InstallAsync(RemoteResource resource,IProgress<DownloadProgress>? progress,CancellationToken cancellation)
     {
+        await Rights.DemandAsync(resource,cancellation).ConfigureAwait(false);
         resource.CheckCompatibility();cancellation.ThrowIfCancellationRequested();
         if(State(resource)=="ID conflict")throw new InvalidOperationException("This resource ID belongs to a different local theme. Nothing was overwritten.");
         var existingTheme=resource.Type=="cursor"?themes.Themes.FirstOrDefault(t=>t.Id==resource.Id):null;

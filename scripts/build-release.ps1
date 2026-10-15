@@ -1,11 +1,11 @@
-param([switch]$SkipVerification,[ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.5.2')
+param([switch]$SkipVerification,[ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version='1.6.0')
 $ErrorActionPreference = 'Stop'
 $frostRoot = Split-Path -Parent $PSScriptRoot
 Set-Location -LiteralPath $frostRoot
 function Invoke-Dotnet { param([string[]]$Arguments) & dotnet @Arguments; if ($LASTEXITCODE -ne 0) { throw "dotnet failed: $Arguments" } }
 Invoke-Dotnet @('run','--project','tools/Frost.CursorGen','-c','Release','--','assets/cursors')
 Invoke-Dotnet @('run','--project','tools/Frost.CursorGen','-c','Release','--','assets/themes/obsidian','--obsidian')
-Invoke-Dotnet @('build','Frost.sln','-c','Release','--no-incremental',"-p:Version=$Version")
+Invoke-Dotnet @('build','Frost.sln','-c','Release','--no-incremental',"-p:Version=$Version",'-p:CursoriumChannel=Community')
 if (-not $SkipVerification) {
     Invoke-Dotnet @('run','--project','tests/Frost.Verify','-c','Release','--','assets/cursors')
     Invoke-Dotnet @('run','--project','tests/Frost.Verify','-c','Release','--','assets/themes/obsidian')
@@ -23,7 +23,7 @@ foreach($taskOutputName in @('portable','setup')){
   Remove-Item -LiteralPath $taskOutput -Recurse -Force
  }
 }
-Invoke-Dotnet @('publish','src/Frost.App','-c','Release','-r','win-x64','--self-contained','true','-p:PublishSingleFile=false',"-p:Version=$Version",'-o','artifacts/cursorium-release/portable')
+& (Join-Path $PSScriptRoot 'build-channel.ps1') -Channel Community -Version $Version -OutputDirectory artifacts/cursorium-release/portable
 if ((Get-ChildItem -LiteralPath 'artifacts/cursorium-release/portable/Theme' -Filter '*.cur').Count -ne 15 -or (Get-ChildItem -LiteralPath 'artifacts/cursorium-release/portable/Themes/obsidian' -Filter '*.cur').Count -ne 15 -or -not (Test-Path -LiteralPath 'artifacts/cursorium-release/portable/Catalog/effects.json')) { throw 'Published CURSORIUM theme/effect resources are incomplete.' }
 $cursoriumCute=@(Get-ChildItem -LiteralPath 'artifacts/cursorium-release/portable/Themes' -Directory | Where-Object {$_.Name -like 'cute-*'})
 if($cursoriumCute.Count -ne 5){throw 'Published Cute Collection requires five real themes.'}
@@ -34,13 +34,10 @@ foreach($cursoriumTheme in $cursoriumCute){
         if((Get-FileHash -LiteralPath (Join-Path $cursoriumTheme.FullName $cursoriumSource.Path)).Hash -ne $cursoriumSource.Sha256){throw 'Published Cute source checksum mismatch.'}
     }
 }
-Copy-Item -LiteralPath 'README.md','LICENSE','VALIDATION.md' -Destination 'artifacts/cursorium-release/portable'
-Copy-Item -LiteralPath 'docs' -Destination 'artifacts/cursorium-release/portable' -Recurse -Force
 $taskPortable=[IO.Path]::GetFullPath((Join-Path $frostRoot 'artifacts/cursorium-release/portable'))
-@{schemaVersion=1;version=$Version;runtime='net10.0-windows / 10.0.13';entryPoint='FrostWhiteComet.exe';userData='%LOCALAPPDATA%/FrostWhiteComet';files=@(Get-ChildItem -LiteralPath $taskPortable -Recurse -File | ForEach-Object {@{path=$_.FullName.Substring($taskPortable.Length+1).Replace('\','/');size=$_.Length;sha256=(Get-FileHash -LiteralPath $_.FullName).Hash}})} | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath (Join-Path $taskPortable 'distribution-manifest.json') -Encoding utf8
 Compress-Archive -Path 'artifacts/cursorium-release/portable/*' -DestinationPath "artifacts/CURSORIUM-$Version-win-x64.zip" -Force
 Copy-Item -LiteralPath "artifacts/CURSORIUM-$Version-win-x64.zip" -Destination 'artifacts/installer-payload.zip' -Force
-Invoke-Dotnet @('publish','installer/Frost.Setup','-c','Release','-r','win-x64','--self-contained','true','-p:PublishSingleFile=true','-p:IncludeNativeLibrariesForSelfExtract=true','-p:EnableCompressionInSingleFile=true',"-p:Version=$Version",'-o','artifacts/cursorium-release/setup')
+Invoke-Dotnet @('publish','installer/Frost.Setup','-c','Release','-r','win-x64','--self-contained','true','-p:PublishSingleFile=true','-p:IncludeNativeLibrariesForSelfExtract=true','-p:EnableCompressionInSingleFile=true',"-p:Version=$Version",'-p:CursoriumChannel=Community','-o','artifacts/cursorium-release/setup')
 Copy-Item -LiteralPath 'artifacts/cursorium-release/setup/FrostWhiteCometSetup.exe' -Destination "artifacts/CURSORIUM-Setup-$Version-Release.exe" -Force
 Compress-Archive -Path 'assets/cursors','assets/themes','assets/catalog' -DestinationPath "artifacts/CURSORIUM-Themes-$Version.zip" -Force
 & (Join-Path $PSScriptRoot 'package-source.ps1') -Version $Version

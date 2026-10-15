@@ -1,0 +1,763 @@
+{
+  "passed": true,
+  "started": "2026-10-15T10:23:21.7861739+00:00",
+  "ended": "2026-10-15T10:23:24.3783808+00:00",
+  "checks": [
+    {
+      "name": "Actual retained Catalog v1 still has 29 identities",
+      "passed": true
+    },
+    {
+      "name": "Signed v2 sidecar covers 29 online and six additional bundled identities",
+      "passed": true
+    },
+    {
+      "name": "Only fourteen original MIT online presets enter Steam whitelist",
+      "passed": true
+    },
+    {
+      "name": "All fifteen third-party cursor packages remain Needs Review",
+      "passed": true
+    },
+    {
+      "name": "Tampered rights bytes rejected by production RSA-PSS verifier",
+      "passed": true
+    },
+    {
+      "name": "Forged signature rejected",
+      "passed": true
+    },
+    {
+      "name": "Unsigned base catalog cannot authorize rights",
+      "passed": true
+    },
+    {
+      "name": "Sidecar bound to another catalog rejected",
+      "passed": true
+    },
+    {
+      "name": "Duplicate resource-version rights rejected",
+      "passed": true
+    },
+    {
+      "name": "Package hash identity mismatch rejected",
+      "passed": true
+    },
+    {
+      "name": "Needs Review cannot be declared Steam distributable",
+      "passed": true
+    },
+    {
+      "name": "Approval without traceable license evidence rejected",
+      "passed": true
+    },
+    {
+      "name": "Non-HTTPS license provenance rejected",
+      "passed": true
+    },
+    {
+      "name": "Unknown sidecar schema rejected",
+      "passed": true
+    },
+    {
+      "name": "Steam denies acquisition without verified rights",
+      "passed": true
+    },
+    {
+      "name": "Steam denies uncleared third-party package",
+      "passed": true
+    },
+    {
+      "name": "Original signed MIT preset allowed for Steam acquisition",
+      "passed": true
+    },
+    {
+      "name": "Old Community v1 acquisition remains compatible when v2 is unavailable",
+      "passed": true
+    },
+    {
+      "name": "Withdrawal blocks new Community acquisition without deleting installed data",
+      "passed": true
+    },
+    {
+      "name": "v2 path whitelist admits no executable path",
+      "passed": true
+    },
+    {
+      "name": "Only explicit official v2 rights endpoint admitted",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: cute-bunny-cute-kawaii",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: cute-bunny-cute-kawaii",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: cute-bunny-cute-kawaii",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: cute-cool-cat",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: cute-cool-cat",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: cute-cool-cat",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: cool-cat-superstar",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: cool-cat-superstar",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: cool-cat-superstar",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: cute-kawaii-cat-curs0rs",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: cute-kawaii-cat-curs0rs",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: cute-kawaii-cat-curs0rs",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: cute-kawaii-pink-heart",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: cute-kawaii-pink-heart",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: cute-kawaii-pink-heart",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: cute-pastel",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: cute-pastel",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: cute-pastel",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: neon-blue",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: neon-blue",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: neon-blue",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: sakura-pink",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: sakura-pink",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: sakura-pink",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: aurora-flow",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: aurora-flow",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: aurora-flow",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: golden-spark",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: golden-spark",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: golden-spark",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: basic-vlazteron",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: basic-vlazteron",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: basic-vlazteron",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: dot-minimal",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: dot-minimal",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: dot-minimal",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: golden-mhmd",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: golden-mhmd",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: golden-mhmd",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: amber-rose",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: amber-rose",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: amber-rose",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: brown-cow",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: brown-cow",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: brown-cow",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: little-chicken",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: little-chicken",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: little-chicken",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: discrete-vlasta",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: discrete-vlasta",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: discrete-vlasta",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: lovely-sunshine",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: lovely-sunshine",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: lovely-sunshine",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: simple-dot-star",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: simple-dot-star",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: simple-dot-star",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: sakura-blossom",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: sakura-blossom",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: sakura-blossom",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: ice-crystal",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: ice-crystal",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: ice-crystal",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: lavender-dream",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: lavender-dream",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: lavender-dream",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: emerald-stream",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: emerald-stream",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: emerald-stream",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: sunset-glow",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: sunset-glow",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: sunset-glow",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: cyber-pulse",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: cyber-pulse",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: cyber-pulse",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: moonlight",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: moonlight",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: moonlight",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: stardust-pink",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: stardust-pink",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: stardust-pink",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: ocean-mist",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: ocean-mist",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: ocean-mist",
+      "passed": true
+    },
+    {
+      "name": "Real package hash/size matches signed catalog: amber-whisper",
+      "passed": true
+    },
+    {
+      "name": "Actual NOTICE matches signed rights evidence: amber-whisper",
+      "passed": true
+    },
+    {
+      "name": "Production bounded pack/CUR/ANI/preset validation: amber-whisper",
+      "passed": true
+    },
+    {
+      "name": "Concurrent rights refresh coalesces one four-file verification",
+      "passed": true
+    },
+    {
+      "name": "Offline restart verifies the signed rights and base catalog cache",
+      "passed": true
+    },
+    {
+      "name": "Synthetic newer in-memory revision rejects signed lower revision without replacing cache",
+      "passed": true
+    },
+    {
+      "name": "Unknown cache schema preserved on startup and refresh",
+      "passed": true
+    },
+    {
+      "name": "Community keeps original data root",
+      "passed": true
+    },
+    {
+      "name": "Steam has independent writable data root",
+      "passed": true
+    },
+    {
+      "name": "Unvalidated Steam and non-isolated Development cannot change Windows cursors",
+      "passed": true
+    },
+    {
+      "name": "Community native behavior retained",
+      "passed": true
+    },
+    {
+      "name": "Ambiguous/unknown channel rejected",
+      "passed": true
+    },
+    {
+      "name": "Legacy process and transaction lock identities retained exactly",
+      "passed": true
+    },
+    {
+      "name": "Isolated data cannot overlap live Development",
+      "passed": true
+    },
+    {
+      "name": "Isolated data cannot overlap live Community",
+      "passed": true
+    },
+    {
+      "name": "Isolated data cannot overlap live Steam",
+      "passed": true
+    },
+    {
+      "name": "Private resource refs excluded; offline/uninstalled official favorites retained",
+      "passed": true
+    },
+    {
+      "name": "Portable DTO excludes machine, registry, backup and file-path state",
+      "passed": true
+    },
+    {
+      "name": "Portable preview restores visuals with local machine defaults, without Apply",
+      "passed": true
+    },
+    {
+      "name": "Missing resource stays unresolved, never silently substituted",
+      "passed": true
+    },
+    {
+      "name": "Missing pinned immutable version stays unresolved",
+      "passed": true
+    },
+    {
+      "name": "Portable export retains the pinned old version rather than mislabeling it with the current theme version",
+      "passed": true
+    },
+    {
+      "name": "Duplicate/case-folded schema properties rejected",
+      "passed": true
+    },
+    {
+      "name": "Newer portable schema rejected",
+      "passed": true
+    },
+    {
+      "name": "Unknown native-state field cannot enter portable data",
+      "passed": true
+    },
+    {
+      "name": "Oversized portable document rejected",
+      "passed": true
+    },
+    {
+      "name": "Unversioned portable document is not silently treated as current data",
+      "passed": true
+    },
+    {
+      "name": "Path-like portable names rejected",
+      "passed": true
+    },
+    {
+      "name": "Non-finite cloud candidate parameter rejected",
+      "passed": true
+    },
+    {
+      "name": "Portable data cannot add executable renderers",
+      "passed": true
+    },
+    {
+      "name": "Actual isolated copy preserves profile IDs, original JSON bytes, backup and stable cursor bytes",
+      "passed": true
+    },
+    {
+      "name": "Repeated migration cannot overwrite existing receipt or target",
+      "passed": true
+    },
+    {
+      "name": "Modified migrated data blocks rollback replacement",
+      "passed": true
+    },
+    {
+      "name": "Rollback retains both source and audited prepared copy",
+      "passed": true
+    },
+    {
+      "name": "Cancelled copy cleans uncommitted staging",
+      "passed": true
+    },
+    {
+      "name": "Cancelled migration has no exposed partial target",
+      "passed": true
+    },
+    {
+      "name": "Newer case-insensitive legacy schema blocks migration before commit",
+      "passed": true
+    },
+    {
+      "name": "Pending native journal blocks copy without attempting recovery",
+      "passed": true
+    },
+    {
+      "name": "All foundation tests leave actual Windows cursor values and types unchanged",
+      "passed": true
+    }
+  ],
+  "packages": [
+    {
+      "id": "cute-bunny-cute-kawaii",
+      "sha256": "5b91eb342537bca782d99ed634fd40925155ad6d25f5d414e6392fbf74f810b7",
+      "type": "cursor",
+      "commercial": "Needs Review"
+    },
+    {
+      "id": "cute-cool-cat",
+      "sha256": "f83777fbea02f46e90dc5c5f630b8130d1fa9d247cd3394a9bcfdb9d466cc5cb",
+      "type": "cursor",
+      "commercial": "Needs Review"
+    },
+    {
+      "id": "cool-cat-superstar",
+      "sha256": "07facb74c2e8e35cac8309d8a3f64bf5f87fbf0fb05ccfb85b8ba67c2ea29795",
+      "type": "cursor",
+      "commercial": "Needs Review"
+    },
+    {
+      "id": "cute-kawaii-cat-curs0rs",
+      "sha256": "c0afa04473f93e9f200b7c6b619eda59b1c129d1a795579d4524e86cd317ba28",
+      "type": "cursor",
+      "commercial": "Needs Review"
+    },
+    {
+      "id": "cute-kawaii-pink-heart",
+      "sha256": "39d5ace0ea309e64472174b28bfb17574ed00d1cc3c6ea7279a0dec74912e76a",
+      "type": "cursor",
+      "commercial": "Needs Review"
+    },
+    {
+      "id": "cute-pastel",
+      "sha256": "11de2b0a2653c24ff1610161367294a227f57f4514b60559e26ddd3074d9e3bc",
+      "type": "cursor",
+      "commercial": "Needs Review"
+    },
+    {
+      "id": "neon-blue",
+      "sha256": "35320c1274668f72f772af5d60fe973048042051713af9ed0afa67d623098bf2",
+      "type": "trail",
+      "commercial": "Approved"
+    },
+    {
+      "id": "sakura-pink",
+      "sha256": "85ec0e81e591dc38aa4fccf71811362ab6c467a22567eb2499b37e734e326ab1",
+      "type": "trail",
+      "commercial": "Approved"
+    },
+    {
+      "id": "aurora-flow",
+      "sha256": "67738c30d34a5ca023fe7854e6a05b3e1ea3827d723a6aba960668ad37c2f47b",
+      "type": "trail",
+      "commercial": "Approved"
+    },
+    {
+      "id": "golden-spark",
+      "sha256": "44ae1bde808f9df09f5d49af7e63692c0abd3a7e73eef16122e925b133b984c5",
+      "type": "trail",
+      "commercial": "Approved"
+    },
+    {
+      "id": "basic-vlazteron",
+      "sha256": "6fc170c870183609c8c0f1ea74cba5de73143da75dda8feeff7df9fdc13bceee",
+      "type": "cursor",
+      "commercial": "Needs Review"
+    },
+    {
+      "id": "dot-minimal",
+      "sha256": "9fe2e3b78aa12082948bb8bdac52aebf2cc083e482637734b7327392c276b3a3",
+      "type": "cursor",
+      "commercial": "Needs Review"
+    },
+    {
+      "id": "golden-mhmd",
+      "sha256": "4d376a0abdfc24588b280011a43dd49bb5901d889b373c96029de76e987b6d19",
+      "type": "cursor",
+      "commercial": "Needs Review"
+    },
+    {
+      "id": "amber-rose",
+      "sha256": "a6275e5b23a3a5d07de517b89b1321a0337d93741cd2988e5c8a1b02b45d3353",
+      "type": "cursor",
+      "commercial": "Needs Review"
+    },
+    {
+      "id": "brown-cow",
+      "sha256": "372a20beecc179c1b243f3f95109c850bfb65ebe8a40c5f3fef0f997567ed7e1",
+      "type": "cursor",
+      "commercial": "Needs Review"
+    },
+    {
+      "id": "little-chicken",
+      "sha256": "b7a8f5eb6580adf8c4dd8ffa1570a7b2a38f096220847f39e130873824424be9",
+      "type": "cursor",
+      "commercial": "Needs Review"
+    },
+    {
+      "id": "discrete-vlasta",
+      "sha256": "887abc33293c37ea00c7cae6ba0bb51aa141e4cb81503f1f5461b7b73a1e1927",
+      "type": "cursor",
+      "commercial": "Needs Review"
+    },
+    {
+      "id": "lovely-sunshine",
+      "sha256": "170854cb38ec6fd31fcc03b60087aba79a400f05421d5364aea0271d3070696b",
+      "type": "cursor",
+      "commercial": "Needs Review"
+    },
+    {
+      "id": "simple-dot-star",
+      "sha256": "085005a598259af1e8796d8c88914ba7528abca3eb4e1195aaef0d3321cc39b9",
+      "type": "cursor",
+      "commercial": "Needs Review"
+    },
+    {
+      "id": "sakura-blossom",
+      "sha256": "515f3c1619bde282ce1d3b5fe5b8c15551090710b701ddbb1535f80b0d81ee28",
+      "type": "trail",
+      "commercial": "Approved"
+    },
+    {
+      "id": "ice-crystal",
+      "sha256": "55474046429fbeb8302aab8f0d8aa13686a3adb29cc86a6f82fc2af126499a35",
+      "type": "trail",
+      "commercial": "Approved"
+    },
+    {
+      "id": "lavender-dream",
+      "sha256": "5e0d65e4bbf2d3807ad2cdf72dccc70ec7692bb37eb421194c358b7713d41441",
+      "type": "trail",
+      "commercial": "Approved"
+    },
+    {
+      "id": "emerald-stream",
+      "sha256": "3e4d02bc71915a714ded4dd358246558261399f9139b6c5c7a824458c6021533",
+      "type": "trail",
+      "commercial": "Approved"
+    },
+    {
+      "id": "sunset-glow",
+      "sha256": "159340482ebcb192bfcae44b38859d8006b394ebd48b88d4ab2d0a05906b29d3",
+      "type": "trail",
+      "commercial": "Approved"
+    },
+    {
+      "id": "cyber-pulse",
+      "sha256": "12b118046bc38c00f7b2a6cf221e55fa12dcc3e458c6832fbdb522e3eb2affb8",
+      "type": "trail",
+      "commercial": "Approved"
+    },
+    {
+      "id": "moonlight",
+      "sha256": "f44293296ee4ca840ca0edf73f2eeaebdb15e3d115f7512a82a49b3fa9df987e",
+      "type": "trail",
+      "commercial": "Approved"
+    },
+    {
+      "id": "stardust-pink",
+      "sha256": "cbb8d28227fe7c86d50c1ea30ac002eb620f17e56ffab440a9bb48a84e53d9f8",
+      "type": "trail",
+      "commercial": "Approved"
+    },
+    {
+      "id": "ocean-mist",
+      "sha256": "59858329c178edd2844c2fa4b9d9319ca209c4dba3d27c8726dbbde311cc2d1b",
+      "type": "trail",
+      "commercial": "Approved"
+    },
+    {
+      "id": "amber-whisper",
+      "sha256": "2b697649debf8601e40875a4370cec74abba1db40b462dd0efdd8bbedaeb6595",
+      "type": "trail",
+      "commercial": "Approved"
+    }
+  ],
+  "scope": "Actual Windows filesystem, pinned RSA-PSS, bounded native CUR/ANI loading and controlled HTTP fixtures. Synthetic review/cache/portable/migration cases are labeled; no input injection, Apply, live migration, Steam SDK or Cloud upload.",
+  "runtime": ".NET 10.0.13 self-contained",
+  "coreSHA256": "4201f3473a8cffc50671d1d268814095cd7c93bcc080cc68f6ee22f8145a523f",
+  "coreMatchesCandidate": true
+}

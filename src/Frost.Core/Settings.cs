@@ -65,9 +65,10 @@ public sealed class Settings
 public static class StartupRegistration
 {
     private const string KeyPath=@"Software\Microsoft\Windows\CurrentVersion\Run",Name="FrostWhiteComet";
-    public static bool Enabled{get{using var key=Registry.CurrentUser.OpenSubKey(KeyPath);return key?.GetValue(Name)!=null;}}
+    public static bool Enabled{get{if(!DistributionProfile.Current.UsesCommunityInstaller)return false;using var key=Registry.CurrentUser.OpenSubKey(KeyPath);return key?.GetValue(Name)!=null;}}
     public static void Set(bool enabled,string executable)
     {
+        if(!DistributionProfile.Current.UsesCommunityInstaller)throw new InvalidOperationException("Login startup registration is not enabled for this distribution channel.");
         using var key=Registry.CurrentUser.CreateSubKey(KeyPath);
         if(enabled)key.SetValue(Name,$"\"{executable}\" --tray",RegistryValueKind.String);else key.DeleteValue(Name,false);
     }

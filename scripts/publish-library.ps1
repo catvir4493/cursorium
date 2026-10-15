@@ -1,7 +1,31 @@
-param([string]$LibraryPath='D:\codex-workspaces\cursorium-library',[string]$ExportPath,[string]$Version='1.0.0',[switch]$Prepared,[string]$PreviousCatalog,[switch]$Resume,[switch]$MetadataOnly)
+param([string]$LibraryPath='D:\codex-workspaces\cursorium-library',[string]$ExportPath,[string]$Version='1.0.0',[switch]$Prepared,[string]$PreviousCatalog,[switch]$Resume,[switch]$MetadataOnly,[switch]$RightsOnly)
 $ErrorActionPreference='Stop'
 $projectRoot=Split-Path -Parent $PSScriptRoot
 if(-not $ExportPath){$ExportPath=Join-Path $projectRoot 'artifacts/library-export'}
+if($RightsOnly){
+ if((git -C $LibraryPath status --porcelain)-or (git -C $LibraryPath remote get-url origin).Trim() -ne 'https://github.com/catvir4493/cursorium-library.git'){throw 'A clean reviewed official library checkout is required'}
+ $receipt=Join-Path $projectRoot ('artifacts/rights-publication-'+[guid]::NewGuid().ToString('N'))
+ & dotnet run --project (Join-Path $projectRoot 'tools/Frost.Foundation') -c Release -p:CursoriumChannel=Development -- verify-rights (Join-Path $receipt 'local') ([IO.Path]::GetFullPath($ExportPath));if($LASTEXITCODE -ne 0){throw 'Rights preflight failed; nothing published'}
+ $verified=Get-Content -LiteralPath (Join-Path $receipt 'local/rights-report.json') -Raw|ConvertFrom-Json;if($verified.Version -ne $Version){throw 'Rights revision mismatch'}
+ foreach($name in @('rights.json','rights.json.sig')){if((Get-FileHash -LiteralPath (Join-Path $ExportPath $name)).Hash -ne (Get-FileHash -LiteralPath (Join-Path $LibraryPath ('catalog/v2/'+$name))).Hash){throw 'Staged and committed rights bytes differ'}}
+ $remote=(git -C $LibraryPath ls-remote origin refs/heads/main) -split '\s+';if($LASTEXITCODE -ne 0){throw 'Live library main unavailable'}
+ & git -C $LibraryPath merge-base --is-ancestor $remote[0] HEAD;if($LASTEXITCODE -ne 0){throw 'Library update must fast-forward published main'}
+ $changes=@(git -C $LibraryPath diff --name-only $remote[0] HEAD);if($changes|Where-Object {$_ -notmatch '^(catalog/v2/|reviews/commercial-v2/|README\.md$|SOURCES\.md$)'}){throw 'Rights-only publication must not change v1 catalogs, collections, packages or covers'}
+ & git -C $LibraryPath cat-file -e ($remote[0]+':catalog/v2/rights.json') 2>$null
+ if($LASTEXITCODE -eq 0){$old=git -C $LibraryPath show ($remote[0]+':catalog/v2/rights.json')|ConvertFrom-Json;if([version]$Version -lt [version]$old.Version -or ([version]$Version -eq [version]$old.Version -and (-not $Resume -or $remote[0] -ne (git -C $LibraryPath rev-parse HEAD).Trim()))){throw 'Use a new rights revision; published revision cannot be replaced. Resume only the identical pushed commit.'}}
+ & dotnet run --project (Join-Path $projectRoot 'tools/Frost.Foundation') -c Release -p:CursoriumChannel=Development -- verify-base-network (Join-Path $receipt 'before') ([IO.Path]::GetFullPath($ExportPath));if($LASTEXITCODE -ne 0){throw 'Public signed v1 base changed; no promotion performed'}
+ & git -C $LibraryPath push origin HEAD:refs/heads/main;if($LASTEXITCODE -ne 0){throw 'Rights push failed; no force retry'}
+ $commit=(git -C $LibraryPath rev-parse HEAD).Trim();$remote=(git -C $LibraryPath ls-remote origin refs/heads/main)-split '\s+';if($remote[0] -ne $commit){throw 'Live rights commit differs'}
+ $published=$false
+ for($attempt=0;$attempt -lt 12;$attempt++){
+  & dotnet run --project (Join-Path $projectRoot 'tools/Frost.Foundation') -c Release -p:CursoriumChannel=Development -- verify-rights-network (Join-Path $receipt ('public-'+$attempt)) $Version
+  if($LASTEXITCODE -eq 0){$network=Get-Content -LiteralPath (Join-Path $receipt ('public-'+$attempt+'/rights-network-report.json')) -Raw|ConvertFrom-Json;if($network.sha256 -ne (Get-FileHash -LiteralPath (Join-Path $ExportPath 'rights.json')).Hash){throw 'Public metadata bytes differ'};$published=$true;break};Start-Sleep -Seconds 5
+ }
+ if(-not $published){throw 'Git commit pushed but Pages verification pending; do not claim public endpoint success'}
+ & dotnet run --project (Join-Path $projectRoot 'tools/Frost.Foundation') -c Release -p:CursoriumChannel=Development -- verify-base-network (Join-Path $receipt 'after') ([IO.Path]::GetFullPath($ExportPath));if($LASTEXITCODE -ne 0){throw 'Post-publication v1 compatibility verification failed'}
+ @{passed=$true;commit=$commit;rightsVersion=$Version;v1Unchanged=$true;packagesChanged=0;network=$network}|ConvertTo-Json -Depth 6|Set-Content -LiteralPath (Join-Path $receipt 'publication.json') -Encoding utf8
+ Write-Host "Signed rights sidecar published and publicly verified; v1 resources/collections unchanged: $commit";return
+}
 $catalogFile=Join-Path $ExportPath 'catalog/v1/index.json'
 $catalog=Get-Content -LiteralPath $catalogFile -Raw | ConvertFrom-Json
 if($catalog.SchemaVersion -ne 1 -or $catalog.CatalogVersion -ne $Version){throw 'Catalog version mismatch.'}

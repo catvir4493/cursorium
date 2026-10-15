@@ -402,3 +402,30 @@ post-publication SHA256 verification through the existing publisher.
 Native ThemeService/StudioService, cursor transactions, profiles, signed catalog,
 safe download/import, visual algorithms and user-data schemas retain the v1.5.1
 implementation. Diagnostic tools/trace and user backups are outside release payloads.
+
+## v1.6 — commercial foundation (Preview)
+
+DistributionProfile derives its channel from compiled AssemblyMetadata. Community
+keeps the original writable data path and manual installer; Development/Steam use
+separate roots. No mutable file switches a running binary's channel. The shared
+legacy process/transaction identities remain deliberate compatibility constraints.
+Steam is only an experimental local payload, without an AppID/SDK/SteamPipe/Cloud;
+native writes remain blocked until real recovery handover is validated. The build
+script prepares bytes; the publisher verifies them and pushes, without building.
+
+LibraryRights adds a separately signed schema-2 sidecar bound to exact signed v1
+bytes and per-resource ID/version/author/package hashes. It reuses OfficialHttp,
+the pinned RSA-PSS verifier and the existing library publication entry. Community
+v1 compatibility remains; Steam acquisition is fail-closed on current clearance.
+Withdrawal affects new acquisition only, never native-file deletion. Full supplier
+notices now accompany exact self-contained runtime/apphost components.
+
+IdentityMigration is a bounded, explicitly marked filesystem laboratory copy with
+checksummed receipts and non-destructive rollback; it has no production bootstrap
+hook or registry writer. PortableWorkspace is an independent allowlist DTO, not a
+serialization of Settings/StudioState. It excludes native backups, private files,
+paths, machine preferences and caches. Missing pins remain unresolved drafts.
+Frost.Foundation provides actual signing/verification, channel, migration and local
+portable commands. No new UI framework, renderer algorithm or executable resource
+plugin is introduced. See docs/commercial and CURSORIUM-v1.6-DELIVERY.md for real
+results, unfinished rights decisions and remaining Steam/performance gates.

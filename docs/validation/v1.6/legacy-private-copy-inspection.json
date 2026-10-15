@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "profiles": 1,
+  "backupExists": true,
+  "backupSchemaCompatible": true,
+  "availableOriginalRoleFiles": 15,
+  "nativeRestorePerformed": false,
+  "productionMigrationPerformed": false,
+  "runtime": ".NET 10.0.13"
+}
