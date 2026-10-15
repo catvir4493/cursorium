@@ -2,6 +2,8 @@
 
 日期：2026-10-15，基线 `7ed2719` / v1.5.2 Preview，.NET 10.0.13 / WPF / Win32。独立分支 `codex/commercial-v1.6` 与独立工作树执行；生产 D:\CURSORIUM 仍为 v1.5.1。本轮没有恢复自动鼠标/键盘输入，没有覆盖生产安装或真实数据，也没有执行 Windows Apply/Restore。只允许 Preview，不能标 Stable 或 Steam Ready。
 
+发布后附记：用户已恢复自动输入授权，并完成28轮历史补测；48组各3轮的合并结构门槛通过，完整性能验收仍Pending。详见[后续补测与保护报告](validation/v1.6/input-resumed/README.md)。下文“暂停”描述为本次Preview发布时的历史状态，未重写旧tag/Release。
+
 ## 实施结果
 
 |任务|已实现|边界|

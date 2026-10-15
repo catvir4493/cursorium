@@ -1,0 +1,21 @@
+{
+  "at": "2026-10-15T13:22:19.5274309+00:00",
+  "checks": [
+    {
+      "inputFailures": 0,
+      "seconds": 5.0030573,
+      "observedMoves": 398,
+      "name": "positive",
+      "observedClicks": 80,
+      "passed": true
+    },
+    {
+      "inputFailures": 0,
+      "seconds": 1.7236268,
+      "observedMoves": 137,
+      "name": "close-cancels",
+      "observedClicks": 28,
+      "passed": true
+    }
+  ]
+}

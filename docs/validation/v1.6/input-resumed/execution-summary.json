@@ -1,0 +1,75 @@
+{
+  "scope": "User reauthorized automated input after the v1.6.0 Preview publication. Historical version repair only, not current v1.6 performance acceptance.",
+  "started": "2026-10-15T13:22:36.9353+00:00",
+  "ended": "2026-10-15T13:35:11.6147766+00:00",
+  "elapsedSeconds": 754.679476,
+  "newTrials": 28,
+  "newGroups": 22,
+  "newExcluded": 0,
+  "newStableSamples": 560,
+  "warmupSeconds": 5,
+  "stableSecondsPerTrial": 20,
+  "newTargets": [
+    {
+      "applicationSHA256": "AF2E40C9E217E137DDAB73617861490CB5AA1453647C17E152E561BED4E6CBC4",
+      "id": "v1.4.0",
+      "version": "1.4.0+6886ea6f406894f7869977d4eaf476dcdcfa9641",
+      "coreSHA256": "BAE254676510F8DC56956F18DAAAEF91991A56B7A1BC4F0B0E704A3F1E52B264",
+      "hostSHA256": "7B6569CBC9E5A27D8C385F84DDA0C662B103CE8F71465A48B9F624B1C46C2725"
+    },
+    {
+      "applicationSHA256": "981A66BEB8089F08A2E12A4D7379408E2A12A2A93C42643D0B444B754E15983E",
+      "id": "v1.5.0",
+      "version": "1.5.0+c59bd2602bdbd8d90c12bec501c8519c852c85ce",
+      "coreSHA256": "D43D73092CD7EBBC71C803FE0701F3896DC18AC8F4350465FC092C6C433910C4",
+      "hostSHA256": "6251413D340FFE61EE21E8928E413749C314B2C6455FE7BBDA6D7669C2CD2551"
+    },
+    {
+      "applicationSHA256": "B38D9FE4895F37CA29113A394A7D6B86A78F84B05471F43642F1065F071DA306",
+      "id": "v1.5.1",
+      "version": "1.5.1+8da97e5db8b12c63567112a210c7da490e4386f6",
+      "coreSHA256": "641C08477BDE78D28EA3C6957CD5FFC69805B2AFDA3233CB2FC073C228490DEC",
+      "hostSHA256": "6251413D340FFE61EE21E8928E413749C314B2C6455FE7BBDA6D7669C2CD2551"
+    },
+    {
+      "applicationSHA256": "35CE6EFFAB3C64C265A6EFA68A942B52E957F8A5F7C7E15C1B0E22192CC6FC6E",
+      "id": "v1.5.2",
+      "version": "1.5.2+8da97e5db8b12c63567112a210c7da490e4386f6",
+      "coreSHA256": "61D7834EBB55131426EDE7A7C14FD769A3692F48F55653A224F53A25BF0EEB78",
+      "hostSHA256": "6251413D340FFE61EE21E8928E413749C314B2C6455FE7BBDA6D7669C2CD2551"
+    }
+  ],
+  "driverSHA256": "6251413D340FFE61EE21E8928E413749C314B2C6455FE7BBDA6D7669C2CD2551",
+  "repairPlanSHA256": "222584336D116EE36C8E200728A872630FE4F8AE34EDA995DE3C9A5A167FFE05",
+  "combinedRawTrials": 172,
+  "combinedAcceptedTrials": 144,
+  "combinedExcludedTrials": 28,
+  "combinedGroups": 48,
+  "combinedGroupsBelowThreeRounds": 0,
+  "structuralCompleteGatePassed": true,
+  "performanceAcceptancePassed": false,
+  "historicalPartialSupplementIncluded": false,
+  "input": "SetPhysicalCursorPos in separate process; not physical HID/natural input",
+  "engineModified": false,
+  "productionInstallationModified": false,
+  "nativeThemeApplied": false,
+  "protocolTestsPassed": 17,
+  "comparabilityLimit": "Old primary trials and the new repair batch span separate sessions with different host/driver revisions. Exact application/Core hashes are unchanged. Combined completeness verifies counts and protocol, not equal environmental conditions or JIT/native CPU causation.",
+  "commands": [
+    "scripts/measure-performance.ps1 -TargetsPath artifacts/input-resume/targets.json -ReportDirectory artifacts/input-resume/repair-observations -Rounds 3 -Seconds 20 -WarmupSeconds 5 -Modes <repair-plan modes> -RepairPlanPath artifacts/input-resume/repair-plan.json",
+    "python -B scripts/summarize-performance.py artifacts/input-resume/repair-observations --output artifacts/input-resume/new-batch-summary.json",
+    "python -B scripts/summarize-performance.py <retained-primary> --additional-directory artifacts/input-resume/repair-observations --exclude-before 2026-10-14T20:38:47.9Z --require-complete --output artifacts/input-resume/combined-protocol-complete.json",
+    "python -B -m unittest discover -s tests -p test_performance_summary.py",
+    "scripts/verify-stability-protection.ps1 -BaselineDirectory artifacts/input-resume-baseline -ReportDirectory artifacts/input-resume/protection"
+  ],
+  "pending": [
+    "Unified fresh same-host performance matrix",
+    "Natural physical input comparison",
+    "Native CPU profiling",
+    "Full WPF/native desktop regression",
+    "Windows 10",
+    "Physical dual display/mixed DPI",
+    "24h/72h",
+    "Current v1.6 full performance acceptance"
+  ]
+}

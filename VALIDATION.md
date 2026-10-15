@@ -1,6 +1,11 @@
 # v1.6.0 Commercial Foundation & Library Architecture — Preview, 2026-10-15
 
-Automatic input remains paused; no live deployment, Windows Apply or Restore.
+Automatic input was paused at the v1.6 release cutoff. The user later reauthorized it;
+28 historical repair trials now completed with no new exclusions. See the
+[post-release input verification](docs/validation/v1.6/input-resumed/README.md).
+Combined historical counts reach 48 groups x 3 accepted rounds, but different host
+revisions/sessions do not prove a fresh controlled performance pass.
+No live deployment, Windows Apply or Restore.
 Development/Community/Steam compiled identities and non-window probes passed.
 Steam is an experimental local payload with no AppID/SDK/SteamPipe/Cloud and native
 writes disabled; uncleared Cute files are absent. Community retains five bundles.
@@ -21,7 +26,7 @@ endpoint, commit 5a62639. Existing v1 catalog, six collections and all 29 packag
 identities/hashes remain unchanged. Fourteen original MIT online presets qualify
 for the content whitelist; fifteen third-party cursor packages remain Needs Review.
 
-Full WPF/native safety, incomplete performance matrix/natural input/native CPU,
+Full WPF/native safety, a fresh same-host performance matrix/natural input/native CPU,
 Windows 10, physical dual/mixed DPI and 24/72h remain Pending, not waived or replaced
 by test counts. Steam integration, live identity migration/backup handover, Cloud
 transport/conflicts and remaining commercial rights are additional blockers.

@@ -1,0 +1,6846 @@
+{
+  "schemaVersion": 1,
+  "executionCompleted": true,
+  "started": "2026-10-15T13:22:36.9353+00:00",
+  "ended": "2026-10-15T13:35:11.6147766+00:00",
+  "requestedRounds": 3,
+  "stableSecondsPerTrial": 20,
+  "warmupSeconds": 5,
+  "excludedBefore": null,
+  "insufficientGroups": [
+    {
+      "mode": "comet",
+      "target": "v1.4.0",
+      "acceptedRounds": 1
+    },
+    {
+      "mode": "comet",
+      "target": "v1.5.0",
+      "acceptedRounds": 1
+    },
+    {
+      "mode": "comet",
+      "target": "v1.5.1",
+      "acceptedRounds": 2
+    },
+    {
+      "mode": "comet",
+      "target": "v1.5.2",
+      "acceptedRounds": 1
+    },
+    {
+      "mode": "disabled",
+      "target": "v1.4.0",
+      "acceptedRounds": 1
+    },
+    {
+      "mode": "disabled",
+      "target": "v1.5.0",
+      "acceptedRounds": 1
+    },
+    {
+      "mode": "disabled",
+      "target": "v1.5.1",
+      "acceptedRounds": 1
+    },
+    {
+      "mode": "disabled",
+      "target": "v1.5.2",
+      "acceptedRounds": 1
+    },
+    {
+      "mode": "harness-timer8",
+      "target": "v1.4.0",
+      "acceptedRounds": 1
+    },
+    {
+      "mode": "harness-timer8",
+      "target": "v1.5.0",
+      "acceptedRounds": 0
+    },
+    {
+      "mode": "harness-timer8",
+      "target": "v1.5.1",
+      "acceptedRounds": 0
+    },
+    {
+      "mode": "harness-timer8",
+      "target": "v1.5.2",
+      "acceptedRounds": 0
+    },
+    {
+      "mode": "idle",
+      "target": "v1.4.0",
+      "acceptedRounds": 1
+    },
+    {
+      "mode": "idle",
+      "target": "v1.5.0",
+      "acceptedRounds": 2
+    },
+    {
+      "mode": "idle",
+      "target": "v1.5.1",
+      "acceptedRounds": 2
+    },
+    {
+      "mode": "idle",
+      "target": "v1.5.2",
+      "acceptedRounds": 1
+    },
+    {
+      "mode": "minimal",
+      "target": "v1.4.0",
+      "acceptedRounds": 2
+    },
+    {
+      "mode": "minimal",
+      "target": "v1.5.0",
+      "acceptedRounds": 1
+    },
+    {
+      "mode": "minimal",
+      "target": "v1.5.1",
+      "acceptedRounds": 2
+    },
+    {
+      "mode": "minimal",
+      "target": "v1.5.2",
+      "acceptedRounds": 2
+    },
+    {
+      "mode": "neon",
+      "target": "v1.4.0",
+      "acceptedRounds": 1
+    },
+    {
+      "mode": "neon",
+      "target": "v1.5.0",
+      "acceptedRounds": 1
+    },
+    {
+      "mode": "neon",
+      "target": "v1.5.1",
+      "acceptedRounds": 1
+    },
+    {
+      "mode": "neon",
+      "target": "v1.5.2",
+      "acceptedRounds": 1
+    },
+    {
+      "mode": "stardust",
+      "target": "v1.4.0",
+      "acceptedRounds": 0
+    },
+    {
+      "mode": "stardust",
+      "target": "v1.5.0",
+      "acceptedRounds": 1
+    },
+    {
+      "mode": "stardust",
+      "target": "v1.5.1",
+      "acceptedRounds": 0
+    },
+    {
+      "mode": "stardust",
+      "target": "v1.5.2",
+      "acceptedRounds": 0
+    }
+  ],
+  "excludedRuns": [],
+  "measurements": [
+    {
+      "mode": "comet",
+      "target": "v1.4.0",
+      "completedRounds": 1,
+      "stableObservations": 20,
+      "applicationSHA256": [
+        "AF2E40C9E217E137DDAB73617861490CB5AA1453647C17E152E561BED4E6CBC4"
+      ],
+      "roundCpuMeans": [
+        6.227669103747345
+      ],
+      "roundCpuMeanDistribution": {
+        "count": 1,
+        "median": 6.227669103747345,
+        "p95": 6.227669103747345,
+        "mean": 6.227669103747345,
+        "minimum": 6.227669103747345,
+        "maximum": 6.227669103747345
+      },
+      "observations": {
+        "cpuOneCorePercent": {
+          "count": 20,
+          "median": 7.002963556753281,
+          "p95": 12.446084279099011,
+          "mean": 6.227669103747345,
+          "minimum": 0,
+          "maximum": 12.463002331279375
+        },
+        "cpuMachinePercent": {
+          "count": 20,
+          "median": 0.25010584131261715,
+          "p95": 0.4445030099678219,
+          "mean": 0.22241675370526232,
+          "minimum": 0,
+          "maximum": 0.44510722611712056
+        },
+        "machineBusyPercent": {
+          "count": 20,
+          "median": 3.5408810351335918,
+          "p95": 8.599256720339016,
+          "mean": 4.430613666953899,
+          "minimum": 2.013808975834297,
+          "maximum": 8.612716763005778
+        },
+        "workingSet": {
+          "count": 20,
+          "median": 200798208.0,
+          "p95": 205292748.8,
+          "mean": 200773836.8,
+          "minimum": 195244032,
+          "maximum": 205705216
+        },
+        "privateBytes": {
+          "count": 20,
+          "median": 168773632.0,
+          "p95": 197691392.0,
+          "mean": 169813811.2,
+          "minimum": 145022976,
+          "maximum": 200687616
+        },
+        "gdi": {
+          "count": 20,
+          "median": 166.0,
+          "p95": 166.0,
+          "mean": 166,
+          "minimum": 166,
+          "maximum": 166
+        },
+        "user": {
+          "count": 20,
+          "median": 82.0,
+          "p95": 82.0,
+          "mean": 81.85,
+          "minimum": 81,
+          "maximum": 82
+        },
+        "threads": {
+          "count": 20,
+          "median": 24.0,
+          "p95": 24.0,
+          "mean": 23.7,
+          "minimum": 23,
+          "maximum": 24
+        },
+        "allocatedBytesPerSecond": {
+          "count": 20,
+          "median": 398044.4814730161,
+          "p95": 430842.49202759186,
+          "mean": 384344.98519785306,
+          "minimum": 317303.28866822465,
+          "maximum": 432277.06215333677
+        },
+        "samplerHz": {
+          "count": 20,
+          "median": 52.82382600059872,
+          "p95": 55.822150123563674,
+          "mean": 52.860844305821146,
+          "minimum": 47.76951210409776,
+          "maximum": 56.82758510678594
+        },
+        "renderHz": {
+          "count": 20,
+          "median": 52.81452354301689,
+          "p95": 54.80972438193235,
+          "mean": 51.41603444497173,
+          "minimum": 43.80867873821443,
+          "maximum": 55.77628133556305
+        },
+        "paintHz": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        },
+        "paintWindowMeanMs": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        }
+      },
+      "warmupObservations": {
+        "cpuOneCorePercent": {
+          "count": 5,
+          "median": 10.89961185921618,
+          "p95": 30.432457965738106,
+          "mean": 16.771924687442255,
+          "minimum": 4.665509587112104,
+          "maximum": 31.069619112319607
+        },
+        "cpuMachinePercent": {
+          "count": 5,
+          "median": 0.38927185211486354,
+          "p95": 1.0868734987763609,
+          "mean": 0.5989973102657948,
+          "minimum": 0.16662534239686083,
+          "maximum": 1.1096292540114145
+        },
+        "machineBusyPercent": {
+          "count": 5,
+          "median": 4.429301533219765,
+          "p95": 6.940778610677278,
+          "mean": 4.528953665136111,
+          "minimum": 2.0396912899669273,
+          "maximum": 7.206208425720617
+        },
+        "workingSet": {
+          "count": 5,
+          "median": 202899456.0,
+          "p95": 203882496.0,
+          "mean": 199715225.6,
+          "minimum": 191062016,
+          "maximum": 204005376
+        },
+        "privateBytes": {
+          "count": 5,
+          "median": 139804672.0,
+          "p95": 143987507.2,
+          "mean": 139607244.8,
+          "minimum": 133779456,
+          "maximum": 144572416
+        },
+        "gdi": {
+          "count": 5,
+          "median": 166.0,
+          "p95": 166.0,
+          "mean": 166,
+          "minimum": 166,
+          "maximum": 166
+        },
+        "user": {
+          "count": 5,
+          "median": 81.0,
+          "p95": 81.8,
+          "mean": 81.2,
+          "minimum": 81,
+          "maximum": 82
+        },
+        "threads": {
+          "count": 5,
+          "median": 24.0,
+          "p95": 24.0,
+          "mean": 24,
+          "minimum": 24,
+          "maximum": 24
+        },
+        "allocatedBytesPerSecond": {
+          "count": 5,
+          "median": 440816.7501934022,
+          "p95": 490773.1365107175,
+          "mean": 426375.93676176766,
+          "minimum": 347314.4151185235,
+          "maximum": 500486.93813124613
+        },
+        "samplerHz": {
+          "count": 5,
+          "median": 53.68830182608828,
+          "p95": 57.1442195885149,
+          "mean": 53.71705243315269,
+          "minimum": 48.822656582230714,
+          "maximum": 57.72790529120043
+        },
+        "renderHz": {
+          "count": 5,
+          "median": 52.69407401449405,
+          "p95": 53.593920598411955,
+          "mean": 47.169050795231556,
+          "minimum": 26.768460844235612,
+          "maximum": 53.804560315111395
+        },
+        "paintHz": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        },
+        "paintWindowMeanMs": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        }
+      },
+      "roundResourceChanges": [
+        {
+          "workingSet": 614400,
+          "privateBytes": 55427072,
+          "gdi": 0,
+          "user": 0,
+          "threads": -1
+        }
+      ],
+      "initialPanelsCreated": [
+        true
+      ],
+      "interventions": [
+        "none"
+      ],
+      "managedMainEpochExplicit": true,
+      "gcCollections": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "driverOneCoreCPU": {
+        "count": 1,
+        "median": 1.9831262370068405,
+        "p95": 1.9831262370068405,
+        "mean": 1.9831262370068405,
+        "minimum": 1.9831262370068405,
+        "maximum": 1.9831262370068405
+      },
+      "controllerOneCoreCPU": {
+        "count": 1,
+        "median": 2.8493326664194614,
+        "p95": 2.8493326664194614,
+        "mean": 2.8493326664194614,
+        "minimum": 2.8493326664194614,
+        "maximum": 2.8493326664194614
+      },
+      "inputConditions": [
+        {
+          "input": "SetPhysicalCursorPos",
+          "events": 1658,
+          "observedClicks": 0,
+          "observedMoves": 1660,
+          "seconds": 26.0006048
+        }
+      ],
+      "markers": {
+        "mainAssemblyLoadedMs": {
+          "count": 1,
+          "median": 43.6763,
+          "p95": 43.6763,
+          "mean": 43.6763,
+          "minimum": 43.6763,
+          "maximum": 43.6763
+        },
+        "trayShellRectangleAvailableMs": {
+          "count": 1,
+          "median": 2121.8603,
+          "p95": 2121.8603,
+          "mean": 2121.8603,
+          "minimum": 2121.8603,
+          "maximum": 2121.8603
+        },
+        "trayStartupReturnedMs": {
+          "count": 1,
+          "median": 2119.5904,
+          "p95": 2119.5904,
+          "mean": 2119.5904,
+          "minimum": 2119.5904,
+          "maximum": 2119.5904
+        }
+      }
+    },
+    {
+      "mode": "comet",
+      "target": "v1.5.0",
+      "completedRounds": 1,
+      "stableObservations": 20,
+      "applicationSHA256": [
+        "981A66BEB8089F08A2E12A4D7379408E2A12A2A93C42643D0B444B754E15983E"
+      ],
+      "roundCpuMeans": [
+        5.837522851912964
+      ],
+      "roundCpuMeanDistribution": {
+        "count": 1,
+        "median": 5.837522851912964,
+        "p95": 5.837522851912964,
+        "mean": 5.837522851912964,
+        "minimum": 5.837522851912964,
+        "maximum": 5.837522851912964
+      },
+      "observations": {
+        "cpuOneCorePercent": {
+          "count": 20,
+          "median": 5.450434227840853,
+          "p95": 11.212198839500688,
+          "mean": 5.837522851912964,
+          "minimum": 0,
+          "maximum": 17.107900361199416
+        },
+        "cpuMachinePercent": {
+          "count": 20,
+          "median": 0.1946583652800305,
+          "p95": 0.40043567283931036,
+          "mean": 0.20848295899689157,
+          "minimum": 0,
+          "maximum": 0.6109964414714077
+        },
+        "machineBusyPercent": {
+          "count": 20,
+          "median": 3.918609303956755,
+          "p95": 5.940562699169397,
+          "mean": 3.8619120300708314,
+          "minimum": 1.2806236080178168,
+          "maximum": 6.6147859922178975
+        },
+        "workingSet": {
+          "count": 20,
+          "median": 168828928.0,
+          "p95": 173788774.4,
+          "mean": 169148211.2,
+          "minimum": 163831808,
+          "maximum": 174403584
+        },
+        "privateBytes": {
+          "count": 20,
+          "median": 146956288.0,
+          "p95": 177087283.2,
+          "mean": 149081088,
+          "minimum": 125038592,
+          "maximum": 181071872
+        },
+        "gdi": {
+          "count": 20,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 20,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 22.55,
+          "minimum": 21,
+          "maximum": 23
+        },
+        "threads": {
+          "count": 20,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 20,
+          "median": 362261.3060322599,
+          "p95": 424909.24769129744,
+          "mean": 369282.67855028115,
+          "minimum": 315289.236021497,
+          "maximum": 447124.0789641864
+        },
+        "samplerHz": {
+          "count": 20,
+          "median": 52.75325722151551,
+          "p95": 57.865269184312474,
+          "mean": 53.14925200173695,
+          "minimum": 47.83148966192116,
+          "maximum": 59.79398580132022
+        },
+        "renderHz": {
+          "count": 20,
+          "median": 51.80723905108293,
+          "p95": 54.802195822278904,
+          "mean": 51.256275961624624,
+          "minimum": 44.84202155805109,
+          "maximum": 55.78789998305447
+        },
+        "paintHz": {
+          "count": 20,
+          "median": 51.80723905108293,
+          "p95": 54.802195822278904,
+          "mean": 51.256275961624624,
+          "minimum": 44.84202155805109,
+          "maximum": 55.78789998305447
+        },
+        "paintWindowMeanMs": {
+          "count": 20,
+          "median": 0.011720157874470543,
+          "p95": 0.01556377922077922,
+          "mean": 0.012377994343199155,
+          "minimum": 0.010451923076923077,
+          "maximum": 0.01584285714285714
+        }
+      },
+      "warmupObservations": {
+        "cpuOneCorePercent": {
+          "count": 5,
+          "median": 24.920744556088277,
+          "p95": 29.87098668345397,
+          "mean": 18.904254271903092,
+          "minimum": 4.6718069333302505,
+          "maximum": 30.735418404447223
+        },
+        "cpuMachinePercent": {
+          "count": 5,
+          "median": 0.890026591288867,
+          "p95": 1.066820952980499,
+          "mean": 0.6751519382822533,
+          "minimum": 0.16685024761893752,
+          "maximum": 1.0976935144445437
+        },
+        "machineBusyPercent": {
+          "count": 5,
+          "median": 4.703247480403139,
+          "p95": 8.095167485544183,
+          "mean": 5.494738785725987,
+          "minimum": 3.370165745856357,
+          "maximum": 8.557323093801427
+        },
+        "workingSet": {
+          "count": 5,
+          "median": 172064768.0,
+          "p95": 172590694.4,
+          "mean": 168597913.6,
+          "minimum": 161435648,
+          "maximum": 172683264
+        },
+        "privateBytes": {
+          "count": 5,
+          "median": 121069568.0,
+          "p95": 122924236.8,
+          "mean": 121364480,
+          "minimum": 120090624,
+          "maximum": 123265024
+        },
+        "gdi": {
+          "count": 5,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 5,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 21.8,
+          "minimum": 21,
+          "maximum": 22
+        },
+        "threads": {
+          "count": 5,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 5,
+          "median": 388771.0779811168,
+          "p95": 448152.7577577973,
+          "mean": 396634.70873733325,
+          "minimum": 354217.4821415453,
+          "maximum": 462681.7555448206
+        },
+        "samplerHz": {
+          "count": 5,
+          "median": 50.71345881500346,
+          "p95": 51.83330125741294,
+          "mean": 50.469521969880645,
+          "minimum": 48.796421330210336,
+          "maximum": 51.835148676663614
+        },
+        "renderHz": {
+          "count": 5,
+          "median": 51.70784036039569,
+          "p95": 53.81817619223221,
+          "mean": 48.126218217989894,
+          "minimum": 30.489535057211647,
+          "maximum": 53.828808241150675
+        },
+        "paintHz": {
+          "count": 5,
+          "median": 51.70784036039569,
+          "p95": 53.81817619223221,
+          "mean": 48.32292489577836,
+          "minimum": 31.473068446153956,
+          "maximum": 53.828808241150675
+        },
+        "paintWindowMeanMs": {
+          "count": 5,
+          "median": 0.013625925925925927,
+          "p95": 0.05342961538461538,
+          "mean": 0.024724599044746103,
+          "minimum": 0.012962962962962963,
+          "maximum": 0.0611125
+        }
+      },
+      "roundResourceChanges": [
+        {
+          "workingSet": 589824,
+          "privateBytes": 56033280,
+          "gdi": 0,
+          "user": 1,
+          "threads": 0
+        }
+      ],
+      "initialPanelsCreated": [
+        false
+      ],
+      "interventions": [
+        "none"
+      ],
+      "managedMainEpochExplicit": true,
+      "gcCollections": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "driverOneCoreCPU": {
+        "count": 1,
+        "median": 1.5022757598113712,
+        "p95": 1.5022757598113712,
+        "mean": 1.5022757598113712,
+        "minimum": 1.5022757598113712,
+        "maximum": 1.5022757598113712
+      },
+      "controllerOneCoreCPU": {
+        "count": 1,
+        "median": 1.5176570710546435,
+        "p95": 1.5176570710546435,
+        "mean": 1.5176570710546435,
+        "minimum": 1.5176570710546435,
+        "maximum": 1.5176570710546435
+      },
+      "inputConditions": [
+        {
+          "input": "SetPhysicalCursorPos",
+          "events": 1659,
+          "observedClicks": 0,
+          "observedMoves": 1661,
+          "seconds": 26.002202
+        }
+      ],
+      "markers": {
+        "mainAssemblyLoadedMs": {
+          "count": 1,
+          "median": 119.2349,
+          "p95": 119.2349,
+          "mean": 119.2349,
+          "minimum": 119.2349,
+          "maximum": 119.2349
+        },
+        "trayShellRectangleAvailableMs": {
+          "count": 1,
+          "median": 1884.2305,
+          "p95": 1884.2305,
+          "mean": 1884.2305,
+          "minimum": 1884.2305,
+          "maximum": 1884.2305
+        },
+        "trayStartupReturnedMs": {
+          "count": 1,
+          "median": 1883.4532,
+          "p95": 1883.4532,
+          "mean": 1883.4532,
+          "minimum": 1883.4532,
+          "maximum": 1883.4532
+        }
+      }
+    },
+    {
+      "mode": "comet",
+      "target": "v1.5.1",
+      "completedRounds": 2,
+      "stableObservations": 40,
+      "applicationSHA256": [
+        "B38D9FE4895F37CA29113A394A7D6B86A78F84B05471F43642F1065F071DA306"
+      ],
+      "roundCpuMeans": [
+        4.827878680128258,
+        5.994104208058702
+      ],
+      "roundCpuMeanDistribution": {
+        "count": 2,
+        "median": 5.410991444093479,
+        "p95": 5.93579293166218,
+        "mean": 5.410991444093479,
+        "minimum": 4.827878680128258,
+        "maximum": 5.994104208058702
+      },
+      "observations": {
+        "cpuOneCorePercent": {
+          "count": 40,
+          "median": 4.672915687212592,
+          "p95": 12.439928565894592,
+          "mean": 5.41099144409348,
+          "minimum": 0,
+          "maximum": 12.468170008784602
+        },
+        "cpuMachinePercent": {
+          "count": 40,
+          "median": 0.16688984597187828,
+          "p95": 0.4442831630676639,
+          "mean": 0.19324969443190998,
+          "minimum": 0,
+          "maximum": 0.4452917860280215
+        },
+        "machineBusyPercent": {
+          "count": 40,
+          "median": 3.50402436613797,
+          "p95": 7.313317667138516,
+          "mean": 3.7478399950644645,
+          "minimum": 1.2861736334405127,
+          "maximum": 8.333333333333337
+        },
+        "workingSet": {
+          "count": 40,
+          "median": 168564736.0,
+          "p95": 174512128.0,
+          "mean": 168582041.6,
+          "minimum": 162172928,
+          "maximum": 175628288
+        },
+        "privateBytes": {
+          "count": 40,
+          "median": 147605504.0,
+          "p95": 176406528.0,
+          "mean": 148148940.8,
+          "minimum": 121032704,
+          "maximum": 180514816
+        },
+        "gdi": {
+          "count": 40,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 40,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 22.825,
+          "minimum": 22,
+          "maximum": 23
+        },
+        "threads": {
+          "count": 40,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 40,
+          "median": 376471.46476119116,
+          "p95": 423229.2012495056,
+          "mean": 375786.8966110626,
+          "minimum": 302180.9279194844,
+          "maximum": 430441.3173594815
+        },
+        "samplerHz": {
+          "count": 40,
+          "median": 52.81081349468027,
+          "p95": 56.928871728363355,
+          "mean": 52.872148947543096,
+          "minimum": 46.86501002512353,
+          "maximum": 57.815009314695786
+        },
+        "renderHz": {
+          "count": 40,
+          "median": 52.79506014039379,
+          "p95": 53.87608627442356,
+          "mean": 51.25216339334742,
+          "minimum": 41.84562312715928,
+          "maximum": 54.825769188097105
+        },
+        "paintHz": {
+          "count": 40,
+          "median": 52.79506014039379,
+          "p95": 53.87608627442356,
+          "mean": 51.25216339334742,
+          "minimum": 41.84562312715928,
+          "maximum": 54.825769188097105
+        },
+        "paintWindowMeanMs": {
+          "count": 40,
+          "median": 0.012288679245283018,
+          "p95": 0.015395780445969124,
+          "mean": 0.01263133794991234,
+          "minimum": 0.010633333333333335,
+          "maximum": 0.01658703703703704
+        }
+      },
+      "warmupObservations": {
+        "cpuOneCorePercent": {
+          "count": 10,
+          "median": 14.787225199953355,
+          "p95": 32.77657321454444,
+          "mean": 16.170267544680325,
+          "minimum": 3.1128322500179055,
+          "maximum": 34.17143053686275
+        },
+        "cpuMachinePercent": {
+          "count": 10,
+          "median": 0.5281151857126198,
+          "p95": 1.1705919005194443,
+          "mean": 0.5775095551671544,
+          "minimum": 0.11117258035778235,
+          "maximum": 1.220408233459384
+        },
+        "machineBusyPercent": {
+          "count": 10,
+          "median": 5.617936457137118,
+          "p95": 14.872024111767173,
+          "mean": 6.807874113732737,
+          "minimum": 2.4636058230683044,
+          "maximum": 19.269102990033225
+        },
+        "workingSet": {
+          "count": 10,
+          "median": 169467904.0,
+          "p95": 173779763.2,
+          "mean": 167765196.8,
+          "minimum": 158535680,
+          "maximum": 174063616
+        },
+        "privateBytes": {
+          "count": 10,
+          "median": 121821184.0,
+          "p95": 126921113.6,
+          "mean": 122305331.2,
+          "minimum": 116772864,
+          "maximum": 126980096
+        },
+        "gdi": {
+          "count": 10,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 10,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 21.8,
+          "minimum": 21,
+          "maximum": 22
+        },
+        "threads": {
+          "count": 10,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 10,
+          "median": 396624.30207487266,
+          "p95": 494743.07473272964,
+          "mean": 401815.5976853693,
+          "minimum": 323503.4070823624,
+          "maximum": 505772.1532274673
+        },
+        "samplerHz": {
+          "count": 10,
+          "median": 52.75772442231023,
+          "p95": 56.807383702107025,
+          "mean": 51.878502285998465,
+          "minimum": 42.83169286289526,
+          "maximum": 56.83137562538192
+        },
+        "renderHz": {
+          "count": 10,
+          "median": 53.260506631007615,
+          "p95": 54.900300498320206,
+          "mean": 47.10163792229313,
+          "minimum": 21.913889371713854,
+          "maximum": 55.781953920320866
+        },
+        "paintHz": {
+          "count": 10,
+          "median": 53.260506631007615,
+          "p95": 54.900300498320206,
+          "mean": 47.30065430827179,
+          "minimum": 22.9099752522463,
+          "maximum": 55.781953920320866
+        },
+        "paintWindowMeanMs": {
+          "count": 10,
+          "median": 0.018126851851851852,
+          "p95": 0.06451523411371238,
+          "mean": 0.02677859629620448,
+          "minimum": 0.010497916666666668,
+          "maximum": 0.06535217391304349
+        }
+      },
+      "roundResourceChanges": [
+        {
+          "workingSet": 122880,
+          "privateBytes": 54960128,
+          "gdi": 0,
+          "user": 1,
+          "threads": 0
+        },
+        {
+          "workingSet": 974848,
+          "privateBytes": 50745344,
+          "gdi": 0,
+          "user": 1,
+          "threads": 0
+        }
+      ],
+      "initialPanelsCreated": [
+        false,
+        false
+      ],
+      "interventions": [
+        "none"
+      ],
+      "managedMainEpochExplicit": true,
+      "gcCollections": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "driverOneCoreCPU": {
+        "count": 2,
+        "median": 0.9012665197601293,
+        "p95": 1.0636150431428124,
+        "mean": 0.9012665197601293,
+        "minimum": 0.7208792715571478,
+        "maximum": 1.0816537679631106
+      },
+      "controllerOneCoreCPU": {
+        "count": 2,
+        "median": 0.3276156762400562,
+        "p95": 0.5189593604786036,
+        "mean": 0.3276156762400562,
+        "minimum": 0.11501158264167023,
+        "maximum": 0.5402197698384422
+      },
+      "inputConditions": [
+        {
+          "input": "SetPhysicalCursorPos",
+          "events": 1661,
+          "observedClicks": 0,
+          "observedMoves": 1663,
+          "seconds": 26.0098929
+        },
+        {
+          "input": "SetPhysicalCursorPos",
+          "events": 1656,
+          "observedClicks": 0,
+          "observedMoves": 1659,
+          "seconds": 26.0018408
+        }
+      ],
+      "markers": {
+        "mainAssemblyLoadedMs": {
+          "count": 2,
+          "median": 72.51835,
+          "p95": 99.994855,
+          "mean": 72.51835,
+          "minimum": 41.9889,
+          "maximum": 103.0478
+        },
+        "trayShellRectangleAvailableMs": {
+          "count": 2,
+          "median": 1238.8074000000001,
+          "p95": 1858.57161,
+          "mean": 1238.8074,
+          "minimum": 550.1805,
+          "maximum": 1927.4343
+        },
+        "trayStartupReturnedMs": {
+          "count": 2,
+          "median": 1237.8049500000002,
+          "p95": 1857.725085,
+          "mean": 1237.80495,
+          "minimum": 549.0048,
+          "maximum": 1926.6051
+        }
+      }
+    },
+    {
+      "mode": "comet",
+      "target": "v1.5.2",
+      "completedRounds": 1,
+      "stableObservations": 20,
+      "applicationSHA256": [
+        "35CE6EFFAB3C64C265A6EFA68A942B52E957F8A5F7C7E15C1B0E22192CC6FC6E"
+      ],
+      "roundCpuMeans": [
+        5.527985991293884
+      ],
+      "roundCpuMeanDistribution": {
+        "count": 1,
+        "median": 5.527985991293884,
+        "p95": 5.527985991293884,
+        "mean": 5.527985991293884,
+        "minimum": 5.527985991293884,
+        "maximum": 5.527985991293884
+      },
+      "observations": {
+        "cpuOneCorePercent": {
+          "count": 20,
+          "median": 4.6709744729229605,
+          "p95": 10.970412437598496,
+          "mean": 5.527985991293884,
+          "minimum": 1.5560955774319636,
+          "maximum": 12.464498615044633
+        },
+        "cpuMachinePercent": {
+          "count": 20,
+          "median": 0.16682051689010574,
+          "p95": 0.39180044419994625,
+          "mean": 0.1974280711176387,
+          "minimum": 0.05557484205114155,
+          "maximum": 0.4451606648230226
+        },
+        "machineBusyPercent": {
+          "count": 20,
+          "median": 3.203302563758914,
+          "p95": 6.271825849766744,
+          "mean": 3.4562997790890293,
+          "minimum": 1.179112857944975,
+          "maximum": 7.5268817204301115
+        },
+        "workingSet": {
+          "count": 20,
+          "median": 169103360.0,
+          "p95": 174301388.8,
+          "mean": 169096396.8,
+          "minimum": 163250176,
+          "maximum": 174616576
+        },
+        "privateBytes": {
+          "count": 20,
+          "median": 146085888.0,
+          "p95": 176155238.4,
+          "mean": 147928473.6,
+          "minimum": 122499072,
+          "maximum": 179085312
+        },
+        "gdi": {
+          "count": 20,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 20,
+          "median": 22.0,
+          "p95": 23.0,
+          "mean": 22.3,
+          "minimum": 21,
+          "maximum": 23
+        },
+        "threads": {
+          "count": 20,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 20,
+          "median": 373785.6217000921,
+          "p95": 430083.01780389395,
+          "mean": 374730.32971988217,
+          "minimum": 309581.1609393217,
+          "maximum": 432616.2512223444
+        },
+        "samplerHz": {
+          "count": 20,
+          "median": 52.83859092092526,
+          "p95": 57.919676482165585,
+          "mean": 53.21677114311065,
+          "minimum": 48.80828107194929,
+          "maximum": 59.77233911477964
+        },
+        "renderHz": {
+          "count": 20,
+          "median": 52.311794529559826,
+          "p95": 53.80104808115815,
+          "mean": 51.621779383390894,
+          "minimum": 46.86651479256781,
+          "maximum": 53.81915686908847
+        },
+        "paintHz": {
+          "count": 20,
+          "median": 52.311794529559826,
+          "p95": 53.80104808115815,
+          "mean": 51.621779383390894,
+          "minimum": 46.86651479256781,
+          "maximum": 53.81915686908847
+        },
+        "paintWindowMeanMs": {
+          "count": 20,
+          "median": 0.012484259259259257,
+          "p95": 0.015211039550072568,
+          "mean": 0.012615410642901339,
+          "minimum": 0.00975,
+          "maximum": 0.016101923076923076
+        }
+      },
+      "warmupObservations": {
+        "cpuOneCorePercent": {
+          "count": 5,
+          "median": 18.687741788232497,
+          "p95": 36.33498654620663,
+          "mean": 20.822707759102016,
+          "minimum": 3.1133718674124027,
+          "maximum": 37.27438189383481
+        },
+        "cpuMachinePercent": {
+          "count": 5,
+          "median": 0.667419349579732,
+          "p95": 1.297678090935951,
+          "mean": 0.7436681342536434,
+          "minimum": 0.11119185240758582,
+          "maximum": 1.3312279247798144
+        },
+        "machineBusyPercent": {
+          "count": 5,
+          "median": 5.918141592920357,
+          "p95": 8.830644709886153,
+          "mean": 5.997759882089285,
+          "minimum": 3.3860045146726914,
+          "maximum": 9.380142622051569
+        },
+        "workingSet": {
+          "count": 5,
+          "median": 172339200.0,
+          "p95": 172654592.0,
+          "mean": 168551219.2,
+          "minimum": 160342016,
+          "maximum": 172699648
+        },
+        "privateBytes": {
+          "count": 5,
+          "median": 119848960.0,
+          "p95": 122224640.0,
+          "mean": 120193024,
+          "minimum": 119115776,
+          "maximum": 122818560
+        },
+        "gdi": {
+          "count": 5,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 5,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 21.6,
+          "minimum": 21,
+          "maximum": 22
+        },
+        "threads": {
+          "count": 5,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 5,
+          "median": 328777.4249921922,
+          "p95": 397333.93603807734,
+          "mean": 349864.0269448673,
+          "minimum": 302271.04786333535,
+          "maximum": 398436.30489013053
+        },
+        "samplerHz": {
+          "count": 5,
+          "median": 49.84255236134575,
+          "p95": 51.51584584702589,
+          "mean": 49.964701007764965,
+          "minimum": 47.82139188345451,
+          "maximum": 51.687142892784266
+        },
+        "renderHz": {
+          "count": 5,
+          "median": 46.82511288588254,
+          "p95": 53.30555538690399,
+          "mean": 45.19481245187382,
+          "minimum": 29.78505614234874,
+          "maximum": 53.67510992712212
+        },
+        "paintHz": {
+          "count": 5,
+          "median": 46.82511288588254,
+          "p95": 53.30555538690399,
+          "mean": 45.39337949282282,
+          "minimum": 30.7778913470937,
+          "maximum": 53.67510992712212
+        },
+        "paintWindowMeanMs": {
+          "count": 5,
+          "median": 0.015147727272727273,
+          "p95": 0.05412961768219832,
+          "mean": 0.024157546801808986,
+          "minimum": 0.009025,
+          "maximum": 0.06140322580645161
+        }
+      },
+      "roundResourceChanges": [
+        {
+          "workingSet": 389120,
+          "privateBytes": 55775232,
+          "gdi": 0,
+          "user": 1,
+          "threads": 0
+        }
+      ],
+      "initialPanelsCreated": [
+        false
+      ],
+      "interventions": [
+        "none"
+      ],
+      "managedMainEpochExplicit": true,
+      "gcCollections": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "driverOneCoreCPU": {
+        "count": 1,
+        "median": 1.0215027275959128,
+        "p95": 1.0215027275959128,
+        "mean": 1.0215027275959128,
+        "minimum": 1.0215027275959128,
+        "maximum": 1.0215027275959128
+      },
+      "controllerOneCoreCPU": {
+        "count": 1,
+        "median": 0.1668188440060886,
+        "p95": 0.1668188440060886,
+        "mean": 0.1668188440060886,
+        "minimum": 0.1668188440060886,
+        "maximum": 0.1668188440060886
+      },
+      "inputConditions": [
+        {
+          "input": "SetPhysicalCursorPos",
+          "events": 1658,
+          "observedClicks": 0,
+          "observedMoves": 1661,
+          "seconds": 26.0033499
+        }
+      ],
+      "markers": {
+        "mainAssemblyLoadedMs": {
+          "count": 1,
+          "median": 62.4887,
+          "p95": 62.4887,
+          "mean": 62.4887,
+          "minimum": 62.4887,
+          "maximum": 62.4887
+        },
+        "trayShellRectangleAvailableMs": {
+          "count": 1,
+          "median": 1533.3862,
+          "p95": 1533.3862,
+          "mean": 1533.3862,
+          "minimum": 1533.3862,
+          "maximum": 1533.3862
+        },
+        "trayStartupReturnedMs": {
+          "count": 1,
+          "median": 1532.2105,
+          "p95": 1532.2105,
+          "mean": 1532.2105,
+          "minimum": 1532.2105,
+          "maximum": 1532.2105
+        }
+      }
+    },
+    {
+      "mode": "disabled",
+      "target": "v1.4.0",
+      "completedRounds": 1,
+      "stableObservations": 20,
+      "applicationSHA256": [
+        "AF2E40C9E217E137DDAB73617861490CB5AA1453647C17E152E561BED4E6CBC4"
+      ],
+      "roundCpuMeans": [
+        1.3111153445264052
+      ],
+      "roundCpuMeanDistribution": {
+        "count": 1,
+        "median": 1.3111153445264052,
+        "p95": 1.3111153445264052,
+        "mean": 1.3111153445264052,
+        "minimum": 1.3111153445264052,
+        "maximum": 1.3111153445264052
+      },
+      "observations": {
+        "cpuOneCorePercent": {
+          "count": 20,
+          "median": 1.5328108420375517,
+          "p95": 3.179212445840039,
+          "mean": 1.3111153445264052,
+          "minimum": 0,
+          "maximum": 4.603171735081992
+        },
+        "cpuMachinePercent": {
+          "count": 20,
+          "median": 0.054743244358483975,
+          "p95": 0.11354330163714424,
+          "mean": 0.046825548018800185,
+          "minimum": 0,
+          "maximum": 0.16439899053864257
+        },
+        "machineBusyPercent": {
+          "count": 20,
+          "median": 3.035952672677067,
+          "p95": 4.51581047787755,
+          "mean": 3.182955029233055,
+          "minimum": 2.119565217391306,
+          "maximum": 6.753812636165579
+        },
+        "workingSet": {
+          "count": 20,
+          "median": 174917632.0,
+          "p95": 175686041.6,
+          "mean": 174984601.6,
+          "minimum": 174587904,
+          "maximum": 175771648
+        },
+        "privateBytes": {
+          "count": 20,
+          "median": 110247936.0,
+          "p95": 111043174.4,
+          "mean": 110172569.6,
+          "minimum": 109723648,
+          "maximum": 111054848
+        },
+        "gdi": {
+          "count": 20,
+          "median": 166.0,
+          "p95": 166.0,
+          "mean": 166,
+          "minimum": 166,
+          "maximum": 166
+        },
+        "user": {
+          "count": 20,
+          "median": 81.0,
+          "p95": 81.0,
+          "mean": 80.95,
+          "minimum": 80,
+          "maximum": 81
+        },
+        "threads": {
+          "count": 20,
+          "median": 24.0,
+          "p95": 24.0,
+          "mean": 23.7,
+          "minimum": 23,
+          "maximum": 24
+        },
+        "allocatedBytesPerSecond": {
+          "count": 20,
+          "median": 8082.614053498655,
+          "p95": 16687.543573368177,
+          "mean": 10921.263079412178,
+          "minimum": 8030.691343610065,
+          "maximum": 24405.350688249393
+        },
+        "samplerHz": {
+          "count": 20,
+          "median": 3.9414394720324966,
+          "p95": 4.022458049117632,
+          "mean": 3.992209660016163,
+          "minimum": 3.9174104115171047,
+          "maximum": 4.903109650202348
+        },
+        "renderHz": {
+          "count": 20,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "paintHz": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        },
+        "paintWindowMeanMs": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        }
+      },
+      "warmupObservations": {
+        "cpuOneCorePercent": {
+          "count": 5,
+          "median": 3.067866207262292,
+          "p95": 7.137010261078254,
+          "mean": 3.091080591720605,
+          "minimum": 0,
+          "maximum": 7.765838184683514
+        },
+        "cpuMachinePercent": {
+          "count": 5,
+          "median": 0.10956665025936758,
+          "p95": 0.2548932236099376,
+          "mean": 0.11039573541859303,
+          "minimum": 0,
+          "maximum": 0.2773513637386969
+        },
+        "machineBusyPercent": {
+          "count": 5,
+          "median": 3.7277147487844386,
+          "p95": 7.2912129380053905,
+          "mean": 4.764433247284603,
+          "minimum": 2.1654636313159337,
+          "maximum": 7.3854447439353095
+        },
+        "workingSet": {
+          "count": 5,
+          "median": 181534720.0,
+          "p95": 181732966.4,
+          "mean": 181550284.8,
+          "minimum": 181342208,
+          "maximum": 181747712
+        },
+        "privateBytes": {
+          "count": 5,
+          "median": 117633024.0,
+          "p95": 136287027.2,
+          "mean": 125055795.2,
+          "minimum": 117633024,
+          "maximum": 136351744
+        },
+        "gdi": {
+          "count": 5,
+          "median": 166.0,
+          "p95": 166.0,
+          "mean": 166,
+          "minimum": 166,
+          "maximum": 166
+        },
+        "user": {
+          "count": 5,
+          "median": 81.0,
+          "p95": 81.0,
+          "mean": 81,
+          "minimum": 81,
+          "maximum": 81
+        },
+        "threads": {
+          "count": 5,
+          "median": 24.0,
+          "p95": 24.0,
+          "mean": 24,
+          "minimum": 24,
+          "maximum": 24
+        },
+        "allocatedBytesPerSecond": {
+          "count": 5,
+          "median": 16311.159637916113,
+          "p95": 146161.15958709194,
+          "mean": 45979.39327951163,
+          "minimum": 8137.162390868991,
+          "maximum": 177836.05910844356
+        },
+        "samplerHz": {
+          "count": 5,
+          "median": 3.969347507740971,
+          "p95": 3.977887125314736,
+          "mean": 3.9589012932292174,
+          "minimum": 3.926868745295734,
+          "maximum": 3.9783316190039297
+        },
+        "renderHz": {
+          "count": 5,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "paintHz": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        },
+        "paintWindowMeanMs": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        }
+      },
+      "roundResourceChanges": [
+        {
+          "workingSet": -921600,
+          "privateBytes": -1257472,
+          "gdi": 0,
+          "user": 0,
+          "threads": -1
+        }
+      ],
+      "initialPanelsCreated": [
+        true
+      ],
+      "interventions": [
+        "none"
+      ],
+      "managedMainEpochExplicit": true,
+      "gcCollections": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "driverOneCoreCPU": {
+        "count": 0,
+        "median": null,
+        "p95": null,
+        "mean": null,
+        "minimum": null,
+        "maximum": null
+      },
+      "controllerOneCoreCPU": {
+        "count": 1,
+        "median": 0.17980400523385198,
+        "p95": 0.17980400523385198,
+        "mean": 0.17980400523385198,
+        "minimum": 0.17980400523385198,
+        "maximum": 0.17980400523385198
+      },
+      "inputConditions": [],
+      "markers": {
+        "mainAssemblyLoadedMs": {
+          "count": 1,
+          "median": 11.0782,
+          "p95": 11.0782,
+          "mean": 11.0782,
+          "minimum": 11.0782,
+          "maximum": 11.0782
+        },
+        "trayShellRectangleAvailableMs": {
+          "count": 1,
+          "median": 617.7302,
+          "p95": 617.7302,
+          "mean": 617.7302,
+          "minimum": 617.7302,
+          "maximum": 617.7302
+        },
+        "trayStartupReturnedMs": {
+          "count": 1,
+          "median": 617.065,
+          "p95": 617.065,
+          "mean": 617.065,
+          "minimum": 617.065,
+          "maximum": 617.065
+        }
+      }
+    },
+    {
+      "mode": "disabled",
+      "target": "v1.5.0",
+      "completedRounds": 1,
+      "stableObservations": 20,
+      "applicationSHA256": [
+        "981A66BEB8089F08A2E12A4D7379408E2A12A2A93C42643D0B444B754E15983E"
+      ],
+      "roundCpuMeans": [
+        2.38994784322969
+      ],
+      "roundCpuMeanDistribution": {
+        "count": 1,
+        "median": 2.38994784322969,
+        "p95": 2.38994784322969,
+        "mean": 2.38994784322969,
+        "minimum": 2.38994784322969,
+        "maximum": 2.38994784322969
+      },
+      "observations": {
+        "cpuOneCorePercent": {
+          "count": 20,
+          "median": 1.552591198991963,
+          "p95": 6.230048197077348,
+          "mean": 2.38994784322969,
+          "minimum": 0,
+          "maximum": 7.691470103046501
+        },
+        "cpuMachinePercent": {
+          "count": 20,
+          "median": 0.05544968567828439,
+          "p95": 0.222501721324191,
+          "mean": 0.08535528011534607,
+          "minimum": 0,
+          "maximum": 0.2746953608230893
+        },
+        "machineBusyPercent": {
+          "count": 20,
+          "median": 3.481698568244951,
+          "p95": 7.899341812302207,
+          "mean": 4.044089239593841,
+          "minimum": 1.709873138444562,
+          "maximum": 8.207343412527003
+        },
+        "workingSet": {
+          "count": 20,
+          "median": 147429376.0,
+          "p95": 147984179.2,
+          "mean": 147275571.2,
+          "minimum": 146550784,
+          "maximum": 148058112
+        },
+        "privateBytes": {
+          "count": 20,
+          "median": 91858944.0,
+          "p95": 92524544.0,
+          "mean": 92073779.2,
+          "minimum": 91791360,
+          "maximum": 92524544
+        },
+        "gdi": {
+          "count": 20,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 20,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 22.85,
+          "minimum": 22,
+          "maximum": 23
+        },
+        "threads": {
+          "count": 20,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 20,
+          "median": 8153.476715564549,
+          "p95": 17059.99349726031,
+          "mean": 11304.38241415387,
+          "minimum": 8072.908206111188,
+          "maximum": 31510.898649278817
+        },
+        "samplerHz": {
+          "count": 20,
+          "median": 3.9538499104567824,
+          "p95": 3.982622817245021,
+          "mean": 3.956119816304241,
+          "minimum": 3.918164817798968,
+          "maximum": 3.985820840940445
+        },
+        "renderHz": {
+          "count": 20,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "paintHz": {
+          "count": 20,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "paintWindowMeanMs": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        }
+      },
+      "warmupObservations": {
+        "cpuOneCorePercent": {
+          "count": 5,
+          "median": 1.551289605664664,
+          "p95": 4.308232827925277,
+          "mean": 1.8464323096310133,
+          "minimum": 0,
+          "maximum": 4.620097399045328
+        },
+        "cpuMachinePercent": {
+          "count": 5,
+          "median": 0.055403200202309426,
+          "p95": 0.15386545814018848,
+          "mean": 0.06594401105825048,
+          "minimum": 0,
+          "maximum": 0.16500347853733316
+        },
+        "machineBusyPercent": {
+          "count": 5,
+          "median": 4.9672489082969395,
+          "p95": 11.93484538310153,
+          "mean": 6.042484862498565,
+          "minimum": 2.312464749012977,
+          "maximum": 13.50737797956867
+        },
+        "workingSet": {
+          "count": 5,
+          "median": 152858624.0,
+          "p95": 153249382.4,
+          "mean": 152971673.6,
+          "minimum": 152760320,
+          "maximum": 153276416
+        },
+        "privateBytes": {
+          "count": 5,
+          "median": 98406400.0,
+          "p95": 116944076.8,
+          "mean": 105768550.4,
+          "minimum": 98340864,
+          "maximum": 117010432
+        },
+        "gdi": {
+          "count": 5,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 5,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "threads": {
+          "count": 5,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 5,
+          "median": 8141.167850528156,
+          "p95": 51414.256248869526,
+          "mean": 22548.869476390388,
+          "minimum": 8040.208100195897,
+          "maximum": 56196.80006550547
+        },
+        "samplerHz": {
+          "count": 5,
+          "median": 3.9424831138520133,
+          "p95": 4.738076669784377,
+          "mean": 3.940790257493757,
+          "minimum": 2.9383435617072715,
+          "maximum": 4.929770489605086
+        },
+        "renderHz": {
+          "count": 5,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "paintHz": {
+          "count": 5,
+          "median": 0.0,
+          "p95": 0.783558283121939,
+          "mean": 0.1958895707804848,
+          "minimum": 0,
+          "maximum": 0.979447853902424
+        },
+        "paintWindowMeanMs": {
+          "count": 1,
+          "median": 0.0041,
+          "p95": 0.0041,
+          "mean": 0.0041,
+          "minimum": 0.0041,
+          "maximum": 0.0041
+        }
+      },
+      "roundResourceChanges": [
+        {
+          "workingSet": -303104,
+          "privateBytes": 94208,
+          "gdi": 0,
+          "user": 1,
+          "threads": 0
+        }
+      ],
+      "initialPanelsCreated": [
+        false
+      ],
+      "interventions": [
+        "none"
+      ],
+      "managedMainEpochExplicit": true,
+      "gcCollections": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "driverOneCoreCPU": {
+        "count": 0,
+        "median": null,
+        "p95": null,
+        "mean": null,
+        "minimum": null,
+        "maximum": null
+      },
+      "controllerOneCoreCPU": {
+        "count": 1,
+        "median": 0.36081736899610384,
+        "p95": 0.36081736899610384,
+        "mean": 0.36081736899610384,
+        "minimum": 0.36081736899610384,
+        "maximum": 0.36081736899610384
+      },
+      "inputConditions": [],
+      "markers": {
+        "mainAssemblyLoadedMs": {
+          "count": 1,
+          "median": 33.8579,
+          "p95": 33.8579,
+          "mean": 33.8579,
+          "minimum": 33.8579,
+          "maximum": 33.8579
+        },
+        "trayShellRectangleAvailableMs": {
+          "count": 1,
+          "median": 553.1233,
+          "p95": 553.1233,
+          "mean": 553.1233,
+          "minimum": 553.1233,
+          "maximum": 553.1233
+        },
+        "trayStartupReturnedMs": {
+          "count": 1,
+          "median": 551.4067,
+          "p95": 551.4067,
+          "mean": 551.4067,
+          "minimum": 551.4067,
+          "maximum": 551.4067
+        }
+      }
+    },
+    {
+      "mode": "disabled",
+      "target": "v1.5.1",
+      "completedRounds": 1,
+      "stableObservations": 20,
+      "applicationSHA256": [
+        "B38D9FE4895F37CA29113A394A7D6B86A78F84B05471F43642F1065F071DA306"
+      ],
+      "roundCpuMeans": [
+        0.9236959229111114
+      ],
+      "roundCpuMeanDistribution": {
+        "count": 1,
+        "median": 0.9236959229111114,
+        "p95": 0.9236959229111114,
+        "mean": 0.9236959229111114,
+        "minimum": 0.9236959229111114,
+        "maximum": 0.9236959229111114
+      },
+      "observations": {
+        "cpuOneCorePercent": {
+          "count": 20,
+          "median": 0.0,
+          "p95": 3.1761422757355353,
+          "mean": 0.9236959229111114,
+          "minimum": 0,
+          "maximum": 4.615417335143204
+        },
+        "cpuMachinePercent": {
+          "count": 20,
+          "median": 0.0,
+          "p95": 0.11343365270484056,
+          "mean": 0.032989140103968265,
+          "minimum": 0,
+          "maximum": 0.16483633339797155
+        },
+        "machineBusyPercent": {
+          "count": 20,
+          "median": 2.678069419195228,
+          "p95": 5.3756652868125405,
+          "mean": 3.1991062019819116,
+          "minimum": 1.765030336458906,
+          "maximum": 6.4606741573033695
+        },
+        "workingSet": {
+          "count": 20,
+          "median": 147165184.0,
+          "p95": 147553689.6,
+          "mean": 147063603.2,
+          "minimum": 146313216,
+          "maximum": 147619840
+        },
+        "privateBytes": {
+          "count": 20,
+          "median": 90765312.0,
+          "p95": 91472896.0,
+          "mean": 90785587.2,
+          "minimum": 90402816,
+          "maximum": 91492352
+        },
+        "gdi": {
+          "count": 20,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 20,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 22.75,
+          "minimum": 22,
+          "maximum": 23
+        },
+        "threads": {
+          "count": 20,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 20,
+          "median": 8105.659005466054,
+          "p95": 16588.638509344903,
+          "mean": 10897.584331764936,
+          "minimum": 8038.815321746722,
+          "maximum": 24123.145196585847
+        },
+        "samplerHz": {
+          "count": 20,
+          "median": 3.939157270469071,
+          "p95": 4.022879673635756,
+          "mean": 3.989105086692522,
+          "minimum": 3.9213733276813274,
+          "maximum": 4.922692074583901
+        },
+        "renderHz": {
+          "count": 20,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "paintHz": {
+          "count": 20,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "paintWindowMeanMs": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        }
+      },
+      "warmupObservations": {
+        "cpuOneCorePercent": {
+          "count": 5,
+          "median": 1.5363520561798474,
+          "p95": 8.27563472844554,
+          "mean": 3.374430905794861,
+          "minimum": 0,
+          "maximum": 9.190552954642685
+        },
+        "cpuMachinePercent": {
+          "count": 5,
+          "median": 0.05486971629213741,
+          "p95": 0.2955583831587693,
+          "mean": 0.12051538949267362,
+          "minimum": 0,
+          "maximum": 0.3282340340943816
+        },
+        "machineBusyPercent": {
+          "count": 5,
+          "median": 2.970297029702973,
+          "p95": 4.6832053939140605,
+          "mean": 3.370309969257601,
+          "minimum": 2.6082130965593753,
+          "maximum": 4.918032786885251
+        },
+        "workingSet": {
+          "count": 5,
+          "median": 152940544.0,
+          "p95": 153292800.0,
+          "mean": 153047040,
+          "minimum": 152842240,
+          "maximum": 153313280
+        },
+        "privateBytes": {
+          "count": 5,
+          "median": 97366016.0,
+          "p95": 117140684.8,
+          "mean": 105222963.2,
+          "minimum": 97300480,
+          "maximum": 117207040
+        },
+        "gdi": {
+          "count": 5,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 5,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "threads": {
+          "count": 5,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 5,
+          "median": 16051.403641417512,
+          "p95": 50399.118598588626,
+          "mean": 22651.57528700743,
+          "minimum": 8038.670317660802,
+          "maximum": 56967.548800167184
+        },
+        "samplerHz": {
+          "count": 5,
+          "median": 3.9330612638204094,
+          "p95": 3.966340060485636,
+          "mean": 3.9362961996911,
+          "minimum": 3.91497649790671,
+          "maximum": 3.9731865532268924
+        },
+        "renderHz": {
+          "count": 5,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "paintHz": {
+          "count": 5,
+          "median": 0.0,
+          "p95": 0.7946373106453783,
+          "mean": 0.19865932766134461,
+          "minimum": 0,
+          "maximum": 0.9932966383067231
+        },
+        "paintWindowMeanMs": {
+          "count": 1,
+          "median": 0.0029,
+          "p95": 0.0029,
+          "mean": 0.0029,
+          "minimum": 0.0029,
+          "maximum": 0.0029
+        }
+      },
+      "roundResourceChanges": [
+        {
+          "workingSet": -630784,
+          "privateBytes": -290816,
+          "gdi": 0,
+          "user": 1,
+          "threads": 0
+        }
+      ],
+      "initialPanelsCreated": [
+        false
+      ],
+      "interventions": [
+        "none"
+      ],
+      "managedMainEpochExplicit": true,
+      "gcCollections": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "driverOneCoreCPU": {
+        "count": 0,
+        "median": null,
+        "p95": null,
+        "mean": null,
+        "minimum": null,
+        "maximum": null
+      },
+      "controllerOneCoreCPU": {
+        "count": 1,
+        "median": 0.1801295360200547,
+        "p95": 0.1801295360200547,
+        "mean": 0.1801295360200547,
+        "minimum": 0.1801295360200547,
+        "maximum": 0.1801295360200547
+      },
+      "inputConditions": [],
+      "markers": {
+        "mainAssemblyLoadedMs": {
+          "count": 1,
+          "median": 32.6758,
+          "p95": 32.6758,
+          "mean": 32.6758,
+          "minimum": 32.6758,
+          "maximum": 32.6758
+        },
+        "trayShellRectangleAvailableMs": {
+          "count": 1,
+          "median": 527.3785,
+          "p95": 527.3785,
+          "mean": 527.3785,
+          "minimum": 527.3785,
+          "maximum": 527.3785
+        },
+        "trayStartupReturnedMs": {
+          "count": 1,
+          "median": 526.661,
+          "p95": 526.661,
+          "mean": 526.661,
+          "minimum": 526.661,
+          "maximum": 526.661
+        }
+      }
+    },
+    {
+      "mode": "disabled",
+      "target": "v1.5.2",
+      "completedRounds": 1,
+      "stableObservations": 20,
+      "applicationSHA256": [
+        "35CE6EFFAB3C64C265A6EFA68A942B52E957F8A5F7C7E15C1B0E22192CC6FC6E"
+      ],
+      "roundCpuMeans": [
+        1.3117798679950565
+      ],
+      "roundCpuMeanDistribution": {
+        "count": 1,
+        "median": 1.3117798679950565,
+        "p95": 1.3117798679950565,
+        "mean": 1.3117798679950565,
+        "minimum": 1.3117798679950565,
+        "maximum": 1.3117798679950565
+      },
+      "observations": {
+        "cpuOneCorePercent": {
+          "count": 20,
+          "median": 1.5349486667639685,
+          "p95": 3.180655215432308,
+          "mean": 1.3117798679950565,
+          "minimum": 0,
+          "maximum": 4.611009349208781
+        },
+        "cpuMachinePercent": {
+          "count": 20,
+          "median": 0.054819595241570304,
+          "p95": 0.1135948291225824,
+          "mean": 0.046849280999823446,
+          "minimum": 0,
+          "maximum": 0.16467890532888504
+        },
+        "machineBusyPercent": {
+          "count": 20,
+          "median": 2.955381574111499,
+          "p95": 5.369544764470677,
+          "mean": 3.1571672370749293,
+          "minimum": 1.8133333333333335,
+          "maximum": 6.270447110141763
+        },
+        "workingSet": {
+          "count": 20,
+          "median": 146989056.0,
+          "p95": 147382272.0,
+          "mean": 146900377.6,
+          "minimum": 146128896,
+          "maximum": 147460096
+        },
+        "privateBytes": {
+          "count": 20,
+          "median": 90099712.0,
+          "p95": 90314752.0,
+          "mean": 90055065.6,
+          "minimum": 89526272,
+          "maximum": 90820608
+        },
+        "gdi": {
+          "count": 20,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 20,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "threads": {
+          "count": 20,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 20,
+          "median": 8086.220581962001,
+          "p95": 16701.9185577129,
+          "mean": 10910.244885250919,
+          "minimum": 8024.972932842816,
+          "maximum": 24127.509315623392
+        },
+        "samplerHz": {
+          "count": 20,
+          "median": 3.940872650803508,
+          "p95": 3.9750499065687106,
+          "mean": 3.943520489503118,
+          "minimum": 3.914620942850154,
+          "maximum": 3.9783165832944087
+        },
+        "renderHz": {
+          "count": 20,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "paintHz": {
+          "count": 20,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "paintWindowMeanMs": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        }
+      },
+      "warmupObservations": {
+        "cpuOneCorePercent": {
+          "count": 5,
+          "median": 1.5501914796515663,
+          "p95": 7.741630843064073,
+          "mean": 3.3963176001164146,
+          "minimum": 0,
+          "maximum": 7.758919231463285
+        },
+        "cpuMachinePercent": {
+          "count": 5,
+          "median": 0.055363981416127375,
+          "p95": 0.27648681582371687,
+          "mean": 0.12129705714701482,
+          "minimum": 0,
+          "maximum": 0.2771042582665459
+        },
+        "machineBusyPercent": {
+          "count": 5,
+          "median": 3.4961154273029926,
+          "p95": 5.972450550721987,
+          "mean": 3.972379057371256,
+          "minimum": 2.4861878453038666,
+          "maximum": 6.371986222732495
+        },
+        "workingSet": {
+          "count": 5,
+          "median": 152805376.0,
+          "p95": 153132236.8,
+          "mean": 152895488,
+          "minimum": 152690688,
+          "maximum": 153149440
+        },
+        "privateBytes": {
+          "count": 5,
+          "median": 96710656.0,
+          "p95": 116954726.4,
+          "mean": 104754380.8,
+          "minimum": 96645120,
+          "maximum": 117022720
+        },
+        "gdi": {
+          "count": 5,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 5,
+          "median": 22.0,
+          "p95": 22.8,
+          "mean": 22,
+          "minimum": 21,
+          "maximum": 23
+        },
+        "threads": {
+          "count": 5,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 5,
+          "median": 16106.064326049593,
+          "p95": 56828.55551336932,
+          "mean": 24236.595189160642,
+          "minimum": 8058.324976915847,
+          "maximum": 65086.53193640676
+        },
+        "samplerHz": {
+          "count": 5,
+          "median": 3.942453582044332,
+          "p95": 4.722006409788819,
+          "mean": 3.9463288905470284,
+          "minimum": 2.979424984881901,
+          "maximum": 4.910385465259022
+        },
+        "renderHz": {
+          "count": 5,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "paintHz": {
+          "count": 5,
+          "median": 0.0,
+          "p95": 0.7945133293018402,
+          "mean": 0.1986283323254601,
+          "minimum": 0,
+          "maximum": 0.9931416616273004
+        },
+        "paintWindowMeanMs": {
+          "count": 1,
+          "median": 0.0031,
+          "p95": 0.0031,
+          "mean": 0.0031,
+          "minimum": 0.0031,
+          "maximum": 0.0031
+        }
+      },
+      "roundResourceChanges": [
+        {
+          "workingSet": -618496,
+          "privateBytes": -507904,
+          "gdi": 0,
+          "user": 0,
+          "threads": 0
+        }
+      ],
+      "initialPanelsCreated": [
+        false
+      ],
+      "interventions": [
+        "none"
+      ],
+      "managedMainEpochExplicit": true,
+      "gcCollections": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "driverOneCoreCPU": {
+        "count": 0,
+        "median": null,
+        "p95": null,
+        "mean": null,
+        "minimum": null,
+        "maximum": null
+      },
+      "controllerOneCoreCPU": {
+        "count": 1,
+        "median": 0.36054808616364703,
+        "p95": 0.36054808616364703,
+        "mean": 0.36054808616364703,
+        "minimum": 0.36054808616364703,
+        "maximum": 0.36054808616364703
+      },
+      "inputConditions": [],
+      "markers": {
+        "mainAssemblyLoadedMs": {
+          "count": 1,
+          "median": 33.2721,
+          "p95": 33.2721,
+          "mean": 33.2721,
+          "minimum": 33.2721,
+          "maximum": 33.2721
+        },
+        "trayShellRectangleAvailableMs": {
+          "count": 1,
+          "median": 533.6362,
+          "p95": 533.6362,
+          "mean": 533.6362,
+          "minimum": 533.6362,
+          "maximum": 533.6362
+        },
+        "trayStartupReturnedMs": {
+          "count": 1,
+          "median": 532.9202,
+          "p95": 532.9202,
+          "mean": 532.9202,
+          "minimum": 532.9202,
+          "maximum": 532.9202
+        }
+      }
+    },
+    {
+      "mode": "harness-timer8",
+      "target": "v1.4.0",
+      "completedRounds": 1,
+      "stableObservations": 20,
+      "applicationSHA256": [
+        "AF2E40C9E217E137DDAB73617861490CB5AA1453647C17E152E561BED4E6CBC4"
+      ],
+      "roundCpuMeans": [
+        5.614195767864383
+      ],
+      "roundCpuMeanDistribution": {
+        "count": 1,
+        "median": 5.614195767864383,
+        "p95": 5.614195767864383,
+        "mean": 5.614195767864383,
+        "minimum": 5.614195767864383,
+        "maximum": 5.614195767864383
+      },
+      "observations": {
+        "cpuOneCorePercent": {
+          "count": 20,
+          "median": 2.312172750451918,
+          "p95": 15.973321982039156,
+          "mean": 5.614195767864383,
+          "minimum": 0,
+          "maximum": 27.70473851011848
+        },
+        "cpuMachinePercent": {
+          "count": 20,
+          "median": 0.08257759823042564,
+          "p95": 0.570475785072827,
+          "mean": 0.20050699170944228,
+          "minimum": 0,
+          "maximum": 0.9894549467899458
+        },
+        "machineBusyPercent": {
+          "count": 20,
+          "median": 3.4191778993397595,
+          "p95": 6.282205910556646,
+          "mean": 3.938581885594874,
+          "minimum": 2.020202020202022,
+          "maximum": 8.785249457700651
+        },
+        "workingSet": {
+          "count": 20,
+          "median": 51728384.0,
+          "p95": 52006502.4,
+          "mean": 51645644.8,
+          "minimum": 50688000,
+          "maximum": 52076544
+        },
+        "privateBytes": {
+          "count": 20,
+          "median": 14960640.0,
+          "p95": 15703040.0,
+          "mean": 15062425.6,
+          "minimum": 14680064,
+          "maximum": 16072704
+        },
+        "gdi": {
+          "count": 20,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "user": {
+          "count": 20,
+          "median": 8.0,
+          "p95": 8.0,
+          "mean": 8,
+          "minimum": 8,
+          "maximum": 8
+        },
+        "threads": {
+          "count": 20,
+          "median": 16.0,
+          "p95": 16.0,
+          "mean": 15.55,
+          "minimum": 13,
+          "maximum": 16
+        },
+        "allocatedBytesPerSecond": {
+          "count": 20,
+          "median": 71548.82575851871,
+          "p95": 79883.41084935985,
+          "mean": 67421.6070841344,
+          "minimum": 55972.78518569684,
+          "maximum": 80380.68133069042
+        },
+        "samplerHz": {
+          "count": 20,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "renderHz": {
+          "count": 20,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "paintHz": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        },
+        "paintWindowMeanMs": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        }
+      },
+      "warmupObservations": {
+        "cpuOneCorePercent": {
+          "count": 5,
+          "median": 4.587529026213655,
+          "p95": 13.029411276087664,
+          "mean": 6.171918302241452,
+          "minimum": 0,
+          "maximum": 13.977794564936485
+        },
+        "cpuMachinePercent": {
+          "count": 5,
+          "median": 0.1638403223647734,
+          "p95": 0.46533611700313093,
+          "mean": 0.22042565365148045,
+          "minimum": 0,
+          "maximum": 0.49920694874773164
+        },
+        "machineBusyPercent": {
+          "count": 5,
+          "median": 2.8602860286028653,
+          "p95": 5.0550481061990045,
+          "mean": 3.459068875966933,
+          "minimum": 2.586681342872865,
+          "maximum": 5.380434782608701
+        },
+        "workingSet": {
+          "count": 5,
+          "median": 50696192.0,
+          "p95": 50837913.6,
+          "mean": 50728140.8,
+          "minimum": 50626560,
+          "maximum": 50851840
+        },
+        "privateBytes": {
+          "count": 5,
+          "median": 15187968.0,
+          "p95": 15256780.8,
+          "mean": 15165030.4,
+          "minimum": 15056896,
+          "maximum": 15265792
+        },
+        "gdi": {
+          "count": 5,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "user": {
+          "count": 5,
+          "median": 8.0,
+          "p95": 8.0,
+          "mean": 8,
+          "minimum": 8,
+          "maximum": 8
+        },
+        "threads": {
+          "count": 5,
+          "median": 13.0,
+          "p95": 13.0,
+          "mean": 13,
+          "minimum": 13,
+          "maximum": 13
+        },
+        "allocatedBytesPerSecond": {
+          "count": 5,
+          "median": 71717.14710206648,
+          "p95": 73259.25984493857,
+          "mean": 67501.28511095837,
+          "minimum": 56012.27588587587,
+          "maximum": 73458.83943303581
+        },
+        "samplerHz": {
+          "count": 5,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "renderHz": {
+          "count": 5,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "paintHz": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        },
+        "paintWindowMeanMs": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        }
+      },
+      "roundResourceChanges": [
+        {
+          "workingSet": 1032192,
+          "privateBytes": 741376,
+          "gdi": 0,
+          "user": 0,
+          "threads": 3
+        }
+      ],
+      "initialPanelsCreated": [
+        false
+      ],
+      "interventions": [
+        "none"
+      ],
+      "managedMainEpochExplicit": true,
+      "gcCollections": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "driverOneCoreCPU": {
+        "count": 0,
+        "median": null,
+        "p95": null,
+        "mean": null,
+        "minimum": null,
+        "maximum": null
+      },
+      "controllerOneCoreCPU": {
+        "count": 1,
+        "median": 0.18386434657566786,
+        "p95": 0.18386434657566786,
+        "mean": 0.18386434657566786,
+        "minimum": 0.18386434657566786,
+        "maximum": 0.18386434657566786
+      },
+      "inputConditions": [],
+      "markers": {
+        "mainAssemblyLoadedMs": {
+          "count": 1,
+          "median": 11.2002,
+          "p95": 11.2002,
+          "mean": 11.2002,
+          "minimum": 11.2002,
+          "maximum": 11.2002
+        },
+        "trayStartupReturnedMs": {
+          "count": 1,
+          "median": 58.4933,
+          "p95": 58.4933,
+          "mean": 58.4933,
+          "minimum": 58.4933,
+          "maximum": 58.4933
+        }
+      }
+    },
+    {
+      "mode": "idle",
+      "target": "v1.4.0",
+      "completedRounds": 1,
+      "stableObservations": 20,
+      "applicationSHA256": [
+        "AF2E40C9E217E137DDAB73617861490CB5AA1453647C17E152E561BED4E6CBC4"
+      ],
+      "roundCpuMeans": [
+        1.6203924248877704
+      ],
+      "roundCpuMeanDistribution": {
+        "count": 1,
+        "median": 1.6203924248877704,
+        "p95": 1.6203924248877704,
+        "mean": 1.6203924248877704,
+        "minimum": 1.6203924248877704,
+        "maximum": 1.6203924248877704
+      },
+      "observations": {
+        "cpuOneCorePercent": {
+          "count": 20,
+          "median": 1.5385201634062913,
+          "p95": 3.336906303695458,
+          "mean": 1.6203924248877704,
+          "minimum": 0,
+          "maximum": 7.749290586543667
+        },
+        "cpuMachinePercent": {
+          "count": 20,
+          "median": 0.05494714869308183,
+          "p95": 0.11917522513198066,
+          "mean": 0.05787115803170608,
+          "minimum": 0,
+          "maximum": 0.27676037809084525
+        },
+        "machineBusyPercent": {
+          "count": 20,
+          "median": 3.2673779100397873,
+          "p95": 5.653999468509172,
+          "mean": 3.4185112434850837,
+          "minimum": 1.7534246575342416,
+          "maximum": 6.037735849056602
+        },
+        "workingSet": {
+          "count": 20,
+          "median": 175751168.0,
+          "p95": 176127180.8,
+          "mean": 175452160,
+          "minimum": 174735360,
+          "maximum": 176189440
+        },
+        "privateBytes": {
+          "count": 20,
+          "median": 111087616.0,
+          "p95": 111501312.0,
+          "mean": 110643404.8,
+          "minimum": 109686784,
+          "maximum": 111501312
+        },
+        "gdi": {
+          "count": 20,
+          "median": 166.0,
+          "p95": 166.0,
+          "mean": 166,
+          "minimum": 166,
+          "maximum": 166
+        },
+        "user": {
+          "count": 20,
+          "median": 81.0,
+          "p95": 81.0,
+          "mean": 80.9,
+          "minimum": 80,
+          "maximum": 81
+        },
+        "threads": {
+          "count": 20,
+          "median": 24.0,
+          "p95": 24.0,
+          "mean": 23.7,
+          "minimum": 23,
+          "maximum": 24
+        },
+        "allocatedBytesPerSecond": {
+          "count": 20,
+          "median": 40606.953799529685,
+          "p95": 48356.762808900516,
+          "mean": 42008.59570069609,
+          "minimum": 32332.78798040443,
+          "maximum": 48540.01117604159
+        },
+        "samplerHz": {
+          "count": 20,
+          "median": 63.46365133324077,
+          "p95": 64.04253497267511,
+          "mean": 62.478819820562826,
+          "minimum": 56.1880766732638,
+          "maximum": 64.1280635455834
+        },
+        "renderHz": {
+          "count": 20,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "paintHz": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        },
+        "paintWindowMeanMs": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        }
+      },
+      "warmupObservations": {
+        "cpuOneCorePercent": {
+          "count": 5,
+          "median": 4.6460953916978065,
+          "p95": 8.29648731966156,
+          "mean": 4.315701726819584,
+          "minimum": 0,
+          "maximum": 9.20545394916429
+        },
+        "cpuMachinePercent": {
+          "count": 5,
+          "median": 0.16593197827492165,
+          "p95": 0.29630311855934144,
+          "mean": 0.15413220452927087,
+          "minimum": 0,
+          "maximum": 0.32876621247015325
+        },
+        "machineBusyPercent": {
+          "count": 5,
+          "median": 3.015616585891223,
+          "p95": 4.675038275402779,
+          "mean": 3.5403693525507185,
+          "minimum": 2.879728966685491,
+          "maximum": 4.8205677557578985
+        },
+        "workingSet": {
+          "count": 5,
+          "median": 182218752.0,
+          "p95": 182343270.4,
+          "mean": 182252339.2,
+          "minimum": 182177792,
+          "maximum": 182345728
+        },
+        "privateBytes": {
+          "count": 5,
+          "median": 118116352.0,
+          "p95": 136697446.4,
+          "mean": 125498163.2,
+          "minimum": 118087680,
+          "maximum": 136765440
+        },
+        "gdi": {
+          "count": 5,
+          "median": 166.0,
+          "p95": 166.0,
+          "mean": 166,
+          "minimum": 166,
+          "maximum": 166
+        },
+        "user": {
+          "count": 5,
+          "median": 80.0,
+          "p95": 81.0,
+          "mean": 80.4,
+          "minimum": 80,
+          "maximum": 81
+        },
+        "threads": {
+          "count": 5,
+          "median": 24.0,
+          "p95": 24.0,
+          "mean": 24,
+          "minimum": 24,
+          "maximum": 24
+        },
+        "allocatedBytesPerSecond": {
+          "count": 5,
+          "median": 48208.878488052,
+          "p95": 170766.66001437226,
+          "mean": 75841.35780806483,
+          "minimum": 40230.36100959757,
+          "maximum": 201276.88238031926
+        },
+        "samplerHz": {
+          "count": 5,
+          "median": 60.650212032147024,
+          "p95": 63.5660197489015,
+          "mean": 61.3015260556067,
+          "minimum": 59.47002101373192,
+          "maximum": 63.779840624971754
+        },
+        "renderHz": {
+          "count": 5,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "paintHz": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        },
+        "paintWindowMeanMs": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        }
+      },
+      "roundResourceChanges": [
+        {
+          "workingSet": -1298432,
+          "privateBytes": -1814528,
+          "gdi": 0,
+          "user": 1,
+          "threads": -1
+        }
+      ],
+      "initialPanelsCreated": [
+        true
+      ],
+      "interventions": [
+        "none"
+      ],
+      "managedMainEpochExplicit": true,
+      "gcCollections": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "driverOneCoreCPU": {
+        "count": 0,
+        "median": null,
+        "p95": null,
+        "mean": null,
+        "minimum": null,
+        "maximum": null
+      },
+      "controllerOneCoreCPU": {
+        "count": 1,
+        "median": 0.4792338796975281,
+        "p95": 0.4792338796975281,
+        "mean": 0.4792338796975281,
+        "minimum": 0.4792338796975281,
+        "maximum": 0.4792338796975281
+      },
+      "inputConditions": [],
+      "markers": {
+        "mainAssemblyLoadedMs": {
+          "count": 1,
+          "median": 12.1044,
+          "p95": 12.1044,
+          "mean": 12.1044,
+          "minimum": 12.1044,
+          "maximum": 12.1044
+        },
+        "trayShellRectangleAvailableMs": {
+          "count": 1,
+          "median": 599.3927,
+          "p95": 599.3927,
+          "mean": 599.3927,
+          "minimum": 599.3927,
+          "maximum": 599.3927
+        },
+        "trayStartupReturnedMs": {
+          "count": 1,
+          "median": 598.8689,
+          "p95": 598.8689,
+          "mean": 598.8689,
+          "minimum": 598.8689,
+          "maximum": 598.8689
+        }
+      }
+    },
+    {
+      "mode": "idle",
+      "target": "v1.5.0",
+      "completedRounds": 2,
+      "stableObservations": 40,
+      "applicationSHA256": [
+        "981A66BEB8089F08A2E12A4D7379408E2A12A2A93C42643D0B444B754E15983E"
+      ],
+      "roundCpuMeans": [
+        2.0033056621887835,
+        1.307545294759129
+      ],
+      "roundCpuMeanDistribution": {
+        "count": 2,
+        "median": 1.6554254784739562,
+        "p95": 1.9685176438173007,
+        "mean": 1.6554254784739562,
+        "minimum": 1.307545294759129,
+        "maximum": 2.0033056621887835
+      },
+      "observations": {
+        "cpuOneCorePercent": {
+          "count": 40,
+          "median": 1.535579035763521,
+          "p95": 4.695042787078482,
+          "mean": 1.6554254784739564,
+          "minimum": 0,
+          "maximum": 6.203116842901355
+        },
+        "cpuMachinePercent": {
+          "count": 40,
+          "median": 0.054842108420125754,
+          "p95": 0.16768009953851723,
+          "mean": 0.05912233851692701,
+          "minimum": 0,
+          "maximum": 0.22153988724647697
+        },
+        "machineBusyPercent": {
+          "count": 40,
+          "median": 3.27483561016495,
+          "p95": 5.929594808709871,
+          "mean": 3.550406329348766,
+          "minimum": 1.7704169046259266,
+          "maximum": 7.21590909090909
+        },
+        "workingSet": {
+          "count": 40,
+          "median": 147288064.0,
+          "p95": 147604070.4,
+          "mean": 147274240,
+          "minimum": 146325504,
+          "maximum": 150204416
+        },
+        "privateBytes": {
+          "count": 40,
+          "median": 91172864.0,
+          "p95": 91480678.39999999,
+          "mean": 91201024,
+          "minimum": 90578944,
+          "maximum": 94068736
+        },
+        "gdi": {
+          "count": 40,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 40,
+          "median": 22.0,
+          "p95": 23.0,
+          "mean": 22.3,
+          "minimum": 21,
+          "maximum": 23
+        },
+        "threads": {
+          "count": 40,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 40,
+          "median": 16127.247696434068,
+          "p95": 17125.597730547353,
+          "mean": 14752.389995924561,
+          "minimum": 8012.047774863803,
+          "maximum": 32553.95719154631
+        },
+        "samplerHz": {
+          "count": 40,
+          "median": 10.799879396876554,
+          "p95": 10.944374399902019,
+          "mean": 10.59582320144143,
+          "minimum": 9.810245329710078,
+          "maximum": 10.961095782738331
+        },
+        "renderHz": {
+          "count": 40,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "paintHz": {
+          "count": 40,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "paintWindowMeanMs": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        }
+      },
+      "warmupObservations": {
+        "cpuOneCorePercent": {
+          "count": 10,
+          "median": 1.5525746936867395,
+          "p95": 11.616124113971772,
+          "mean": 4.0025125410565074,
+          "minimum": 0,
+          "maximum": 12.31182605064199
+        },
+        "cpuMachinePercent": {
+          "count": 10,
+          "median": 0.055449096203097833,
+          "p95": 0.4148615754989919,
+          "mean": 0.14294687646630383,
+          "minimum": 0,
+          "maximum": 0.4397080732372139
+        },
+        "machineBusyPercent": {
+          "count": 10,
+          "median": 3.766104644064283,
+          "p95": 8.449765763484416,
+          "mean": 4.15869268146738,
+          "minimum": 1.9933554817275767,
+          "maximum": 11.086350974930358
+        },
+        "workingSet": {
+          "count": 10,
+          "median": 153585664.0,
+          "p95": 153810534.4,
+          "mean": 153590579.2,
+          "minimum": 153350144,
+          "maximum": 153825280
+        },
+        "privateBytes": {
+          "count": 10,
+          "median": 98062336.0,
+          "p95": 117128192.0,
+          "mean": 105417113.6,
+          "minimum": 98000896,
+          "maximum": 117248000
+        },
+        "gdi": {
+          "count": 10,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 10,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 21.8,
+          "minimum": 21,
+          "maximum": 22
+        },
+        "threads": {
+          "count": 10,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 10,
+          "median": 16280.162217449224,
+          "p95": 64781.78333241835,
+          "mean": 27486.579517719747,
+          "minimum": 8025.660188849656,
+          "maximum": 65171.58082531385
+        },
+        "samplerHz": {
+          "count": 10,
+          "median": 10.82248797598892,
+          "p95": 24.219921765371378,
+          "mean": 13.30820522888985,
+          "minimum": 9.787390474206898,
+          "maximum": 24.51857772634325
+        },
+        "renderHz": {
+          "count": 10,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "paintHz": {
+          "count": 10,
+          "median": 0.0,
+          "p95": 0.9880091406237548,
+          "mean": 0.19746971845984143,
+          "minimum": 0,
+          "maximum": 0.9939540755446843
+        },
+        "paintWindowMeanMs": {
+          "count": 2,
+          "median": 0.0028,
+          "p95": 0.00307,
+          "mean": 0.0028,
+          "minimum": 0.0025,
+          "maximum": 0.0031
+        }
+      },
+      "roundResourceChanges": [
+        {
+          "workingSet": -860160,
+          "privateBytes": -630784,
+          "gdi": 0,
+          "user": 0,
+          "threads": 0
+        },
+        {
+          "workingSet": -3125248,
+          "privateBytes": -2953216,
+          "gdi": 0,
+          "user": 1,
+          "threads": 0
+        }
+      ],
+      "initialPanelsCreated": [
+        false,
+        false
+      ],
+      "interventions": [
+        "none"
+      ],
+      "managedMainEpochExplicit": true,
+      "gcCollections": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "driverOneCoreCPU": {
+        "count": 0,
+        "median": null,
+        "p95": null,
+        "mean": null,
+        "minimum": null,
+        "maximum": null
+      },
+      "controllerOneCoreCPU": {
+        "count": 2,
+        "median": 0.11966127167920011,
+        "p95": 0.2273564161904802,
+        "mean": 0.11966127167920011,
+        "minimum": 0.0,
+        "maximum": 0.23932254335840022
+      },
+      "inputConditions": [],
+      "markers": {
+        "mainAssemblyLoadedMs": {
+          "count": 2,
+          "median": 33.067750000000004,
+          "p95": 33.291085,
+          "mean": 33.067750000000004,
+          "minimum": 32.8196,
+          "maximum": 33.3159
+        },
+        "trayShellRectangleAvailableMs": {
+          "count": 2,
+          "median": 554.2063,
+          "p95": 590.57485,
+          "mean": 554.2063,
+          "minimum": 513.7968,
+          "maximum": 594.6158
+        },
+        "trayStartupReturnedMs": {
+          "count": 2,
+          "median": 553.2265500000001,
+          "p95": 589.304265,
+          "mean": 553.2265500000001,
+          "minimum": 513.1402,
+          "maximum": 593.3129
+        }
+      }
+    },
+    {
+      "mode": "idle",
+      "target": "v1.5.1",
+      "completedRounds": 2,
+      "stableObservations": 40,
+      "applicationSHA256": [
+        "B38D9FE4895F37CA29113A394A7D6B86A78F84B05471F43642F1065F071DA306"
+      ],
+      "roundCpuMeans": [
+        1.8425154607562066,
+        1.7640331721437956
+      ],
+      "roundCpuMeanDistribution": {
+        "count": 2,
+        "median": 1.8032743164500011,
+        "p95": 1.838591346325586,
+        "mean": 1.8032743164500011,
+        "minimum": 1.7640331721437956,
+        "maximum": 1.8425154607562066
+      },
+      "observations": {
+        "cpuOneCorePercent": {
+          "count": 40,
+          "median": 1.5319424339556202,
+          "p95": 6.131185924157848,
+          "mean": 1.8032743164500011,
+          "minimum": 0,
+          "maximum": 7.683926396394414
+        },
+        "cpuMachinePercent": {
+          "count": 40,
+          "median": 0.05471222978412929,
+          "p95": 0.21897092586278033,
+          "mean": 0.06440265415892861,
+          "minimum": 0,
+          "maximum": 0.2744259427283719
+        },
+        "machineBusyPercent": {
+          "count": 40,
+          "median": 2.7846494805529307,
+          "p95": 4.685661495466363,
+          "mean": 3.051448031704746,
+          "minimum": 1.857923497267755,
+          "maximum": 5.214050493962674
+        },
+        "workingSet": {
+          "count": 40,
+          "median": 147468288.0,
+          "p95": 147871334.4,
+          "mean": 147379712,
+          "minimum": 146702336,
+          "maximum": 147988480
+        },
+        "privateBytes": {
+          "count": 40,
+          "median": 91000832.0,
+          "p95": 91805900.8,
+          "mean": 91039948.8,
+          "minimum": 90202112,
+          "maximum": 92139520
+        },
+        "gdi": {
+          "count": 40,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 40,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 22.75,
+          "minimum": 21,
+          "maximum": 23
+        },
+        "threads": {
+          "count": 40,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 40,
+          "median": 16091.796051552465,
+          "p95": 17074.921694041514,
+          "mean": 14514.852652298414,
+          "minimum": 8027.490827612772,
+          "maximum": 32212.98653884286
+        },
+        "samplerHz": {
+          "count": 40,
+          "median": 10.793277839455921,
+          "p95": 10.913439185042629,
+          "mean": 10.575574383065689,
+          "minimum": 9.777410407877396,
+          "maximum": 10.925883178867828
+        },
+        "renderHz": {
+          "count": 40,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "paintHz": {
+          "count": 40,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "paintWindowMeanMs": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        }
+      },
+      "warmupObservations": {
+        "cpuOneCorePercent": {
+          "count": 10,
+          "median": 2.3000963188085697,
+          "p95": 9.525872049169713,
+          "mean": 3.839479411615664,
+          "minimum": 0,
+          "maximum": 12.251517178881363
+        },
+        "cpuMachinePercent": {
+          "count": 10,
+          "median": 0.08214629710030606,
+          "p95": 0.3402097160417755,
+          "mean": 0.13712426470055944,
+          "minimum": 0,
+          "maximum": 0.43755418496004866
+        },
+        "machineBusyPercent": {
+          "count": 10,
+          "median": 2.8153393228770085,
+          "p95": 4.583869698284343,
+          "mean": 3.2349826821519603,
+          "minimum": 2.3522975929978096,
+          "maximum": 4.684095860566451
+        },
+        "workingSet": {
+          "count": 10,
+          "median": 153618432.0,
+          "p95": 153937305.6,
+          "mean": 153627852.8,
+          "minimum": 153255936,
+          "maximum": 153968640
+        },
+        "privateBytes": {
+          "count": 10,
+          "median": 98181120.0,
+          "p95": 117428019.2,
+          "mean": 105628876.8,
+          "minimum": 97689600,
+          "maximum": 117518336
+        },
+        "gdi": {
+          "count": 10,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 10,
+          "median": 22.0,
+          "p95": 23.0,
+          "mean": 22.2,
+          "minimum": 22,
+          "maximum": 23
+        },
+        "threads": {
+          "count": 10,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 10,
+          "median": 16174.541338732584,
+          "p95": 112468.49746595512,
+          "mean": 36999.38292091189,
+          "minimum": 8031.105844098602,
+          "maximum": 112486.56988686851
+        },
+        "samplerHz": {
+          "count": 10,
+          "median": 10.791100291025998,
+          "p95": 24.499097628684634,
+          "mean": 13.448540428946993,
+          "minimum": 9.866343603111728,
+          "maximum": 24.50303435776273
+        },
+        "renderHz": {
+          "count": 10,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "paintHz": {
+          "count": 10,
+          "median": 0.0,
+          "p95": 0.9799639051473853,
+          "mean": 0.19598928171474098,
+          "minimum": 0,
+          "maximum": 0.980121374310509
+        },
+        "paintWindowMeanMs": {
+          "count": 2,
+          "median": 0.00275,
+          "p95": 0.003065,
+          "mean": 0.00275,
+          "minimum": 0.0024,
+          "maximum": 0.0031
+        }
+      },
+      "roundResourceChanges": [
+        {
+          "workingSet": -786432,
+          "privateBytes": -1576960,
+          "gdi": 0,
+          "user": 1,
+          "threads": 0
+        },
+        {
+          "workingSet": -737280,
+          "privateBytes": -1130496,
+          "gdi": 0,
+          "user": 1,
+          "threads": 0
+        }
+      ],
+      "initialPanelsCreated": [
+        false,
+        false
+      ],
+      "interventions": [
+        "none"
+      ],
+      "managedMainEpochExplicit": true,
+      "gcCollections": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "driverOneCoreCPU": {
+        "count": 0,
+        "median": null,
+        "p95": null,
+        "mean": null,
+        "minimum": null,
+        "maximum": null
+      },
+      "controllerOneCoreCPU": {
+        "count": 2,
+        "median": 0.029970089103021763,
+        "p95": 0.05694316929574135,
+        "mean": 0.029970089103021763,
+        "minimum": 0.0,
+        "maximum": 0.059940178206043526
+      },
+      "inputConditions": [],
+      "markers": {
+        "mainAssemblyLoadedMs": {
+          "count": 2,
+          "median": 32.705799999999996,
+          "p95": 33.025389999999994,
+          "mean": 32.705799999999996,
+          "minimum": 32.3507,
+          "maximum": 33.0609
+        },
+        "trayShellRectangleAvailableMs": {
+          "count": 2,
+          "median": 517.38775,
+          "p95": 521.627605,
+          "mean": 517.38775,
+          "minimum": 512.6768,
+          "maximum": 522.0987
+        },
+        "trayStartupReturnedMs": {
+          "count": 2,
+          "median": 516.56645,
+          "p95": 520.783085,
+          "mean": 516.56645,
+          "minimum": 511.8813,
+          "maximum": 521.2516
+        }
+      }
+    },
+    {
+      "mode": "idle",
+      "target": "v1.5.2",
+      "completedRounds": 1,
+      "stableObservations": 20,
+      "applicationSHA256": [
+        "35CE6EFFAB3C64C265A6EFA68A942B52E957F8A5F7C7E15C1B0E22192CC6FC6E"
+      ],
+      "roundCpuMeans": [
+        1.4605277121672993
+      ],
+      "roundCpuMeanDistribution": {
+        "count": 1,
+        "median": 1.4605277121672993,
+        "p95": 1.4605277121672993,
+        "mean": 1.4605277121672993,
+        "minimum": 1.4605277121672993,
+        "maximum": 1.4605277121672993
+      },
+      "observations": {
+        "cpuOneCorePercent": {
+          "count": 20,
+          "median": 1.5299760946260763,
+          "p95": 4.605861134692631,
+          "mean": 1.4605277121672993,
+          "minimum": 0,
+          "maximum": 4.654709433921793
+        },
+        "cpuMachinePercent": {
+          "count": 20,
+          "median": 0.05464200337950273,
+          "p95": 0.16449504052473685,
+          "mean": 0.052161704005974974,
+          "minimum": 0,
+          "maximum": 0.16623962264006403
+        },
+        "machineBusyPercent": {
+          "count": 20,
+          "median": 3.0483018085405766,
+          "p95": 5.903097739487405,
+          "mean": 3.425047203909139,
+          "minimum": 1.7318435754189898,
+          "maximum": 5.930807248764413
+        },
+        "workingSet": {
+          "count": 20,
+          "median": 147363840.0,
+          "p95": 147898777.6,
+          "mean": 147404800,
+          "minimum": 146890752,
+          "maximum": 147906560
+        },
+        "privateBytes": {
+          "count": 20,
+          "median": 91238400.0,
+          "p95": 92321587.2,
+          "mean": 91440947.2,
+          "minimum": 91017216,
+          "maximum": 92434432
+        },
+        "gdi": {
+          "count": 20,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 20,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 22.75,
+          "minimum": 22,
+          "maximum": 23
+        },
+        "threads": {
+          "count": 20,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 20,
+          "median": 16072.632230652809,
+          "p95": 17050.488341689404,
+          "mean": 14532.677279542815,
+          "minimum": 8023.483365949124,
+          "maximum": 32530.833291792624
+        },
+        "samplerHz": {
+          "count": 20,
+          "median": 10.802791810069944,
+          "p95": 10.939849564262598,
+          "mean": 10.589534060100297,
+          "minimum": 9.772757968071625,
+          "maximum": 10.944027863892906
+        },
+        "renderHz": {
+          "count": 20,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "paintHz": {
+          "count": 20,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "paintWindowMeanMs": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        }
+      },
+      "warmupObservations": {
+        "cpuOneCorePercent": {
+          "count": 5,
+          "median": 4.6119402764802855,
+          "p95": 10.131569155382753,
+          "mean": 5.231790036324782,
+          "minimum": 0,
+          "maximum": 10.729120102285421
+        },
+        "cpuMachinePercent": {
+          "count": 5,
+          "median": 0.16471215273143877,
+          "p95": 0.36184175554938397,
+          "mean": 0.18684964415445648,
+          "minimum": 0,
+          "maximum": 0.38318286079590785
+        },
+        "machineBusyPercent": {
+          "count": 5,
+          "median": 2.756339581036382,
+          "p95": 4.5900879024293175,
+          "mean": 3.2525340272502956,
+          "minimum": 2.4337479718766875,
+          "maximum": 4.859193815571505
+        },
+        "workingSet": {
+          "count": 5,
+          "median": 153784320.0,
+          "p95": 153884262.4,
+          "mean": 153709772.8,
+          "minimum": 153444352,
+          "maximum": 153899008
+        },
+        "privateBytes": {
+          "count": 5,
+          "median": 98267136.0,
+          "p95": 116298547.2,
+          "mean": 105455616,
+          "minimum": 98267136,
+          "maximum": 116338688
+        },
+        "gdi": {
+          "count": 5,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 5,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 21.8,
+          "minimum": 21,
+          "maximum": 22
+        },
+        "threads": {
+          "count": 5,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 5,
+          "median": 16250.674180027152,
+          "p95": 58085.52541054321,
+          "mean": 27452.523207496797,
+          "minimum": 8125.82986276167,
+          "maximum": 64543.02142855877
+        },
+        "samplerHz": {
+          "count": 5,
+          "median": 10.822686515473738,
+          "p95": 21.869857079438454,
+          "mean": 13.406952500272025,
+          "minimum": 9.908947670748264,
+          "maximum": 24.612195480688975
+        },
+        "renderHz": {
+          "count": 5,
+          "median": 0.0,
+          "p95": 0.0,
+          "mean": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "paintHz": {
+          "count": 5,
+          "median": 0.0,
+          "p95": 0.7875902553820471,
+          "mean": 0.1968975638455118,
+          "minimum": 0,
+          "maximum": 0.984487819227559
+        },
+        "paintWindowMeanMs": {
+          "count": 1,
+          "median": 0.0028,
+          "p95": 0.0028,
+          "mean": 0.0028,
+          "minimum": 0.0028,
+          "maximum": 0.0028
+        }
+      },
+      "roundResourceChanges": [
+        {
+          "workingSet": -782336,
+          "privateBytes": -1282048,
+          "gdi": 0,
+          "user": 1,
+          "threads": 0
+        }
+      ],
+      "initialPanelsCreated": [
+        false
+      ],
+      "interventions": [
+        "none"
+      ],
+      "managedMainEpochExplicit": true,
+      "gcCollections": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "driverOneCoreCPU": {
+        "count": 0,
+        "median": null,
+        "p95": null,
+        "mean": null,
+        "minimum": null,
+        "maximum": null
+      },
+      "controllerOneCoreCPU": {
+        "count": 1,
+        "median": 0.06005519227833437,
+        "p95": 0.06005519227833437,
+        "mean": 0.06005519227833437,
+        "minimum": 0.06005519227833437,
+        "maximum": 0.06005519227833437
+      },
+      "inputConditions": [],
+      "markers": {
+        "mainAssemblyLoadedMs": {
+          "count": 1,
+          "median": 33.0053,
+          "p95": 33.0053,
+          "mean": 33.0053,
+          "minimum": 33.0053,
+          "maximum": 33.0053
+        },
+        "trayShellRectangleAvailableMs": {
+          "count": 1,
+          "median": 525.7813,
+          "p95": 525.7813,
+          "mean": 525.7813,
+          "minimum": 525.7813,
+          "maximum": 525.7813
+        },
+        "trayStartupReturnedMs": {
+          "count": 1,
+          "median": 524.8,
+          "p95": 524.8,
+          "mean": 524.8,
+          "minimum": 524.8,
+          "maximum": 524.8
+        }
+      }
+    },
+    {
+      "mode": "minimal",
+      "target": "v1.4.0",
+      "completedRounds": 2,
+      "stableObservations": 40,
+      "applicationSHA256": [
+        "AF2E40C9E217E137DDAB73617861490CB5AA1453647C17E152E561BED4E6CBC4"
+      ],
+      "roundCpuMeans": [
+        5.13814196506005,
+        4.359092756095635
+      ],
+      "roundCpuMeanDistribution": {
+        "count": 2,
+        "median": 4.748617360577843,
+        "p95": 5.099189504611829,
+        "mean": 4.748617360577843,
+        "minimum": 4.359092756095635,
+        "maximum": 5.13814196506005
+      },
+      "observations": {
+        "cpuOneCorePercent": {
+          "count": 40,
+          "median": 4.669731903908846,
+          "p95": 11.051713935031938,
+          "mean": 4.748617360577843,
+          "minimum": 0,
+          "maximum": 15.574241987937112
+        },
+        "cpuMachinePercent": {
+          "count": 40,
+          "median": 0.16677613942531594,
+          "p95": 0.3947040691082836,
+          "mean": 0.16959347716349438,
+          "minimum": 0,
+          "maximum": 0.5562229281406111
+        },
+        "machineBusyPercent": {
+          "count": 40,
+          "median": 3.535634743875282,
+          "p95": 6.538655612098731,
+          "mean": 3.7762445580072175,
+          "minimum": 1.4340871483728646,
+          "maximum": 7.158469945355195
+        },
+        "workingSet": {
+          "count": 40,
+          "median": 193236992.0,
+          "p95": 196658176.0,
+          "mean": 193012326.4,
+          "minimum": 189231104,
+          "maximum": 197025792
+        },
+        "privateBytes": {
+          "count": 40,
+          "median": 164222976.0,
+          "p95": 193403289.6,
+          "mean": 165176320,
+          "minimum": 135876608,
+          "maximum": 195858432
+        },
+        "gdi": {
+          "count": 40,
+          "median": 166.0,
+          "p95": 166.0,
+          "mean": 166,
+          "minimum": 166,
+          "maximum": 166
+        },
+        "user": {
+          "count": 40,
+          "median": 82.0,
+          "p95": 82.0,
+          "mean": 81.75,
+          "minimum": 81,
+          "maximum": 82
+        },
+        "threads": {
+          "count": 40,
+          "median": 24.0,
+          "p95": 24.0,
+          "mean": 23.7,
+          "minimum": 23,
+          "maximum": 24
+        },
+        "allocatedBytesPerSecond": {
+          "count": 40,
+          "median": 260542.02087885197,
+          "p95": 285119.30795825354,
+          "mean": 264767.16122236126,
+          "minimum": 244193.88296474016,
+          "maximum": 292445.0339315031
+        },
+        "samplerHz": {
+          "count": 40,
+          "median": 51.85465583891072,
+          "p95": 56.86048283954193,
+          "mean": 52.63628357699592,
+          "minimum": 47.848397138506364,
+          "maximum": 59.78037288804645
+        },
+        "renderHz": {
+          "count": 40,
+          "median": 51.78260783310728,
+          "p95": 54.79334580962306,
+          "mean": 51.26616615246152,
+          "minimum": 45.80527262501651,
+          "maximum": 54.80488365321787
+        },
+        "paintHz": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        },
+        "paintWindowMeanMs": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        }
+      },
+      "warmupObservations": {
+        "cpuOneCorePercent": {
+          "count": 10,
+          "median": 10.130385454280741,
+          "p95": 22.92713243710426,
+          "mean": 12.129642042779304,
+          "minimum": 4.667500228271878,
+          "maximum": 26.418043496357562
+        },
+        "cpuMachinePercent": {
+          "count": 10,
+          "median": 0.36179948051002647,
+          "p95": 0.8188261584680093,
+          "mean": 0.43320150152783227,
+          "minimum": 0.16669643672399564,
+          "maximum": 0.9435015534413416
+        },
+        "machineBusyPercent": {
+          "count": 10,
+          "median": 5.38031433722413,
+          "p95": 15.119788133803418,
+          "mean": 6.602350420227517,
+          "minimum": 2.025886325267301,
+          "maximum": 20.19176536943035
+        },
+        "workingSet": {
+          "count": 10,
+          "median": 191897600.0,
+          "p95": 192778854.4,
+          "mean": 191099289.6,
+          "minimum": 186961920,
+          "maximum": 192802816
+        },
+        "privateBytes": {
+          "count": 10,
+          "median": 133662720.0,
+          "p95": 141730406.4,
+          "mean": 135933542.4,
+          "minimum": 132677632,
+          "maximum": 141791232
+        },
+        "gdi": {
+          "count": 10,
+          "median": 166.0,
+          "p95": 166.0,
+          "mean": 166,
+          "minimum": 166,
+          "maximum": 166
+        },
+        "user": {
+          "count": 10,
+          "median": 81.0,
+          "p95": 82.0,
+          "mean": 81.2,
+          "minimum": 81,
+          "maximum": 82
+        },
+        "threads": {
+          "count": 10,
+          "median": 24.0,
+          "p95": 24.0,
+          "mean": 24,
+          "minimum": 24,
+          "maximum": 24
+        },
+        "allocatedBytesPerSecond": {
+          "count": 10,
+          "median": 269742.8561771604,
+          "p95": 375447.02419022616,
+          "mean": 287978.7309733202,
+          "minimum": 245015.50320656557,
+          "maximum": 381342.0574963933
+        },
+        "samplerHz": {
+          "count": 10,
+          "median": 52.245537199088574,
+          "p95": 54.18774064084173,
+          "mean": 51.77129488610705,
+          "minimum": 48.80390104521021,
+          "maximum": 54.425414570752196
+        },
+        "renderHz": {
+          "count": 10,
+          "median": 51.284394857902114,
+          "p95": 53.3528284781046,
+          "mean": 47.10085956056411,
+          "minimum": 28.944819595922333,
+          "maximum": 53.81504844151621
+        },
+        "paintHz": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        },
+        "paintWindowMeanMs": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        }
+      },
+      "roundResourceChanges": [
+        {
+          "workingSet": 3497984,
+          "privateBytes": 59981824,
+          "gdi": 0,
+          "user": -1,
+          "threads": -1
+        },
+        {
+          "workingSet": 3801088,
+          "privateBytes": 59260928,
+          "gdi": 0,
+          "user": 0,
+          "threads": -1
+        }
+      ],
+      "initialPanelsCreated": [
+        true,
+        true
+      ],
+      "interventions": [
+        "none"
+      ],
+      "managedMainEpochExplicit": true,
+      "gcCollections": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "driverOneCoreCPU": {
+        "count": 2,
+        "median": 1.5619379270321891,
+        "p95": 1.8321792879370897,
+        "mean": 1.5619379270321891,
+        "minimum": 1.2616697482489658,
+        "maximum": 1.8622061058154122
+      },
+      "controllerOneCoreCPU": {
+        "count": 2,
+        "median": 0.1437887551646206,
+        "p95": 0.2731986348127792,
+        "mean": 0.1437887551646206,
+        "minimum": 0.0,
+        "maximum": 0.2875775103292412
+      },
+      "inputConditions": [
+        {
+          "input": "SetPhysicalCursorPos",
+          "events": 1655,
+          "observedClicks": 0,
+          "observedMoves": 1657,
+          "seconds": 26.0071922
+        },
+        {
+          "input": "SetPhysicalCursorPos",
+          "events": 1659,
+          "observedClicks": 0,
+          "observedMoves": 1661,
+          "seconds": 26.0108053
+        }
+      ],
+      "markers": {
+        "mainAssemblyLoadedMs": {
+          "count": 2,
+          "median": 11.33775,
+          "p95": 11.468025,
+          "mean": 11.33775,
+          "minimum": 11.193,
+          "maximum": 11.4825
+        },
+        "trayShellRectangleAvailableMs": {
+          "count": 2,
+          "median": 625.3507,
+          "p95": 642.92032,
+          "mean": 625.3507,
+          "minimum": 605.8289,
+          "maximum": 644.8725
+        },
+        "trayStartupReturnedMs": {
+          "count": 2,
+          "median": 624.6668999999999,
+          "p95": 642.19557,
+          "mean": 624.6668999999999,
+          "minimum": 605.1906,
+          "maximum": 644.1432
+        }
+      }
+    },
+    {
+      "mode": "minimal",
+      "target": "v1.5.0",
+      "completedRounds": 1,
+      "stableObservations": 20,
+      "applicationSHA256": [
+        "981A66BEB8089F08A2E12A4D7379408E2A12A2A93C42643D0B444B754E15983E"
+      ],
+      "roundCpuMeans": [
+        4.59135932490719
+      ],
+      "roundCpuMeanDistribution": {
+        "count": 1,
+        "median": 4.59135932490719,
+        "p95": 4.59135932490719,
+        "mean": 4.59135932490719,
+        "minimum": 4.59135932490719,
+        "maximum": 4.59135932490719
+      },
+      "observations": {
+        "cpuOneCorePercent": {
+          "count": 20,
+          "median": 4.668130534338692,
+          "p95": 9.413065003159774,
+          "mean": 4.59135932490719,
+          "minimum": 0,
+          "maximum": 10.890763378039486
+        },
+        "cpuMachinePercent": {
+          "count": 20,
+          "median": 0.16671894765495332,
+          "p95": 0.33618089296999193,
+          "mean": 0.16397711874668536,
+          "minimum": 0,
+          "maximum": 0.3889558349299816
+        },
+        "machineBusyPercent": {
+          "count": 20,
+          "median": 3.4223537040038887,
+          "p95": 4.648652415914938,
+          "mean": 3.3561825573058583,
+          "minimum": 1.4262205156335694,
+          "maximum": 5.7495969908651245
+        },
+        "workingSet": {
+          "count": 20,
+          "median": 166139904.0,
+          "p95": 171757158.4,
+          "mean": 166362112,
+          "minimum": 161361920,
+          "maximum": 172605440
+        },
+        "privateBytes": {
+          "count": 20,
+          "median": 144928768.0,
+          "p95": 173357670.4,
+          "mean": 147127500.8,
+          "minimum": 122793984,
+          "maximum": 176287744
+        },
+        "gdi": {
+          "count": 20,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 20,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 22.55,
+          "minimum": 22,
+          "maximum": 23
+        },
+        "threads": {
+          "count": 20,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 20,
+          "median": 258663.0279624232,
+          "p95": 269150.91653481306,
+          "mean": 253383.903768835,
+          "minimum": 227889.437491669,
+          "maximum": 276691.01153646206
+        },
+        "samplerHz": {
+          "count": 20,
+          "median": 53.77945508634235,
+          "p95": 55.810175805112216,
+          "mean": 53.29687727596576,
+          "minimum": 49.849817454953495,
+          "maximum": 56.710176969579166
+        },
+        "renderHz": {
+          "count": 20,
+          "median": 52.29945128569149,
+          "p95": 55.781532489207045,
+          "mean": 51.65332480581308,
+          "minimum": 45.86183205855722,
+          "maximum": 55.78661619306159
+        },
+        "paintHz": {
+          "count": 20,
+          "median": 52.29945128569149,
+          "p95": 55.781532489207045,
+          "mean": 51.65332480581308,
+          "minimum": 45.86183205855722,
+          "maximum": 55.78661619306159
+        },
+        "paintWindowMeanMs": {
+          "count": 20,
+          "median": 0.0035794515669515673,
+          "p95": 0.004511080281169072,
+          "mean": 0.0036585015101435023,
+          "minimum": 0.002680851063829787,
+          "maximum": 0.004972549019607843
+        }
+      },
+      "warmupObservations": {
+        "cpuOneCorePercent": {
+          "count": 5,
+          "median": 1.557975328052271,
+          "p95": 25.99067410217829,
+          "mean": 10.802473699665477,
+          "minimum": 0,
+          "maximum": 26.351649908422747
+        },
+        "cpuMachinePercent": {
+          "count": 5,
+          "median": 0.05564197600186683,
+          "p95": 0.9282383607920818,
+          "mean": 0.3858026321309099,
+          "minimum": 0,
+          "maximum": 0.941130353872241
+        },
+        "machineBusyPercent": {
+          "count": 5,
+          "median": 8.796821793416576,
+          "p95": 16.61989230281913,
+          "mean": 8.35387960033187,
+          "minimum": 1.9005030743432072,
+          "maximum": 18.571428571428573
+        },
+        "workingSet": {
+          "count": 5,
+          "median": 170872832.0,
+          "p95": 171387289.6,
+          "mean": 168741273.6,
+          "minimum": 160182272,
+          "maximum": 171454464
+        },
+        "privateBytes": {
+          "count": 5,
+          "median": 129896448.0,
+          "p95": 129896448.0,
+          "mean": 127548620.8,
+          "minimum": 119492608,
+          "maximum": 129896448
+        },
+        "gdi": {
+          "count": 5,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 5,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "threads": {
+          "count": 5,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 5,
+          "median": 261303.7783889027,
+          "p95": 282585.8457412189,
+          "mean": 255627.643604755,
+          "minimum": 217315.50818836092,
+          "maximum": 286168.9082566411
+        },
+        "samplerHz": {
+          "count": 5,
+          "median": 50.81267399604618,
+          "p95": 58.4167187352443,
+          "mean": 51.639373056755716,
+          "minimum": 44.184187578960824,
+          "maximum": 59.82625259720721
+        },
+        "renderHz": {
+          "count": 5,
+          "median": 53.57135416677001,
+          "p95": 55.425149728628696,
+          "mean": 46.91443775051902,
+          "minimum": 23.56490004211244,
+          "maximum": 55.83783575739339
+        },
+        "paintHz": {
+          "count": 5,
+          "median": 53.57135416677001,
+          "p95": 55.425149728628696,
+          "mean": 47.11081191753662,
+          "minimum": 24.54677087720046,
+          "maximum": 55.83783575739339
+        },
+        "paintWindowMeanMs": {
+          "count": 5,
+          "median": 0.0050104166666666665,
+          "p95": 0.045954740740740734,
+          "mean": 0.015016496031746032,
+          "minimum": 0.003224074074074074,
+          "maximum": 0.05558
+        }
+      },
+      "roundResourceChanges": [
+        {
+          "workingSet": -2252800,
+          "privateBytes": 46387200,
+          "gdi": 0,
+          "user": 1,
+          "threads": 0
+        }
+      ],
+      "initialPanelsCreated": [
+        false
+      ],
+      "interventions": [
+        "none"
+      ],
+      "managedMainEpochExplicit": true,
+      "gcCollections": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "driverOneCoreCPU": {
+        "count": 1,
+        "median": 1.501854721856621,
+        "p95": 1.501854721856621,
+        "mean": 1.501854721856621,
+        "minimum": 1.501854721856621,
+        "maximum": 1.501854721856621
+      },
+      "controllerOneCoreCPU": {
+        "count": 1,
+        "median": 0.0,
+        "p95": 0.0,
+        "mean": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "inputConditions": [
+        {
+          "input": "SetPhysicalCursorPos",
+          "events": 1658,
+          "observedClicks": 0,
+          "observedMoves": 1659,
+          "seconds": 26.009491
+        }
+      ],
+      "markers": {
+        "mainAssemblyLoadedMs": {
+          "count": 1,
+          "median": 33.3298,
+          "p95": 33.3298,
+          "mean": 33.3298,
+          "minimum": 33.3298,
+          "maximum": 33.3298
+        },
+        "trayShellRectangleAvailableMs": {
+          "count": 1,
+          "median": 581.0766,
+          "p95": 581.0766,
+          "mean": 581.0766,
+          "minimum": 581.0766,
+          "maximum": 581.0766
+        },
+        "trayStartupReturnedMs": {
+          "count": 1,
+          "median": 579.9945,
+          "p95": 579.9945,
+          "mean": 579.9945,
+          "minimum": 579.9945,
+          "maximum": 579.9945
+        }
+      }
+    },
+    {
+      "mode": "minimal",
+      "target": "v1.5.1",
+      "completedRounds": 2,
+      "stableObservations": 40,
+      "applicationSHA256": [
+        "B38D9FE4895F37CA29113A394A7D6B86A78F84B05471F43642F1065F071DA306"
+      ],
+      "roundCpuMeans": [
+        4.981022956553289,
+        5.994640043143893
+      ],
+      "roundCpuMeanDistribution": {
+        "count": 2,
+        "median": 5.487831499848591,
+        "p95": 5.943959188814363,
+        "mean": 5.487831499848591,
+        "minimum": 4.981022956553289,
+        "maximum": 5.994640043143893
+      },
+      "observations": {
+        "cpuOneCorePercent": {
+          "count": 40,
+          "median": 4.66921142872189,
+          "p95": 12.534671531155553,
+          "mean": 5.487831499848591,
+          "minimum": 0,
+          "maximum": 21.79858723231588
+        },
+        "cpuMachinePercent": {
+          "count": 40,
+          "median": 0.16675755102578177,
+          "p95": 0.44766684039841265,
+          "mean": 0.19599398213744967,
+          "minimum": 0,
+          "maximum": 0.77852097258271
+        },
+        "machineBusyPercent": {
+          "count": 40,
+          "median": 3.303403334493027,
+          "p95": 5.790604364367867,
+          "mean": 3.5253737376558085,
+          "minimum": 1.4892443463872085,
+          "maximum": 6.278026905829592
+        },
+        "workingSet": {
+          "count": 40,
+          "median": 165484544.0,
+          "p95": 172318720.0,
+          "mean": 165977600,
+          "minimum": 160792576,
+          "maximum": 172552192
+        },
+        "privateBytes": {
+          "count": 40,
+          "median": 144336896.0,
+          "p95": 172395315.2,
+          "mean": 145694720,
+          "minimum": 121802752,
+          "maximum": 175542272
+        },
+        "gdi": {
+          "count": 40,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 40,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 22.725,
+          "minimum": 21,
+          "maximum": 23
+        },
+        "threads": {
+          "count": 40,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 40,
+          "median": 252783.51097310256,
+          "p95": 276260.1061398447,
+          "mean": 254622.7200275784,
+          "minimum": 227957.282316296,
+          "maximum": 277910.7412102754
+        },
+        "samplerHz": {
+          "count": 40,
+          "median": 53.32119568578521,
+          "p95": 56.872361172918225,
+          "mean": 53.35176824383774,
+          "minimum": 46.820340987562545,
+          "maximum": 60.76206789453858
+        },
+        "renderHz": {
+          "count": 40,
+          "median": 51.80380604068177,
+          "p95": 54.75412999112114,
+          "mean": 51.43362999844064,
+          "minimum": 46.81839612327742,
+          "maximum": 54.82464337815498
+        },
+        "paintHz": {
+          "count": 40,
+          "median": 51.80380604068177,
+          "p95": 54.75412999112114,
+          "mean": 51.43362999844064,
+          "minimum": 46.81839612327742,
+          "maximum": 54.82464337815498
+        },
+        "paintWindowMeanMs": {
+          "count": 40,
+          "median": 0.0036534858387799562,
+          "p95": 0.004774519230769229,
+          "mean": 0.0036909041411996,
+          "minimum": 0.0023411764705882354,
+          "maximum": 0.00703090909090909
+        }
+      },
+      "warmupObservations": {
+        "cpuOneCorePercent": {
+          "count": 10,
+          "median": 10.117319415693029,
+          "p95": 32.79223864544893,
+          "mean": 14.597145778190608,
+          "minimum": 1.5576887667062742,
+          "maximum": 34.17338726714006
+        },
+        "cpuMachinePercent": {
+          "count": 10,
+          "median": 0.361332836274751,
+          "p95": 1.1711513801946045,
+          "mean": 0.5213266349353788,
+          "minimum": 0.05563174166808122,
+          "maximum": 1.2204781166835734
+        },
+        "machineBusyPercent": {
+          "count": 10,
+          "median": 7.034276436068887,
+          "p95": 14.318852464098804,
+          "mean": 7.492667318186042,
+          "minimum": 2.0054200542005463,
+          "maximum": 19.0530519110097
+        },
+        "workingSet": {
+          "count": 10,
+          "median": 170747904.0,
+          "p95": 171232256.0,
+          "mean": 168533606.4,
+          "minimum": 159748096,
+          "maximum": 171352064
+        },
+        "privateBytes": {
+          "count": 10,
+          "median": 119619584.0,
+          "p95": 127247564.8,
+          "mean": 120816025.6,
+          "minimum": 117678080,
+          "maximum": 127590400
+        },
+        "gdi": {
+          "count": 10,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 10,
+          "median": 22.0,
+          "p95": 22.549999999999997,
+          "mean": 21.9,
+          "minimum": 21,
+          "maximum": 23
+        },
+        "threads": {
+          "count": 10,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 10,
+          "median": 261392.84044503226,
+          "p95": 272966.47239648807,
+          "mean": 257549.52131291805,
+          "minimum": 227818.61287629366,
+          "maximum": 276949.5221653278
+        },
+        "samplerHz": {
+          "count": 10,
+          "median": 53.27287244935303,
+          "p95": 56.27527307897343,
+          "mean": 52.32914220188044,
+          "minimum": 43.826595691487064,
+          "maximum": 56.662202612902945
+        },
+        "renderHz": {
+          "count": 10,
+          "median": 52.78280810741045,
+          "p95": 53.81581487988647,
+          "mean": 47.469554591647785,
+          "minimum": 23.905415831720216,
+          "maximum": 53.83372377736883
+        },
+        "paintHz": {
+          "count": 10,
+          "median": 52.78280810741045,
+          "p95": 53.81581487988647,
+          "mean": 47.66783823872965,
+          "minimum": 24.901474824708558,
+          "maximum": 53.83372377736883
+        },
+        "paintWindowMeanMs": {
+          "count": 10,
+          "median": 0.004567525399129173,
+          "p95": 0.05243229999999997,
+          "mean": 0.014356044003655324,
+          "minimum": 0.003316666666666667,
+          "maximum": 0.064096
+        }
+      },
+      "roundResourceChanges": [
+        {
+          "workingSet": -2801664,
+          "privateBytes": 51638272,
+          "gdi": 0,
+          "user": 1,
+          "threads": 0
+        },
+        {
+          "workingSet": -2342912,
+          "privateBytes": 52776960,
+          "gdi": 0,
+          "user": 0,
+          "threads": 0
+        }
+      ],
+      "initialPanelsCreated": [
+        false,
+        false
+      ],
+      "interventions": [
+        "none"
+      ],
+      "managedMainEpochExplicit": true,
+      "gcCollections": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "driverOneCoreCPU": {
+        "count": 2,
+        "median": 1.4718361467719068,
+        "p95": 1.7148346155497742,
+        "mean": 1.4718361467719068,
+        "minimum": 1.2018378481298315,
+        "maximum": 1.7418344454139818
+      },
+      "controllerOneCoreCPU": {
+        "count": 2,
+        "median": 0.05757372431467122,
+        "p95": 0.10939007619787532,
+        "mean": 0.05757372431467122,
+        "minimum": 0.0,
+        "maximum": 0.11514744862934244
+      },
+      "inputConditions": [
+        {
+          "input": "SetPhysicalCursorPos",
+          "events": 1656,
+          "observedClicks": 0,
+          "observedMoves": 1659,
+          "seconds": 26.0018349
+        },
+        {
+          "input": "SetPhysicalCursorPos",
+          "events": 1658,
+          "observedClicks": 0,
+          "observedMoves": 1659,
+          "seconds": 26.0142309
+        }
+      ],
+      "markers": {
+        "mainAssemblyLoadedMs": {
+          "count": 2,
+          "median": 32.91615,
+          "p95": 33.177465,
+          "mean": 32.91615,
+          "minimum": 32.6258,
+          "maximum": 33.2065
+        },
+        "trayShellRectangleAvailableMs": {
+          "count": 2,
+          "median": 534.4969,
+          "p95": 541.23178,
+          "mean": 534.4969,
+          "minimum": 527.0137,
+          "maximum": 541.9801
+        },
+        "trayStartupReturnedMs": {
+          "count": 2,
+          "median": 533.6725,
+          "p95": 540.36652,
+          "mean": 533.6725,
+          "minimum": 526.2347,
+          "maximum": 541.1103
+        }
+      }
+    },
+    {
+      "mode": "minimal",
+      "target": "v1.5.2",
+      "completedRounds": 2,
+      "stableObservations": 40,
+      "applicationSHA256": [
+        "35CE6EFFAB3C64C265A6EFA68A942B52E957F8A5F7C7E15C1B0E22192CC6FC6E"
+      ],
+      "roundCpuMeans": [
+        7.084069703289779,
+        4.66988559249114
+      ],
+      "roundCpuMeanDistribution": {
+        "count": 2,
+        "median": 5.87697764789046,
+        "p95": 6.9633604977498464,
+        "mean": 5.87697764789046,
+        "minimum": 4.66988559249114,
+        "maximum": 7.084069703289779
+      },
+      "observations": {
+        "cpuOneCorePercent": {
+          "count": 40,
+          "median": 4.669572353287059,
+          "p95": 15.569677510818826,
+          "mean": 5.87697764789046,
+          "minimum": 0,
+          "maximum": 20.24040166522829
+        },
+        "cpuMachinePercent": {
+          "count": 40,
+          "median": 0.16677044118882356,
+          "p95": 0.5560599111006724,
+          "mean": 0.2098920588532307,
+          "minimum": 0,
+          "maximum": 0.7228714880438676
+        },
+        "machineBusyPercent": {
+          "count": 40,
+          "median": 3.3585435595485826,
+          "p95": 7.535309427414686,
+          "mean": 3.724814790293285,
+          "minimum": 1.6685845799769838,
+          "maximum": 8.248043347381095
+        },
+        "workingSet": {
+          "count": 40,
+          "median": 165646336.0,
+          "p95": 171774976.0,
+          "mean": 165816422.4,
+          "minimum": 160743424,
+          "maximum": 172670976
+        },
+        "privateBytes": {
+          "count": 40,
+          "median": 144412672.0,
+          "p95": 172122316.79999998,
+          "mean": 145814528,
+          "minimum": 119955456,
+          "maximum": 175661056
+        },
+        "gdi": {
+          "count": 40,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 40,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 22.675,
+          "minimum": 22,
+          "maximum": 23
+        },
+        "threads": {
+          "count": 40,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 40,
+          "median": 260387.25750663597,
+          "p95": 277698.72061941907,
+          "mean": 256820.92436183913,
+          "minimum": 227657.24366175442,
+          "maximum": 284849.080069429
+        },
+        "samplerHz": {
+          "count": 40,
+          "median": 53.82236735489586,
+          "p95": 56.841965005960816,
+          "mean": 53.580643986428065,
+          "minimum": 47.829626088908704,
+          "maximum": 57.787941370347355
+        },
+        "renderHz": {
+          "count": 40,
+          "median": 52.81053831770899,
+          "p95": 54.87040273679103,
+          "mean": 52.484687099188555,
+          "minimum": 45.87102444058048,
+          "maximum": 56.77538522098866
+        },
+        "paintHz": {
+          "count": 40,
+          "median": 52.81053831770899,
+          "p95": 54.87040273679103,
+          "mean": 52.484687099188555,
+          "minimum": 45.87102444058048,
+          "maximum": 56.77538522098866
+        },
+        "paintWindowMeanMs": {
+          "count": 40,
+          "median": 0.0034380952380952384,
+          "p95": 0.004658996655518393,
+          "mean": 0.003610237948243277,
+          "minimum": 0.002701851851851852,
+          "maximum": 0.0059388888888888885
+        }
+      },
+      "warmupObservations": {
+        "cpuOneCorePercent": {
+          "count": 10,
+          "median": 10.893625633993803,
+          "p95": 32.07848026427304,
+          "mean": 15.224571443836444,
+          "minimum": 0,
+          "maximum": 34.16670609297479
+        },
+        "cpuMachinePercent": {
+          "count": 10,
+          "median": 0.38905805835692153,
+          "p95": 1.145660009438323,
+          "mean": 0.5437346944227301,
+          "minimum": 0,
+          "maximum": 1.2202395033205282
+        },
+        "machineBusyPercent": {
+          "count": 10,
+          "median": 7.1143948739460345,
+          "p95": 18.897274937407015,
+          "mean": 8.529757807046046,
+          "minimum": 3.18080357142857,
+          "maximum": 20.967741935483875
+        },
+        "workingSet": {
+          "count": 10,
+          "median": 170891264.0,
+          "p95": 171407564.8,
+          "mean": 168655257.6,
+          "minimum": 159817728,
+          "maximum": 171483136
+        },
+        "privateBytes": {
+          "count": 10,
+          "median": 128557056.0,
+          "p95": 129449984.0,
+          "mean": 126603673.6,
+          "minimum": 117850112,
+          "maximum": 129449984
+        },
+        "gdi": {
+          "count": 10,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 10,
+          "median": 22.0,
+          "p95": 23.0,
+          "mean": 22.2,
+          "minimum": 22,
+          "maximum": 23
+        },
+        "threads": {
+          "count": 10,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 10,
+          "median": 245054.68157546833,
+          "p95": 278647.2642606988,
+          "mean": 252372.68256200463,
+          "minimum": 228129.2329442785,
+          "maximum": 279878.8207704447
+        },
+        "samplerHz": {
+          "count": 10,
+          "median": 51.30756727108451,
+          "p95": 54.30729433599998,
+          "mean": 50.65331589912374,
+          "minimum": 45.812690234706366,
+          "maximum": 54.79255538531122
+        },
+        "renderHz": {
+          "count": 10,
+          "median": 50.31130146464561,
+          "p95": 52.79293831286162,
+          "mean": 46.58257982946379,
+          "minimum": 24.848513522163486,
+          "maximum": 52.80009882584536
+        },
+        "paintHz": {
+          "count": 10,
+          "median": 50.31130146464561,
+          "p95": 52.79293831286162,
+          "mean": 46.781114178570164,
+          "minimum": 25.842454063050024,
+          "maximum": 52.80009882584536
+        },
+        "paintWindowMeanMs": {
+          "count": 10,
+          "median": 0.005039882352941177,
+          "p95": 0.044621172456575674,
+          "mean": 0.012915022212430082,
+          "minimum": 0.0030754716981132076,
+          "maximum": 0.047742307692307695
+        }
+      },
+      "roundResourceChanges": [
+        {
+          "workingSet": -2494464,
+          "privateBytes": 47099904,
+          "gdi": 0,
+          "user": 1,
+          "threads": 0
+        },
+        {
+          "workingSet": -2666496,
+          "privateBytes": 45473792,
+          "gdi": 0,
+          "user": -1,
+          "threads": 0
+        }
+      ],
+      "initialPanelsCreated": [
+        false,
+        false
+      ],
+      "interventions": [
+        "none"
+      ],
+      "managedMainEpochExplicit": true,
+      "gcCollections": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "driverOneCoreCPU": {
+        "count": 2,
+        "median": 1.6517674900889672,
+        "p95": 2.3274768412420475,
+        "mean": 1.651767490088967,
+        "minimum": 0.9009793221411001,
+        "maximum": 2.402555658036834
+      },
+      "controllerOneCoreCPU": {
+        "count": 2,
+        "median": 0.08640479316392041,
+        "p95": 0.16416910701144877,
+        "mean": 0.08640479316392041,
+        "minimum": 0.0,
+        "maximum": 0.17280958632784083
+      },
+      "inputConditions": [
+        {
+          "input": "SetPhysicalCursorPos",
+          "events": 1660,
+          "observedClicks": 0,
+          "observedMoves": 1662,
+          "seconds": 26.0139531
+        },
+        {
+          "input": "SetPhysicalCursorPos",
+          "events": 1659,
+          "observedClicks": 0,
+          "observedMoves": 1661,
+          "seconds": 26.0133504
+        }
+      ],
+      "markers": {
+        "mainAssemblyLoadedMs": {
+          "count": 2,
+          "median": 32.638400000000004,
+          "p95": 32.82614,
+          "mean": 32.638400000000004,
+          "minimum": 32.4298,
+          "maximum": 32.847
+        },
+        "trayShellRectangleAvailableMs": {
+          "count": 2,
+          "median": 573.8216,
+          "p95": 597.4038499999999,
+          "mean": 573.8216,
+          "minimum": 547.6191,
+          "maximum": 600.0241
+        },
+        "trayStartupReturnedMs": {
+          "count": 2,
+          "median": 572.6304500000001,
+          "p95": 595.8843350000001,
+          "mean": 572.6304500000001,
+          "minimum": 546.7928,
+          "maximum": 598.4681
+        }
+      }
+    },
+    {
+      "mode": "neon",
+      "target": "v1.4.0",
+      "completedRounds": 1,
+      "stableObservations": 20,
+      "applicationSHA256": [
+        "AF2E40C9E217E137DDAB73617861490CB5AA1453647C17E152E561BED4E6CBC4"
+      ],
+      "roundCpuMeans": [
+        6.1485346803135394
+      ],
+      "roundCpuMeanDistribution": {
+        "count": 1,
+        "median": 6.1485346803135394,
+        "p95": 6.1485346803135394,
+        "mean": 6.1485346803135394,
+        "minimum": 6.1485346803135394,
+        "maximum": 6.1485346803135394
+      },
+      "observations": {
+        "cpuOneCorePercent": {
+          "count": 20,
+          "median": 6.226832757857723,
+          "p95": 9.805492221321115,
+          "mean": 6.1485346803135394,
+          "minimum": 1.5559482132635896,
+          "maximum": 18.68031495309892
+        },
+        "cpuMachinePercent": {
+          "count": 20,
+          "median": 0.2223868842092044,
+          "p95": 0.35019615076146837,
+          "mean": 0.21959052429691212,
+          "minimum": 0.05556957904512821,
+          "maximum": 0.6671541054678187
+        },
+        "machineBusyPercent": {
+          "count": 20,
+          "median": 4.278639253953909,
+          "p95": 6.785907071123445,
+          "mean": 4.084883735212741,
+          "minimum": 1.8753447324875938,
+          "maximum": 7.077625570776258
+        },
+        "workingSet": {
+          "count": 20,
+          "median": 194893824.0,
+          "p95": 198811648.0,
+          "mean": 195503923.2,
+          "minimum": 192692224,
+          "maximum": 198967296
+        },
+        "privateBytes": {
+          "count": 20,
+          "median": 165980160.0,
+          "p95": 193412505.6,
+          "mean": 166730547.2,
+          "minimum": 140423168,
+          "maximum": 196280320
+        },
+        "gdi": {
+          "count": 20,
+          "median": 166.0,
+          "p95": 166.0,
+          "mean": 166,
+          "minimum": 166,
+          "maximum": 166
+        },
+        "user": {
+          "count": 20,
+          "median": 82.0,
+          "p95": 82.0,
+          "mean": 81.7,
+          "minimum": 81,
+          "maximum": 82
+        },
+        "threads": {
+          "count": 20,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 20,
+          "median": 325200.6809687796,
+          "p95": 350675.8855490018,
+          "mean": 323893.75877240906,
+          "minimum": 292803.7249843179,
+          "maximum": 359386.43905817793
+        },
+        "samplerHz": {
+          "count": 20,
+          "median": 53.79543884135778,
+          "p95": 56.82967325064364,
+          "mean": 53.79567352868968,
+          "minimum": 49.78397240852768,
+          "maximum": 57.821925815067296
+        },
+        "renderHz": {
+          "count": 20,
+          "median": 52.718810955559846,
+          "p95": 53.828700954683534,
+          "mean": 52.30126622535836,
+          "minimum": 48.78829296035713,
+          "maximum": 53.83420679333852
+        },
+        "paintHz": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        },
+        "paintWindowMeanMs": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        }
+      },
+      "warmupObservations": {
+        "cpuOneCorePercent": {
+          "count": 5,
+          "median": 12.463884647844402,
+          "p95": 24.534243746894003,
+          "mean": 13.038792966049602,
+          "minimum": 4.671848373578837,
+          "maximum": 26.42844172932799
+        },
+        "cpuMachinePercent": {
+          "count": 5,
+          "median": 0.44513873742301435,
+          "p95": 0.8762229909605002,
+          "mean": 0.4656711773589144,
+          "minimum": 0.16685172762781558,
+          "maximum": 0.9438729189045711
+        },
+        "machineBusyPercent": {
+          "count": 5,
+          "median": 6.122448979591832,
+          "p95": 14.844150434889137,
+          "mean": 7.202894490477845,
+          "minimum": 2.7041942604856484,
+          "maximum": 16.72222222222223
+        },
+        "workingSet": {
+          "count": 5,
+          "median": 196984832.0,
+          "p95": 197542707.2,
+          "mean": 195801088,
+          "minimum": 190468096,
+          "maximum": 197599232
+        },
+        "privateBytes": {
+          "count": 5,
+          "median": 137814016.0,
+          "p95": 145876582.4,
+          "mean": 140469862.4,
+          "minimum": 137801728,
+          "maximum": 146817024
+        },
+        "gdi": {
+          "count": 5,
+          "median": 166.0,
+          "p95": 166.0,
+          "mean": 166,
+          "minimum": 166,
+          "maximum": 166
+        },
+        "user": {
+          "count": 5,
+          "median": 81.0,
+          "p95": 81.8,
+          "mean": 80.8,
+          "minimum": 80,
+          "maximum": 82
+        },
+        "threads": {
+          "count": 5,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 5,
+          "median": 324418.38772824855,
+          "p95": 371302.2107759157,
+          "mean": 330681.9589300445,
+          "minimum": 302386.9432626814,
+          "maximum": 380202.10224058374
+        },
+        "samplerHz": {
+          "count": 5,
+          "median": 52.84687090686027,
+          "p95": 55.53831935346222,
+          "mean": 52.70534696372536,
+          "minimum": 48.836388331810774,
+          "maximum": 55.71737362230089
+        },
+        "renderHz": {
+          "count": 5,
+          "median": 50.74260812030974,
+          "p95": 52.84321098272349,
+          "mean": 46.775266045639995,
+          "minimum": 27.625230596679327,
+          "maximum": 52.84687090686027
+        },
+        "paintHz": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        },
+        "paintWindowMeanMs": {
+          "count": 0,
+          "median": null,
+          "p95": null,
+          "mean": null,
+          "minimum": null,
+          "maximum": null
+        }
+      },
+      "roundResourceChanges": [
+        {
+          "workingSet": 1007616,
+          "privateBytes": 55857152,
+          "gdi": 0,
+          "user": 0,
+          "threads": 0
+        }
+      ],
+      "initialPanelsCreated": [
+        true
+      ],
+      "interventions": [
+        "none"
+      ],
+      "managedMainEpochExplicit": true,
+      "gcCollections": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "driverOneCoreCPU": {
+        "count": 1,
+        "median": 1.1413067725153492,
+        "p95": 1.1413067725153492,
+        "mean": 1.1413067725153492,
+        "minimum": 1.1413067725153492,
+        "maximum": 1.1413067725153492
+      },
+      "controllerOneCoreCPU": {
+        "count": 1,
+        "median": 0.11438185172227058,
+        "p95": 0.11438185172227058,
+        "mean": 0.11438185172227058,
+        "minimum": 0.11438185172227058,
+        "maximum": 0.11438185172227058
+      },
+      "inputConditions": [
+        {
+          "input": "SetPhysicalCursorPos",
+          "events": 1659,
+          "observedClicks": 0,
+          "observedMoves": 1661,
+          "seconds": 26.0118296
+        }
+      ],
+      "markers": {
+        "mainAssemblyLoadedMs": {
+          "count": 1,
+          "median": 11.2546,
+          "p95": 11.2546,
+          "mean": 11.2546,
+          "minimum": 11.2546,
+          "maximum": 11.2546
+        },
+        "trayShellRectangleAvailableMs": {
+          "count": 1,
+          "median": 746.9204,
+          "p95": 746.9204,
+          "mean": 746.9204,
+          "minimum": 746.9204,
+          "maximum": 746.9204
+        },
+        "trayStartupReturnedMs": {
+          "count": 1,
+          "median": 745.9885,
+          "p95": 745.9885,
+          "mean": 745.9885,
+          "minimum": 745.9885,
+          "maximum": 745.9885
+        }
+      }
+    },
+    {
+      "mode": "neon",
+      "target": "v1.5.0",
+      "completedRounds": 1,
+      "stableObservations": 20,
+      "applicationSHA256": [
+        "981A66BEB8089F08A2E12A4D7379408E2A12A2A93C42643D0B444B754E15983E"
+      ],
+      "roundCpuMeans": [
+        6.150239106183232
+      ],
+      "roundCpuMeanDistribution": {
+        "count": 1,
+        "median": 6.150239106183232,
+        "p95": 6.150239106183232,
+        "mean": 6.150239106183232,
+        "minimum": 6.150239106183232,
+        "maximum": 6.150239106183232
+      },
+      "observations": {
+        "cpuOneCorePercent": {
+          "count": 20,
+          "median": 4.670177642920626,
+          "p95": 11.449409763892946,
+          "mean": 6.150239106183232,
+          "minimum": 0,
+          "maximum": 21.80020132921931
+        },
+        "cpuMachinePercent": {
+          "count": 20,
+          "median": 0.16679205867573665,
+          "p95": 0.4089074915676052,
+          "mean": 0.21965139664940114,
+          "minimum": 0,
+          "maximum": 0.7785786189006896
+        },
+        "machineBusyPercent": {
+          "count": 20,
+          "median": 4.131492262605358,
+          "p95": 5.894247075705523,
+          "mean": 4.107819302047015,
+          "minimum": 2.0296215030170095,
+          "maximum": 7.009609949123796
+        },
+        "workingSet": {
+          "count": 20,
+          "median": 165836800.0,
+          "p95": 171138867.2,
+          "mean": 165872844.8,
+          "minimum": 160710656,
+          "maximum": 171446272
+        },
+        "privateBytes": {
+          "count": 20,
+          "median": 145313792.0,
+          "p95": 173330022.4,
+          "mean": 145913241.6,
+          "minimum": 118796288,
+          "maximum": 176201728
+        },
+        "gdi": {
+          "count": 20,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 20,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 22.5,
+          "minimum": 21,
+          "maximum": 23
+        },
+        "threads": {
+          "count": 20,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 20,
+          "median": 292309.76332591986,
+          "p95": 320783.35813548905,
+          "mean": 294459.0096234903,
+          "minimum": 252256.09768855892,
+          "maximum": 325669.03346211434
+        },
+        "samplerHz": {
+          "count": 20,
+          "median": 52.27735458352852,
+          "p95": 54.8495655386011,
+          "mean": 51.5629428097463,
+          "minimum": 44.83649475457844,
+          "maximum": 55.76658338856883
+        },
+        "renderHz": {
+          "count": 20,
+          "median": 52.761804560169935,
+          "p95": 54.821597015461364,
+          "mean": 51.46313171433697,
+          "minimum": 43.8401282044767,
+          "maximum": 55.78766100468399
+        },
+        "paintHz": {
+          "count": 20,
+          "median": 52.761804560169935,
+          "p95": 54.821597015461364,
+          "mean": 51.46313171433697,
+          "minimum": 43.8401282044767,
+          "maximum": 55.78766100468399
+        },
+        "paintWindowMeanMs": {
+          "count": 20,
+          "median": 0.00658867924528302,
+          "p95": 0.007876115427302998,
+          "mean": 0.0066864428384193625,
+          "minimum": 0.005489090909090909,
+          "maximum": 0.008641176470588235
+        }
+      },
+      "warmupObservations": {
+        "cpuOneCorePercent": {
+          "count": 5,
+          "median": 9.34421455074113,
+          "p95": 30.478797474285216,
+          "mean": 16.187310697481177,
+          "minimum": 6.217292688354374,
+          "maximum": 31.081853389533304
+        },
+        "cpuMachinePercent": {
+          "count": 5,
+          "median": 0.33372194824075463,
+          "p95": 1.088528481224472,
+          "mean": 0.5781182391957562,
+          "minimum": 0.22204616744122765,
+          "maximum": 1.1100661924833322
+        },
+        "machineBusyPercent": {
+          "count": 5,
+          "median": 5.239436619718307,
+          "p95": 20.833219537604183,
+          "mean": 9.185126208232802,
+          "minimum": 4.211724530449635,
+          "maximum": 24.17707150964813
+        },
+        "workingSet": {
+          "count": 5,
+          "median": 170352640.0,
+          "p95": 170851532.8,
+          "mean": 168501248,
+          "minimum": 160509952,
+          "maximum": 170905600
+        },
+        "privateBytes": {
+          "count": 5,
+          "median": 119947264.0,
+          "p95": 127990169.6,
+          "mean": 122104217.6,
+          "minimum": 119947264,
+          "maximum": 129757184
+        },
+        "gdi": {
+          "count": 5,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 5,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 21.8,
+          "minimum": 21,
+          "maximum": 22
+        },
+        "threads": {
+          "count": 5,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 5,
+          "median": 302264.99494398537,
+          "p95": 316616.5005744066,
+          "mean": 299204.87622138386,
+          "minimum": 278700.28718637914,
+          "maximum": 318126.43227771664
+        },
+        "samplerHz": {
+          "count": 5,
+          "median": 50.894053848104406,
+          "p95": 54.59899539028806,
+          "mean": 51.59635858479502,
+          "minimum": 47.74172680632315,
+          "maximum": 54.81939203101463
+        },
+        "renderHz": {
+          "count": 5,
+          "median": 50.80921141115113,
+          "p95": 54.334932444719435,
+          "mean": 47.20402911413598,
+          "minimum": 27.94183348523379,
+          "maximum": 54.71217565751849
+        },
+        "paintHz": {
+          "count": 5,
+          "median": 50.80921141115113,
+          "p95": 54.334932444719435,
+          "mean": 47.4036136390305,
+          "minimum": 28.939756109706426,
+          "maximum": 54.71217565751849
+        },
+        "paintWindowMeanMs": {
+          "count": 5,
+          "median": 0.0070470588235294115,
+          "p95": 0.051493724137931025,
+          "mean": 0.018402468013596875,
+          "minimum": 0.005610909090909091,
+          "maximum": 0.06158965517241379
+        }
+      },
+      "roundResourceChanges": [
+        {
+          "workingSet": -1695744,
+          "privateBytes": 53383168,
+          "gdi": 0,
+          "user": 2,
+          "threads": 0
+        }
+      ],
+      "initialPanelsCreated": [
+        false
+      ],
+      "interventions": [
+        "none"
+      ],
+      "managedMainEpochExplicit": true,
+      "gcCollections": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "driverOneCoreCPU": {
+        "count": 1,
+        "median": 1.2016065829922442,
+        "p95": 1.2016065829922442,
+        "mean": 1.2016065829922442,
+        "minimum": 1.2016065829922442,
+        "maximum": 1.2016065829922442
+      },
+      "controllerOneCoreCPU": {
+        "count": 1,
+        "median": 0.0,
+        "p95": 0.0,
+        "mean": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "inputConditions": [
+        {
+          "input": "SetPhysicalCursorPos",
+          "events": 1658,
+          "observedClicks": 0,
+          "observedMoves": 1659,
+          "seconds": 26.0068375
+        }
+      ],
+      "markers": {
+        "mainAssemblyLoadedMs": {
+          "count": 1,
+          "median": 32.8628,
+          "p95": 32.8628,
+          "mean": 32.8628,
+          "minimum": 32.8628,
+          "maximum": 32.8628
+        },
+        "trayShellRectangleAvailableMs": {
+          "count": 1,
+          "median": 571.4044,
+          "p95": 571.4044,
+          "mean": 571.4044,
+          "minimum": 571.4044,
+          "maximum": 571.4044
+        },
+        "trayStartupReturnedMs": {
+          "count": 1,
+          "median": 566.1266,
+          "p95": 566.1266,
+          "mean": 566.1266,
+          "minimum": 566.1266,
+          "maximum": 566.1266
+        }
+      }
+    },
+    {
+      "mode": "neon",
+      "target": "v1.5.1",
+      "completedRounds": 1,
+      "stableObservations": 20,
+      "applicationSHA256": [
+        "B38D9FE4895F37CA29113A394A7D6B86A78F84B05471F43642F1065F071DA306"
+      ],
+      "roundCpuMeans": [
+        5.1377322448599125
+      ],
+      "roundCpuMeanDistribution": {
+        "count": 1,
+        "median": 5.1377322448599125,
+        "p95": 5.1377322448599125,
+        "mean": 5.1377322448599125,
+        "minimum": 5.1377322448599125,
+        "maximum": 5.1377322448599125
+      },
+      "observations": {
+        "cpuOneCorePercent": {
+          "count": 20,
+          "median": 4.669875424381793,
+          "p95": 10.975341388640109,
+          "mean": 5.1377322448599125,
+          "minimum": 1.5561853112440314,
+          "maximum": 12.454871020344855
+        },
+        "cpuMachinePercent": {
+          "count": 20,
+          "median": 0.1667812651564926,
+          "p95": 0.3919764781657182,
+          "mean": 0.18349043731642542,
+          "minimum": 0.055578046830143966,
+          "maximum": 0.44481682215517343
+        },
+        "machineBusyPercent": {
+          "count": 20,
+          "median": 3.300256428555609,
+          "p95": 6.459147684431921,
+          "mean": 3.866120654043412,
+          "minimum": 1.6137708445400745,
+          "maximum": 9.900442477876103
+        },
+        "workingSet": {
+          "count": 20,
+          "median": 165738496.0,
+          "p95": 171477811.2,
+          "mean": 166026035.2,
+          "minimum": 160641024,
+          "maximum": 172077056
+        },
+        "privateBytes": {
+          "count": 20,
+          "median": 146192384.0,
+          "p95": 175847219.2,
+          "mean": 147799040,
+          "minimum": 121880576,
+          "maximum": 178528256
+        },
+        "gdi": {
+          "count": 20,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 20,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 22.65,
+          "minimum": 22,
+          "maximum": 23
+        },
+        "threads": {
+          "count": 20,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 20,
+          "median": 301164.29417240515,
+          "p95": 341742.15818284045,
+          "mean": 307048.55137403856,
+          "minimum": 276504.3442427282,
+          "maximum": 341910.1870891373
+        },
+        "samplerHz": {
+          "count": 20,
+          "median": 52.80868603508431,
+          "p95": 56.77153890671511,
+          "mean": 53.107284845545955,
+          "minimum": 48.847137767071786,
+          "maximum": 56.802995849793724
+        },
+        "renderHz": {
+          "count": 20,
+          "median": 51.81366256323994,
+          "p95": 54.91423653306724,
+          "mean": 52.16098507614841,
+          "minimum": 47.850257404478484,
+          "maximum": 56.769640154182255
+        },
+        "paintHz": {
+          "count": 20,
+          "median": 51.81366256323994,
+          "p95": 54.91423653306724,
+          "mean": 52.16098507614841,
+          "minimum": 47.850257404478484,
+          "maximum": 56.769640154182255
+        },
+        "paintWindowMeanMs": {
+          "count": 20,
+          "median": 0.007147363636363636,
+          "p95": 0.010799628190899,
+          "mean": 0.007480748489642047,
+          "minimum": 0.005417307692307693,
+          "maximum": 0.011239622641509434
+        }
+      },
+      "warmupObservations": {
+        "cpuOneCorePercent": {
+          "count": 5,
+          "median": 6.231078706400147,
+          "p95": 22.65507094877479,
+          "mean": 12.402188572279258,
+          "minimum": 6.228756204090327,
+          "maximum": 23.317883919071946
+        },
+        "cpuMachinePercent": {
+          "count": 5,
+          "median": 0.22253852522857667,
+          "p95": 0.8091096767419568,
+          "mean": 0.44293530615283067,
+          "minimum": 0.22245557871751168,
+          "maximum": 0.8327815685382838
+        },
+        "machineBusyPercent": {
+          "count": 5,
+          "median": 4.206935758953955,
+          "p95": 18.955051482814092,
+          "mean": 7.4730005902407655,
+          "minimum": 2.1311475409836023,
+          "maximum": 22.310305775764437
+        },
+        "workingSet": {
+          "count": 5,
+          "median": 170725376.0,
+          "p95": 171122688.0,
+          "mean": 168648704,
+          "minimum": 160223232,
+          "maximum": 171171840
+        },
+        "privateBytes": {
+          "count": 5,
+          "median": 131735552.0,
+          "p95": 131735552.0,
+          "mean": 129649868.8,
+          "minimum": 121991168,
+          "maximum": 131735552
+        },
+        "gdi": {
+          "count": 5,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 5,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 21.8,
+          "minimum": 21,
+          "maximum": 22
+        },
+        "threads": {
+          "count": 5,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 5,
+          "median": 326885.1255906603,
+          "p95": 333081.4111240667,
+          "mean": 306630.3436418926,
+          "minimum": 257971.22030239177,
+          "maximum": 334388.65308739233
+        },
+        "samplerHz": {
+          "count": 5,
+          "median": 52.72950816899469,
+          "p95": 54.63008481372512,
+          "mean": 51.300749824025395,
+          "minimum": 46.285759811768614,
+          "maximum": 54.833492616321294
+        },
+        "renderHz": {
+          "count": 5,
+          "median": 51.82325161803151,
+          "p95": 51.83978973030755,
+          "mean": 46.17085523439641,
+          "minimum": 24.620085006259902,
+          "maximum": 51.842574837249224
+        },
+        "paintHz": {
+          "count": 5,
+          "median": 51.82325161803151,
+          "p95": 51.83978973030755,
+          "mean": 46.36781591444649,
+          "minimum": 25.604888406510298,
+          "maximum": 51.842574837249224
+        },
+        "paintWindowMeanMs": {
+          "count": 5,
+          "median": 0.007569230769230769,
+          "p95": 0.04922527903469079,
+          "mean": 0.018283740573152338,
+          "minimum": 0.006178846153846154,
+          "maximum": 0.05848846153846154
+        }
+      },
+      "roundResourceChanges": [
+        {
+          "workingSet": -1507328,
+          "privateBytes": 46727168,
+          "gdi": 0,
+          "user": 1,
+          "threads": 0
+        }
+      ],
+      "initialPanelsCreated": [
+        false
+      ],
+      "interventions": [
+        "none"
+      ],
+      "managedMainEpochExplicit": true,
+      "gcCollections": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "driverOneCoreCPU": {
+        "count": 1,
+        "median": 0.7809504184085322,
+        "p95": 0.7809504184085322,
+        "mean": 0.7809504184085322,
+        "minimum": 0.7809504184085322,
+        "maximum": 0.7809504184085322
+      },
+      "controllerOneCoreCPU": {
+        "count": 1,
+        "median": 0.05761279848499541,
+        "p95": 0.05761279848499541,
+        "mean": 0.05761279848499541,
+        "minimum": 0.05761279848499541,
+        "maximum": 0.05761279848499541
+      },
+      "inputConditions": [
+        {
+          "input": "SetPhysicalCursorPos",
+          "events": 1659,
+          "observedClicks": 0,
+          "observedMoves": 1662,
+          "seconds": 26.0099597
+        }
+      ],
+      "markers": {
+        "mainAssemblyLoadedMs": {
+          "count": 1,
+          "median": 33.2766,
+          "p95": 33.2766,
+          "mean": 33.2766,
+          "minimum": 33.2766,
+          "maximum": 33.2766
+        },
+        "trayShellRectangleAvailableMs": {
+          "count": 1,
+          "median": 534.1392,
+          "p95": 534.1392,
+          "mean": 534.1392,
+          "minimum": 534.1392,
+          "maximum": 534.1392
+        },
+        "trayStartupReturnedMs": {
+          "count": 1,
+          "median": 533.3004,
+          "p95": 533.3004,
+          "mean": 533.3004,
+          "minimum": 533.3004,
+          "maximum": 533.3004
+        }
+      }
+    },
+    {
+      "mode": "neon",
+      "target": "v1.5.2",
+      "completedRounds": 1,
+      "stableObservations": 20,
+      "applicationSHA256": [
+        "35CE6EFFAB3C64C265A6EFA68A942B52E957F8A5F7C7E15C1B0E22192CC6FC6E"
+      ],
+      "roundCpuMeans": [
+        5.450951394974989
+      ],
+      "roundCpuMeanDistribution": {
+        "count": 1,
+        "median": 5.450951394974989,
+        "p95": 5.450951394974989,
+        "mean": 5.450951394974989,
+        "minimum": 5.450951394974989,
+        "maximum": 5.450951394974989
+      },
+      "observations": {
+        "cpuOneCorePercent": {
+          "count": 20,
+          "median": 4.674028054877306,
+          "p95": 9.662077890077883,
+          "mean": 5.450951394974989,
+          "minimum": 0,
+          "maximum": 15.577294535485041
+        },
+        "cpuMachinePercent": {
+          "count": 20,
+          "median": 0.16692957338847525,
+          "p95": 0.34507421035992447,
+          "mean": 0.194676835534821,
+          "minimum": 0,
+          "maximum": 0.5563319476958943
+        },
+        "machineBusyPercent": {
+          "count": 20,
+          "median": 3.8621336627055527,
+          "p95": 6.655862914984609,
+          "mean": 3.8544143673252718,
+          "minimum": 1.7241379310344862,
+          "maximum": 7.7958496915311315
+        },
+        "workingSet": {
+          "count": 20,
+          "median": 166443008.0,
+          "p95": 171833139.2,
+          "mean": 166645760,
+          "minimum": 162004992,
+          "maximum": 172802048
+        },
+        "privateBytes": {
+          "count": 20,
+          "median": 145606656.0,
+          "p95": 175435980.8,
+          "mean": 147120332.8,
+          "minimum": 122531840,
+          "maximum": 178241536
+        },
+        "gdi": {
+          "count": 20,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 20,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 22.6,
+          "minimum": 22,
+          "maximum": 23
+        },
+        "threads": {
+          "count": 20,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 20,
+          "median": 297548.22354774387,
+          "p95": 326206.97535507765,
+          "mean": 299284.88954822737,
+          "minimum": 260170.0856360683,
+          "maximum": 334080.1301240557
+        },
+        "samplerHz": {
+          "count": 20,
+          "median": 53.34993509508366,
+          "p95": 55.7355016040879,
+          "mean": 53.019383022068254,
+          "minimum": 48.825453884906835,
+          "maximum": 55.85058293547274
+        },
+        "renderHz": {
+          "count": 20,
+          "median": 52.336425349907486,
+          "p95": 53.91082777561284,
+          "mean": 51.92331691881526,
+          "minimum": 46.78315539642205,
+          "maximum": 54.83497961235459
+        },
+        "paintHz": {
+          "count": 20,
+          "median": 52.336425349907486,
+          "p95": 53.91082777561284,
+          "mean": 51.92331691881526,
+          "minimum": 46.78315539642205,
+          "maximum": 54.83497961235459
+        },
+        "paintWindowMeanMs": {
+          "count": 20,
+          "median": 0.006621296296296296,
+          "p95": 0.007541331908831908,
+          "mean": 0.006599634430119707,
+          "minimum": 0.005569811320754717,
+          "maximum": 0.007869230769230769
+        }
+      },
+      "warmupObservations": {
+        "cpuOneCorePercent": {
+          "count": 5,
+          "median": 6.229518588783798,
+          "p95": 29.949377588494585,
+          "mean": 12.387721474549249,
+          "minimum": 1.5557063857839202,
+          "maximum": 32.38373609571907
+        },
+        "cpuMachinePercent": {
+          "count": 5,
+          "median": 0.22248280674227852,
+          "p95": 1.069620628160521,
+          "mean": 0.4424186240910446,
+          "minimum": 0.05556094234942572,
+          "maximum": 1.1565620034185384
+        },
+        "machineBusyPercent": {
+          "count": 5,
+          "median": 4.6875,
+          "p95": 18.3861739487291,
+          "mean": 7.616475712024662,
+          "minimum": 2.9540481400437635,
+          "maximum": 21.55457552370452
+        },
+        "workingSet": {
+          "count": 5,
+          "median": 170704896.0,
+          "p95": 171191500.8,
+          "mean": 169054208,
+          "minimum": 161845248,
+          "maximum": 171249664
+        },
+        "privateBytes": {
+          "count": 5,
+          "median": 119595008.0,
+          "p95": 128151552.0,
+          "mean": 122072268.8,
+          "minimum": 119590912,
+          "maximum": 129724416
+        },
+        "gdi": {
+          "count": 5,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 5,
+          "median": 22.0,
+          "p95": 23.0,
+          "mean": 22.4,
+          "minimum": 22,
+          "maximum": 23
+        },
+        "threads": {
+          "count": 5,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 5,
+          "median": 310245.1902785725,
+          "p95": 319720.6518401159,
+          "mean": 295969.9792309631,
+          "minimum": 258884.34537875082,
+          "maximum": 321942.30483919446
+        },
+        "samplerHz": {
+          "count": 5,
+          "median": 50.83287168447579,
+          "p95": 54.35621683200625,
+          "mean": 50.51596667255166,
+          "minimum": 45.39891384085569,
+          "maximum": 54.760864779593994
+        },
+        "renderHz": {
+          "count": 5,
+          "median": 49.75247645439175,
+          "p95": 53.612344606831726,
+          "mean": 45.772206364353366,
+          "minimum": 25.6602556491793,
+          "maximum": 53.82304060709201
+        },
+        "paintHz": {
+          "count": 5,
+          "median": 49.75247645439175,
+          "p95": 53.612344606831726,
+          "mean": 45.96959294627013,
+          "minimum": 26.647188558763123,
+          "maximum": 53.82304060709201
+        },
+        "paintWindowMeanMs": {
+          "count": 5,
+          "median": 0.006683018867924529,
+          "p95": 0.03736614814814814,
+          "mean": 0.014789560432371352,
+          "minimum": 0.0055340425531914894,
+          "maximum": 0.043585185185185185
+        }
+      },
+      "roundResourceChanges": [
+        {
+          "workingSet": -1507328,
+          "privateBytes": 55709696,
+          "gdi": 0,
+          "user": 1,
+          "threads": 0
+        }
+      ],
+      "initialPanelsCreated": [
+        false
+      ],
+      "interventions": [
+        "none"
+      ],
+      "managedMainEpochExplicit": true,
+      "gcCollections": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "driverOneCoreCPU": {
+        "count": 1,
+        "median": 1.08125473020111,
+        "p95": 1.08125473020111,
+        "mean": 1.08125473020111,
+        "minimum": 1.08125473020111,
+        "maximum": 1.08125473020111
+      },
+      "controllerOneCoreCPU": {
+        "count": 1,
+        "median": 0.11524556002097373,
+        "p95": 0.11524556002097373,
+        "mean": 0.11524556002097373,
+        "minimum": 0.11524556002097373,
+        "maximum": 0.11524556002097373
+      },
+      "inputConditions": [
+        {
+          "input": "SetPhysicalCursorPos",
+          "events": 1657,
+          "observedClicks": 0,
+          "observedMoves": 1658,
+          "seconds": 26.0114309
+        }
+      ],
+      "markers": {
+        "mainAssemblyLoadedMs": {
+          "count": 1,
+          "median": 33.1766,
+          "p95": 33.1766,
+          "mean": 33.1766,
+          "minimum": 33.1766,
+          "maximum": 33.1766
+        },
+        "trayShellRectangleAvailableMs": {
+          "count": 1,
+          "median": 550.4926,
+          "p95": 550.4926,
+          "mean": 550.4926,
+          "minimum": 550.4926,
+          "maximum": 550.4926
+        },
+        "trayStartupReturnedMs": {
+          "count": 1,
+          "median": 547.5984,
+          "p95": 547.5984,
+          "mean": 547.5984,
+          "minimum": 547.5984,
+          "maximum": 547.5984
+        }
+      }
+    },
+    {
+      "mode": "stardust",
+      "target": "v1.5.0",
+      "completedRounds": 1,
+      "stableObservations": 20,
+      "applicationSHA256": [
+        "981A66BEB8089F08A2E12A4D7379408E2A12A2A93C42643D0B444B754E15983E"
+      ],
+      "roundCpuMeans": [
+        5.605822309199599
+      ],
+      "roundCpuMeanDistribution": {
+        "count": 1,
+        "median": 5.605822309199599,
+        "p95": 5.605822309199599,
+        "mean": 5.605822309199599,
+        "minimum": 5.605822309199599,
+        "maximum": 5.605822309199599
+      },
+      "observations": {
+        "cpuOneCorePercent": {
+          "count": 20,
+          "median": 6.223874849597919,
+          "p95": 9.34428050207485,
+          "mean": 5.605822309199599,
+          "minimum": 0,
+          "maximum": 9.347480083885063
+        },
+        "cpuMachinePercent": {
+          "count": 20,
+          "median": 0.22228124462849708,
+          "p95": 0.3337243036455304,
+          "mean": 0.20020793961427139,
+          "minimum": 0,
+          "maximum": 0.3338385744244665
+        },
+        "machineBusyPercent": {
+          "count": 20,
+          "median": 3.0580511830511803,
+          "p95": 5.69685588761584,
+          "mean": 3.3866200700976825,
+          "minimum": 1.996577296063895,
+          "maximum": 6.309523809523809
+        },
+        "workingSet": {
+          "count": 20,
+          "median": 165888000.0,
+          "p95": 169260032.0,
+          "mean": 165649408,
+          "minimum": 161239040,
+          "maximum": 170213376
+        },
+        "privateBytes": {
+          "count": 20,
+          "median": 146835456.0,
+          "p95": 175029043.2,
+          "mean": 147898163.2,
+          "minimum": 122257408,
+          "maximum": 177963008
+        },
+        "gdi": {
+          "count": 20,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 20,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 22.8,
+          "minimum": 22,
+          "maximum": 23
+        },
+        "threads": {
+          "count": 20,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 20,
+          "median": 280996.7829046439,
+          "p95": 301699.7063762641,
+          "mean": 280792.2153452202,
+          "minimum": 252284.57767324973,
+          "maximum": 309134.03817594156
+        },
+        "samplerHz": {
+          "count": 20,
+          "median": 53.80050797773886,
+          "p95": 56.91287366558632,
+          "mean": 53.666747162695614,
+          "minimum": 49.85322711405367,
+          "maximum": 57.77833917957145
+        },
+        "renderHz": {
+          "count": 20,
+          "median": 51.87251113974568,
+          "p95": 55.800913387429446,
+          "mean": 52.17168254135485,
+          "minimum": 47.84073818259012,
+          "maximum": 55.84823799806407
+        },
+        "paintHz": {
+          "count": 20,
+          "median": 51.87251113974568,
+          "p95": 55.800913387429446,
+          "mean": 52.17168254135485,
+          "minimum": 47.84073818259012,
+          "maximum": 55.84823799806407
+        },
+        "paintWindowMeanMs": {
+          "count": 20,
+          "median": 0.005970833333333333,
+          "p95": 0.007444213286713287,
+          "mean": 0.006127137750513702,
+          "minimum": 0.004884905660377359,
+          "maximum": 0.008111538461538462
+        }
+      },
+      "warmupObservations": {
+        "cpuOneCorePercent": {
+          "count": 5,
+          "median": 15.577109733834298,
+          "p95": 24.5166328193222,
+          "mean": 15.526498242798873,
+          "minimum": 6.225383588215479,
+          "maximum": 24.84635263991006
+        },
+        "cpuMachinePercent": {
+          "count": 5,
+          "median": 0.5563253476369392,
+          "p95": 0.8755940292615071,
+          "mean": 0.5545177943856741,
+          "minimum": 0.2223351281505528,
+          "maximum": 0.887369737139645
+        },
+        "machineBusyPercent": {
+          "count": 5,
+          "median": 7.558455682436104,
+          "p95": 18.557445259270814,
+          "mean": 9.652196743011542,
+          "minimum": 4.807184363444272,
+          "maximum": 20.984162895927604
+        },
+        "workingSet": {
+          "count": 5,
+          "median": 168357888.0,
+          "p95": 168783872.0,
+          "mean": 166614630.4,
+          "minimum": 159748096,
+          "maximum": 168833024
+        },
+        "privateBytes": {
+          "count": 5,
+          "median": 118779904.0,
+          "p95": 125702963.2,
+          "mean": 120433868.8,
+          "minimum": 118091776,
+          "maximum": 127102976
+        },
+        "gdi": {
+          "count": 5,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "user": {
+          "count": 5,
+          "median": 22.0,
+          "p95": 22.0,
+          "mean": 22,
+          "minimum": 22,
+          "maximum": 22
+        },
+        "threads": {
+          "count": 5,
+          "median": 23.0,
+          "p95": 23.0,
+          "mean": 23,
+          "minimum": 23,
+          "maximum": 23
+        },
+        "allocatedBytesPerSecond": {
+          "count": 5,
+          "median": 269534.20783537737,
+          "p95": 290766.1899404301,
+          "mean": 270739.60141898744,
+          "minimum": 253334.23026805883,
+          "maximum": 292140.75451615104
+        },
+        "samplerHz": {
+          "count": 5,
+          "median": 51.68041349101292,
+          "p95": 53.81032966805295,
+          "mean": 51.525866487455744,
+          "minimum": 48.49877006129354,
+          "maximum": 53.81608353452076
+        },
+        "renderHz": {
+          "count": 5,
+          "median": 50.686559385416516,
+          "p95": 54.423391576090836,
+          "mean": 47.36709516815661,
+          "minimum": 29.693124527322578,
+          "maximum": 54.83142626309673
+        },
+        "paintHz": {
+          "count": 5,
+          "median": 50.686559385416516,
+          "p95": 54.423391576090836,
+          "mean": 47.56504933167209,
+          "minimum": 30.682895344899997,
+          "maximum": 54.83142626309673
+        },
+        "paintWindowMeanMs": {
+          "count": 5,
+          "median": 0.006420754716981132,
+          "p95": 0.03133554712207463,
+          "mean": 0.01328865204236954,
+          "minimum": 0.004885454545454545,
+          "maximum": 0.0358258064516129
+        }
+      },
+      "roundResourceChanges": [
+        {
+          "workingSet": -282624,
+          "privateBytes": 55705600,
+          "gdi": 0,
+          "user": 0,
+          "threads": 0
+        }
+      ],
+      "initialPanelsCreated": [
+        false
+      ],
+      "interventions": [
+        "none"
+      ],
+      "managedMainEpochExplicit": true,
+      "gcCollections": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "driverOneCoreCPU": {
+        "count": 1,
+        "median": 1.5617073194106335,
+        "p95": 1.5617073194106335,
+        "mean": 1.5617073194106335,
+        "minimum": 1.5617073194106335,
+        "maximum": 1.5617073194106335
+      },
+      "controllerOneCoreCPU": {
+        "count": 1,
+        "median": 0.0,
+        "p95": 0.0,
+        "mean": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.0
+      },
+      "inputConditions": [
+        {
+          "input": "SetPhysicalCursorPos",
+          "events": 1659,
+          "observedClicks": 0,
+          "observedMoves": 1661,
+          "seconds": 26.0131808
+        }
+      ],
+      "markers": {
+        "mainAssemblyLoadedMs": {
+          "count": 1,
+          "median": 32.8278,
+          "p95": 32.8278,
+          "mean": 32.8278,
+          "minimum": 32.8278,
+          "maximum": 32.8278
+        },
+        "trayShellRectangleAvailableMs": {
+          "count": 1,
+          "median": 550.1672,
+          "p95": 550.1672,
+          "mean": 550.1672,
+          "minimum": 550.1672,
+          "maximum": 550.1672
+        },
+        "trayStartupReturnedMs": {
+          "count": 1,
+          "median": 549.3042,
+          "p95": 549.3042,
+          "mean": 549.3042,
+          "minimum": 549.3042,
+          "maximum": 549.3042
+        }
+      }
+    }
+  ],
+  "notes": "P95 uses actual 1-second observations; round CPU means are shown separately. Windows CPU accounting is quantized. Paint statistics are sampling-window CPU means, not per-frame/GPU P95. Missing counters remain null. Profiling and natural-input observations must remain separate from this timed automation."
+}
