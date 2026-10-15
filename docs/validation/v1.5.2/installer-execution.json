@@ -1,0 +1,23 @@
+[
+  {
+    "command": "scripts/verify-installation-lifecycle.ps1 -Version 1.5.2 -ReportDirectory artifacts/v1.5.2-installation",
+    "name": "Lifecycle",
+    "started": "2026-10-15T08:52:11.0705379+00:00",
+    "ended": "2026-10-15T08:52:23.8347908+00:00",
+    "passed": true
+  },
+  {
+    "command": "scripts/verify-release.ps1 -IsolatedUpgrade -CrossVolume -Version 1.5.2",
+    "name": "Cross-volume clone upgrade",
+    "started": "2026-10-15T08:52:23.8483648+00:00",
+    "ended": "2026-10-15T08:52:49.2605097+00:00",
+    "passed": true
+  },
+  {
+    "command": "scripts/verify-stability-protection.ps1 -BaselineDirectory <original-private-baseline> -ReportDirectory artifacts/v1.5.2-protection-after-installation",
+    "name": "Production state protection",
+    "started": "2026-10-15T08:52:49.2628174+00:00",
+    "ended": "2026-10-15T08:52:49.5603623+00:00",
+    "passed": true
+  }
+]

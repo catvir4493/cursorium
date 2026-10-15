@@ -24,8 +24,13 @@ values/types match the private baseline. No user data or raw trace is published.
 See [Chinese delivery](docs/CURSORIUM-v1.5.2-DELIVERY.md),
 [protocol](docs/CURSORIUM-v1.5.2-PROTOCOL.md), and
 [sanitized actual evidence](docs/validation/v1.5.2).
-The delivery's release addendum records isolated installer and final artifact gates
-when actually executed. Historical results below do not count as this round's rerun.
+Isolated installer lifecycle: 16 checks passed. Cross-volume installed-data clone:
+203 protected data files and 903 payload files matched the tested build (53132b1);
+final documentation adds files and the final manifest records its actual count.
+Four release-hardening negative fixtures passed with byte-for-byte restoration.
+All 895 original production program files and the desktop shortcut remain intact.
+See the delivery addendum for actual commands, times, scope and final artifact gates.
+Historical results below do not count as this round's rerun.
 v1.4.0 remains Latest Stable; this preview is not Steam Ready.
 
 # v1.5.1 Download filesystem compatibility — prerelease, 2026-10-14

@@ -55,6 +55,8 @@ Profiling 实际完成 5 次独立 EventPipe trace：三个版本 Comet、v1.5.1
 
 ## 修改与修复
 
+完整逐文件列表见[修改文件清单](validation/v1.5.2/changed-files.txt)，下列按职责说明。
+
 - `tools/Frost.PerformanceHost/`：双运行时反射宿主、独立输入进程、进程/线程资源观测、诊断控制、资源与托盘里程碑、managed 实现核对。
 - `scripts/prepare-performance.ps1`：公开归档/校验清单绑定，冻结 App/Core/host 哈希，拒绝覆写；不从已升级安装冒充历史版本。
 - `scripts/measure-performance.ps1`：轮换顺序、预热/稳定、固定驱动、可恢复记录、缺轮计划、实际输入到达检查；修正 PowerShell 空备份参数传入 File.Replace 变成空字符串的问题，改为 NullString。
@@ -107,4 +109,12 @@ v1.6 可以在独立分支开展设计和兼容迁移；**不得将 v1.5.2 提�
 
 ### 发布附记
 
-构建、隔离安装与发行字节闸门尚待本轮后续执行；此行会在实际完成后更新。生产安装保持 v1.5.1，桌面快捷方式继续指向原位置。
+现有 `build-release.ps1 -Version 1.5.2` 实际生成完整自包含发行；Release 重新编译 0 错误、0 警告，FROST/Obsidian 再次各 388 校验通过。初次源对象闸门还发现 `git archive` 会依照 `.gitattributes` 把 PowerShell 转成 CRLF；源码打包现在恢复规范 LF 字节，再逐文件比对当前提交的 Git blob。既不读取未跟踪私人文件，也不绕过精确内容校验。
+
+实际执行的 `verify-release-hardening.ps1` 四项负例全部通过：错误版本/提交、错误运行时、过期源码内容被拒绝，未跟踪源码目录文件不入包；运行时/源码包原始字节准确还原，最终完整文件闸门重新通过。见[发布负例记录](validation/v1.5.2/release-hardening.json)。
+
+`verify-installation-lifecycle.ps1 -Version 1.5.2` **16 项通过**：全新/重复安装、重命名中断后恢复、junction 阻止卸载、较新备份 schema 恢复失败时停止删除、卸载保留导入文件、原生指针值/类型不变。`verify-release.ps1 -IsolatedUpgrade -CrossVolume -Version 1.5.2` 在 D: 的隔离安装/用户数据副本执行，203 个受保护数据文件原样保留，903 个安装文件与该测试构建逐一匹配，五套 Cute Collection 存在，真实原生指针未变。测试构建为 `53132b1`；后续仅文档和证据更新会增加文件数，最终资产清单以发布前闸门为准。这是软件重命名恢复与副本升级，不是实际断电、不是生产卸载，也不代表完整历史升级矩阵已通过。[安装生命周期](validation/v1.5.2/isolated-lifecycle.json)、[升级结果](validation/v1.5.2/isolated-upgrade.json)、[命令与时间](validation/v1.5.2/installer-execution.json)。
+
+对测试构建 App/Core 实际比较方法 IL/签名/异常区、字符串、嵌入资源与冻结候选一致，差别为版本提交元数据；未据此声称 JIT/native machine code 相同。[比较结果](validation/v1.5.2/managed-identity.json)。文档更新后的最终发行仍须重新编译，并由发布器绑定最终 HEAD、资产内容和 SHA256，再匿名重新下载五个文件核对；最终 commit/哈希回执位于发布工作树 `artifacts/github-publication.json` 与 `artifacts/remote-v1.5.2/public-download-verification.json`。此源文档不嵌入会造成自身递归变化的最终包哈希。
+
+生产安装的 **895 个原有程序文件哈希全部未变**，201 个用户永久文件与关键 JSON、原生快照保持一致。`D:\CURSORIUM` 仍是 **v1.5.1+8da97e5**，桌面快捷方式准确指向该目录；本轮未升级正式安装。[安装保护](validation/v1.5.2/installed-protection.json)。

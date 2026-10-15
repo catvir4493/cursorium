@@ -1,0 +1,22 @@
+{
+  "measuredCandidate": "frozen v1.5.2 before trials",
+  "testedBuildCommit": "53132b1",
+  "assemblies": [
+    {
+      "passed": true,
+      "leftFile": "Frost.Core.dll",
+      "rightFile": "Frost.Core.dll",
+      "leftSHA256": "61D7834EBB55131426EDE7A7C14FD769A3692F48F55653A224F53A25BF0EEB78",
+      "rightSHA256": "DCB9F326F9AE5A9D96343410D3084FC6FB012317F575339709B25DDDB112EAFD",
+      "notes": "Managed IL, method signatures/exception regions, user-string constants and embedded resources. Informational-version metadata is intentionally excluded. Does not prove identical runtime JIT/native code or replace final release smoke/regression tests."
+    },
+    {
+      "passed": true,
+      "leftFile": "FrostWhiteComet.dll",
+      "rightFile": "FrostWhiteComet.dll",
+      "leftSHA256": "35CE6EFFAB3C64C265A6EFA68A942B52E957F8A5F7C7E15C1B0E22192CC6FC6E",
+      "rightSHA256": "A250E1D5FEE9CDA877FDAEF8EF76F15A59FA41177BFB4CC4F361DF9ECFC1872E",
+      "notes": "Managed IL, method signatures/exception regions, user-string constants and embedded resources. Informational-version metadata is intentionally excluded. Does not prove identical runtime JIT/native code or replace final release smoke/regression tests."
+    }
+  ]
+}
