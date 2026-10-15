@@ -8,7 +8,9 @@ Windows 鼠标主题与桌面特效管理工具，沿用原 FROST 的 **C# / WPF
 
 v1.1 的 UI、状态与窗口框架升级、同尺寸前后对照和页面截图见 [交付记录](docs/CURSORIUM-v1.1-DELIVERY.md) 与 [截图对照](docs/CURSORIUM-v1.1-SCREENSHOTS.md)。
 
-当前候选 **v1.5.1 — Stability, Performance & Compatibility（预发布）**：.NET 10.0.13 自包含运行时、静止采样降频、减少参数复制与绘制分配、外部修改保护、真实中断恢复测试、安装生命周期与可持续诊断。尚未完成 Windows 10、物理混合 DPI 和 24/72 小时长测，**不是 Steam Ready**。见[中文交付](docs/CURSORIUM-v1.5-DELIVERY.md)、[兼容性矩阵](docs/CURSORIUM-v1.5-COMPATIBILITY.md)和[可复现诊断](docs/CURSORIUM-v1.5-DIAGNOSTICS.md)。v1.4.0 Stable 保留。v1.5.1 修复加密用户目录下的主题下载和本地导入失败，见[修复记录](docs/CURSORIUM-v1.5.1-DELIVERY.md)。
+当前候选 **v1.5.2 — Performance Verification & Release Hardening（Preview）**：准确 .NET 8/10 冻结基线、独立输入驱动、交替多轮与缺测闸门、启动/profiling 分离和发行字节核验。用户已暂停自动输入，153 次原始记录中 118 次接受，21 个模式/版本组不足三轮；主动 CPU 根因、完整自然输入及 WPF/原生回归仍 Pending，**不宣称普遍 CPU 改善或 Steam Ready**。见[中文交付](docs/CURSORIUM-v1.5.2-DELIVERY.md)、[实际统计](docs/validation/v1.5.2/performance-table.md)和[复现协议](docs/CURSORIUM-v1.5.2-PROTOCOL.md)。本机生产安装保留 v1.5.1；v1.4.0 Latest Stable 不变。
+
+v1.5 的 .NET 10.0.13、延迟创建主窗口、静止采样、事务/外部修改保护和 Profile 行为继续保留。v1.5.1 修复加密用户目录下的主题下载和本地导入，见[修复记录](docs/CURSORIUM-v1.5.1-DELIVERY.md)。历史[交付](docs/CURSORIUM-v1.5-DELIVERY.md)、[兼容性矩阵](docs/CURSORIUM-v1.5-COMPATIBILITY.md)中的 Windows 10、物理混合 DPI 与 24/72h 限制仍未关闭。
 
 v1.4.0 — Online Library Expansion & Curation：29 项真实在线资源、6 个独立签名合集、版本绑定与安全更新、可复用审核发布工具。本轮资源库、来源/授权与旧资源 ID 保持不变，见[来源台账](docs/CURSORIUM-v1.4-SOURCES.md)和[以后上架流程](docs/CURSORIUM-LIBRARY-WORKFLOW.md)。
 
@@ -35,7 +37,7 @@ v1.2 新增五套真实 Public Domain 可爱主题、分类/收藏、来源与�
 
 关闭窗口会保留托盘进程；Quit 会释放特效引擎，Windows 指针主题继续保留。Restore original cursors 恢复安装第一套主题前保存的配置，包括原注册表类型和原本不存在的值。已有 FROST 的备份继续有效。
 
-安装器 `CURSORIUM-Setup-1.5.1-Release.exe` 按当前用户安装，无需管理员权限。安装本身不改变系统指针或默认开启登录启动。卸载先退出引擎并恢复备份；恢复失败时停止卸载。设置、导入主题、指针稳定副本与历史备份保留。
+安装器 `CURSORIUM-Setup-1.5.2-Release.exe` 为预发布候选，按当前用户安装，无需管理员权限。安装本身不改变系统指针或默认开启登录启动。卸载先退出引擎并恢复备份；恢复失败时停止卸载。设置、导入主题、指针稳定副本与历史备份保留。本轮没有自动升级本机的 v1.5.1 正式安装。
 
 ## 使用
 

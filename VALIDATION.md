@@ -1,3 +1,33 @@
+# v1.5.2 Performance Verification & Release Hardening — Preview, 2026-10-15
+
+Actual Windows 11 build 26100, one 2560x1440 / 96-DPI display. User paused
+automatic input; it was not resumed. Production D:\CURSORIUM remains v1.5.1.
+The matrix has 153 completed raw trials, 118 accepted, 35 excluded by input
+conditions, and 21 mode/version groups short of three accepted rounds.
+Each observation uses 5 seconds warmup and 20 seconds stable. The strict complete
+gate rejects the incomplete matrix. This is not a full performance pass.
+Natural-input comparison, native CPU attribution, complete WPF/native rerun,
+24/72h, Windows 10 and physical multi-monitor/mixed-DPI remain Pending.
+No new production-renderer optimization or general CPU reduction is claimed.
+
+Actual non-input checks: core 162 (without native roundtrip), online security 51,
+curation/update 104, real public-network encrypted-filesystem download 14,
+native cursor-file validation FROST/Obsidian 388 each. Curation initially failed
+because its retained previous-catalog signature fixture had not been copied;
+the original public fixture was restored and the check rerun successfully.
+Seventeen synthetic protocol correctness tests pass; these are not benchmark data.
+Release solution build: zero errors/warnings. PerformanceHost publishes for exact
+8.0.24 / 10.0.13; explicit mixed-host exceptions remain WFO0003 and WFAC010.
+All 201 permanent user files, critical JSON presence/hashes and native registry
+values/types match the private baseline. No user data or raw trace is published.
+
+See [Chinese delivery](docs/CURSORIUM-v1.5.2-DELIVERY.md),
+[protocol](docs/CURSORIUM-v1.5.2-PROTOCOL.md), and
+[sanitized actual evidence](docs/validation/v1.5.2).
+The delivery's release addendum records isolated installer and final artifact gates
+when actually executed. Historical results below do not count as this round's rerun.
+v1.4.0 remains Latest Stable; this preview is not Steam Ready.
+
 # v1.5.1 Download filesystem compatibility — prerelease, 2026-10-14
 
 Reproduced Simple Dot or Star failure at DownloadManager.InstallCursor/Directory.Move

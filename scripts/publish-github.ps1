@@ -12,6 +12,13 @@ $cursoriumRemote=(git remote get-url origin).Trim()
 if($LASTEXITCODE -ne 0 -or $cursoriumRemote -notin @('https://github.com/catvir4493/cursorium.git','git@github.com:catvir4493/cursorium.git')){throw 'origin must point to the CURSORIUM repository.'}
 if((git branch --show-current).Trim() -ne 'main'){throw 'Switch the completed release work to main before publishing.'}
 if(git status --porcelain){throw 'Commit or preserve working-tree changes before publishing.'}
+if($Release){
+    if(-not $NotesPath){$NotesPath="docs/releases/$Version.md"}
+    # Validate the classification and prepared bytes before any remote mutation.
+    $cursoriumNotes=[IO.File]::ReadAllText((Resolve-Path -LiteralPath $NotesPath).Path,[Text.Encoding]::UTF8)
+    if(-not $Prerelease -and ($cursoriumNotes -split "`n")[0] -match '(?i)preview|prerelease|预发布'){throw 'These release notes identify a preview. Pass -Prerelease; do not mark an unverified preview Stable.'}
+    & (Join-Path $PSScriptRoot 'verify-release-assets.ps1') -Version $Version
+}
 function Invoke-CursoriumGit([string[]]$Arguments){
     & git @Arguments
     if($LASTEXITCODE -ne 0){throw "Git operation failed: $($Arguments[0])"}
@@ -23,10 +30,8 @@ if($LASTEXITCODE -ne 0 -or $cursoriumRemoteHead[0] -ne $cursoriumCommit){throw '
 Write-Host "Source uploaded and verified: https://github.com/$cursoriumRepository/commit/$cursoriumCommit"
 if(-not $Release){return}
 
-if(-not $NotesPath){$NotesPath="docs/releases/$Version.md"}
 # File-provider note properties on Get-Content strings are serialized as an object
 # by Windows PowerShell 5.1. The GitHub body must be a plain JSON string.
-$cursoriumNotes=[IO.File]::ReadAllText((Resolve-Path -LiteralPath $NotesPath).Path,[Text.Encoding]::UTF8)
 $cursoriumNames=@("CURSORIUM-Setup-$Version-Release.exe","CURSORIUM-$Version-win-x64.zip","CURSORIUM-Themes-$Version.zip","CURSORIUM-Source-$Version.zip",'CURSORIUM-SHA256SUMS.txt')
 $cursoriumAssets=@($cursoriumNames | ForEach-Object {Get-Item -LiteralPath (Join-Path $cursoriumRoot "artifacts/$_")})
 $cursoriumChecksumLines=Get-Content -LiteralPath 'artifacts/CURSORIUM-SHA256SUMS.txt'
@@ -55,10 +60,11 @@ if(-not $cursoriumCredential.password){throw 'No GitHub authentication token was
 $cursoriumHeaders=@{Authorization='Bearer '+$cursoriumCredential.password;Accept='application/vnd.github+json';'X-GitHub-Api-Version'='2022-11-28';'User-Agent'='CURSORIUM-release'}
 $cursoriumTag="cursorium-v$Version"
 $cursoriumTagRef="refs/tags/$cursoriumTag"
+if((git rev-parse HEAD).Trim() -ne $cursoriumCommit -or (git status --porcelain)){throw 'Source changed after release verification; preserve the changes and rebuild before tagging.'}
 git show-ref --verify --quiet $cursoriumTagRef
 if($LASTEXITCODE -eq 0){
     if((git rev-parse ($cursoriumTag+'^{commit}')).Trim() -ne $cursoriumCommit){throw 'This version tag already belongs to a different commit. Use a new version.'}
-}else{Invoke-CursoriumGit @('tag','-a',$cursoriumTag,'-m',"CURSORIUM v$Version")}
+}else{Invoke-CursoriumGit @('tag','-a',$cursoriumTag,$cursoriumCommit,'-m',"CURSORIUM v$Version")}
 Invoke-CursoriumGit @('push','origin',$cursoriumTagRef)
 $cursoriumApi="https://api.github.com/repos/$cursoriumRepository"
 $cursoriumReleases=Invoke-RestMethod -Uri "$cursoriumApi/releases?per_page=100" -Headers $cursoriumHeaders

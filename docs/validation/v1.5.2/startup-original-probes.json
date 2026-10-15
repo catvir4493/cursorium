@@ -1,0 +1,430 @@
+{
+  "rounds": 15,
+  "ended": "2026-10-14T20:21:04.1048085+00:00",
+  "passed": true,
+  "notes": "Actual unchanged release executables with isolated empty data. Alternating order, warm OS filesystem caches. Process creation API duration and complete state-probe process lifetime are distinct; neither is a first-painted-window timing. Tray/show/input-dispatcher milestones are measured by the common host separately.",
+  "measurements": [
+    {
+      "stateProbeProcessExitMs": 350.7314,
+      "processCreationCallMs": 45.2643,
+      "round": 0,
+      "target": "v1.4.0",
+      "applicationSHA256": "AF2E40C9E217E137DDAB73617861490CB5AA1453647C17E152E561BED4E6CBC4"
+    },
+    {
+      "stateProbeProcessExitMs": 448.1126,
+      "processCreationCallMs": 35.462,
+      "round": 0,
+      "target": "v1.5.0",
+      "applicationSHA256": "981A66BEB8089F08A2E12A4D7379408E2A12A2A93C42643D0B444B754E15983E"
+    },
+    {
+      "stateProbeProcessExitMs": 382.2403,
+      "processCreationCallMs": 22.7315,
+      "round": 0,
+      "target": "v1.5.1",
+      "applicationSHA256": "B38D9FE4895F37CA29113A394A7D6B86A78F84B05471F43642F1065F071DA306"
+    },
+    {
+      "stateProbeProcessExitMs": 992.6714,
+      "processCreationCallMs": 32.8408,
+      "round": 0,
+      "target": "v1.5.2",
+      "applicationSHA256": "35CE6EFFAB3C64C265A6EFA68A942B52E957F8A5F7C7E15C1B0E22192CC6FC6E"
+    },
+    {
+      "stateProbeProcessExitMs": 238.5698,
+      "processCreationCallMs": 3.3531,
+      "round": 1,
+      "target": "v1.5.0",
+      "applicationSHA256": "981A66BEB8089F08A2E12A4D7379408E2A12A2A93C42643D0B444B754E15983E"
+    },
+    {
+      "stateProbeProcessExitMs": 226.9345,
+      "processCreationCallMs": 2.9327,
+      "round": 1,
+      "target": "v1.5.1",
+      "applicationSHA256": "B38D9FE4895F37CA29113A394A7D6B86A78F84B05471F43642F1065F071DA306"
+    },
+    {
+      "stateProbeProcessExitMs": 235.2332,
+      "processCreationCallMs": 2.9413,
+      "round": 1,
+      "target": "v1.5.2",
+      "applicationSHA256": "35CE6EFFAB3C64C265A6EFA68A942B52E957F8A5F7C7E15C1B0E22192CC6FC6E"
+    },
+    {
+      "stateProbeProcessExitMs": 231.455,
+      "processCreationCallMs": 3.8019,
+      "round": 1,
+      "target": "v1.4.0",
+      "applicationSHA256": "AF2E40C9E217E137DDAB73617861490CB5AA1453647C17E152E561BED4E6CBC4"
+    },
+    {
+      "stateProbeProcessExitMs": 309.7868,
+      "processCreationCallMs": 3.9811,
+      "round": 2,
+      "target": "v1.5.1",
+      "applicationSHA256": "B38D9FE4895F37CA29113A394A7D6B86A78F84B05471F43642F1065F071DA306"
+    },
+    {
+      "stateProbeProcessExitMs": 233.3411,
+      "processCreationCallMs": 3.5032,
+      "round": 2,
+      "target": "v1.5.2",
+      "applicationSHA256": "35CE6EFFAB3C64C265A6EFA68A942B52E957F8A5F7C7E15C1B0E22192CC6FC6E"
+    },
+    {
+      "stateProbeProcessExitMs": 314.3175,
+      "processCreationCallMs": 2.9324,
+      "round": 2,
+      "target": "v1.4.0",
+      "applicationSHA256": "AF2E40C9E217E137DDAB73617861490CB5AA1453647C17E152E561BED4E6CBC4"
+    },
+    {
+      "stateProbeProcessExitMs": 547.173,
+      "processCreationCallMs": 4.4012,
+      "round": 2,
+      "target": "v1.5.0",
+      "applicationSHA256": "981A66BEB8089F08A2E12A4D7379408E2A12A2A93C42643D0B444B754E15983E"
+    },
+    {
+      "stateProbeProcessExitMs": 506.0549,
+      "processCreationCallMs": 6.3901,
+      "round": 3,
+      "target": "v1.5.2",
+      "applicationSHA256": "35CE6EFFAB3C64C265A6EFA68A942B52E957F8A5F7C7E15C1B0E22192CC6FC6E"
+    },
+    {
+      "stateProbeProcessExitMs": 256.5867,
+      "processCreationCallMs": 3.5148,
+      "round": 3,
+      "target": "v1.4.0",
+      "applicationSHA256": "AF2E40C9E217E137DDAB73617861490CB5AA1453647C17E152E561BED4E6CBC4"
+    },
+    {
+      "stateProbeProcessExitMs": 306.7217,
+      "processCreationCallMs": 6.0169,
+      "round": 3,
+      "target": "v1.5.0",
+      "applicationSHA256": "981A66BEB8089F08A2E12A4D7379408E2A12A2A93C42643D0B444B754E15983E"
+    },
+    {
+      "stateProbeProcessExitMs": 335.7665,
+      "processCreationCallMs": 3.9751,
+      "round": 3,
+      "target": "v1.5.1",
+      "applicationSHA256": "B38D9FE4895F37CA29113A394A7D6B86A78F84B05471F43642F1065F071DA306"
+    },
+    {
+      "stateProbeProcessExitMs": 295.217,
+      "processCreationCallMs": 2.7665,
+      "round": 4,
+      "target": "v1.4.0",
+      "applicationSHA256": "AF2E40C9E217E137DDAB73617861490CB5AA1453647C17E152E561BED4E6CBC4"
+    },
+    {
+      "stateProbeProcessExitMs": 228.3747,
+      "processCreationCallMs": 3.7779,
+      "round": 4,
+      "target": "v1.5.0",
+      "applicationSHA256": "981A66BEB8089F08A2E12A4D7379408E2A12A2A93C42643D0B444B754E15983E"
+    },
+    {
+      "stateProbeProcessExitMs": 220.3097,
+      "processCreationCallMs": 2.8621,
+      "round": 4,
+      "target": "v1.5.1",
+      "applicationSHA256": "B38D9FE4895F37CA29113A394A7D6B86A78F84B05471F43642F1065F071DA306"
+    },
+    {
+      "stateProbeProcessExitMs": 246.2838,
+      "processCreationCallMs": 3.1274,
+      "round": 4,
+      "target": "v1.5.2",
+      "applicationSHA256": "35CE6EFFAB3C64C265A6EFA68A942B52E957F8A5F7C7E15C1B0E22192CC6FC6E"
+    },
+    {
+      "stateProbeProcessExitMs": 235.3891,
+      "processCreationCallMs": 3.9497,
+      "round": 5,
+      "target": "v1.5.0",
+      "applicationSHA256": "981A66BEB8089F08A2E12A4D7379408E2A12A2A93C42643D0B444B754E15983E"
+    },
+    {
+      "stateProbeProcessExitMs": 222.6223,
+      "processCreationCallMs": 3.7249,
+      "round": 5,
+      "target": "v1.5.1",
+      "applicationSHA256": "B38D9FE4895F37CA29113A394A7D6B86A78F84B05471F43642F1065F071DA306"
+    },
+    {
+      "stateProbeProcessExitMs": 268.9446,
+      "processCreationCallMs": 3.2394,
+      "round": 5,
+      "target": "v1.5.2",
+      "applicationSHA256": "35CE6EFFAB3C64C265A6EFA68A942B52E957F8A5F7C7E15C1B0E22192CC6FC6E"
+    },
+    {
+      "stateProbeProcessExitMs": 200.3668,
+      "processCreationCallMs": 3.5637,
+      "round": 5,
+      "target": "v1.4.0",
+      "applicationSHA256": "AF2E40C9E217E137DDAB73617861490CB5AA1453647C17E152E561BED4E6CBC4"
+    },
+    {
+      "stateProbeProcessExitMs": 230.1984,
+      "processCreationCallMs": 2.7101,
+      "round": 6,
+      "target": "v1.5.1",
+      "applicationSHA256": "B38D9FE4895F37CA29113A394A7D6B86A78F84B05471F43642F1065F071DA306"
+    },
+    {
+      "stateProbeProcessExitMs": 226.8916,
+      "processCreationCallMs": 3.9702,
+      "round": 6,
+      "target": "v1.5.2",
+      "applicationSHA256": "35CE6EFFAB3C64C265A6EFA68A942B52E957F8A5F7C7E15C1B0E22192CC6FC6E"
+    },
+    {
+      "stateProbeProcessExitMs": 185.4603,
+      "processCreationCallMs": 6.0368,
+      "round": 6,
+      "target": "v1.4.0",
+      "applicationSHA256": "AF2E40C9E217E137DDAB73617861490CB5AA1453647C17E152E561BED4E6CBC4"
+    },
+    {
+      "stateProbeProcessExitMs": 270.3797,
+      "processCreationCallMs": 2.9946,
+      "round": 6,
+      "target": "v1.5.0",
+      "applicationSHA256": "981A66BEB8089F08A2E12A4D7379408E2A12A2A93C42643D0B444B754E15983E"
+    },
+    {
+      "stateProbeProcessExitMs": 262.0398,
+      "processCreationCallMs": 3.9976,
+      "round": 7,
+      "target": "v1.5.2",
+      "applicationSHA256": "35CE6EFFAB3C64C265A6EFA68A942B52E957F8A5F7C7E15C1B0E22192CC6FC6E"
+    },
+    {
+      "stateProbeProcessExitMs": 183.8894,
+      "processCreationCallMs": 5.091,
+      "round": 7,
+      "target": "v1.4.0",
+      "applicationSHA256": "AF2E40C9E217E137DDAB73617861490CB5AA1453647C17E152E561BED4E6CBC4"
+    },
+    {
+      "stateProbeProcessExitMs": 223.2468,
+      "processCreationCallMs": 3.1879,
+      "round": 7,
+      "target": "v1.5.0",
+      "applicationSHA256": "981A66BEB8089F08A2E12A4D7379408E2A12A2A93C42643D0B444B754E15983E"
+    },
+    {
+      "stateProbeProcessExitMs": 223.7411,
+      "processCreationCallMs": 3.0248,
+      "round": 7,
+      "target": "v1.5.1",
+      "applicationSHA256": "B38D9FE4895F37CA29113A394A7D6B86A78F84B05471F43642F1065F071DA306"
+    },
+    {
+      "stateProbeProcessExitMs": 187.849,
+      "processCreationCallMs": 4.9591,
+      "round": 8,
+      "target": "v1.4.0",
+      "applicationSHA256": "AF2E40C9E217E137DDAB73617861490CB5AA1453647C17E152E561BED4E6CBC4"
+    },
+    {
+      "stateProbeProcessExitMs": 219.7009,
+      "processCreationCallMs": 3.0153,
+      "round": 8,
+      "target": "v1.5.0",
+      "applicationSHA256": "981A66BEB8089F08A2E12A4D7379408E2A12A2A93C42643D0B444B754E15983E"
+    },
+    {
+      "stateProbeProcessExitMs": 219.9121,
+      "processCreationCallMs": 2.916,
+      "round": 8,
+      "target": "v1.5.1",
+      "applicationSHA256": "B38D9FE4895F37CA29113A394A7D6B86A78F84B05471F43642F1065F071DA306"
+    },
+    {
+      "stateProbeProcessExitMs": 222.4169,
+      "processCreationCallMs": 2.8067,
+      "round": 8,
+      "target": "v1.5.2",
+      "applicationSHA256": "35CE6EFFAB3C64C265A6EFA68A942B52E957F8A5F7C7E15C1B0E22192CC6FC6E"
+    },
+    {
+      "stateProbeProcessExitMs": 211.3346,
+      "processCreationCallMs": 3.3927,
+      "round": 9,
+      "target": "v1.5.0",
+      "applicationSHA256": "981A66BEB8089F08A2E12A4D7379408E2A12A2A93C42643D0B444B754E15983E"
+    },
+    {
+      "stateProbeProcessExitMs": 213.2144,
+      "processCreationCallMs": 3.3409,
+      "round": 9,
+      "target": "v1.5.1",
+      "applicationSHA256": "B38D9FE4895F37CA29113A394A7D6B86A78F84B05471F43642F1065F071DA306"
+    },
+    {
+      "stateProbeProcessExitMs": 213.3164,
+      "processCreationCallMs": 2.6659,
+      "round": 9,
+      "target": "v1.5.2",
+      "applicationSHA256": "35CE6EFFAB3C64C265A6EFA68A942B52E957F8A5F7C7E15C1B0E22192CC6FC6E"
+    },
+    {
+      "stateProbeProcessExitMs": 187.3805,
+      "processCreationCallMs": 3.9713,
+      "round": 9,
+      "target": "v1.4.0",
+      "applicationSHA256": "AF2E40C9E217E137DDAB73617861490CB5AA1453647C17E152E561BED4E6CBC4"
+    },
+    {
+      "stateProbeProcessExitMs": 224.5368,
+      "processCreationCallMs": 3.6238,
+      "round": 10,
+      "target": "v1.5.1",
+      "applicationSHA256": "B38D9FE4895F37CA29113A394A7D6B86A78F84B05471F43642F1065F071DA306"
+    },
+    {
+      "stateProbeProcessExitMs": 216.1663,
+      "processCreationCallMs": 2.9436,
+      "round": 10,
+      "target": "v1.5.2",
+      "applicationSHA256": "35CE6EFFAB3C64C265A6EFA68A942B52E957F8A5F7C7E15C1B0E22192CC6FC6E"
+    },
+    {
+      "stateProbeProcessExitMs": 188.6232,
+      "processCreationCallMs": 2.7357,
+      "round": 10,
+      "target": "v1.4.0",
+      "applicationSHA256": "AF2E40C9E217E137DDAB73617861490CB5AA1453647C17E152E561BED4E6CBC4"
+    },
+    {
+      "stateProbeProcessExitMs": 232.4931,
+      "processCreationCallMs": 2.9987,
+      "round": 10,
+      "target": "v1.5.0",
+      "applicationSHA256": "981A66BEB8089F08A2E12A4D7379408E2A12A2A93C42643D0B444B754E15983E"
+    },
+    {
+      "stateProbeProcessExitMs": 211.9289,
+      "processCreationCallMs": 2.7109,
+      "round": 11,
+      "target": "v1.5.2",
+      "applicationSHA256": "35CE6EFFAB3C64C265A6EFA68A942B52E957F8A5F7C7E15C1B0E22192CC6FC6E"
+    },
+    {
+      "stateProbeProcessExitMs": 178.3694,
+      "processCreationCallMs": 2.9246,
+      "round": 11,
+      "target": "v1.4.0",
+      "applicationSHA256": "AF2E40C9E217E137DDAB73617861490CB5AA1453647C17E152E561BED4E6CBC4"
+    },
+    {
+      "stateProbeProcessExitMs": 215.4238,
+      "processCreationCallMs": 2.8952,
+      "round": 11,
+      "target": "v1.5.0",
+      "applicationSHA256": "981A66BEB8089F08A2E12A4D7379408E2A12A2A93C42643D0B444B754E15983E"
+    },
+    {
+      "stateProbeProcessExitMs": 218.225,
+      "processCreationCallMs": 3.4213,
+      "round": 11,
+      "target": "v1.5.1",
+      "applicationSHA256": "B38D9FE4895F37CA29113A394A7D6B86A78F84B05471F43642F1065F071DA306"
+    },
+    {
+      "stateProbeProcessExitMs": 176.9333,
+      "processCreationCallMs": 2.9197,
+      "round": 12,
+      "target": "v1.4.0",
+      "applicationSHA256": "AF2E40C9E217E137DDAB73617861490CB5AA1453647C17E152E561BED4E6CBC4"
+    },
+    {
+      "stateProbeProcessExitMs": 213.4873,
+      "processCreationCallMs": 3.1111,
+      "round": 12,
+      "target": "v1.5.0",
+      "applicationSHA256": "981A66BEB8089F08A2E12A4D7379408E2A12A2A93C42643D0B444B754E15983E"
+    },
+    {
+      "stateProbeProcessExitMs": 208.8378,
+      "processCreationCallMs": 2.8861,
+      "round": 12,
+      "target": "v1.5.1",
+      "applicationSHA256": "B38D9FE4895F37CA29113A394A7D6B86A78F84B05471F43642F1065F071DA306"
+    },
+    {
+      "stateProbeProcessExitMs": 221.5446,
+      "processCreationCallMs": 2.927,
+      "round": 12,
+      "target": "v1.5.2",
+      "applicationSHA256": "35CE6EFFAB3C64C265A6EFA68A942B52E957F8A5F7C7E15C1B0E22192CC6FC6E"
+    },
+    {
+      "stateProbeProcessExitMs": 219.3105,
+      "processCreationCallMs": 2.7864,
+      "round": 13,
+      "target": "v1.5.0",
+      "applicationSHA256": "981A66BEB8089F08A2E12A4D7379408E2A12A2A93C42643D0B444B754E15983E"
+    },
+    {
+      "stateProbeProcessExitMs": 231.8054,
+      "processCreationCallMs": 2.6833,
+      "round": 13,
+      "target": "v1.5.1",
+      "applicationSHA256": "B38D9FE4895F37CA29113A394A7D6B86A78F84B05471F43642F1065F071DA306"
+    },
+    {
+      "stateProbeProcessExitMs": 236.0752,
+      "processCreationCallMs": 2.9925,
+      "round": 13,
+      "target": "v1.5.2",
+      "applicationSHA256": "35CE6EFFAB3C64C265A6EFA68A942B52E957F8A5F7C7E15C1B0E22192CC6FC6E"
+    },
+    {
+      "stateProbeProcessExitMs": 203.1724,
+      "processCreationCallMs": 3.9756,
+      "round": 13,
+      "target": "v1.4.0",
+      "applicationSHA256": "AF2E40C9E217E137DDAB73617861490CB5AA1453647C17E152E561BED4E6CBC4"
+    },
+    {
+      "stateProbeProcessExitMs": 240.3621,
+      "processCreationCallMs": 2.835,
+      "round": 14,
+      "target": "v1.5.1",
+      "applicationSHA256": "B38D9FE4895F37CA29113A394A7D6B86A78F84B05471F43642F1065F071DA306"
+    },
+    {
+      "stateProbeProcessExitMs": 229.7784,
+      "processCreationCallMs": 4.4774,
+      "round": 14,
+      "target": "v1.5.2",
+      "applicationSHA256": "35CE6EFFAB3C64C265A6EFA68A942B52E957F8A5F7C7E15C1B0E22192CC6FC6E"
+    },
+    {
+      "stateProbeProcessExitMs": 178.7521,
+      "processCreationCallMs": 2.7428,
+      "round": 14,
+      "target": "v1.4.0",
+      "applicationSHA256": "AF2E40C9E217E137DDAB73617861490CB5AA1453647C17E152E561BED4E6CBC4"
+    },
+    {
+      "stateProbeProcessExitMs": 220.1318,
+      "processCreationCallMs": 2.9555,
+      "round": 14,
+      "target": "v1.5.0",
+      "applicationSHA256": "981A66BEB8089F08A2E12A4D7379408E2A12A2A93C42643D0B444B754E15983E"
+    }
+  ],
+  "schemaVersion": 1,
+  "started": "2026-10-14T20:20:48.456049+00:00"
+}

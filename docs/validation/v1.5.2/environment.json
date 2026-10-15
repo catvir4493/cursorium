@@ -1,0 +1,23 @@
+{
+  "os": "Windows 11 x64 build 26100",
+  "processor": "Intel Core i7-14700KF",
+  "logicalProcessors": 28,
+  "gpu": "NVIDIA RTX 5070",
+  "physicalMonitors": 1,
+  "physicalResolution": "2560x1440",
+  "dpi": 96,
+  "refreshHzApprox": 180,
+  "sdk": "10.0.103",
+  "publishedRuntimes": [
+    "8.0.24",
+    "10.0.13"
+  ],
+  "installedVersionAtPause": "1.5.1+8da97e5db8b12c63567112a210c7da490e4386f6",
+  "automaticInput": "Paused by user; not resumed",
+  "physicalInputComparison": "Incomplete",
+  "longStress24h": "Pending",
+  "longStress72h": "Pending",
+  "physicalWindows10": "Pending",
+  "physicalMultipleDisplays": "Pending",
+  "physicalMixedDpi": "Pending"
+}

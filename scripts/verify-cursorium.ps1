@@ -1,4 +1,4 @@
-param([string]$ApplicationDirectory='artifacts/cursorium-release/portable',[switch]$SkipBenchmark,[switch]$Discover,[string]$ReportDirectory='artifacts/cursorium-verification',[string]$CurationStage,[string]$PreviousCatalog)
+param([string]$ApplicationDirectory='artifacts/cursorium-release/portable',[switch]$SkipBenchmark,[switch]$Discover,[string]$ReportDirectory='artifacts/cursorium-verification',[string]$CurationStage,[string]$PreviousCatalog,[string]$VerifierExecutable='')
 $ErrorActionPreference='Stop'
 $cursoriumRoot=Split-Path -Parent $PSScriptRoot
 Set-Location -LiteralPath $cursoriumRoot
@@ -7,6 +7,12 @@ $cursoriumExe=Join-Path $cursoriumApp 'FrostWhiteComet.exe'
 if(-not (Test-Path -LiteralPath $cursoriumExe)){throw 'Build the Release package first.'}
 $cursoriumReport=Join-Path $cursoriumRoot $ReportDirectory
 New-Item -ItemType Directory -Path $cursoriumReport -Force | Out-Null
+$cursoriumVerifierCommand='dotnet';$cursoriumVerifierPrefix=@('run','--project','tests/Frost.Verify','-c','Release','--')
+if($VerifierExecutable){
+    $cursoriumVerifierCommand=[IO.Path]::GetFullPath($VerifierExecutable);$cursoriumVerifierPrefix=@()
+    $cursoriumVerifierRuntime=Get-Content -LiteralPath (Join-Path ([IO.Path]::GetDirectoryName($cursoriumVerifierCommand)) 'Frost.Verify.runtimeconfig.json') -Raw|ConvertFrom-Json
+    if([IO.Path]::GetFileName($cursoriumVerifierCommand) -ne 'Frost.Verify.exe' -or $cursoriumVerifierRuntime.runtimeOptions.tfm -ne 'net10.0' -or @($cursoriumVerifierRuntime.runtimeOptions.includedFrameworks).Count -lt 1 -or @($cursoriumVerifierRuntime.runtimeOptions.includedFrameworks|Where-Object version -ne '10.0.13').Count){throw 'The self-contained verifier must use the same verified .NET 10.0.13 runtime as the application'}
+}
 # Preserve evidence that the user's existing backup/settings remain unchanged.
 $cursoriumData=Join-Path $env:LOCALAPPDATA 'FrostWhiteComet'
 $cursoriumProtected=@('original-theme.json','settings.json','studio.json','profiles.json','interface.json')
@@ -23,13 +29,13 @@ function Invoke-CursoriumTest([string[]]$Arguments){
     if($cursoriumProcess.ExitCode -ne 0){throw "Desktop test failed: exit $($cursoriumProcess.ExitCode). See reports."}
     Write-Host "Process completed with exit 0: $($Arguments[0])"
 }
-& dotnet run --project tests/Frost.Verify -c Release -- --studio-tests $cursoriumApp $cursoriumReport --native-roundtrip 2>&1 | Tee-Object -FilePath (Join-Path $cursoriumReport 'core-console.txt')
+& $cursoriumVerifierCommand @cursoriumVerifierPrefix --studio-tests $cursoriumApp $cursoriumReport --native-roundtrip 2>&1 | Tee-Object -FilePath (Join-Path $cursoriumReport 'core-console.txt')
 if($LASTEXITCODE -ne 0){throw 'Core/native transaction verification failed.'}
-& dotnet run --project tests/Frost.Verify -c Release -- --stability-tests $cursoriumApp (Join-Path $cursoriumReport 'recovery')
+& $cursoriumVerifierCommand @cursoriumVerifierPrefix --stability-tests $cursoriumApp (Join-Path $cursoriumReport 'recovery')
 if($LASTEXITCODE -ne 0){throw 'Crash/concurrency/external-change recovery verification failed.'}
-& dotnet run --project tests/Frost.Verify -c Release -- --online-tests $cursoriumApp (Join-Path $cursoriumRoot 'tests/fixtures/online') (Join-Path $cursoriumReport 'online-security')
+& $cursoriumVerifierCommand @cursoriumVerifierPrefix --online-tests $cursoriumApp (Join-Path $cursoriumRoot 'tests/fixtures/online') (Join-Path $cursoriumReport 'online-security')
 if($LASTEXITCODE -ne 0){throw 'Online download security verification failed.'}
-if($CurationStage){if(-not $PreviousCatalog){throw 'Curation verification needs the previous signed catalog.'};& dotnet run --project tests/Frost.Verify -c Release -- --curation-tests $cursoriumApp ([IO.Path]::GetFullPath($CurationStage)) ([IO.Path]::GetFullPath($PreviousCatalog)) (Join-Path $cursoriumReport 'curation');if($LASTEXITCODE -ne 0){throw 'Curation/update verification failed.'}}
+if($CurationStage){if(-not $PreviousCatalog){throw 'Curation verification needs the previous signed catalog.'};& $cursoriumVerifierCommand @cursoriumVerifierPrefix --curation-tests $cursoriumApp ([IO.Path]::GetFullPath($CurationStage)) ([IO.Path]::GetFullPath($PreviousCatalog)) (Join-Path $cursoriumReport 'curation');if($LASTEXITCODE -ne 0){throw 'Curation/update verification failed.'}}
 $cursoriumTestingData=Join-Path $cursoriumReport ('desktop-data-'+[guid]::NewGuid().ToString('N'))
 Invoke-CursoriumTest @('--self-test','--isolated-test','--test-data-root',('"'+$cursoriumTestingData+'"'),'--report',('"'+$cursoriumReport+'"'))
 $cursoriumDesktop=Get-Content -LiteralPath (Join-Path $cursoriumReport 'desktop-report.json') -Raw | ConvertFrom-Json

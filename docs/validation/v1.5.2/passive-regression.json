@@ -1,0 +1,66 @@
+[
+  {
+    "started": "2026-10-15T00:08:51.5244725+02:00",
+    "runtime": "10.0.13 self-contained; exact frozen candidate Core",
+    "passed": true,
+    "ended": "2026-10-15T00:08:55.8077743+02:00",
+    "command": "Frost.Verify.exe --studio-tests <WORKTREE>\\artifacts\\performance\\targets\\v1.5.2 <WORKTREE>\\artifacts\\v1.5.2-passive\\core",
+    "name": "core",
+    "checks": 162
+  },
+  {
+    "started": "2026-10-15T00:08:55.8331764+02:00",
+    "runtime": "10.0.13 self-contained; exact frozen candidate Core",
+    "passed": true,
+    "ended": "2026-10-15T00:08:59.5974484+02:00",
+    "command": "Frost.Verify.exe --online-tests <WORKTREE>\\artifacts\\performance\\targets\\v1.5.2 <WORKTREE>\\tests\\fixtures\\online <WORKTREE>\\artifacts\\v1.5.2-passive\\online",
+    "name": "online",
+    "checks": 51
+  },
+  {
+    "started": "2026-10-15T00:08:59.602417+02:00",
+    "runtime": "10.0.13 self-contained; exact frozen candidate Core",
+    "passed": false,
+    "ended": "2026-10-15T00:09:00.102146+02:00",
+    "command": "Frost.Verify.exe --curation-tests <WORKTREE>\\artifacts\\performance\\targets\\v1.5.2 <WORKTREE>\\artifacts\\library-1.1.0-stage2 <WORKTREE>\\artifacts\\library-previous\\index.json <WORKTREE>\\artifacts\\v1.5.2-passive\\curation",
+    "name": "curation",
+    "checks": null,
+    "reason": "Previous-catalog signature fixture was initially absent; restored the retained public signature before retry. Original failure preserved."
+  },
+  {
+    "started": "2026-10-14T22:09:11.0840183+00:00",
+    "runtime": "10.0.13 self-contained; exact frozen candidate Core",
+    "name": "curation-retry",
+    "command": "Frost.Verify.exe --curation-tests <WORKTREE>\\artifacts\\performance\\targets\\v1.5.2 <WORKTREE>\\artifacts\\library-1.1.0-stage2 <WORKTREE>\\artifacts\\library-previous\\index.json <WORKTREE>\\artifacts\\v1.5.2-passive\\curation-retry",
+    "ended": "2026-10-14T22:09:17.3214437+00:00",
+    "passed": true,
+    "checks": 104
+  },
+  {
+    "started": "2026-10-14T22:09:17.3381784+00:00",
+    "runtime": "10.0.13 self-contained; exact frozen candidate Core",
+    "name": "FROST",
+    "command": "Frost.Verify.exe <WORKTREE>\\assets\\cursors",
+    "ended": "2026-10-14T22:09:17.6961187+00:00",
+    "passed": true,
+    "checks": 388
+  },
+  {
+    "started": "2026-10-14T22:09:17.6987456+00:00",
+    "runtime": "10.0.13 self-contained; exact frozen candidate Core",
+    "name": "Obsidian",
+    "command": "Frost.Verify.exe <WORKTREE>\\assets\\themes\\obsidian",
+    "ended": "2026-10-14T22:09:17.9794229+00:00",
+    "passed": true,
+    "checks": 388
+  },
+  {
+    "started": "2026-10-14T22:09:17.9858769+00:00",
+    "runtime": "10.0.13 self-contained; exact frozen candidate Core",
+    "name": "filesystem",
+    "command": "Frost.Verify.exe --download-filesystem-tests <candidate> <report> <fresh encrypted isolated LocalAppData root>",
+    "ended": "2026-10-14T22:09:23.0282053+00:00",
+    "passed": true,
+    "checks": 14
+  }
+]

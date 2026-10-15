@@ -371,3 +371,34 @@ actual DPI. This avoids stale/occluding BitBlt content and private desktop leaka
 It is real application rendering, not a concept image, but is not evidence of an
 unobstructed desktop screenshot or physical multi-DPI display switching. Native
 window/input tests remain separate.
+
+## v1.5.2 — isolated performance evidence and release identity
+
+`tools/Frost.PerformanceHost` is a diagnostic executable, not another cursor or
+rendering engine. The same source targets exact .NET 8/10 self-contained runtimes
+and loads frozen production App/Core assemblies. It uses fresh isolated data,
+the original normal-instance mutex, App.Start and TrailEngine, with no Apply.
+A separate fixed .NET 10 input driver owns its input window; its CPU is recorded
+independently. Idle, disabled, normal effects, power/120 targets, tray-first and
+opened-then-closed states have separate observations. Empty-host and timer controls
+calibrate observer/scheduling cost. Explicit no-paint/no-render interventions are
+diagnostic controls, never candidate visual-quality or optimization acceptance.
+
+Alternating timing, original executable startup probes and intrusive EventPipe
+profiling are separate scripts. Evidence resumes without replacing completed
+trials. The summarizer excludes contaminated/manual-overlap periods, rejects
+failed/duplicate/incompatible observations and keeps unavailable paint counters
+null. Wall-time stacks do not identify native CPU hotspots; process/thread CPU
+accounting and actual environmental conditions remain distinct evidence.
+
+Release preparation packages tracked sources only, atomically replaces completed
+source archives and checks exact executable version/commit, self-contained runtime,
+portable files against the distribution manifest, source bytes against canonical
+committed Git objects (independent of checkout CRLF conversion)
+and all four asset hashes before remote publishing. Preview classification is
+validated before remote mutations. Public downloads still receive independent
+post-publication SHA256 verification through the existing publisher.
+
+Native ThemeService/StudioService, cursor transactions, profiles, signed catalog,
+safe download/import, visual algorithms and user-data schemas retain the v1.5.1
+implementation. Diagnostic tools/trace and user backups are outside release payloads.
