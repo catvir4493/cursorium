@@ -40,7 +40,7 @@ try{
  $expected=@{};foreach($file in $tracked){if($file -notmatch '^(100644|100755) blob ([A-Fa-f0-9]+)\t(.+)$'){throw 'Only regular committed files belong in source delivery'};$expected[$Matches[3]]=$Matches[2]};$seen=@{}
  if(@($taskSource.Entries|Where-Object {-not $_.FullName.EndsWith('/')} ).Count -ne $expected.Count){throw 'Source ZIP must contain exactly the committed delivery sources'}
  foreach($entry in $taskSource.Entries){$name=$entry.FullName.Replace('\','/');if($name.EndsWith('/')){continue};if(-not $expected.ContainsKey($name)-or $seen.ContainsKey($name)){throw 'Source ZIP has an unexpected or duplicate file'};$seen[$name]=$true
-  $stream=$entry.Open();try{if((Hash-GitBlob $stream $entry.Length $objectFormat) -ne $expected[$name]){throw 'Source ZIP is stale; rebuild it from the completed source commit'}}finally{$stream.Dispose()};$taskSourceChecks++
+  $stream=$entry.Open();try{if((Hash-GitBlob $stream $entry.Length $objectFormat) -ne $expected[$name]){throw ('Source ZIP is stale; rebuild it from the completed source commit: '+$name)}}finally{$stream.Dispose()};$taskSourceChecks++
  }
 }finally{$taskSource.Dispose()}
 $taskExpectedNames=@("CURSORIUM-Setup-$Version-Release.exe","CURSORIUM-$Version-win-x64.zip","CURSORIUM-Themes-$Version.zip","CURSORIUM-Source-$Version.zip")
