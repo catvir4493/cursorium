@@ -1,0 +1,24 @@
+{
+  "notes": "Negative fixtures touch only prepared artifacts and one uniquely named synthetic untracked workspace file. Runtime/source archive bytes restored and final whole-asset verification required. No installed application, user data, registry, published release or tag modified.",
+  "passed": true,
+  "checks": [
+    {
+      "passed": true,
+      "name": "Mismatched version/commit rejected before publishing"
+    },
+    {
+      "passed": true,
+      "name": "Wrong self-contained runtime rejected"
+    },
+    {
+      "passed": true,
+      "name": "Stale source ZIP content rejected"
+    },
+    {
+      "passed": true,
+      "name": "Untracked source-directory files excluded from source package"
+    }
+  ],
+  "ended": "2026-10-15T10:37:17.4667219+00:00",
+  "started": "2026-10-15T10:37:11.714323+00:00"
+}

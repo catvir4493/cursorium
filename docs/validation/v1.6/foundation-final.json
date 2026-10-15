@@ -1,7 +1,7 @@
 {
   "passed": true,
-  "started": "2026-10-15T10:42:42.1431813+00:00",
-  "ended": "2026-10-15T10:42:45.0957146+00:00",
+  "started": "2026-10-15T12:47:50.2083266+02:00",
+  "ended": "2026-10-15T12:47:53.4837171+02:00",
   "checks": [
     {
       "name": "Actual retained Catalog v1 still has 29 identities",
@@ -768,7 +768,9 @@
       "commercial": "Approved"
     }
   ],
-  "scope": "Actual Windows filesystem, pinned RSA-PSS, bounded native CUR/ANI loading and controlled HTTP fixtures. Synthetic review/cache/portable/migration cases are labeled; no input injection, Apply, live migration, Steam SDK or Cloud upload. Latest policy guard regression build; release implementation is checked separately.",
+  "scope": "Actual Windows filesystem, pinned RSA-PSS, bounded native CUR/ANI loading and controlled HTTP fixtures. Synthetic review/cache/portable/migration cases are labeled; no input injection, Apply, live migration, Steam SDK or Cloud upload.",
   "runtime": ".NET 10.0.13 self-contained",
-  "coreSHA256": "ea4b35de383598742052aa47990ed7f428e2a63bc72b97b27c72879e741751a6"
+  "coreSHA256": "ab527cae2c88154b34f54cd3990dc5484a85a00a2c6b5eaa1165278aa8991ca6",
+  "coreMatchesCandidate": true,
+  "candidateCommit": "d9d9996"
 }

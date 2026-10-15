@@ -49,7 +49,7 @@
 
 |检查|实际结果|环境/范围|
 |---|---:|---|
-|新增基础专项最终版|**147 通过**|精确 .NET 10.0.13 自包含验证器；发行前另核对实现；真实签名与 29 个包、本地文件系统、受控 HTTP、明确模拟版本/schema 状态|
+|新增基础专项最终版|**147 通过**|精确 .NET 10.0.13 自包含验证器，复制发行包 Core 并核对 SHA256；真实签名与 29 个包、本地文件系统、受控 HTTP、明确模拟版本/schema 状态|
 |保留核心|162 通过|不带 --native-roundtrip；18 项原生应用/回滚不冒充通过|
 |保留在线安全|51 通过|真实固定公钥、受控网络故障/ZIP/URL 测试|
 |保留合集/更新|104 通过|原签名 stage 与旧 catalog，未删断言|
@@ -86,8 +86,16 @@ scripts/publish-github.ps1 -Release -Prerelease -Version 1.6.0 -NotesPath docs/r
 
 ## 文件、证据与发行附记
 
-工程修改主要在 Distribution、LibraryRights/BundledRights、IdentityMigration、PortableWorkspace/FoundationJson、Foundation CLI、渠道/发布/安全验证脚本及 docs/commercial；ThemeService 只增加渠道阻断与使用原锁常量，没有重写事务。完整清单见本轮修改文件记录。
+工程修改主要在 Distribution、LibraryRights/BundledRights、IdentityMigration、PortableWorkspace/FoundationJson、Foundation CLI、渠道/发布/安全验证脚本及 docs/commercial；ThemeService 只增加渠道阻断与使用原锁常量，没有重写事务。完整清单见[实际修改文件](commercial/CHANGED-FILES.md)。
 
 原始安全回执、示例导出、私有迁移复制与精确运行时工具留在独立工作树 `artifacts/`。最初生产回退点在原工程 `artifacts/v1.6-baseline/`，不提交；公开证据不包含真实 Profile、注册表值、资源私人路径或私钥。当前用户只会获得 Community Preview 的安装器/便携/主题/源码/校验文件；本地实验 Steam payload 不作为正式版发布。
 
-发行附记：最终社区构建、安装器隔离检查、资产字节/公开下载核验尚待后续完成并更新。本机生产安装保持 v1.5.1，v1.4.0 保留 Latest Stable；新版本只能是 [cursorium-v1.6.0 Preview](https://github.com/catvir4493/cursorium/releases/tag/cursorium-v1.6.0)。
+发行构建与隔离证据：Community 自包含便携版、安装器、主题包和源码包已构建并通过本地资产/源码字节核验。`d9d9996` 候选发行包 Core 的精确副本在 .NET 10.0.13 下通过最终 147 项检查，见[最终专项回执](validation/v1.6/foundation-final.json)。原 v1.5 的特定警告例外保持，实际 Release 构建 0 error / 0 warning。
+
+[隔离安装生命周期](validation/v1.6/isolated-installation-lifecycle.json)实际 **16 项通过**；[发布加固](validation/v1.6/release-hardening.json)实际 **4 个负例通过**。这两批最初使用 `7f0841f` 候选；之后增加的获取策略/绝对数据根防线由最终发行 Core 的 147 项检查覆盖。文档提交后的最终构建还会执行精确发行 Core 基础专项、源码/版本/清单/校验门槛，原始最终回执留 artifacts/。一次在公开证据待提交时触发的检查按预期被“工作区必须干净”前置条件拦住，未执行安装操作；不是系统故障。
+
+[生产副本跨盘升级](validation/v1.6/isolated-production-copy-upgrade.json)在 `7f0841f` 候选实际保留 203 个数据文件，核对 936 个部署文件和五套 Cute，原生值未变。这是私有副本、独立注册/快捷方式命名空间的测试；未升级生产安装，也不等于 Steam/全路径/电源中断或真实卸载恢复验收。
+
+[生产程序与快捷方式](validation/v1.6/installation-protection.json)核对 **895 个原文件无变化**、正式快捷方式目标仍正确、生产版本 `1.5.1+8da97e5`。[用户数据保护](validation/v1.6/production-data-protection.json)核对 **201 个持久文件**、七个关键文件的存在性及哈希、原生指针全部值和类型均未变。缓存/临时文件单独统计；原始快照留本地。
+
+本机生产安装保持 v1.5.1，v1.4.0 保留 Latest Stable；新版本仅为 [cursorium-v1.6.0 Preview](https://github.com/catvir4493/cursorium/releases/tag/cursorium-v1.6.0)。公开下载 SHA256 复取门槛由现有发布脚本执行，失败不会冒报发布成功；运行回执留 `artifacts/remote-v1.6.0/public-download-verification.json`。发布文件只含 Community，Steam 实验构建不上传。

@@ -1,53 +1,53 @@
 {
-  "permanentChanged": 0,
-  "ephemeralOrCacheChanges": 0,
-  "at": "2026-10-15T10:34:35.6479366Z",
-  "nativeValuesAndTypesUnchanged": true,
+  "notes": "Private registry snapshots and relative file hashes remain local. Log/setup-result and mutable cache/staging are distinguished from permanent resources.",
+  "passed": true,
   "critical": [
     {
-      "existsAfter": true,
-      "existedBefore": true,
+      "unchanged": true,
       "name": "settings.json",
-      "unchanged": true
+      "existsAfter": true,
+      "existedBefore": true
     },
     {
-      "existsAfter": true,
-      "existedBefore": true,
+      "unchanged": true,
       "name": "studio.json",
-      "unchanged": true
+      "existsAfter": true,
+      "existedBefore": true
     },
     {
-      "existsAfter": true,
-      "existedBefore": true,
+      "unchanged": true,
       "name": "profiles.json",
-      "unchanged": true
+      "existsAfter": true,
+      "existedBefore": true
     },
     {
-      "existsAfter": true,
-      "existedBefore": true,
+      "unchanged": true,
       "name": "original-theme.json",
-      "unchanged": true
-    },
-    {
-      "existsAfter": false,
-      "existedBefore": false,
-      "name": "theme-transaction.json",
-      "unchanged": true
-    },
-    {
-      "existsAfter": false,
-      "existedBefore": false,
-      "name": "interface.json",
-      "unchanged": true
-    },
-    {
       "existsAfter": true,
-      "existedBefore": true,
+      "existedBefore": true
+    },
+    {
+      "unchanged": true,
+      "name": "theme-transaction.json",
+      "existsAfter": false,
+      "existedBefore": false
+    },
+    {
+      "unchanged": true,
+      "name": "interface.json",
+      "existsAfter": false,
+      "existedBefore": false
+    },
+    {
+      "unchanged": true,
       "name": "theme-ownership.json",
-      "unchanged": true
+      "existsAfter": true,
+      "existedBefore": true
     }
   ],
-  "passed": true,
+  "permanentChanged": 0,
+  "at": "2026-10-15T10:47:50.4262836Z",
   "permanentFiles": 201,
-  "notes": "Private registry snapshots and relative file hashes remain local. Log/setup-result and mutable cache/staging are distinguished from permanent resources."
+  "ephemeralOrCacheChanges": 0,
+  "nativeValuesAndTypesUnchanged": true
 }
