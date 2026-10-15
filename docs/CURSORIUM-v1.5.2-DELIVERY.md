@@ -64,6 +64,7 @@ Profiling 实际完成 5 次独立 EventPipe trace：三个版本 Comet、v1.5.1
 - `scripts/verify-v1.5.ps1`、`scripts/verify-cursorium.ps1`：可选准确 10.0.13 自包含验证器，核对部署 Core SHA256；旧测试保留。
 - `scripts/verify-stability.ps1`：用真实签名 fixture 初始化隔离缓存；新长压路径未实际执行。
 - `scripts/package-source.ps1`：仅打包当前提交的 allowlist Git 对象，排除未跟踪私人文件，避免工作树 CRLF 差异；要求已提交的源码。
+- `tools/Frost.CursorGen/Program.cs`：实际打包时发现 Windows JSON 换行使四个生成清单显示脏工作树、阻断源码身份闸门。生成工具将两个 JSON 固定为仓库要求的 LF；光标/ANI/PNG 字节与生产 Core 不变。
 - `scripts/verify-release-assets.ps1`、`scripts/verify-release-hardening.ps1`、`scripts/publish-github.ps1`：发布前核对版本/提交、准确运行时、portable 清单、规范源对象、四个资产 SHA256；错误版本/运行时/过期源码负例、精确还原；Preview 缺少 -Prerelease 时拒绝远端修改。
 - App/installer 版本、导航版本标签、HTTP User-Agent 和构建/发布默认版本更新为 1.5.2；设计系统、主题资源和生产算法不变。
 
