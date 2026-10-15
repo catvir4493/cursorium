@@ -7,7 +7,7 @@ writes disabled; uncleared Cute files are absent. Community retains five bundles
 Root MIT and published history remain intact. Runtime/apphost supplier notices are
 included without relicensing third-party components.
 
-Final foundation checks: 144 on self-contained 10.0.13, exact candidate Core;
+Final foundation checks: 147 on self-contained 10.0.13; release implementation verified separately;
 real pinned RSA-PSS and 29 package audits, bounded JSON/cache, controlled HTTP,
 portable data and isolated migration, including explicitly simulated versions.
 Retained safe subset: core 162 without native roundtrip, online 51, curation 104,

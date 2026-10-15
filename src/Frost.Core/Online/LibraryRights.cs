@@ -106,6 +106,7 @@ public sealed class RemoteRightsService
     {
         var record=document?.Resources.SingleOrDefault(r=>r.Scope=="Online"&&r.StableId==resource.Id&&r.Version==resource.Version&&r.Author==resource.Author&&r.PackageSha256.Equals(resource.SHA256,StringComparison.OrdinalIgnoreCase));
         if(record?.WithdrawalStatus=="Withdrawn")throw new InvalidDataException("This resource version was withdrawn from new acquisition. Existing installed files are preserved.");
+        if(record!=null&&(record.RedistributionPermission=="Denied"||!record.DistributionChannel.Contains(channel.ToString())||System.Version.Parse(record.MinimumClientVersion)>ProductIdentity.ClientVersion))throw new InvalidDataException("This resource version is not authorized for acquisition in this channel/client. Existing installed files are preserved.");
         if(channel==DistributionChannel.Steam&&(record==null||!record.AllowsSteam||System.Version.Parse(record.MinimumClientVersion)>ProductIdentity.ClientVersion))throw new InvalidDataException("Steam commercial clearance is missing or Needs Review; nothing was downloaded or applied.");
     }
     public async Task DemandAsync(RemoteResource resource,CancellationToken cancellation)

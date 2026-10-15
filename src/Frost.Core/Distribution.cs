@@ -12,10 +12,10 @@ public sealed record DistributionProfile(DistributionChannel Channel)
         "Development"=>new(DistributionChannel.Development),"Community"=>new(DistributionChannel.Community),"Steam"=>new(DistributionChannel.Steam),_=>throw new InvalidDataException("Unknown distribution channel.")};
     public string UpdateOwner=>Channel switch {DistributionChannel.Community=>"ManualCommunityInstaller",DistributionChannel.Steam=>"SteamPipePlanned",_=>"Developer"};
     public bool SteamIntegrated=>false;
-    public string DataRoot(string localAppData)=>Channel switch {
+    public string DataRoot(string localAppData){if(string.IsNullOrWhiteSpace(localAppData)||!Path.IsPathFullyQualified(localAppData))throw new InvalidDataException("A real per-user LocalAppData directory is required; never fall back to program files.");return Channel switch {
         DistributionChannel.Community=>Path.Combine(localAppData,"FrostWhiteComet"),
         DistributionChannel.Steam=>Path.Combine(localAppData,"CURSORIUM","Steam"),
-        _=>Path.Combine(localAppData,"CURSORIUM","Development")};
+        _=>Path.Combine(localAppData,"CURSORIUM","Development")};}
     public bool UsesCommunityInstaller=>Channel==DistributionChannel.Community;
     public bool AllowsNativeWrites(bool isolated)=>Channel==DistributionChannel.Community||(Channel==DistributionChannel.Development&&isolated);
     public static void DemandNativeWrites()

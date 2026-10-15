@@ -1,7 +1,7 @@
 {
   "passed": true,
-  "started": "2026-10-15T10:23:21.7861739+00:00",
-  "ended": "2026-10-15T10:23:24.3783808+00:00",
+  "started": "2026-10-15T10:42:42.1431813+00:00",
+  "ended": "2026-10-15T10:42:45.0957146+00:00",
   "checks": [
     {
       "name": "Actual retained Catalog v1 still has 29 identities",
@@ -77,6 +77,14 @@
     },
     {
       "name": "Withdrawal blocks new Community acquisition without deleting installed data",
+      "passed": true
+    },
+    {
+      "name": "Explicit redistribution denial blocks new acquisition in Community too",
+      "passed": true
+    },
+    {
+      "name": "A verified channel exclusion cannot be bypassed through Community fallback",
       "passed": true
     },
     {
@@ -460,6 +468,10 @@
       "passed": true
     },
     {
+      "name": "Missing/relative LocalAppData never falls back to writing program files",
+      "passed": true
+    },
+    {
       "name": "Unvalidated Steam and non-isolated Development cannot change Windows cursors",
       "passed": true
     },
@@ -756,8 +768,7 @@
       "commercial": "Approved"
     }
   ],
-  "scope": "Actual Windows filesystem, pinned RSA-PSS, bounded native CUR/ANI loading and controlled HTTP fixtures. Synthetic review/cache/portable/migration cases are labeled; no input injection, Apply, live migration, Steam SDK or Cloud upload.",
+  "scope": "Actual Windows filesystem, pinned RSA-PSS, bounded native CUR/ANI loading and controlled HTTP fixtures. Synthetic review/cache/portable/migration cases are labeled; no input injection, Apply, live migration, Steam SDK or Cloud upload. Latest policy guard regression build; release implementation is checked separately.",
   "runtime": ".NET 10.0.13 self-contained",
-  "coreSHA256": "4201f3473a8cffc50671d1d268814095cd7c93bcc080cc68f6ee22f8145a523f",
-  "coreMatchesCandidate": true
+  "coreSHA256": "ea4b35de383598742052aa47990ed7f428e2a63bc72b97b27c72879e741751a6"
 }
